@@ -23,14 +23,17 @@
 
 
 
-
+///
+/// this is the main menu. this controller is
+/// loaded first in the application
+///
 @interface RootViewController : UITableViewController {
 	NSString *parseErrorMessage;
 }
 
 
 
-
+//! this is called when a user has picked a menu item
 - (void) loadMenuItem:(NSInteger) menuItem;
 
 @end

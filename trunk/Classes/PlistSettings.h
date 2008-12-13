@@ -27,17 +27,18 @@
 	NSMutableDictionary * dict;
 }
 
+//! this is where the settings are stored in memory
 @property (nonatomic, retain) NSMutableDictionary * dict;
 
-/**
- this method installs the default plist if not already installed
- if already installed, then it will load the existing
- */
+///
+/// this method installs the default plist if not already installed
+/// if already installed, then it will load the existing
+///
 -(id) initWithSettingsNamed: (NSString *) plistName;
 
-/**
- call this when your app is shutting down, and the settings will be saved.
- */
+///
+/// call this when your app is shutting down, and the settings will be saved.
+///
 -(void) saveSettings;
 
 
