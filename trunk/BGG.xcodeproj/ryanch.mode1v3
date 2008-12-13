@@ -277,13 +277,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>31</integer>
+									<integer>55</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 159}, {244, 788}}</string>
+							<string>{{0, 371}, {244, 788}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -322,7 +322,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BoardGameSearchResultsTableViewController.m</string>
+								<string>DbAccess.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BoardGameSearchResultsTableViewController.m</string>
+										<string>DbAccess.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>BAC585BA0EF4614A00BF2280</string>
+										<string>BAC585D80EF464D400BF2280</string>
 										<key>history</key>
 										<array>
 											<string>BA03E8570EA8644F0069F8D6</string>
@@ -378,7 +378,6 @@
 											<string>BA9A99720EF43E4400FBF9C0</string>
 											<string>BA9A99730EF43E4400FBF9C0</string>
 											<string>BA9A99740EF43E4400FBF9C0</string>
-											<string>BA9A99750EF43E4400FBF9C0</string>
 											<string>BA9A99770EF43E4400FBF9C0</string>
 											<string>BA9A99780EF43E4400FBF9C0</string>
 											<string>BA9A99790EF43E4400FBF9C0</string>
@@ -400,13 +399,14 @@
 											<string>BA9A998A0EF43E4400FBF9C0</string>
 											<string>BA9A998B0EF43E4400FBF9C0</string>
 											<string>BA9A998C0EF43E4400FBF9C0</string>
-											<string>BA9A998D0EF43E4400FBF9C0</string>
-											<string>BA9A998E0EF43E4400FBF9C0</string>
 											<string>BA9A998F0EF43E4400FBF9C0</string>
 											<string>BAC5858B0EF4522100BF2280</string>
 											<string>BAC5858C0EF4522100BF2280</string>
-											<string>BAC5858D0EF4522100BF2280</string>
-											<string>BAC5858E0EF4522100BF2280</string>
+											<string>BAC585C90EF464D400BF2280</string>
+											<string>BAC585CA0EF464D400BF2280</string>
+											<string>BAC585CB0EF464D400BF2280</string>
+											<string>BAC585CC0EF464D400BF2280</string>
+											<string>BAC585CD0EF464D400BF2280</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -451,14 +451,11 @@
 											<string>BAEC7EF70EC8057600151693</string>
 											<string>BAEC80EF0EC94D1000151693</string>
 											<string>BAEC810E0EC9512500151693</string>
-											<string>BAEC81C70EC95C8F00151693</string>
 											<string>BAEC82010EC963EA00151693</string>
 											<string>BADA03EB0ED5371300748D14</string>
 											<string>BA0CF37D0EF22DB9000AE1EF</string>
 											<string>BA9A98E60EF427B000FBF9C0</string>
 											<string>BA9A98E80EF427B000FBF9C0</string>
-											<string>BA9A98FE0EF42A8700FBF9C0</string>
-											<string>BA9A98FF0EF42A8700FBF9C0</string>
 											<string>BA9A994A0EF42E1100FBF9C0</string>
 											<string>BA9A99940EF43E4400FBF9C0</string>
 											<string>BA9A99950EF43E4400FBF9C0</string>
@@ -469,9 +466,17 @@
 											<string>BA9A99C10EF43E4400FBF9C0</string>
 											<string>BAC5858F0EF4522100BF2280</string>
 											<string>BAC585900EF4522100BF2280</string>
-											<string>BAC585910EF4522100BF2280</string>
 											<string>BAC585920EF4522100BF2280</string>
-											<string>BAC585930EF4522100BF2280</string>
+											<string>BAC585CE0EF464D400BF2280</string>
+											<string>BAC585CF0EF464D400BF2280</string>
+											<string>BAC585D00EF464D400BF2280</string>
+											<string>BAC585D10EF464D400BF2280</string>
+											<string>BAC585D20EF464D400BF2280</string>
+											<string>BAC585D30EF464D400BF2280</string>
+											<string>BAC585D40EF464D400BF2280</string>
+											<string>BAC585D50EF464D400BF2280</string>
+											<string>BAC585D60EF464D400BF2280</string>
+											<string>BAC585D70EF464D400BF2280</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -667,9 +672,9 @@
 	<array>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>BA03E7B30EA857940069F8D6</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/ryanch/Documents/bggiphone/BGG.xcodeproj</string>
+		<string>BA03E7B30EA857940069F8D6</string>
 	</array>
 	<key>WindowString</key>
 	<string>5 155 1280 847 0 0 1280 1002 </string>
@@ -762,7 +767,7 @@
 			<key>WindowToolGUID</key>
 			<string>BA03E7B30EA857940069F8D6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

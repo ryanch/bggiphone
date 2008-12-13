@@ -554,11 +554,10 @@
 	
 }
 
-
-- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title {
+- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType {
 	
 	// see if this game exists in the db already
-
+	
 	int totalCount = 0;
 	FMResultSet *rs = [database executeQuery:@"select count(*) as c from GameInfo where gameId=?", [NSNumber numberWithInt:gameId] ];
     if ([rs next]) {
@@ -582,23 +581,24 @@
 		
 	}
 	
-	/*
-	else {
 	
-		[database executeUpdate:@"update GameInfo set own=1 WHERE gameId=?", [NSNumber numberWithInt:gameId] ];
-		
-
-	}
-	 */
 	
 	BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
 	
-	[self saveGameInList:gameId	list:LIST_TYPE_OWN	inList:YES forUser: [appDelegate getCurrentUserName]  ];
+	[self saveGameInList:gameId	list:listType	inList:YES forUser: [appDelegate getCurrentUserName]  ];
 	
 	
 	if ([database hadError]) {
-		NSLog(@"updating ownerership Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
-	}	
+		NSLog(@"error updating list Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+	}		
+	
+	
+}
+
+- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title {
+	
+	[self saveGameForListGameId: gameId title: title list: LIST_TYPE_OWN];
+
 	
 }
 
@@ -757,11 +757,8 @@
 	
 }
 
-// return a list of BBGSearchResult
-- (NSArray*) findGamesOwned {
-	
-	BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
-	NSString * username = [appDelegate getCurrentUserName];
+
+- (NSArray*) getAllGamesInListByTypeAsSearchResults: (NSInteger) listType forUser: (NSString *) username  {
 	
 	NSArray * fullResults = [self getAllGamesInListByType:LIST_TYPE_OWN	forUser:username];
 	
@@ -792,48 +789,9 @@
 	[searchResults autorelease];
 	
 	return searchResults;
-	
-	/*
-	NSString * countQuery = @"select count(*) as c from GameInfo where own=1";
-	NSString * query = @"select * from GameInfo where own=1  ORDER BY title";
-	
-	int totalCount = 0;
-	FMResultSet *rs = [database executeQuery:countQuery];
-    if ([rs next]) {
-		totalCount = [rs intForColumn:@"c"];
-    }
-    [rs close]; 
-	
-	
-	
-	
-	if ( totalCount == 0 ) {
-		return nil;
-	}
-	
-	NSMutableArray * items = [[NSMutableArray alloc] initWithCapacity:totalCount];
-	
-	rs = [database executeQuery:query];
-    while ([rs next]) {
-		
-		BBGSearchResult * result = [[BBGSearchResult alloc] init];
-		
-		FullGameInfo * fullGameInfo = [self buildFullGameInfoFromResultRow:	rs];
-		
-		result.primaryTitle = fullGameInfo.title;
-		result.gameId = fullGameInfo.gameId;
-
-		[items addObject:result];
-		[result release];
-		
-    }
-    [rs close]; 
-	
-	[items autorelease];
-	return items;
-	*/ 
-	 
 }
+
+
 
 
 

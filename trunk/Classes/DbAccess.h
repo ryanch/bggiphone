@@ -74,10 +74,15 @@
 
 -(void) clearDB;
 
--(NSArray*) findGamesOwned;
+// get a list of all of the games in a list, as SearchResult objects.
+- (NSArray*) getAllGamesInListByTypeAsSearchResults: (NSInteger) listType forUser: (NSString *) username;
 
+
+// save a game as owned by the current user in the owned list
 - (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title;
 
+// save a game in the list requested for the current user
+- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType;
 
 
 @end
