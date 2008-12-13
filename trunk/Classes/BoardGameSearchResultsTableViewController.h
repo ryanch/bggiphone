@@ -26,27 +26,49 @@
 @class BBGSearchResult;
 @class XmlSearchReader;
 
+///
+/// this view is used to show a list of board games
+///
 @interface BoardGameSearchResultsTableViewController : UITableViewController {
+	
+	//! the games to display, this are BBGSearchResult objects
 	NSArray * resultsToDisplay;
+	
+	//! this is the search that was used to get this list
 	XmlSearchReader * currentSearch;
+	
+	//! this is the error message from a failed search
 	NSString * parseErrorMessage;
+	
+	//! this is the type of search that are listing for
 	BGGSearchGameType searchGameType;
+	
+	//! this is a list of titles used for the sections in the table view
 	NSArray * sectionTitles;
+	
+	//! this dict tracks how many games are in each section
 	NSDictionary * sectionCountsDict;
 }
 
+//! start the search, show the animated loading icon, and call thrSearch
 - (void) doSearch: (XmlSearchReader*) search;
+
+//! this is called from a worker thread, this will do call the search method on the delegate, and when done, call doneSearch on the main thread
 - (void) thrSearch;
+
+//! either show the error from trying to load, or reload the table with the new data
 - (void) doneSearch;
 
+//! this calls the app delegate method with the same name
 - (void) loadGameFromSearchResult: (BBGSearchResult*) searchResult;
 
-
+//! this rebuilds the sectionTitles and sectionCountsDict based on the results passed in
 - (void) buildSectionTitlesForResults:(NSArray*)results;
  
-
 @property BGGSearchGameType searchGameType;
+
 @property (nonatomic, retain ) NSArray * resultsToDisplay;
+
 @property (nonatomic, retain ) XmlSearchReader * currentSearch;
 
 @end
