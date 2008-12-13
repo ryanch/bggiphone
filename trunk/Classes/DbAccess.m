@@ -760,7 +760,7 @@
 
 - (NSArray*) getAllGamesInListByTypeAsSearchResults: (NSInteger) listType forUser: (NSString *) username  {
 	
-	NSArray * fullResults = [self getAllGamesInListByType:LIST_TYPE_OWN	forUser:username];
+	NSArray * fullResults = [self getAllGamesInListByType:listType	forUser:username];
 	
 	if ( fullResults == nil ) {
 		return nil;
