@@ -30,58 +30,114 @@
 #define LIST_TYPE_RECENT 3
 #define LIST_TYPE_TOPLAY 4
 
-
+///
+/// this class wraps access to the SQLLite database
+///
 @interface DbAccess : NSObject {
 	FMDatabase * database;
 
 }
 
-
+///
+/// this method returns the number of games that are in the users collection, but are not cached. 
+/// so OWNED, but isCache=0 
+///
 - (NSInteger) fetchTotalMissingGameInfoFromCollection;
 
+///
+/// search the current players collection for 
+/// games that match the critera selected
+/// 
 - (NSArray*) searchGamesOwnedPlayers: (NSInteger) player withWeight: (NSInteger) weight withTime: (NSInteger) time;
 
+///
+/// return YES if the user has any games in their collection
+/// and fetchTotalMissingGameInfoFromCollection == 0
 - (BOOL) checkIfCollectionIsLoaded;
 
+///
+/// return YES is there is any data about the current users collection
+///
 - (BOOL) hasOwnedGamesCached;
 
-
+///
+/// clean up database before the app shutsdown
+///
 - (void) cleanupForShutdown;
 
-// count number of games in a list for a user
+///
+/// count number of games in a list for a user
+///
 - (NSInteger) countGamesInList: (NSInteger) listType forUser: (NSString*) username;
 
-// check if a game is in a list
+///
+/// check if a game is in a list
+///
 - (BOOL) checkIfGameInList:(NSInteger) gameId list: (NSInteger) listType forUser: (NSString *) username;
 
-// get all of the games in a list
+///
+/// get all of the games in a list
+///
 - (NSArray*) getAllGamesInListByType: (NSInteger) listType forUser: (NSString *) username;
 
-// save a game in a list, or remove from a list
+///
+/// save a game in a list, or remove from a list
+///
 - (void) saveGameInList: (NSInteger) gameId list: (NSInteger) listType inList: (BOOL) isInList forUser: (NSString *) username;
 
+///
+/// find a game in the users collection that is missing data. fetch all of the data for that
+/// game and return it, and save to db.
+///
 - (FullGameInfo *) initNextMissingGameForCollection;
 
+
+///
+/// given a result row from the GameInfo table, build a 
+/// FullGameInfo object
+///
 - (FullGameInfo* ) buildFullGameInfoFromResultRow:(FMResultSet*) rs;
 
+///
+/// should be called at startup. open the db
+///
 -(void) setupDatabase;
 
+///
+/// show an error to the user in a pretty dialog
+///
 -(void) showError: (NSString*) errorMessage withTitle:(NSString*) title;
 
+///
+/// given a game id, fetch the game from the db
+///
 -(FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId;
 
+
+///
+/// save a game to the db. if the game already exists delete it
+/// and replace with this game
+///
 -(void) saveFullGameInfo: (FullGameInfo * ) fullgameInfo;
 
+///
+/// remove all data from the db
+///
 -(void) clearDB;
 
-// get a list of all of the games in a list, as SearchResult objects.
+///
+/// get a list of all of the games in a list, as SearchResult objects.
+///
 - (NSArray*) getAllGamesInListByTypeAsSearchResults: (NSInteger) listType forUser: (NSString *) username;
 
-
-// save a game as owned by the current user in the owned list
+///
+/// save a game as owned by the current user in the owned list
+///
 - (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title;
 
-// save a game in the list requested for the current user
+///
+/// save a game in the list requested for the current user
+///
 - (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType;
 
 
