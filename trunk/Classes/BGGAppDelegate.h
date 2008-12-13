@@ -32,6 +32,12 @@
 #define ABOUT_MENU_CHOICE 5
 #define PICK_GAME_CHOICE 2
 
+enum {
+	BGG_SEARCH_OWNED = 1,
+	BGG_SEARCH_WISH = 2
+};
+typedef NSInteger BGGSearchGameType;
+
 
 enum {
 		BGG_RESUME_GAME = 1,
@@ -73,7 +79,7 @@ typedef NSInteger BGGResumeState;
 
 -(void) cacheGameImage: (FullGameInfo*) fullGameInfo;
 
-- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError isForOwnedGames: (BOOL) searchingOwnedGames;
+- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType;
 
 - (NSString*) handleMissingUsername;
 

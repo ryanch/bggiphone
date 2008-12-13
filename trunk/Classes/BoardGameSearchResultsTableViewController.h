@@ -20,6 +20,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGGAppDelegate.h"
+
 
 @class BBGSearchResult;
 @class XmlSearchReader;
@@ -28,7 +30,7 @@
 	NSArray * resultsToDisplay;
 	XmlSearchReader * currentSearch;
 	NSString * parseErrorMessage;
-	BOOL searchingOwnedGames;
+	BGGSearchGameType searchGameType;
 	NSArray * sectionTitles;
 	NSDictionary * sectionCountsDict;
 }
@@ -43,7 +45,7 @@
 - (void) buildSectionTitlesForResults:(NSArray*)results;
  
 
-@property BOOL searchingOwnedGames;
+@property BGGSearchGameType searchGameType;
 @property (nonatomic, retain ) NSArray * resultsToDisplay;
 @property (nonatomic, retain ) XmlSearchReader * currentSearch;
 

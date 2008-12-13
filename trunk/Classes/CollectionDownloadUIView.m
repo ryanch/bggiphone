@@ -77,7 +77,7 @@
 		
 		NSError * error = nil;
 		
-		NSArray *results = [appDelegate initGameSearchResults:search	withError:&error isForOwnedGames:YES];
+		NSArray *results = [appDelegate initGameSearchResults:search	withError:&error searchGameType: BGG_SEARCH_OWNED];
 		
 		BOOL hadResults = YES;
 		if ( results == nil ) {

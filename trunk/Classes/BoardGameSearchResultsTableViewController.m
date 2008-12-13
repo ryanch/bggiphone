@@ -34,7 +34,7 @@
 
 @synthesize resultsToDisplay;
 @synthesize currentSearch;
-@synthesize searchingOwnedGames;
+@synthesize searchGameType;
 
 // this is called when we should start a search
 
@@ -60,7 +60,7 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	NSError * parseError = nil;
-	resultsToDisplay = [appDelegate initGameSearchResults: currentSearch withError: &parseError isForOwnedGames: searchingOwnedGames];
+	resultsToDisplay = [appDelegate initGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType];
 	if ( resultsToDisplay == nil ) {
 		parseErrorMessage = [[parseError localizedDescription] retain];
 		[NSThread sleepForTimeInterval:1.0]; 

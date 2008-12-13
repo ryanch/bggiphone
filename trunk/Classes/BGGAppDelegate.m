@@ -382,13 +382,14 @@
 	
 }
 
-- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError isForOwnedGames: (BOOL) searchingOwnedGames  {
+- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType {
+
 	
 	NSArray * results = nil;
 	
 	// see if we can  use the ownded games cache
 
-	if ( searchingOwnedGames ) {
+	if ( searchType == BGG_SEARCH_OWNED ) {
 		results = [self.dbAccess findGamesOwned];
 	}
 	
@@ -408,7 +409,7 @@
 			results = searchReader.searchResults;
 			
 			// update ownership
-			if ( searchingOwnedGames == YES ) {
+			if (  searchType == BGG_SEARCH_OWNED ) {
 				for ( NSInteger i = 0; i < [results count]; i++ ) {
 					BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:i];
 					[self.dbAccess saveGameAsOwnedGameId:[result.gameId intValue] title:result.primaryTitle];
@@ -530,6 +531,7 @@
 			[[Beacon shared] startSubBeaconWithName:@"games owned menu click" timeSession:NO];
 			
 			resultsViewer.title = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
+			resultsViewer.searchGameType = BGG_SEARCH_OWNED;
 		}
 		else {
 			[appDelegate saveResumePoint:BGG_RESUME_WISH withString:nil];
@@ -537,6 +539,8 @@
 			[[Beacon shared] startSubBeaconWithName:@"games on wish list menu click" timeSession:NO];
 			
 			resultsViewer.title = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
+			
+			resultsViewer.searchGameType = BGG_SEARCH_WISH;
 		}
 		
 		//resultsViewer.resultsToDisplay = search.searchResults;
@@ -552,15 +556,14 @@
 		
 		NSString * urlStr = nil;
 		
-		resultsViewer.searchingOwnedGames = NO;
 		
 		if ( menuItem == OWNED_MENU_CHOICE ) {
 			urlStr = [NSString stringWithFormat:@"http://boardgamegeek.com/xmlapi/collection/%@?own=1", username ];
-			resultsViewer.searchingOwnedGames = YES;
+	
 		}
 		else {
 			urlStr = [NSString stringWithFormat:@"http://boardgamegeek.com/xmlapi/collection/%@?wishlist=1&notown=1", username ];
-			resultsViewer.searchingOwnedGames = NO;
+
 		}
 		
 		NSURL *url = [NSURL URLWithString: urlStr	];
