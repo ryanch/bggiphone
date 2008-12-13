@@ -1,0 +1,47 @@
+PRAGMA legacy_file_format=OFF; 
+
+create table GameInfo (
+	gameId INTEGER PRIMARY KEY,
+	title text,
+	imageURL text,
+	desc text,
+	usersrated integer,
+	average double,
+	bayesaverage double,
+	rank integer,
+	numweights integer,
+	averageweight double,
+	owned integer,
+	minPlayers integer,
+	maxPlayers integer,
+	playingTime integer,
+	isCached integer,
+	trading integer,
+	wanting integer,
+	wishing integer
+);
+
+create table GameOwnList (
+	gameId integer,
+	username text
+);
+
+create table GameWantList (
+	gameId integer,
+	username text
+);	
+
+create table GameToPlayList (
+	gameId integer,
+	username text
+);
+
+create table RecentGameList (
+	gameId integer,
+	username text,
+	dateViewed double
+);
+
+
+
+

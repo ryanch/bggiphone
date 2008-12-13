@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* BGGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* BGGAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		BA03E7C90EA858760069F8D6 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7C80EA858760069F8D6 /* Search.xib */; };
+		BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */; };
+		BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7DD0EA85A310069F8D6 /* Settings.xib */; };
+		BA03E7E20EA85AC60069F8D6 /* SettingsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7E10EA85AC60069F8D6 /* SettingsUIViewController.m */; };
+		BA03E8350EA85D980069F8D6 /* PlistSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E8340EA85D980069F8D6 /* PlistSettings.m */; };
+		BA03E8500EA8619B0069F8D6 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA03E84F0EA8619B0069F8D6 /* settings.plist */; };
+		BA0CF3510EF22B5B000AE1EF /* bgg13.db in Resources */ = {isa = PBXBuildFile; fileRef = BA0CF3500EF22B5B000AE1EF /* bgg13.db */; };
+		BA3C7D240EC75BF000F24BF4 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D230EC75BF000F24BF4 /* header.png */; };
+		BA3C7D300EC75F4200F24BF4 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D2F0EC75F4200F24BF4 /* footer.png */; };
+		BA3C7D8F0EC76A0B00F24BF4 /* GameCommentsXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */; };
+		BA476C8A0EB53B350035E2E4 /* GameInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476C890EB53B350035E2E4 /* GameInfoViewController.m */; };
+		BA476C8D0EB53B400035E2E4 /* GameActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476C8C0EB53B400035E2E4 /* GameActionsViewController.m */; };
+		BA476D610EB587030035E2E4 /* FullGameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476D600EB587030035E2E4 /* FullGameInfo.m */; };
+		BA476E5E0EB599ED0035E2E4 /* XmlGameInfoReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476E5D0EB599ED0035E2E4 /* XmlGameInfoReader.m */; };
+		BA48C4A80EB3CC36005B4297 /* BBGSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C4A50EB3CC36005B4297 /* BBGSearchResult.m */; };
+		BA48C4A90EB3CC36005B4297 /* XmlSearchReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C4A70EB3CC36005B4297 /* XmlSearchReader.m */; };
+		BA48C4AC0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C4AB0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m */; };
+		BA48C62F0EB5086F005B4297 /* FetchURLData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C62E0EB5086F005B4297 /* FetchURLData.m */; };
+		BA48C6D90EB51639005B4297 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C6D80EB51639005B4297 /* LoadingCell.xib */; };
+		BA48C7360EB51BAF005B4297 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C7350EB51BAF005B4297 /* AboutViewController.m */; };
+		BA48C7560EB51BED005B4297 /* About.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C7550EB51BED005B4297 /* About.xib */; };
+		BA48C7580EB51C08005B4297 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = BA48C7570EB51C08005B4297 /* about.html */; };
+		BA48C76A0EB51CBC005B4297 /* libPinchAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */; };
+		BA48C7700EB51D03005B4297 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */; };
+		BA48C7720EB51D0E005B4297 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7710EB51D0E005B4297 /* SystemConfiguration.framework */; };
+		BA48C7760EB51D17005B4297 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7750EB51D17005B4297 /* CoreLocation.framework */; };
+		BA48C82C0EB52932005B4297 /* GameInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82B0EB52932005B4297 /* GameInfo.xib */; };
+		BA48C82F0EB52978005B4297 /* GameActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82E0EB52978005B4297 /* GameActions.xib */; };
+		BA4DE14F0EB8119100B18E17 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DE14E0EB8119100B18E17 /* Entitlements.plist */; };
+		BAB288160EB6DEBF00A6AEE3 /* stats.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288130EB6DEBF00A6AEE3 /* stats.png */; };
+		BAB288170EB6DEBF00A6AEE3 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288140EB6DEBF00A6AEE3 /* info.png */; };
+		BAB288180EB6DEBF00A6AEE3 /* actions.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288150EB6DEBF00A6AEE3 /* actions.png */; };
+		BAB2885C0EB6E12300A6AEE3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB2885B0EB6E12300A6AEE3 /* icon.png */; };
+		BAD111590EBD07C100C4F518 /* DbAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD111580EBD07C100C4F518 /* DbAccess.m */; };
+		BAD111B00EBD0B9900C4F518 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD111AB0EBD0B9900C4F518 /* FMDatabase.m */; };
+		BAD111B10EBD0B9900C4F518 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD111AD0EBD0B9900C4F518 /* FMDatabaseAdditions.m */; };
+		BAD111B20EBD0B9900C4F518 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD111AF0EBD0B9900C4F518 /* FMResultSet.m */; };
+		BAD111C50EBD0E4800C4F518 /* bgg.db in Resources */ = {isa = PBXBuildFile; fileRef = BAD111C40EBD0E4800C4F518 /* bgg.db */; };
+		BADA03E50ED5360500748D14 /* bgg12.db in Resources */ = {isa = PBXBuildFile; fileRef = BADA03E40ED5360500748D14 /* bgg12.db */; };
+		BADB59FD0EB8259800742CA6 /* DownloadGameInfoOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BADB59FC0EB8259800742CA6 /* DownloadGameInfoOperation.m */; };
+		BADB5A900EBAB9B800742CA6 /* RecordPlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADB5A8F0EBAB9B800742CA6 /* RecordPlay.xib */; };
+		BADB5A940EBABB3C00742CA6 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = BADB5A920EBABB3C00742CA6 /* minus.png */; };
+		BADB5A950EBABB3C00742CA6 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = BADB5A930EBABB3C00742CA6 /* plus.png */; };
+		BADB5A990EBABC0A00742CA6 /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BADB5A980EBABC0A00742CA6 /* whiteButton.png */; };
+		BADB5AB70EBABD8E00742CA6 /* LogPlayUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADB5AB60EBABD8E00742CA6 /* LogPlayUIViewController.m */; };
+		BADB5AC20EBAC03900742CA6 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BADB5AC10EBAC03900742CA6 /* blueButton.png */; };
+		BAEC7B310EC7780600151693 /* CommentsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7B300EC7780600151693 /* CommentsUIViewController.m */; };
+		BAEC7B450EC77DBE00151693 /* GameComments.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7B440EC77DBE00151693 /* GameComments.xib */; };
+		BAEC7BE90EC7838F00151693 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7BE80EC7838F00151693 /* comments.png */; };
+		BAEC7C190EC798BD00151693 /* GamePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7C180EC798BD00151693 /* GamePicker.xib */; };
+		BAEC7C1D0EC798F300151693 /* GamePickerUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7C1C0EC798F300151693 /* GamePickerUIViewController.m */; };
+		BAEC7D050EC7ADD100151693 /* bgg11.db in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D040EC7ADD100151693 /* bgg11.db */; };
+		BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */; };
+		BAEC7D9D0EC7F04600151693 /* CollectionDownload.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* BGGAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* BGGAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* BGG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BGG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E55F0DE3E45000AC0155 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		28A0AAE50D9B0CCF005BE974 /* BGG_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGG_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA03E7C80EA858760069F8D6 /* Search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search.xib; sourceTree = "<group>"; };
+		BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUIViewController.h; sourceTree = "<group>"; };
+		BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUIViewController.m; sourceTree = "<group>"; };
+		BA03E7DD0EA85A310069F8D6 /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		BA03E7E00EA85AC60069F8D6 /* SettingsUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsUIViewController.h; sourceTree = "<group>"; };
+		BA03E7E10EA85AC60069F8D6 /* SettingsUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsUIViewController.m; sourceTree = "<group>"; };
+		BA03E8330EA85D980069F8D6 /* PlistSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistSettings.h; sourceTree = "<group>"; };
+		BA03E8340EA85D980069F8D6 /* PlistSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistSettings.m; sourceTree = "<group>"; };
+		BA03E84F0EA8619B0069F8D6 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
+		BA0CF3500EF22B5B000AE1EF /* bgg13.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg13.db; path = sql/bgg13.db; sourceTree = "<group>"; };
+		BA3C7D230EC75BF000F24BF4 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header.png; path = images/header.png; sourceTree = "<group>"; };
+		BA3C7D2F0EC75F4200F24BF4 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = images/footer.png; sourceTree = "<group>"; };
+		BA3C7D8D0EC76A0B00F24BF4 /* GameCommentsXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommentsXmlParser.h; sourceTree = "<group>"; };
+		BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCommentsXmlParser.m; sourceTree = "<group>"; };
+		BA476C880EB53B350035E2E4 /* GameInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoViewController.h; sourceTree = "<group>"; };
+		BA476C890EB53B350035E2E4 /* GameInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoViewController.m; sourceTree = "<group>"; };
+		BA476C8B0EB53B400035E2E4 /* GameActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionsViewController.h; sourceTree = "<group>"; };
+		BA476C8C0EB53B400035E2E4 /* GameActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionsViewController.m; sourceTree = "<group>"; };
+		BA476D5F0EB587030035E2E4 /* FullGameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullGameInfo.h; sourceTree = "<group>"; };
+		BA476D600EB587030035E2E4 /* FullGameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullGameInfo.m; sourceTree = "<group>"; };
+		BA476E5C0EB599ED0035E2E4 /* XmlGameInfoReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlGameInfoReader.h; sourceTree = "<group>"; };
+		BA476E5D0EB599ED0035E2E4 /* XmlGameInfoReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlGameInfoReader.m; sourceTree = "<group>"; };
+		BA48C4A40EB3CC36005B4297 /* BBGSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGSearchResult.h; sourceTree = "<group>"; };
+		BA48C4A50EB3CC36005B4297 /* BBGSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGSearchResult.m; sourceTree = "<group>"; };
+		BA48C4A60EB3CC36005B4297 /* XmlSearchReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlSearchReader.h; sourceTree = "<group>"; };
+		BA48C4A70EB3CC36005B4297 /* XmlSearchReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlSearchReader.m; sourceTree = "<group>"; };
+		BA48C4AA0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGameSearchResultsTableViewController.h; sourceTree = "<group>"; };
+		BA48C4AB0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardGameSearchResultsTableViewController.m; sourceTree = "<group>"; };
+		BA48C62D0EB5086F005B4297 /* FetchURLData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchURLData.h; sourceTree = "<group>"; };
+		BA48C62E0EB5086F005B4297 /* FetchURLData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchURLData.m; sourceTree = "<group>"; };
+		BA48C6D80EB51639005B4297 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		BA48C7340EB51BAF005B4297 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		BA48C7350EB51BAF005B4297 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		BA48C7550EB51BED005B4297 /* About.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = About.xib; sourceTree = "<group>"; };
+		BA48C7570EB51C08005B4297 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
+		BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPinchAnalytics.a; sourceTree = "<group>"; };
+		BA48C7690EB51CBB005B4297 /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
+		BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		BA48C7710EB51D0E005B4297 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BA48C7750EB51D17005B4297 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BA48C82B0EB52932005B4297 /* GameInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameInfo.xib; sourceTree = "<group>"; };
+		BA48C82E0EB52978005B4297 /* GameActions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameActions.xib; sourceTree = "<group>"; };
+		BA4DE14E0EB8119100B18E17 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		BAB288130EB6DEBF00A6AEE3 /* stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stats.png; sourceTree = "<group>"; };
+		BAB288140EB6DEBF00A6AEE3 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		BAB288150EB6DEBF00A6AEE3 /* actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actions.png; sourceTree = "<group>"; };
+		BAB2885B0EB6E12300A6AEE3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		BAD111570EBD07C100C4F518 /* DbAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbAccess.h; sourceTree = "<group>"; };
+		BAD111580EBD07C100C4F518 /* DbAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbAccess.m; sourceTree = "<group>"; };
+		BAD111AA0EBD0B9900C4F518 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		BAD111AB0EBD0B9900C4F518 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		BAD111AC0EBD0B9900C4F518 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		BAD111AD0EBD0B9900C4F518 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		BAD111AE0EBD0B9900C4F518 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		BAD111AF0EBD0B9900C4F518 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		BAD111C40EBD0E4800C4F518 /* bgg.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg.db; path = sql/bgg.db; sourceTree = "<group>"; };
+		BADA03E40ED5360500748D14 /* bgg12.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg12.db; path = sql/bgg12.db; sourceTree = "<group>"; };
+		BADB59FB0EB8259800742CA6 /* DownloadGameInfoOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadGameInfoOperation.h; sourceTree = "<group>"; };
+		BADB59FC0EB8259800742CA6 /* DownloadGameInfoOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadGameInfoOperation.m; sourceTree = "<group>"; };
+		BADB5A8F0EBAB9B800742CA6 /* RecordPlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordPlay.xib; sourceTree = "<group>"; };
+		BADB5A920EBABB3C00742CA6 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = minus.png; path = images/minus.png; sourceTree = "<group>"; };
+		BADB5A930EBABB3C00742CA6 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = images/plus.png; sourceTree = "<group>"; };
+		BADB5A980EBABC0A00742CA6 /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteButton.png; path = images/whiteButton.png; sourceTree = "<group>"; };
+		BADB5AB50EBABD8E00742CA6 /* LogPlayUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPlayUIViewController.h; sourceTree = "<group>"; };
+		BADB5AB60EBABD8E00742CA6 /* LogPlayUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogPlayUIViewController.m; sourceTree = "<group>"; };
+		BADB5AC10EBAC03900742CA6 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueButton.png; path = images/blueButton.png; sourceTree = "<group>"; };
+		BAEC7B2F0EC7780600151693 /* CommentsUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsUIViewController.h; sourceTree = "<group>"; };
+		BAEC7B300EC7780600151693 /* CommentsUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsUIViewController.m; sourceTree = "<group>"; };
+		BAEC7B440EC77DBE00151693 /* GameComments.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameComments.xib; sourceTree = "<group>"; };
+		BAEC7BE80EC7838F00151693 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comments.png; path = images/comments.png; sourceTree = "<group>"; };
+		BAEC7C180EC798BD00151693 /* GamePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GamePicker.xib; sourceTree = "<group>"; };
+		BAEC7C1B0EC798F300151693 /* GamePickerUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePickerUIViewController.h; sourceTree = "<group>"; };
+		BAEC7C1C0EC798F300151693 /* GamePickerUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePickerUIViewController.m; sourceTree = "<group>"; };
+		BAEC7D040EC7ADD100151693 /* bgg11.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg11.db; path = sql/bgg11.db; sourceTree = "<group>"; };
+		BAEC7D990EC7F02200151693 /* CollectionDownloadUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionDownloadUIView.h; sourceTree = "<group>"; };
+		BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionDownloadUIView.m; sourceTree = "<group>"; };
+		BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDownload.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				BA48C76A0EB51CBC005B4297 /* libPinchAnalytics.a in Frameworks */,
+				BA48C7700EB51D03005B4297 /* libsqlite3.0.dylib in Frameworks */,
+				BA48C7720EB51D0E005B4297 /* SystemConfiguration.framework in Frameworks */,
+				BA48C7760EB51D17005B4297 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BAEC7C120EC797AC00151693 /* gamepicker */,
+				BA3C7D8A0EC769CA00F24BF4 /* comments */,
+				BAD111AA0EBD0B9900C4F518 /* FMDatabase.h */,
+				BAD111AB0EBD0B9900C4F518 /* FMDatabase.m */,
+				BAD111AC0EBD0B9900C4F518 /* FMDatabaseAdditions.h */,
+				BAD111AD0EBD0B9900C4F518 /* FMDatabaseAdditions.m */,
+				BAD111AE0EBD0B9900C4F518 /* FMResultSet.h */,
+				BAD111AF0EBD0B9900C4F518 /* FMResultSet.m */,
+				BA48C7340EB51BAF005B4297 /* AboutViewController.h */,
+				BA48C7350EB51BAF005B4297 /* AboutViewController.m */,
+				BA48C4A40EB3CC36005B4297 /* BBGSearchResult.h */,
+				BA48C4A50EB3CC36005B4297 /* BBGSearchResult.m */,
+				BA48C4A60EB3CC36005B4297 /* XmlSearchReader.h */,
+				BA48C4A70EB3CC36005B4297 /* XmlSearchReader.m */,
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				1D3623240D0F684500981E51 /* BGGAppDelegate.h */,
+				1D3623250D0F684500981E51 /* BGGAppDelegate.m */,
+				BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */,
+				BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */,
+				BA03E7E00EA85AC60069F8D6 /* SettingsUIViewController.h */,
+				BA03E7E10EA85AC60069F8D6 /* SettingsUIViewController.m */,
+				BA03E8330EA85D980069F8D6 /* PlistSettings.h */,
+				BA03E8340EA85D980069F8D6 /* PlistSettings.m */,
+				BA48C4AA0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.h */,
+				BA48C4AB0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m */,
+				BA48C62D0EB5086F005B4297 /* FetchURLData.h */,
+				BA48C62E0EB5086F005B4297 /* FetchURLData.m */,
+				BA476C880EB53B350035E2E4 /* GameInfoViewController.h */,
+				BA476C890EB53B350035E2E4 /* GameInfoViewController.m */,
+				BA476C8B0EB53B400035E2E4 /* GameActionsViewController.h */,
+				BA476C8C0EB53B400035E2E4 /* GameActionsViewController.m */,
+				BA476D5F0EB587030035E2E4 /* FullGameInfo.h */,
+				BA476D600EB587030035E2E4 /* FullGameInfo.m */,
+				BA476E5C0EB599ED0035E2E4 /* XmlGameInfoReader.h */,
+				BA476E5D0EB599ED0035E2E4 /* XmlGameInfoReader.m */,
+				BADB59FB0EB8259800742CA6 /* DownloadGameInfoOperation.h */,
+				BADB59FC0EB8259800742CA6 /* DownloadGameInfoOperation.m */,
+				BADB5AB50EBABD8E00742CA6 /* LogPlayUIViewController.h */,
+				BADB5AB60EBABD8E00742CA6 /* LogPlayUIViewController.m */,
+				BAD111570EBD07C100C4F518 /* DbAccess.h */,
+				BAD111580EBD07C100C4F518 /* DbAccess.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* BGG.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				BA4DE14E0EB8119100B18E17 /* Entitlements.plist */,
+				BAB2885B0EB6E12300A6AEE3 /* icon.png */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */,
+				BA48C7710EB51D0E005B4297 /* SystemConfiguration.framework */,
+				BA48C7750EB51D17005B4297 /* CoreLocation.framework */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* BGG_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BA0CF3500EF22B5B000AE1EF /* bgg13.db */,
+				BADA03E40ED5360500748D14 /* bgg12.db */,
+				BAEC7D040EC7ADD100151693 /* bgg11.db */,
+				BAEC7BE80EC7838F00151693 /* comments.png */,
+				BAEC7B440EC77DBE00151693 /* GameComments.xib */,
+				BA3C7D2F0EC75F4200F24BF4 /* footer.png */,
+				BA3C7D230EC75BF000F24BF4 /* header.png */,
+				BAD111C40EBD0E4800C4F518 /* bgg.db */,
+				BADB5AC10EBAC03900742CA6 /* blueButton.png */,
+				BADB5A980EBABC0A00742CA6 /* whiteButton.png */,
+				BADB5A920EBABB3C00742CA6 /* minus.png */,
+				BADB5A930EBABB3C00742CA6 /* plus.png */,
+				BAB288130EB6DEBF00A6AEE3 /* stats.png */,
+				BAB288140EB6DEBF00A6AEE3 /* info.png */,
+				BAB288150EB6DEBF00A6AEE3 /* actions.png */,
+				BA48C7570EB51C08005B4297 /* about.html */,
+				BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */,
+				BA48C7690EB51CBB005B4297 /* Beacon.h */,
+				BA48C7550EB51BED005B4297 /* About.xib */,
+				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				BA03E84F0EA8619B0069F8D6 /* settings.plist */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				BA03E7C80EA858760069F8D6 /* Search.xib */,
+				BA03E7DD0EA85A310069F8D6 /* Settings.xib */,
+				BA48C6D80EB51639005B4297 /* LoadingCell.xib */,
+				BA48C82E0EB52978005B4297 /* GameActions.xib */,
+				BA48C82B0EB52932005B4297 /* GameInfo.xib */,
+				BADB5A8F0EBAB9B800742CA6 /* RecordPlay.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA3C7D8A0EC769CA00F24BF4 /* comments */ = {
+			isa = PBXGroup;
+			children = (
+				BA3C7D8D0EC76A0B00F24BF4 /* GameCommentsXmlParser.h */,
+				BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */,
+				BAEC7B2F0EC7780600151693 /* CommentsUIViewController.h */,
+				BAEC7B300EC7780600151693 /* CommentsUIViewController.m */,
+			);
+			name = comments;
+			sourceTree = "<group>";
+		};
+		BAEC7C120EC797AC00151693 /* gamepicker */ = {
+			isa = PBXGroup;
+			children = (
+				BAEC7C180EC798BD00151693 /* GamePicker.xib */,
+				BAEC7C1B0EC798F300151693 /* GamePickerUIViewController.h */,
+				BAEC7C1C0EC798F300151693 /* GamePickerUIViewController.m */,
+				BAEC7D990EC7F02200151693 /* CollectionDownloadUIView.h */,
+				BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */,
+				BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */,
+			);
+			name = gamepicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* BGG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "BGG" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BGG;
+			productName = BGG;
+			productReference = 1D6058910D05DD3D006BFB54 /* BGG.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BGG" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* BGG */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
+				BA03E7C90EA858760069F8D6 /* Search.xib in Resources */,
+				BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */,
+				BA03E8500EA8619B0069F8D6 /* settings.plist in Resources */,
+				BA48C6D90EB51639005B4297 /* LoadingCell.xib in Resources */,
+				BA48C7560EB51BED005B4297 /* About.xib in Resources */,
+				BA48C7580EB51C08005B4297 /* about.html in Resources */,
+				BA48C82C0EB52932005B4297 /* GameInfo.xib in Resources */,
+				BA48C82F0EB52978005B4297 /* GameActions.xib in Resources */,
+				BAB288160EB6DEBF00A6AEE3 /* stats.png in Resources */,
+				BAB288170EB6DEBF00A6AEE3 /* info.png in Resources */,
+				BAB288180EB6DEBF00A6AEE3 /* actions.png in Resources */,
+				BAB2885C0EB6E12300A6AEE3 /* icon.png in Resources */,
+				BA4DE14F0EB8119100B18E17 /* Entitlements.plist in Resources */,
+				BADB5A900EBAB9B800742CA6 /* RecordPlay.xib in Resources */,
+				BADB5A940EBABB3C00742CA6 /* minus.png in Resources */,
+				BADB5A950EBABB3C00742CA6 /* plus.png in Resources */,
+				BADB5A990EBABC0A00742CA6 /* whiteButton.png in Resources */,
+				BADB5AC20EBAC03900742CA6 /* blueButton.png in Resources */,
+				BAD111C50EBD0E4800C4F518 /* bgg.db in Resources */,
+				BA3C7D240EC75BF000F24BF4 /* header.png in Resources */,
+				BA3C7D300EC75F4200F24BF4 /* footer.png in Resources */,
+				BAEC7B450EC77DBE00151693 /* GameComments.xib in Resources */,
+				BAEC7BE90EC7838F00151693 /* comments.png in Resources */,
+				BAEC7C190EC798BD00151693 /* GamePicker.xib in Resources */,
+				BAEC7D050EC7ADD100151693 /* bgg11.db in Resources */,
+				BAEC7D9D0EC7F04600151693 /* CollectionDownload.xib in Resources */,
+				BADA03E50ED5360500748D14 /* bgg12.db in Resources */,
+				BA0CF3510EF22B5B000AE1EF /* bgg13.db in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* BGGAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
+				BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */,
+				BA03E7E20EA85AC60069F8D6 /* SettingsUIViewController.m in Sources */,
+				BA03E8350EA85D980069F8D6 /* PlistSettings.m in Sources */,
+				BA48C4A80EB3CC36005B4297 /* BBGSearchResult.m in Sources */,
+				BA48C4A90EB3CC36005B4297 /* XmlSearchReader.m in Sources */,
+				BA48C4AC0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m in Sources */,
+				BA48C62F0EB5086F005B4297 /* FetchURLData.m in Sources */,
+				BA48C7360EB51BAF005B4297 /* AboutViewController.m in Sources */,
+				BA476C8A0EB53B350035E2E4 /* GameInfoViewController.m in Sources */,
+				BA476C8D0EB53B400035E2E4 /* GameActionsViewController.m in Sources */,
+				BA476D610EB587030035E2E4 /* FullGameInfo.m in Sources */,
+				BA476E5E0EB599ED0035E2E4 /* XmlGameInfoReader.m in Sources */,
+				BADB59FD0EB8259800742CA6 /* DownloadGameInfoOperation.m in Sources */,
+				BADB5AB70EBABD8E00742CA6 /* LogPlayUIViewController.m in Sources */,
+				BAD111590EBD07C100C4F518 /* DbAccess.m in Sources */,
+				BAD111B00EBD0B9900C4F518 /* FMDatabase.m in Sources */,
+				BAD111B10EBD0B9900C4F518 /* FMDatabaseAdditions.m in Sources */,
+				BAD111B20EBD0B9900C4F518 /* FMResultSet.m in Sources */,
+				BA3C7D8F0EC76A0B00F24BF4 /* GameCommentsXmlParser.m in Sources */,
+				BAEC7B310EC7780600151693 /* CommentsUIViewController.m in Sources */,
+				BAEC7C1D0EC798F300151693 /* GamePickerUIViewController.m in Sources */,
+				BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan CHRISTIANSON";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BGG_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = BGG;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "027620C1-1F10-4E36-B41B-7F6D3AA57D0C";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BGG_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = BGG;
+			};
+			name = Release;
+		};
+		BA476ED90EB5A03D0035E2E4 /* Adhoc2 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84949213-6858-4CA1-A33C-BE2C0566489D";
+				SDKROOT = iphoneos2.1;
+			};
+			name = Adhoc2;
+		};
+		BA476EDA0EB5A03D0035E2E4 /* Adhoc2 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BGG_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = BGG;
+			};
+			name = Adhoc2;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D05D547E-48DF-4355-B8B7-8771CD03C7EB";
+				SDKROOT = iphoneos2.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126F3B1D-5FDB-4FCF-8B7B-2966A280B6D5";
+				SDKROOT = iphoneos2.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "BGG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+				BA476EDA0EB5A03D0035E2E4 /* Adhoc2 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BGG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+				BA476ED90EB5A03D0035E2E4 /* Adhoc2 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
