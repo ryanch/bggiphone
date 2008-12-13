@@ -30,7 +30,14 @@
 @synthesize searchURL;
 
 
-
+- (XmlSearchReader*) initCopyForReload {
+	XmlSearchReader* newCopy = [[XmlSearchReader alloc] init];
+	
+	newCopy.parseItemFormat = self.parseItemFormat;
+	newCopy.searchURL = self.searchURL;
+	
+	return newCopy;
+}
 
 - (BOOL)parseXMLAtSearchURLWithError:(NSError **)error { 
 	return [self parseXMLAtURL:searchURL parseError: error];

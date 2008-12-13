@@ -36,13 +36,69 @@
 @synthesize currentSearch;
 @synthesize searchGameType;
 
+
+- (void) userRequestedReload {
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	NSString * username = [appDelegate handleMissingUsername];
+	if ( username == nil ) {
+		return;
+	}
+	
+	
+	
+	// dump current results
+	[resultsToDisplay release];
+	resultsToDisplay = nil;
+	
+	// reload the table
+	[self.tableView reloadData];
+	
+	// see what type of search it is, if its something
+	// we cache, then clear it from db
+
+	NSInteger listId = 0;
+	if ( searchGameType == BGG_SEARCH_OWNED ) {
+		listId = LIST_TYPE_OWN;
+	}
+	else if ( searchGameType == BGG_SEARCH_WISH ) {
+		listId = LIST_TYPE_WISH;
+	}
+	
+	if ( listId != 0 ) {
+		[appDelegate.dbAccess removeAllGamesInList: listId forUser: username];
+	}
+		
+	XmlSearchReader* newSearch = [self.currentSearch initCopyForReload];
+	
+	
+	[self doSearch:newSearch];
+	
+}
+
+- (void) addReloadResultsButton {
+	
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem != nil ) {
+		return;
+	}
+	
+	UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
+									  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
+
+	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+	
+	[refreshButton release];
+	
+	
+}
+									   
 // this is called when we should start a search
-
-
 - (void) doSearch: (XmlSearchReader*) search {
 	[parseErrorMessage release];
 	parseErrorMessage = nil;
 	[currentSearch release];
+	currentSearch = nil;
 	self.currentSearch = search;
 	
 	//[self thrSearch];
@@ -222,7 +278,11 @@
 	
 	
 		[self.tableView reloadData];
+		
+		
 	}
+	
+	[self addReloadResultsButton];
 }
 
 

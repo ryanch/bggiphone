@@ -514,6 +514,30 @@
 	
 }
 
+
+- (void) removeAllGamesInList: (NSInteger) listType forUser: (NSString*) username {
+	
+	NSString* tableName = nil;
+	
+	if ( LIST_TYPE_OWN == listType ) {
+		tableName = @"GameOwnList";
+	}
+	else if ( LIST_TYPE_WISH == listType ) {
+		tableName = @"GameWantList";
+	}	
+	else if ( LIST_TYPE_TOPLAY == listType ) {
+		tableName = @"GameToPlayList";
+	}	
+	else if ( LIST_TYPE_RECENT == listType ) {
+		tableName = @"RecentGameList";
+	}	
+	
+	// delete from the db first
+	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where username=?", tableName];
+	[database executeUpdate: deleteQuery,username];
+	
+}
+
 // save a game in a list, or remove from a list
 - (void) saveGameInList: (NSInteger) gameId list: (NSInteger) listType inList: (BOOL) isInList forUser: (NSString *) username{
 	

@@ -82,5 +82,10 @@
 /// 
 - (BOOL)parseXMLAtSearchURLWithError:(NSError **)error;
 
+///
+/// create an instance of this class from this instance
+/// that can be used to do a reload
+///
+- (XmlSearchReader*) initCopyForReload;
 
 @end

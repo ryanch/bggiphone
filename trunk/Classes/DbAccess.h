@@ -71,6 +71,11 @@
 - (NSInteger) countGamesInList: (NSInteger) listType forUser: (NSString*) username;
 
 ///
+/// remove all games in the list of type for user
+///
+- (void) removeAllGamesInList: (NSInteger) listType forUser: (NSString*) username;
+
+///
 /// check if a game is in a list
 ///
 - (BOOL) checkIfGameInList:(NSInteger) gameId list: (NSInteger) listType forUser: (NSString *) username;

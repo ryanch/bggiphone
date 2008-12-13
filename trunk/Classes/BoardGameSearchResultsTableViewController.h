@@ -65,6 +65,12 @@
 //! this rebuilds the sectionTitles and sectionCountsDict based on the results passed in
 - (void) buildSectionTitlesForResults:(NSArray*)results;
  
+//! this is called when the results are loaded, and we want the user to be able to reload the results if they want
+- (void) addReloadResultsButton;
+
+//! this is called when the user clicks the reload button
+- (void) userRequestedReload;
+
 @property BGGSearchGameType searchGameType;
 
 @property (nonatomic, retain ) NSArray * resultsToDisplay;
