@@ -21,11 +21,23 @@
 
 #import <UIKit/UIKit.h>
 
-
+///
+/// This class is used to represent the results of a search.
+/// This is used in places where the full board game search result
+/// would not make sense.
+///
 @interface BBGSearchResult : NSObject {
+
+	 //! the primary title found in the search
 	NSString * primaryTitle;
+	
+	//! the game id from boardgamegeek.com
 	NSString * gameId;
+	
+	//! the year the game was published -- note this is not used.
 	int yearPublished;
+	
+	//! other names this game goes by -- note this is not used currently
 	NSArray * alternateNames;
 }
 

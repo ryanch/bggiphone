@@ -21,13 +21,18 @@
 
 #import <UIKit/UIKit.h>
 
-
+///
+/// This view is used to display a HTML page. 
+///
 @interface AboutViewController : UIViewController <UIWebViewDelegate > {
 	IBOutlet UIWebView *webView;
 	NSString *pageToLoad;
 }
 
+//! the is the ui view to load the page into
 @property (nonatomic,retain) UIWebView *webView;
+
+//! this is the page to load
 @property (nonatomic,retain) NSString *pageToLoad;
 
 @end
