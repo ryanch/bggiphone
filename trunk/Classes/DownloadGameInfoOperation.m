@@ -53,45 +53,16 @@
 	isExe=YES;
 	[self didChangeValueForKey:@"isExecuting"];	
 	
+	[NSThread sleepForTimeInterval:1.0];
+
+	
 	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 	
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	fullGameInfo = [appDelegate initFullGameInfoByGameIdFromBGG:searchResult.gameId];	
-	/*
-	fullGameInfo = [appDelegate.dbAccess fetchFullGameInfoByGameId: [searchResult.gameId intValue] ];
-	[fullGameInfo retain];
-	if ( fullGameInfo == nil ) {
-		
-		
-		fullGameInfo = [appDelegate fetchFullGameInfoByGameIdFromBGG:searchResult.gameId];
-		
-		
-		// do the work
-		XmlGameInfoReader *reader = [[XmlGameInfoReader alloc] init];
-		
-		NSString * urlStr = [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/game/%@?stats=1", searchResult.gameId	];
-		NSURL *url = [NSURL URLWithString: urlStr	];
-		
-		
-		if ( [self isCancelled] == NO ) {
-			
-			[reader parseXMLAtURL:url	parseError:nil];
-			
-		}
-		
-		fullGameInfo = reader.gameInfo;
-		[fullGameInfo retain];
-		fullGameInfo.gameId = searchResult.gameId;
-		//fullGameInfo.title = searchResult.primaryTitle;
-		
-		[appDelegate.dbAccess saveFullGameInfo:fullGameInfo];
-		
-		[reader release];
-		 
-	}
-	 */
+
 		
 		
 	if ( [self isCancelled] == NO ) {
@@ -114,6 +85,25 @@
 
 
 -(void) updateControllers {
+	
+	if ( fullGameInfo == nil )  {
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
+														message:NSLocalizedString(@"Error downloading game information. Check your network connection. It is also possible that the boardgamegeek.com website is down.", @"error download game.")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];
+		
+		
+		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+		
+		
+		[appDelegate.navigationController popViewControllerAnimated:YES];
+		
+		
+		return;
+	}
+	
 	
 	if ( [self isCancelled] == NO ) {
 		tabBarController.title = fullGameInfo.title;

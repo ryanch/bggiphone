@@ -42,7 +42,7 @@
     
     BOOL success = [parser parse];
     
-    if (!success) {
+    if (!success && error != nil ) {
         *error =  [parser parserError];
     }
     

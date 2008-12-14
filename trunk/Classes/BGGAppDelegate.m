@@ -294,8 +294,12 @@
 	
 	
 
-	[reader parseXMLAtURL:url	parseError:nil];
+	BOOL success = [reader parseXMLAtURL:url	parseError:nil];
 
+	if ( !success ) {
+		return nil;
+	}
+	
 	fullGameInfo = reader.gameInfo;
 	fullGameInfo.isCached = YES;
 
