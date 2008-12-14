@@ -57,21 +57,27 @@
 	
 	if ( indexPath.row == SEARCH_MENU_CHOICE ) {
 		cell.text = NSLocalizedString( @"Search" , @"search menu item" );
+		cell.image = [UIImage imageNamed:@"search.png" ];
 	}
 	else if ( indexPath.row == PICK_GAME_CHOICE ) {
 		cell.text = NSLocalizedString(@"Search Owned Game" , @"pick game menu item" );
+		cell.image = [UIImage imageNamed:@"search_own.png" ];
 	}
 	else if ( indexPath.row == OWNED_MENU_CHOICE ) {
 		cell.text = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
+		cell.image = [UIImage imageNamed:@"own.png" ];
 	}	
 	else if ( indexPath.row == WISH_MENU_CHOICE ) {
 		cell.text = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
+		cell.image = [UIImage imageNamed:@"wish.png" ];
 	}	
 	else if ( indexPath.row == SETTINGS_MENU_CHOICE ) {
 		cell.text = NSLocalizedString( @"Settings" , @"settings menu item" );
+		cell.image = [UIImage imageNamed:@"settings.png" ];
 	}		
 	else if ( indexPath.row == ABOUT_MENU_CHOICE ) {
 		cell.text = NSLocalizedString( @"About" , @"about menu item" );
+		cell.image = [UIImage imageNamed:@"about.png" ];
 	}		
 	
     // Set up the cell
