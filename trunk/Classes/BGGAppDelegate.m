@@ -114,7 +114,7 @@
 	[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
 	
 	// create image dir
-	tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"../tmp/i/" ];
+	tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"/imgs/" ];
 	[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
 	
 	// try to resume
@@ -325,7 +325,7 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/i/%@.jpg", gameId] ];
+	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@.jpg", gameId] ];
 	
 	
 }
@@ -335,7 +335,7 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/i/%@_t.jpg", gameId] ];
+	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.jpg", gameId] ];
 	
 	
 }
