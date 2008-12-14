@@ -52,7 +52,10 @@
 	}	
 	
 	[parser release];
+	
+	
 	[pageBuffer release];
+	pageBuffer = nil;
 		
 	return success;
 	
@@ -132,6 +135,7 @@
 
 - (void) addHTMLHeader {
 	[pageBuffer release];
+	pageBuffer = nil;
 	pageBuffer = [[NSMutableString alloc] initWithCapacity:25*1024];
 	[pageBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];
 	[pageBuffer appendString:@"<style> .comment{border-bottom: 1px solid silver; padding-top: 5px; padding-bottom: 5px; }   * {font-family: helvetica;} .sttitle { font-weight: bold; text-align: right;} </style></head><body>"];
