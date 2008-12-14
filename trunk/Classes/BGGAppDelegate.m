@@ -457,18 +457,15 @@
 
 - (void) loadMenuItem:(NSInteger) menuItem {
 	
-	
-    
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
+
 	if ( menuItem == SEARCH_MENU_CHOICE ) {
 		
-		[appDelegate saveResumePoint:BGG_RESUME_SEARCH withString:nil];
+		[self saveResumePoint:BGG_RESUME_SEARCH withString:nil];
 		
 		[[Beacon shared] startSubBeaconWithName:@"search menu click" timeSession:NO];
 		
 		SearchUIViewController * search = [SearchUIViewController buildSearchUIViewController];
-		[appDelegate.navigationController pushViewController:search		animated:YES];
+		[navigationController pushViewController:search		animated:YES];
 	}
 	
 	else if ( menuItem == PICK_GAME_CHOICE ) {
@@ -485,8 +482,8 @@
 			
 			CollectionDownloadUIView * colDl = [[CollectionDownloadUIView	alloc] initWithNibName:@"CollectionDownload" bundle:nil];
 			colDl.title = NSLocalizedString( @"Collection Download", @"Collection download title" );
-			colDl.parentNav = appDelegate.navigationController;
-			[appDelegate.navigationController pushViewController:colDl 		animated:YES];
+			colDl.parentNav = navigationController;
+			[navigationController pushViewController:colDl 		animated:YES];
 			[colDl release];
 			
 			
@@ -495,37 +492,37 @@
 		}
 		
 		
-		[appDelegate saveResumePoint:BGG_RESUME_PICK_GAME withString:nil];
+		[self saveResumePoint:BGG_RESUME_PICK_GAME withString:nil];
 		
 		[[Beacon shared] startSubBeaconWithName:@"pick game menu click" timeSession:NO];
 		
 		
 		GamePickerUIViewController * gamePicker = [GamePickerUIViewController buildGamePickerUIViewController];
 		
-		[appDelegate.navigationController pushViewController:gamePicker 		animated:YES];
+		[navigationController pushViewController:gamePicker 		animated:YES];
 		
 	}
 	else if ( menuItem == SETTINGS_MENU_CHOICE ) {
 		
-		[appDelegate saveResumePoint:BGG_RESUME_SETTINGS withString:nil];
+		[self saveResumePoint:BGG_RESUME_SETTINGS withString:nil];
 		
 		
 		[[Beacon shared] startSubBeaconWithName:@"settings menu click" timeSession:NO];
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
 		
-		[appDelegate.navigationController pushViewController:settings		animated:YES];
+		[navigationController pushViewController:settings		animated:YES];
 	}
 	else if ( menuItem == ABOUT_MENU_CHOICE ) {
 		
-		[appDelegate saveResumePoint:BGG_RESUME_ABOUT withString:nil];
+		[self saveResumePoint:BGG_RESUME_ABOUT withString:nil];
 		
 		[[Beacon shared] startSubBeaconWithName:@"about page menu click" timeSession:NO];
 		
 		AboutViewController * about = [[AboutViewController alloc] initWithNibName:@"About" bundle:nil];
 		about.pageToLoad = @"about";
 		about.title = NSLocalizedString( @"About" , @"about menu item" );
-		[appDelegate.navigationController pushViewController:about	animated:YES]; 
+		[navigationController pushViewController:about	animated:YES]; 
 		[about release];
 	}
 	else if ( menuItem == OWNED_MENU_CHOICE || menuItem== WISH_MENU_CHOICE ) { 
@@ -547,7 +544,7 @@
 		
 		if ( menuItem == OWNED_MENU_CHOICE ) {
 			
-			[appDelegate saveResumePoint:BGG_RESUME_OWNED withString:nil];
+			[self saveResumePoint:BGG_RESUME_OWNED withString:nil];
 			
 			[[Beacon shared] startSubBeaconWithName:@"games owned menu click" timeSession:NO];
 			
@@ -555,7 +552,7 @@
 			resultsViewer.searchGameType = BGG_SEARCH_OWNED;
 		}
 		else {
-			[appDelegate saveResumePoint:BGG_RESUME_WISH withString:nil];
+			[self saveResumePoint:BGG_RESUME_WISH withString:nil];
 			
 			[[Beacon shared] startSubBeaconWithName:@"games on wish list menu click" timeSession:NO];
 			
@@ -566,7 +563,7 @@
 		
 		//resultsViewer.resultsToDisplay = search.searchResults;
 		
-		[appDelegate.navigationController pushViewController:resultsViewer		animated:YES];
+		[navigationController pushViewController:resultsViewer		animated:YES];
 		
 		XmlSearchReader * search = [[XmlSearchReader alloc] init];
 		search.parseItemFormat = YES;
