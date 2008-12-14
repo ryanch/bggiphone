@@ -22,8 +22,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchUIViewController : UIViewController <UISearchBarDelegate> {
+@interface SearchUIViewController : UIViewController <UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource> {
 	IBOutlet UISearchBar * searchBar;
+	IBOutlet UITableView * tableView;
+	NSArray * localDbSearchResults;
 }
 
 + (SearchUIViewController*) buildSearchUIViewController;
@@ -31,5 +33,6 @@
 
 
 @property (nonatomic, retain) UISearchBar * searchBar;
+@property (nonatomic, retain) UITableView * tableView;
 
 @end

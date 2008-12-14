@@ -25,10 +25,12 @@
 #import "XmlSearchReader.h"
 #import "DbAccess.h"
 #import "Beacon.h"
+#import "BBGSearchResult.h"
 
 @implementation SearchUIViewController
 
 @synthesize searchBar;
+@synthesize tableView;
 
 /*
 // Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
@@ -102,6 +104,100 @@
 	
 }
 
+- (NSInteger)tableView:(UITableView *)tableViewActed numberOfRowsInSection:(NSInteger)section {
+	if ( localDbSearchResults == nil ) {
+		return 0;
+	}
+	else {
+		return [localDbSearchResults count];
+	}
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableViewActed cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	if ( localDbSearchResults == nil ||  [localDbSearchResults count] == 0 ) {
+		return nil;
+	}
+
+	
+    static NSString *CellIdentifier = @"gameCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }	
+	
+	BBGSearchResult * result = (BBGSearchResult*) [localDbSearchResults objectAtIndex: indexPath.row];
+	if ( result == nil ) {
+		return nil;
+	}
+	
+	cell.text = result.primaryTitle;
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
+	if ( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
+		cell.image = [UIImage imageWithContentsOfFile: imagePath];
+	}
+	else {
+		cell.image = nil;
+	}
+	
+	return cell;
+	
+	
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	if ( localDbSearchResults == nil ||  [localDbSearchResults count] == 0 ) {
+		return;
+	}
+	
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	BBGSearchResult * result = (BBGSearchResult*) [localDbSearchResults objectAtIndex:indexPath.row];
+	
+	
+	[appDelegate loadGameFromSearchResult: result];
+	
+	
+	
+	
+}
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+
+	
+	BGGAppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+	
+	
+	// dump the current results
+	[localDbSearchResults release];
+	localDbSearchResults = nil;
+	
+	
+	
+	// do the local search
+	NSArray* results = [appDelegate.dbAccess localDbSearchByName: searchText];
+	
+	// see if we have new results
+	if ( results != nil ) {
+		localDbSearchResults = results;
+		[localDbSearchResults retain];
+	}
+	
+	
+	// reload no matter what - otherwise we could show matches that dont match
+	[tableView reloadData];
+
+
+	
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
@@ -116,7 +212,9 @@
 
 
 - (void)dealloc {
+	[localDbSearchResults release];
 	[searchBar release];
+	[tableView release];
     [super dealloc];
 }
 

@@ -815,6 +815,50 @@
 	return searchResults;
 }
 
+- (NSArray*) localDbSearchByName: (NSString*) gameName {
+	
+	if (gameName == nil) {
+		return nil;
+	}
+	
+	if ( [gameName length] == 0 ) {
+		return nil;
+	}
+	
+	NSMutableArray * results = [[NSMutableArray alloc] initWithCapacity:50];
+	
+	NSString * searchString = [NSString stringWithFormat:@"%%%@%%", gameName];
+	
+	FMResultSet * rs = [database executeQuery:@"select GameInfo.title, GameInfo.gameId from GameInfo where GameInfo.title LIKE ?",  searchString ];
+	
+	if ([database hadError]) {
+        NSLog(@"Err doing local db search by name %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+    }	
+	
+    while ([rs next]) {
+		BBGSearchResult * result = [[BBGSearchResult alloc] init];
+		result.primaryTitle = [rs stringForColumn:@"title"];
+		result.gameId = [rs stringForColumn:@"gameId"];
+		
+#ifdef __DEBUGGING__
+		NSLog(@"local search matched: %@ ", result.primaryTitle	);
+#endif
+		
+		[results addObject:result];
+		[result release];
+    }
+    [rs close]; 
+	
+	if ( [results count] == 0 ) {
+		[results release];
+		return nil;
+	}
+	else {
+		[results autorelease];
+		return results;
+	}
+	
+}
 
 
 

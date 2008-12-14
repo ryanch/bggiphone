@@ -145,5 +145,10 @@
 ///
 - (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType;
 
+///
+/// do search in the local db for the game, return the a list of BBGSearchResult objects
+///
+- (NSArray*) localDbSearchByName: (NSString*) gameName;
+
 
 @end
