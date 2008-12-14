@@ -89,7 +89,7 @@
 		[search release];
 
 		if ( !hadResults ) {
-			errorMessage = NSLocalizedString( @"No games were found as owned. Check your username- is it entered correctly? Do you you have games listed as owned?", @"error no games listed as owned, check your username" );
+			errorMessage = NSLocalizedString( @"No games were found as owned. Check your username- is it entered correctly? Do you you have games listed as owned? Also check your network connection.", @"error no games listed as owned, check your username" );
 			[errorMessage retain];
 			return;
 		}
@@ -131,6 +131,15 @@
 	
 	
 	[gameInfo release];
+	
+	startCount  = [appDelegate.dbAccess fetchTotalMissingGameInfoFromCollection];
+	
+	// if start count is more than 0 and we didnt cancel then 
+	// we were not able to download all of the games.
+	if ( startCount > 0 && !isCanceled ) {
+		errorMessage = NSLocalizedString( @"Not able to download all the games in your collecton. Check your username, and your network connection.", @"error no games listed as owned, check your username" );
+		[errorMessage retain];
+	}
 	
 	
 	
