@@ -43,6 +43,7 @@
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[NSThread detachNewThreadSelector:@selector(startLoading) toTarget:self withObject:nil];
+	//[self startLoading];
 }
 
 
@@ -142,7 +143,8 @@
 	
 	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 	
-	
+	// this is here to prevent a bug in the uinav controller
+	[NSThread sleepForTimeInterval:1.0]; 
 	
 	[self startLoadingHelper];
 	
@@ -151,6 +153,7 @@
 	[autoreleasepool release];
 	
 	[self performSelectorOnMainThread:@selector(allDone) withObject:self waitUntilDone:YES];	
+	
 	
 }
 
@@ -169,7 +172,7 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
 	if ( errorMessage != nil ) {
-		[NSThread sleepForTimeInterval:1.0]; 
+		
 		
 		
 		
@@ -181,8 +184,8 @@
 		
 		
 		
-		[parentNav popViewControllerAnimated:YES];
-		
+		//[parentNav popViewControllerAnimated:YES];
+		[parentNav popToRootViewControllerAnimated:YES];
 	
 		
 		//[parentNav.view setNeedsDisplay];
@@ -194,7 +197,6 @@
 		[parentNav popViewControllerAnimated:YES];
 	
 	}
-	
 	
 }
 
