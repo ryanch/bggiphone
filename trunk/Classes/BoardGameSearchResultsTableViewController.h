@@ -22,6 +22,11 @@
 #import <UIKit/UIKit.h>
 #import "BGGAppDelegate.h"
 
+#define kAccelerometerFrequency			25 //Hz
+#define kFilteringFactor				0.1
+#define kMinEraseInterval				1.0
+#define kEraseAccelerationThreshold		2.0
+
 
 @class BBGSearchResult;
 @class XmlSearchReader;
@@ -29,7 +34,7 @@
 ///
 /// this view is used to show a list of board games
 ///
-@interface BoardGameSearchResultsTableViewController : UITableViewController {
+@interface BoardGameSearchResultsTableViewController : UITableViewController <UIAccelerometerDelegate> {
 	
 	//! the games to display, this are BBGSearchResult objects
 	NSArray * resultsToDisplay;
@@ -48,6 +53,12 @@
 	
 	//! this dict tracks how many games are in each section
 	NSDictionary * sectionCountsDict;
+	
+	//! this holds accelerometer data
+	UIAccelerationValue	myAccelerometer[3];
+	
+	//! this holds the time since the last accell
+	CFTimeInterval		lastTime;
 }
 
 //! start the search, show the animated loading icon, and call thrSearch
@@ -71,10 +82,19 @@
 //! this is called when the user clicks the reload button
 - (void) userRequestedReload;
 
+//! setup accel detect
+- (void) setupAccelRandomPicker;
+
+//! this is called when a shake is detected
+- (void) appWasShook;
+
 @property BGGSearchGameType searchGameType;
 
 @property (nonatomic, retain ) NSArray * resultsToDisplay;
 
 @property (nonatomic, retain ) XmlSearchReader * currentSearch;
+
+
+
 
 @end

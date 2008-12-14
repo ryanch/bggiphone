@@ -303,12 +303,14 @@
 }
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view.
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-*/
+ */
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -513,15 +515,22 @@
     [super viewWillAppear:animated];
 }
 */
-/*
+
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	[self setupAccelRandomPicker];	
 }
-*/
-/*
+
+
+
 - (void)viewWillDisappear:(BOOL)animated {
+	[[UIAccelerometer sharedAccelerometer] setDelegate: nil];	
+	[super viewWillDisappear:animated];
 }
-*/
+
+
 /*
 - (void)viewDidDisappear:(BOOL)animated {
 }
@@ -539,6 +548,71 @@
 	[currentSearch release];
 	[resultsToDisplay release];
     [super dealloc];
+}
+
+
+
+// Called when the accelerometer detects motion; random player select
+- (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+	UIAccelerationValue				length,
+	x,
+	y,
+	z;
+	
+	//Use a basic high-pass filter to remove the influence of the gravity
+	myAccelerometer[0] = acceleration.x * kFilteringFactor + myAccelerometer[0] * (1.0 - kFilteringFactor);
+	myAccelerometer[1] = acceleration.y * kFilteringFactor + myAccelerometer[1] * (1.0 - kFilteringFactor);
+	myAccelerometer[2] = acceleration.z * kFilteringFactor + myAccelerometer[2] * (1.0 - kFilteringFactor);
+	// Compute values for the three axes of the acceleromater
+	x = acceleration.x - myAccelerometer[0];
+	y = acceleration.y - myAccelerometer[0];
+	z = acceleration.z - myAccelerometer[0];
+	
+	//Compute the intensity of the current acceleration 
+	length = sqrt(x * x + y * y + z * z);
+	// If above a given threshold, play the erase sounds and erase the drawing view
+	if((length >= kEraseAccelerationThreshold) && (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval)) {
+		//[erasingSound play];
+		//[drawingView erase];
+		
+		[self appWasShook];
+		
+		
+		lastTime = CFAbsoluteTimeGetCurrent();
+	}
+}
+
+
+- (void) appWasShook {
+	
+	if ( [[UIAccelerometer sharedAccelerometer] delegate ] == nil ) {
+		return;
+	}
+	
+	
+	[[UIAccelerometer sharedAccelerometer] setDelegate: nil];
+	
+	if ( resultsToDisplay == nil ) {
+		return;
+	}
+	NSInteger totalCount = [resultsToDisplay count];
+	if ( totalCount == 0 ) {
+		return;
+	}
+	
+	NSInteger index = RANDOM_INT(0,totalCount);
+	
+	BBGSearchResult * result = [resultsToDisplay objectAtIndex: index ];
+	
+	[self loadGameFromSearchResult: result];
+}
+
+
+- (void) setupAccelRandomPicker {
+	//Configure and enable the accelerometer
+	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+	[[UIAccelerometer sharedAccelerometer] setDelegate: self];	
 }
 
 
