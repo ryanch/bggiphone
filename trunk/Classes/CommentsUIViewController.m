@@ -53,9 +53,9 @@
 		
 		if ( !success ) {
 			
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Comments", @"Error Loading comments title")
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Comments", @"Error Loading comments dialog title")
 															message:NSLocalizedString(@"There was an error loading comments for this game. Check that you have a network connection.", @"error loading comments message" )
-														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+														   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 			[alert show];	
 			[alert release];	
 			

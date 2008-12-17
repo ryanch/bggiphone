@@ -193,7 +193,7 @@
 		NSString *pathToDbInBundle = [[NSBundle mainBundle] pathForResource:@"bgg13" ofType:@"db"];
 		
 		if ( ![fileManager copyItemAtPath:pathToDbInBundle   toPath:noNutsLocalDb error: nil] ) {
-			[self showError:@"Error preparing database, make sure your device has some free space." withTitle:@"DB Error"];
+			[self showError: NSLocalizedString( @"Error preparing database, make sure your device has some free space.", @"erorr shown when trying to load database." ) withTitle:@"DB Error"];
 			return;
 		}
 		

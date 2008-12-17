@@ -17,13 +17,16 @@
 	NSString *errorMessage;
 	IBOutlet UIProgressView * progressView;
 	float percentComplete;
+	IBOutlet UIButton * cancelButton;
+	IBOutlet UILabel * directionsLabel;
 }
 
 
 @property (nonatomic, retain) UILabel * currentItemLabel;
 @property (nonatomic, retain) UINavigationController *parentNav;
 @property (nonatomic, retain) UIProgressView * progressView;
-
+@property (nonatomic, retain) UIButton * cancelButton;
+@property (nonatomic, retain) UILabel * directionsLabel;
 
 - (void) startLoading;
 

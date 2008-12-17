@@ -144,7 +144,7 @@
 		}
 		
 		BBGSearchResult * result = [[BBGSearchResult alloc] init];
-		result.primaryTitle = @"Loading...";
+		result.primaryTitle = NSLocalizedString( @"Loading..." , @"loading text while loading games" );
 		result.gameId = resumeData;
 		[result autorelease];
 		[self loadGameFromSearchResult:result];
@@ -180,29 +180,29 @@
 	UITabBarController * tabBarController = [[UITabBarController alloc] init];
 	
 	GameInfoViewController *gameInfo = [[[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil] autorelease];
-	gameInfo.title = @"Info";
-	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:@"Info"	image:[UIImage imageNamed:@"info.png"] tag:0];
+	gameInfo.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
+	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Info", @"title for the info screen for a board game" )	image:[UIImage imageNamed:@"info.png"] tag:0];
 	gameInfo.tabBarItem = infoItem;
 	[infoItem release];
 	
 	GameInfoViewController *gameStats = [[[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil] autorelease];
-	gameStats.title = @"Stats";
-	UITabBarItem * statsItem = [[UITabBarItem alloc] initWithTitle:@"Stats"	image:[UIImage imageNamed:@"stats.png"] tag:0];
+	gameStats.title = NSLocalizedString( @"Stats", @"title for the stats screen for a board game" );
+	UITabBarItem * statsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Stats", @"title for the stats screen for a board game" )	image:[UIImage imageNamed:@"stats.png"] tag:0];
 	gameStats.tabBarItem = statsItem;
 	[statsItem release];
 	
 	
 	CommentsUIViewController *gameComments = [[[CommentsUIViewController alloc] initWithNibName:@"GameComments" bundle:nil] autorelease];
-	gameComments.title = @"Comments";
-	UITabBarItem * commentsItem = [[UITabBarItem alloc] initWithTitle:@"Comments"	image:[UIImage imageNamed:@"comments.png"] tag:0];
+	gameComments.title = NSLocalizedString( @"Comments", @"title for the comments screen for a board game");
+	UITabBarItem * commentsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Comments", @"title for the comments screen for a board game")	image:[UIImage imageNamed:@"comments.png"] tag:0];
 	gameComments.tabBarItem = commentsItem;
 	gameComments.gameId = searchResult.gameId;
 	[commentsItem release];
 	
 	
 	GameActionsViewController *gameActions  = [[[GameActionsViewController alloc] initWithNibName:@"GameActions" bundle:nil] autorelease];	
-	gameActions.title = @"Actions";
-	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:@"Actions"	image:[UIImage imageNamed:@"actions.png"] tag:0];
+	gameActions.title = NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game");
+	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game")	image:[UIImage imageNamed:@"actions.png"] tag:0];
 	gameActions.tabBarItem = actionsItem;
 	[actionsItem release];
 	
@@ -262,7 +262,7 @@
 	if ( username == nil || [username length] == 0 ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Need Username", @"ask user to provide username title")
 														message:NSLocalizedString(@"Please enter your username, to view your data.", @"please give your username")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													   delegate:self cancelButtonTitle:NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
 		[alert show];	
 		[alert release];	
 		

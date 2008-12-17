@@ -90,7 +90,7 @@
 		
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
 														message:NSLocalizedString(@"Error downloading game information. Check your network connection. It is also possible that the boardgamegeek.com website is down.", @"error download game.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 		[alert show];	
 		[alert release];
 		

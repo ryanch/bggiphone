@@ -252,8 +252,8 @@
 
 	
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Fetching Data", @"error fetching data title error message")
-															message:[NSString stringWithFormat: @"Error parsing XML data. Check your username is correct. BGG could be down. Error message: %@", parseErrorMessage ]
-														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+															message:[NSString stringWithFormat: NSLocalizedString(@"Error parsing XML data. Check your username is correct. BGG could be down. Error message: %@", @"error message for bad xml parsing. The error will be placed where you put the %@"), parseErrorMessage ]
+														   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 			[alert show];	
 			[alert release];		
 			
@@ -265,8 +265,8 @@
 	}
 	else if ( resultsToDisplay == nil || [resultsToDisplay count] == 0 ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Results", @"no results title message")
-														message:[NSString stringWithFormat: @"There are no game results for that list." ]
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+														message:NSLocalizedString(@"There are no results for that list.",@"message shown when there are no games in a list that the user was looking up") 
+													   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button")  otherButtonTitles: nil];
 		[alert show];	
 		[alert release];		
 		

@@ -77,56 +77,81 @@
 
 	[stringBuffer appendString:@"<p  align=\"center\"  ><b style=\"font-size: 1.1em;\">"];
 	[stringBuffer appendString:gameInfo.title];
-	[stringBuffer appendString:@" Game Statistics</b></p><table>"];
+	[stringBuffer appendString:@" "];
+	[stringBuffer appendString:NSLocalizedString(@"Game Statistics",@"game statistics title for stats page") ];
+	[stringBuffer appendString:@"</b></p><table>"];
 	
 	
 	// rank
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Rank:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Rank:",@"rank label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.rank] ];
 	[stringBuffer appendString:@"</td><tr>"];
 		
 	// average
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Average Rating:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Average Rating:",@"Average Rating label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];
+	
 	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal: gameInfo.average] ] ];
 	[stringBuffer appendString:@"</td><tr>"];		
 	
 	// bayesaverage
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Bayesian Average:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Bayesian Average:",@"Bayesian Average label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];
+	
+	
 	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal:gameInfo.bayesaverage ] ] ];
 	[stringBuffer appendString:@"</td><tr>"];	
 	
 	// usersrated
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Users Rated:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Users Rated:",@"Users Rated: label for a game, as in the number of users that rated it") ];
+	[stringBuffer appendString:@"</td><td>"];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.usersrated] ];
 	[stringBuffer appendString:@"</td><tr>"];
 	
 	// averageweight
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Average Weight:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Average Weight:",@"Average Weight: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal:gameInfo.averageweight] ] ];
 	[stringBuffer appendString:@"</td><tr>"];		
 	
 	// numweights
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Number of Weights:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Number of Weights:",@"Number of Weights: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];	
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.numweights] ];
 	[stringBuffer appendString:@"</td><tr>"];	
 	
 	// owned
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Copies Owned:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Copies Owned:",@"Copies Owned: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];		
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.owned] ];
 	[stringBuffer appendString:@"</td><tr>"];	
 
 	// trading
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Copies For Trade:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Copies For Trade:",@"Copies For Trade: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];		
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.trading] ];
 	[stringBuffer appendString:@"</td><tr>"];		
 	
 	// wanting
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Copies Wanted:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Copies Wanted:",@"Copies Wanted: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];		
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.wanting] ];
 	[stringBuffer appendString:@"</td><tr>"];		
 	
 	// wishing
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">Copies Wished For:</td><td>"];
+	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
+	[stringBuffer appendString:NSLocalizedString(@"Copies Wished For:",@"Copies Wished For: label for a game") ];
+	[stringBuffer appendString:@"</td><td>"];		
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.wishing] ];
 	[stringBuffer appendString:@"</td><tr>"];		
 	
@@ -190,15 +215,23 @@
 	[stringBuffer appendString:@"<style>* {font-family: helvetica;} </style></head><body>"];
 	
 	
-	[stringBuffer appendString:@"<div align=\"center\"><b>Rank:</b> "];
+	[stringBuffer appendString:@"<div align=\"center\"><b>"];
+	[stringBuffer appendString:NSLocalizedString(@"Rank:", @"rank label for a game")];
+	[stringBuffer appendString:@"</b> "];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.rank] ];
 	
-	[stringBuffer appendString:@" <b>Players:</b> "];
+	[stringBuffer appendString:@" <b>"];
+	[stringBuffer appendString:NSLocalizedString(@"Players:", @"players label for a game")];
+	[stringBuffer appendString:@"</b> "];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d-%d", gameInfo.minPlayers, gameInfo.maxPlayers] ];
 	
 	
-	[stringBuffer appendString:@" <b>Time:</b> "];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d min", gameInfo.playingTime] ];
+	[stringBuffer appendString:@" <b>"];
+	[stringBuffer appendString:NSLocalizedString(@"Time:", @"time label for a game")];
+	[stringBuffer appendString:@"</b> "];
+	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.playingTime] ];
+	[stringBuffer appendString:@" "];
+	[stringBuffer appendString:NSLocalizedString(@"min", @"minutes abbreviation")];
 	
 	[stringBuffer appendString:@"</div>"];
 	
@@ -264,7 +297,7 @@
 			NSString * gameId = [path substringFromIndex: [gamesPrefix length] ];
 			
 			BBGSearchResult * result = [[BBGSearchResult alloc] init];
-			result.primaryTitle = @"Loading...";
+			result.primaryTitle = NSLocalizedString( @"Loading...", @"loading text, as in content is loading" );
 			result.gameId = gameId;
 			[result autorelease];
 			

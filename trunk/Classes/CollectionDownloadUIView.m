@@ -18,7 +18,8 @@
 @synthesize  currentItemLabel;
 @synthesize parentNav;
 @synthesize progressView;
-
+@synthesize cancelButton;
+@synthesize directionsLabel;
 
 // Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -40,6 +41,11 @@
 // Implement viewDidLoad to do additional setup after loading the view.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	
+	
+	//cancelButton.title = NSLocalizedString( @"Cancel", @"Cancel button text" );
+	directionsLabel.text = NSLocalizedString( @"In order to enable some features the games that you own need to be downloaded. Please wait.", @"directions for the download your collection page." );
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[NSThread detachNewThreadSelector:@selector(startLoading) toTarget:self withObject:nil];
@@ -185,9 +191,9 @@
 		
 		
 		
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"No results were found.")
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error dialog title")
 														message:errorMessage
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													   delegate:self cancelButtonTitle: NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
 		[alert show];	
 		[alert release];
 		
@@ -227,11 +233,13 @@
 
 
 - (void)dealloc {
+	[cancelButton release];
 	[errorMessage release];
 	[message	 release];
 	[parentNav release];
 	[currentItemLabel release];
 	[progressView release];
+	[directionsLabel release];
 	
     [super dealloc];
 }

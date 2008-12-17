@@ -16,11 +16,13 @@
 	NSArray * weightChoices;
 	IBOutlet UIButton * showAllMatchesButton;
 	IBOutlet UIButton * shakeForRandomButton;
+	IBOutlet UILabel * directionsLabel;
 }
 
 @property (nonatomic, retain ) UIPickerView *gamePicker;
 @property (nonatomic, retain ) UIButton *showAllMatchesButton;
 @property (nonatomic, retain ) UIButton *shakeForRandomButton;
+@property (nonatomic, retain ) UILabel *directionsLabel;
 
 - (NSInteger) valueFromPickerForComponent: (NSInteger) comp;
 

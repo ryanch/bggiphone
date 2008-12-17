@@ -16,6 +16,7 @@
 @synthesize gamePicker;
 @synthesize showAllMatchesButton;
 @synthesize shakeForRandomButton;
+@synthesize directionsLabel;
 
 +(GamePickerUIViewController*) buildGamePickerUIViewController {
 	
@@ -34,18 +35,41 @@
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
 		
-		playersChoices = [NSArray arrayWithObjects:@"Any", @"1 player", @"2 Players", 
-						  @"3 Players", @"4 Players", @"5 Players", @"6 Players", 
-						  @"7 Players", @"8 Players", @"9 Players", @"10+ Players", nil];
+	
+		playersChoices = [NSArray arrayWithObjects: 
+						  NSLocalizedString( @"Any", "any number of players for game search" ), 
+						   NSLocalizedString( @"1 Player", "1 player game search" ),
+						   NSLocalizedString( @"2 Player", "2 player game search" ), 
+						   NSLocalizedString( @"3 Player", "3 player game search" ), 
+						   NSLocalizedString( @"4 Player", "4 player game search" ), 
+						   NSLocalizedString( @"5 Player", "5 player game search" ), 
+						   NSLocalizedString( @"6 Player", "6 player game search" ), 
+						   NSLocalizedString( @"7 Player", "7 player game search" ), 
+						   NSLocalizedString( @"8 Player", "8 player game search" ), 
+						   NSLocalizedString( @"9 Player", "9 player game search" ), 
+						   NSLocalizedString( @"10+ Player", "10+ player game search" ), 
+						   nil];
 		[playersChoices retain];
 		
 		
-		timeChoices = [NSArray arrayWithObjects:@"Any", @"< 30 min", 
-						  @"< 45 min",@"< 60 min",  @"< 90 min", @"< 120 min", @"< 150 min", nil];
+		timeChoices = [NSArray arrayWithObjects:
+						NSLocalizedString( @"Any", "any ammount of time game search" ), 
+					   NSLocalizedString( @"< 30 min", "less than 30 min game search" ), 
+					   NSLocalizedString( @"< 60 min", "less than 60 min game search" ), 
+					   NSLocalizedString( @"< 90 min", "less than 90 min game search" ), 
+					   NSLocalizedString( @"< 120 min", "less than 120 min game search" ), 
+					   NSLocalizedString( @"< 150 min", "less than 150 min game search" ), 
+					   nil];
 		[timeChoices retain];
 		
-		weightChoices = [NSArray arrayWithObjects:@"Any", @"Light", 
-					   @"Med. L.",@"Med",  @"Med. H.", @"Heavy", nil];
+		weightChoices = [NSArray arrayWithObjects:
+						 NSLocalizedString( @"Any", "any ammount of time game weight" ), 
+						 NSLocalizedString( @"Light", "light ammount of time game weight" ), 
+						 NSLocalizedString( @"Med. L.", "medium light ammount of time game weight" ), 
+						 NSLocalizedString( @"Med", "medium ammount of time game weight" ), 
+						 NSLocalizedString( @"Med. H.", "Med. Heavy ammount of time game weight" ), 
+						 NSLocalizedString( @"Heavy", "Heavy ammount of time game weight" )
+						 , nil];
 		[weightChoices retain];
 		
     }
@@ -157,6 +181,11 @@
 	[shakeForRandomButton setBackgroundImage:newImage forState:UIControlStateNormal];
 	[showAllMatchesButton setBackgroundImage:newImage forState:UIControlStateNormal];
 	
+	
+	//shakeForRandomButton.text = NSLocalizedString(@"Pick Random",@"pick a random result button text" );
+	//showAllMatchesButton.text = NSLocalizedString(@"Show All Matches",@"show all games that match button text" );
+	directionsLabel.text = NSLocalizedString( @"Use this control to find a game in your collection given the critieria that you select.", @"directions for for the collection game search" );
+	
 	gamePicker.delegate = self;
 }
 
@@ -181,6 +210,7 @@
 	[timeChoices release];
 	[weightChoices release];
 	[gamePicker release];
+	[directionsLabel release];
     [super dealloc];
 }
 
@@ -203,7 +233,7 @@
 	if ( results == nil || [results count] == 0  ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Results", @"No results were found.")
 														message:NSLocalizedString(@"No results were found.", @"No results were found.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													   delegate:self cancelButtonTitle:NSLocalizedString( @"OK", @"okay button title") otherButtonTitles: nil];
 		[alert show];	
 		[alert release];
 		

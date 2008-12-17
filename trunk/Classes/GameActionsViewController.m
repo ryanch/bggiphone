@@ -98,7 +98,7 @@
 	
 	LogPlayUIViewController * logPlay = [[LogPlayUIViewController alloc] initWithNibName:@"RecordPlay" bundle:nil];
 	logPlay.gameId = fullGameInfo.gameId;
-	logPlay.title = NSLocalizedString( @"Log A Play", @"log a play title" );
+	logPlay.title = NSLocalizedString( @"Log A Play", @"log a play button title" );
 	
 	[appDelegate.navigationController pushViewController: logPlay animated: YES];
 	
