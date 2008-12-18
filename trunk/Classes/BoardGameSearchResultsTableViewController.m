@@ -526,7 +526,7 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-	[[UIAccelerometer sharedAccelerometer] setDelegate: nil];	
+	//[[UIAccelerometer sharedAccelerometer] setDelegate: nil];	
 	[super viewWillDisappear:animated];
 }
 
@@ -611,8 +611,8 @@
 
 - (void) setupAccelRandomPicker {
 	//Configure and enable the accelerometer
-	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
-	[[UIAccelerometer sharedAccelerometer] setDelegate: self];	
+	//[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+	//[[UIAccelerometer sharedAccelerometer] setDelegate: self];	
 }
 
 
