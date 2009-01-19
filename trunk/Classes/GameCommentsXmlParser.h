@@ -13,6 +13,7 @@
 	NSMutableString *stringBuffer;
 	NSMutableString *pageBuffer;
 	BOOL inCommentTag;
+	BOOL hitMaxComments;
 	NSString *author;
 	NSString * writeToPath;
 	NSInteger commentCount;

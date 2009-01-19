@@ -16,6 +16,8 @@
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 	
+	hitMaxComments = NO;
+	
 	commentCount = 0;
 	
 	[self addHTMLHeader];
@@ -65,6 +67,9 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
 	
+	if ( hitMaxComments ) {
+		return;
+	}
 	
 	inCommentTag = NO;
 	
@@ -75,6 +80,7 @@
 	if ( [elementName isEqualToString:@"comment"] ) {
 		
 		if ( commentCount > MAX_COMMENTS ) {
+			hitMaxComments = YES;
 			return;
 		}
 		
@@ -94,6 +100,10 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
 	
+	if ( hitMaxComments ) {
+		return;
+	}	
+	
 	if ( inCommentTag ) {
 		[stringBuffer appendString:string];
 	}
@@ -103,6 +113,10 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {     
+	
+	if ( hitMaxComments ) {
+		return;
+	}	
 	
 	if (qName) {
         elementName = qName;
