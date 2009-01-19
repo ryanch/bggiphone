@@ -212,10 +212,52 @@
 	
 	NSMutableString *stringBuffer = [[NSMutableString alloc] initWithCapacity:10*1024];
 	[stringBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];
-	[stringBuffer appendString:@"<style>* {font-family: helvetica;} </style></head><body>"];
+	[stringBuffer appendString:@"<style>* {font-family: helvetica;}  .header { margin-bottom: 3px;  border-bottom: 1px solid silver; } </style></head><body>"];
 	
 	
-	[stringBuffer appendString:@"<div align=\"center\"><b>"];
+	[stringBuffer appendString: @"<div class=\"header\" ><b style=\"font-size: x-large;\">"	];
+	[stringBuffer appendString: gameInfo.title ];
+	[stringBuffer appendString: @"</b><br/>"	];
+	
+	
+	float avgRatingFloatValue = [gameInfo.average floatValue];
+	NSString * avgRating = [NSString stringWithFormat:@"%1.2f", avgRatingFloatValue];
+
+	[stringBuffer appendString: @"<b>Rating:</b>"	];
+	
+
+	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+	NSURL *resourcePath = [NSURL fileURLWithPath:bundlePath];
+	
+	
+	NSString * star = [NSString stringWithFormat:@"%@/star_yellow.gif",resourcePath];
+	NSString * halfStar = [NSString stringWithFormat:@"%@/star_yellowhalf.gif",resourcePath];
+	NSString * noStar = [NSString stringWithFormat:@"%@/star_white.gif",resourcePath];
+	
+	
+	NSLog(star);
+	
+	//NSString * star = @"http://files.boardgamegeek.com/images/star_yellow.gif";
+	//NSString * halfStar = @"http://files.boardgamegeek.com/images/star_yellowhalf.gif";
+	//NSString * noStar = @"http://files.boardgamegeek.com/images/star_white.gif";
+	
+	for ( float i = 0; i < 10; i++ ) {
+		if ( avgRatingFloatValue > 1+i ) {
+			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", star] ];
+		}	
+		else if ( avgRatingFloatValue > 0.2 + i ) {
+			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", halfStar] ];	
+		}
+		else {
+			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", noStar] ];	
+		}
+	}
+	
+		
+	[stringBuffer appendString: [NSString stringWithFormat: @"&nbsp;<b>%@&nbsp;/&nbsp;10</b><br/>", avgRating ]	];
+	
+	
+	[stringBuffer appendString:@"<b>"];
 	[stringBuffer appendString:NSLocalizedString(@"Rank:", @"rank label for a game")];
 	[stringBuffer appendString:@"</b> "];
 	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.rank] ];
