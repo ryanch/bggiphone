@@ -21,14 +21,17 @@
 
 #import <UIKit/UIKit.h>
 
+#define TESTING_ENABLED
 
 @interface SettingsUIViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField * userNameTextField;
 	IBOutlet UITextField * passwordTextField;
+	IBOutlet UIButton * testButton;
 }
 
 @property (nonatomic, retain)  UITextField * userNameTextField;
 @property (nonatomic, retain)  UITextField * passwordTextField;
+@property (nonatomic, retain)  UIButton * testButton;
 
 + (SettingsUIViewController*) buildSettingsUIViewController;
 
@@ -36,5 +39,7 @@
 - (IBAction) clearImageCache;
 
 - (void) saveSettings;
+
+- (IBAction) runTests;
 
 @end

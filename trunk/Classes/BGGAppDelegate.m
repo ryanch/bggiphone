@@ -75,10 +75,14 @@
 + (NSString*) urlEncode: (NSString*) str {
 	//CFStringRef preprocessedString =
 	//CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, (CFStringRef)str, CFSTR(""), kCFStringEncodingUTF8);
-	CFStringRef urlString =
-	CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL,  (CFStringRef)@"&?=", kCFStringEncodingUTF8);
+	//CFStringRef urlString = 
+	//CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL,  (CFStringRef)@"&?=", kCFStringEncodingUTF8);
+	
 	
 	//[(NSString*)preprocessedString release];
+	
+	CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, NULL, kCFStringEncodingUTF8);
+	
 	
 	NSString * result = (NSString*)urlString;
 	[result autorelease];

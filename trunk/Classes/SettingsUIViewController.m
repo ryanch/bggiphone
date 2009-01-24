@@ -24,11 +24,14 @@
 #import "PlistSettings.h"
 #import "XmlSearchReader.h"
 #import "DbAccess.h"
+#import "PostWorker.h"
+#import "BGGConnect.h"
 
 @implementation SettingsUIViewController
 
 @synthesize userNameTextField;
 @synthesize passwordTextField;
+@synthesize testButton;
 
 /*
 // Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
@@ -113,7 +116,10 @@
 // Implement viewDidLoad to do additional setup after loading the view.
 - (void)viewDidLoad {
     
-	
+#ifdef TESTING_ENABLED
+	NSLog( @"testing enabled" );
+	testButton.hidden = NO;
+#endif
 	
 	userNameTextField.delegate = self;
 	passwordTextField.delegate = self;
@@ -159,6 +165,46 @@
 	controller.title = NSLocalizedString( @"Settings", @"settings title" );
 	[controller autorelease];
 	return controller;
+}
+
+
+- (IBAction) runTests {
+	
+#ifdef TESTING_ENABLED
+	
+	/*
+	// post worker test
+	PostWorker* worker = [[PostWorker alloc] init];
+	worker.url = @"http://boardgamegeek.com/login";
+	worker.usePost = YES;
+	
+	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:5];
+	[params setObject:@"ryanch" forKey:@"username"];
+	[params setObject:@"ddd" forKey:@"password"];
+	
+	worker.params = params;
+	
+	[params release];
+	
+	[worker start];
+	
+	
+	NSLog(  [[NSString  alloc] initWithData:worker.receivedData	encoding: NSUTF8StringEncoding  ] );
+	*/
+	BGGConnect * bggConnect = [[BGGConnect alloc] init];
+	
+	bggConnect.username = @"ryanchtest";
+	bggConnect.password = @"go";
+	
+	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: 31260 forDate: [NSDate date] numPlays: 1 ];
+	NSLog(@"result %d" , response	);
+	
+	[bggConnect	 release];
+	
+	
+	
+#endif
+	
 }
 
 
