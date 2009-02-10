@@ -293,7 +293,7 @@
 	// do the work
 	XmlGameInfoReader *reader = [[XmlGameInfoReader alloc] init];
 	
-	NSString * urlStr = [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/game/%@?stats=1", gameId	];
+	NSString * urlStr = [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/boardgame/%@?stats=1", gameId	];
 	NSURL *url = [NSURL URLWithString: urlStr	];
 	
 	
@@ -329,8 +329,15 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@.jpg", gameId] ];
+	NSString *fullPath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@.jpg", gameId] ];
 	
+	NSFileManager * fileManager = [NSFileManager defaultManager];
+	if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
+		return fullPath;
+	}
+	
+	
+	return nil;
 	
 }
 
@@ -339,8 +346,14 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.jpg", gameId] ];
+	NSString *fullPath =  [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.jpg", gameId] ];
 	
+	NSFileManager * fileManager = [NSFileManager defaultManager];
+	if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
+		return fullPath;
+	}	
+	
+	return nil;
 	
 }
 
@@ -350,7 +363,10 @@
 -(void) cacheGameImage: (FullGameInfo*) fullGameInfo {
 	
 	NSString * tempFilePath =[self buildImageFilePathForGameId: fullGameInfo.gameId];
-
+	if ( tempFilePath == nil ) {
+		return;
+	}
+	
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	if ( [fileManager	 fileExistsAtPath:tempFilePath ] ) {
 		return;

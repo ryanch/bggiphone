@@ -46,7 +46,7 @@
 		
 		NSError *error;
 		
-		NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/game/%@?comments=1", gameId]   ];
+		NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/boardgame/%@?comments=1", gameId]   ];
 		
 		BOOL success = [comments parseXMLAtURL:url parseError:&error];
 		[comments release];

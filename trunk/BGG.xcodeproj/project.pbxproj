@@ -22,6 +22,7 @@
 		BA03E8350EA85D980069F8D6 /* PlistSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E8340EA85D980069F8D6 /* PlistSettings.m */; };
 		BA03E8500EA8619B0069F8D6 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA03E84F0EA8619B0069F8D6 /* settings.plist */; };
 		BA0CF3510EF22B5B000AE1EF /* bgg13.db in Resources */ = {isa = PBXBuildFile; fileRef = BA0CF3500EF22B5B000AE1EF /* bgg13.db */; };
+		BA1C98FB0F2BA4C800E65F69 /* GameCollectionSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1C98FA0F2BA4C800E65F69 /* GameCollectionSettings.xib */; };
 		BA3C7D240EC75BF000F24BF4 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D230EC75BF000F24BF4 /* header.png */; };
 		BA3C7D300EC75F4200F24BF4 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D2F0EC75F4200F24BF4 /* footer.png */; };
 		BA3C7D8F0EC76A0B00F24BF4 /* GameCommentsXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */; };
@@ -106,6 +107,7 @@
 		BA03E8340EA85D980069F8D6 /* PlistSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistSettings.m; sourceTree = "<group>"; };
 		BA03E84F0EA8619B0069F8D6 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		BA0CF3500EF22B5B000AE1EF /* bgg13.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg13.db; path = sql/bgg13.db; sourceTree = "<group>"; };
+		BA1C98FA0F2BA4C800E65F69 /* GameCollectionSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCollectionSettings.xib; sourceTree = "<group>"; };
 		BA3C7D230EC75BF000F24BF4 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header.png; path = images/header.png; sourceTree = "<group>"; };
 		BA3C7D2F0EC75F4200F24BF4 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = images/footer.png; sourceTree = "<group>"; };
 		BA3C7D8D0EC76A0B00F24BF4 /* GameCommentsXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommentsXmlParser.h; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				BA3C7D2F0EC75F4200F24BF4 /* footer.png */,
 				BA3C7D230EC75BF000F24BF4 /* header.png */,
 				BAD111C40EBD0E4800C4F518 /* bgg.db */,
+				BA1C98FA0F2BA4C800E65F69 /* GameCollectionSettings.xib */,
 				BADB5AC10EBAC03900742CA6 /* blueButton.png */,
 				BADB5A980EBABC0A00742CA6 /* whiteButton.png */,
 				BADB5A920EBABB3C00742CA6 /* minus.png */,
@@ -477,6 +480,7 @@
 				BABC9B7B0F24FD8300926B50 /* star_white.gif in Resources */,
 				BABC9B7C0F24FD8300926B50 /* star_yellow.gif in Resources */,
 				BABC9B7D0F24FD8300926B50 /* star_yellowhalf.gif in Resources */,
+				BA1C98FB0F2BA4C800E65F69 /* GameCollectionSettings.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

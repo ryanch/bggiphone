@@ -25,6 +25,8 @@
 #import "PlistSettings.h"
 #import "SettingsUIViewController.h"
 #import "Beacon.h"
+#import "BGGConnect.h"
+#import "PostWorker.h"
 
 @implementation LogPlayUIViewController
 
@@ -97,19 +99,54 @@
 
 - (void) doLogPlay {
 	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
 	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 
+	BGGConnect * bggConnect = [[BGGConnect alloc] init];
+	
+
+	bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+	bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+	
+	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: [NSDate date] numPlays: playCount ];
+	
+	if ( response == SUCCESS ) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
+														message:NSLocalizedString(@"Your play was logged.", @"Your play was logged")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];		
+	}
+	else if ( response == CONNECTION_ERROR ) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
+														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network.", @"No data was returned when logged. Check your password, and network connection.")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];	
+	}
+	else if ( response == AUTH_ERROR ) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
+														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];	
+	}
+
+		
+	
+	[bggConnect	 release];
+	
+	
+	[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
+	
+	[autoreleasepool release];
+	
+	
 	/*
-	String url = "http://www.boardgamegeek.com/lastplayed.php3?gameid="+gameid+"&playdate="+year+"-"+month+"-"+day+"&quantity="+quantity+"&B1=Submit";
-	//Hashtable headers = new Hashtable();
-	//headers.put("Cookie","bggusername="+DataProxy.getBGGUser()+";bggpassword="+DataProxy.getBGGPass());
-	//System.out.println(url);
-	Requester req = new Requester(url,"bggusername="+DataProxy.getBGGUser()+";bggpassword="+DataProxy.getBGGPass());
-	req.start();	
-	*/
-	
-	
-	
+	 
+	 NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	 
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -169,7 +206,9 @@
 		[responseBody release];
 
 	}
-
+	 
+	 
+	 
 	 if ( looksGood == NO ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
 														message:NSLocalizedString(@"Check your password, and network connection.", @"No data was returned when logged. Check your password, and network connection.")
@@ -198,11 +237,16 @@
 		[alert show];	
 		[alert release];	
 	}
+	 
+	 
+	 
 	
 	//[self logPlayComplete];
 	[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
 	
 	[autoreleasepool release];
+	 
+	 */
 }
 
 - (void) logPlayComplete {

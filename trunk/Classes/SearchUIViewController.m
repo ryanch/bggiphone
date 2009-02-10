@@ -137,7 +137,7 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
-	if ( [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
+	if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
 		cell.image = [UIImage imageWithContentsOfFile: imagePath];
 	}
 	else {

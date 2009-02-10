@@ -21,7 +21,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define TESTING_ENABLED
+//#define TESTING_ENABLED
 
 @interface SettingsUIViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField * userNameTextField;

@@ -85,7 +85,7 @@
 			
 			// make sure it is a board game
 			NSString *type = [attributeDict valueForKey: @"objecttype" ];
-			if ( [type isEqualToString: @"boardgame"] == NO ) {
+			if ( [type isEqualToString: @"boardgame"] == NO && [type isEqualToString: @"thing"] == NO) {
 				return;
 			}
 			
@@ -127,7 +127,7 @@
 	
 	
 		// is it a <game> tag?
-		if ( [elementName isEqualToString:@"game"] ) {
+		if ( [elementName isEqualToString:@"game"] || [elementName isEqualToString:@"boardgame"]  ) {
 			numberGamesFound++;
 			
 			// clear old game names
@@ -155,6 +155,12 @@
 			if ( gameId != nil ) {
 				currentResult.gameId = gameId;
 			}
+			else {
+				// get objectid
+				gameId = [attributeDict valueForKey:@"objectid"];
+				currentResult.gameId = gameId;
+			}
+			
 			
 			
 		}
@@ -203,7 +209,7 @@
 	else {
 	
 	// is it a </game> tag?
-	if ( [elementName isEqualToString:@"game"] ) {
+	if ( [elementName isEqualToString:@"game"] || [elementName isEqualToString:@"boardgame"] ) {
 		if ( currentResult != nil ) {
 			
 			// see if we have game names

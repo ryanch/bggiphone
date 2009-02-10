@@ -27,7 +27,7 @@ enum {
 	//! connection error
 	CONNECTION_ERROR = 2,
 	//! success
-	SUCCESS = 2,	
+	SUCCESS = 3,	
 };
 typedef NSInteger BGGConnectResponse;
 
@@ -36,16 +36,16 @@ typedef NSInteger BGGConnectResponse;
 /// these are collection flags
 ///
 enum {
-	OWN,
-	PREV_OWN,
-	FOR_TRADE,
-	WANT_IN_TRADE,
-	WANT_TO_BUY,
-	WANT_TO_PLAY,
-	NOTIFY_CONTENT,
-	NOTIFY_SALES,
-	NOTIFY_AUCTIONS,
-	PREORDED
+	COLLECTION_FLAG_OWN,
+	COLLECTION_FLAG_PREV_OWN,
+	COLLECTION_FLAG_FOR_TRADE,
+	COLLECTION_FLAG_WANT_IN_TRADE,
+	COLLECTION_FLAG_WANT_TO_BUY,
+	COLLECTION_FLAG_WANT_TO_PLAY,
+	COLLECTION_FLAG_NOTIFY_CONTENT,
+	COLLECTION_FLAG_NOTIFY_SALES,
+	COLLECTION_FLAG_NOTIFY_AUCTIONS,
+	COLLECTION_FLAG_PREORDED
 };
 typedef NSInteger BGGConnectCollectionFlag;
 
@@ -85,10 +85,10 @@ typedef NSInteger BGGConnectWishListState;
 
 
 //! update game state in collection
-- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId flag: (BGGConnectCollectionFlag) flag setFlag: (BOOL) shouldSet forTarget:(id)target;
+- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId flag: (BGGConnectCollectionFlag) flag setFlag: (BOOL) shouldSet;
 
 //! update game state in wishlist
-- (BGGConnectResponse) saveWishListStateForGameId: (NSInteger) gameId flag: (BGGConnectWishListState) stateToSave forTarget:(id)target;
+- (BGGConnectResponse) saveWishListStateForGameId: (NSInteger) gameId flag: (BGGConnectWishListState) stateToSave;
 
 
 

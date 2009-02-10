@@ -277,16 +277,23 @@
 	
 	[stringBuffer appendString:@"</div>"];
 	
-	[stringBuffer appendString:@"<img src=\""];
-	//[stringBuffer appendString:gameInfo.imageURL];
-	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
 	NSString * gameImagePath = [appDelegate buildImageFilePathForGameId:gameInfo.gameId];
-	NSURL * imageURL = [NSURL fileURLWithPath:gameImagePath];
-	[stringBuffer appendString: [imageURL absoluteString] ];
 	
-	[stringBuffer appendString:@"\" align=\"left\"  />"];
+	if ( gameImagePath != nil ) {
+	
+		[stringBuffer appendString:@"<img src=\""];
+		//[stringBuffer appendString:gameInfo.imageURL];
+		
+		
+		
+		
+		NSURL * imageURL = [NSURL fileURLWithPath:gameImagePath];
+		[stringBuffer appendString: [imageURL absoluteString] ];
+		
+		[stringBuffer appendString:@"\" align=\"left\"  />"];
+		
+	}
 	
 	[stringBuffer appendString:@"<p>"];
 	[stringBuffer appendString:gameInfo.desc];
