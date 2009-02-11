@@ -67,12 +67,12 @@
 					<object class="IBUILabel" id="294049379">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 6}, {280, 111}}</string>
+						<string key="NSFrame">{{20, 6}, {280, 147}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">Please note that these actions are done using an unsupported API on BoardGameGeek. The actions are done in an insecure way, and leaving your BGG password easily found.</string>
+						<string key="IBUIText">Please note that these actions are done using the supported API on BoardGameGeek. The actions are done in an more secure way than prior versions. This method is not encrypted, but is as secure as boardgamegeek.</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
