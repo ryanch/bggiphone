@@ -8,7 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -32,29 +31,29 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIButton" id="794471271">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{97, 161}, {126, 37}}</string>
+						<string key="NSFrame">{{97, 20}, {126, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="536959883">
+						<object class="NSFont" key="IBUIFont" id="364757128">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">1.500000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUIHighlightedTitle">Record A Play</string>
-						<string key="IBUIDisabledTitle">Record A Play</string>
-						<string key="IBUISelectedTitle">Record A Play</string>
-						<string key="IBUINormalTitle">Record A Play</string>
+						<string key="IBUIHighlightedTitle">Record a Play</string>
+						<string key="IBUIDisabledTitle">Record a Play</string>
+						<string key="IBUISelectedTitle">Record a Play</string>
+						<string key="IBUINormalTitle">Record a Play</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="72569849">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -64,16 +63,16 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
 						</object>
 					</object>
-					<object class="IBUIButton" id="976092693">
+					<object class="IBUIButton" id="581724145">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{76, 227}, {168, 37}}</string>
+						<string key="NSFrame">{{76, 75}, {168, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="536959883"/>
+						<reference key="IBUIFont" ref="364757128"/>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUIHighlightedTitle">View Game in Safari</string>
 						<string key="IBUIDisabledTitle">View Game in Safari</string>
@@ -88,15 +87,22 @@
 					<object class="IBUILabel" id="294049379">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 6}, {280, 147}}</string>
+						<string key="NSFrame">{{20, 252}, {280, 108}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">Please note the action is done using the supported API on BoardGameGeek. This method is not encrypted, but is as secure as boardgamegeek.</string>
+						<string type="base64-UTF8" key="IBUIText">VGhlICJSZWNvcmQgYSBQbGF5IiBhY3Rpb24gcmVxdWlyZXMgeW91ciBwYXNzd29yZC4gVGhpcyBhY3Rp
+b24gaXMgZG9uZSBhcyBzZWN1cmVseSBhcyBCb2FyZEdhbWVHZWVrLmNvbSBoYW5kbGVzIHlvdXIgcGFz
+c3dvcmQuA</string>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">1.700000e+01</double>
+							<int key="NSfFlags">16</int>
+						</object>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<bytes key="NSRGB">MC41MDE5NjA4MSAwLjUwMTk2MDgxIDAuNTAxOTYwODEAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -105,7 +111,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 367}</string>
-				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="72569849"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -145,7 +150,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">openGameInSafari</string>
-						<reference key="source" ref="976092693"/>
+						<reference key="source" ref="581724145"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -155,7 +160,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">safariButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="976092693"/>
+						<reference key="destination" ref="581724145"/>
 					</object>
 					<int key="connectionID">19</int>
 				</object>
@@ -178,7 +183,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="294049379"/>
 							<reference ref="794471271"/>
-							<reference ref="976092693"/>
+							<reference ref="581724145"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 					</object>
@@ -205,7 +210,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="976092693"/>
+						<reference key="object" ref="581724145"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -226,7 +231,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameActionsViewController</string>
 					<string>UIResponder</string>
-					<string>{{4, 500}, {320, 480}}</string>
+					<string>{{184, 366}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
