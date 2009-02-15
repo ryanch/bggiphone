@@ -213,7 +213,34 @@
 			continue;
 		}
 		
-		NSString * firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
+		//NSString * firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
+		
+		NSString * firstLetter = nil;
+		
+		NSString * sortTitle = [result.primaryTitle uppercaseString];
+		
+		// look for THE
+		NSRange range = [sortTitle rangeOfString:@"THE "];
+		if ( range.location != NSNotFound && range.location == 0 ) {
+			if ( range.location + range.length < sortTitle.length +1 ) {
+				firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
+			}
+		}
+		
+		// look for A
+		if ( firstLetter == nil ) {
+			range = [sortTitle rangeOfString:@"A "];
+			if ( range.location != NSNotFound && range.location == 0) {
+				if ( range.location + range.length < sortTitle.length +1 ) {
+					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
+				}
+			}
+		}
+		
+		//just use first letter
+		if ( firstLetter == nil ) {
+			firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
+		}
 		
 		
 		NSMutableArray * titles = (NSMutableArray*) [sectionCountsDict objectForKey:firstLetter];

@@ -31,6 +31,7 @@
 
 @synthesize fullGameInfo;
 @synthesize logPlayButton;
+@synthesize safariButton;
 
 
 
@@ -64,6 +65,15 @@
 	
 	logPlayButton.backgroundColor = [UIColor clearColor];
 	
+	
+	// set the bg on the button
+	[safariButton setBackgroundImage:newImage forState:UIControlStateNormal];
+	
+	[safariButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
+	
+	safariButton.backgroundColor = [UIColor clearColor];	
+	
+	
 }
 
 
@@ -83,9 +93,23 @@
 - (void)dealloc {
 	[fullGameInfo release];
 	[logPlayButton release];
+	[safariButton release];
     [super dealloc];
 }
 
+
+- (IBAction) openGameInSafari {
+	if ( fullGameInfo == nil ) {
+		return;
+	}
+	
+	
+	NSString * gameId = fullGameInfo.gameId;
+	NSString  * urlString = [NSString stringWithFormat:@"http://www.boardgamegeek.com/boardgame/%@", gameId ];
+
+	
+	[[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlString] ];
+}
 
 - (IBAction) openRecordAPlay {
 	

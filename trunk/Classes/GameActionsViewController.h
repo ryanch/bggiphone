@@ -27,17 +27,17 @@
 @interface GameActionsViewController : UIViewController {
 	FullGameInfo * fullGameInfo;
 	IBOutlet UIButton * logPlayButton;
-
+	IBOutlet UIButton * safariButton;
 }
 
 
 @property (nonatomic, retain ) FullGameInfo * fullGameInfo;
 
 @property (nonatomic, retain ) UIButton * logPlayButton;
-
+@property (nonatomic, retain ) UIButton * safariButton;
 
 
 - (IBAction) openRecordAPlay;
-
+- (IBAction) openGameInSafari;
 
 @end
