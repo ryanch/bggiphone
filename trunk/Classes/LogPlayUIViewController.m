@@ -109,7 +109,7 @@
 	bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
 	bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
 	
-	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: [NSDate date] numPlays: playCount ];
+	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: datePicker.date numPlays: playCount ];
 	
 	if ( response == SUCCESS ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
