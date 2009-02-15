@@ -237,6 +237,26 @@
 			}
 		}
 		
+		// look for "
+		if ( firstLetter == nil ) {
+			range = [sortTitle rangeOfString:@"\""];
+			if ( range.location != NSNotFound && range.location == 0) {
+				if ( range.location + range.length < sortTitle.length +1 ) {
+					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
+				}
+			}
+		}		
+		
+		// look for "THE 
+		if ( firstLetter == nil ) {
+			range = [sortTitle rangeOfString:@"\"THE "];
+			if ( range.location != NSNotFound && range.location == 0) {
+				if ( range.location + range.length < sortTitle.length +1 ) {
+					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
+				}
+			}
+		}			
+		
 		//just use first letter
 		if ( firstLetter == nil ) {
 			firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
