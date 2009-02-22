@@ -194,12 +194,42 @@
 	
 }
 
+
+NSString* _scubTitleForSort( NSString* title ) {
+	title = [title uppercaseString];
+	NSRange range = [title rangeOfString:@"THE "];
+	if ( range.location != NSNotFound && range.location == 0 ) {
+		title = [title  substringFromIndex: range.length];
+	}
+	return title;
+}
+
+// this is the sort method
+NSInteger gameSort(id obj1, id obj2, void *context) {
+	
+	
+	BBGSearchResult * result1 = (BBGSearchResult*)obj1;
+	BBGSearchResult * result2 = (BBGSearchResult*)obj2;
+	
+	NSString * title1 = _scubTitleForSort(result1.primaryTitle);
+	NSString * title2 = _scubTitleForSort(result2.primaryTitle);
+	
+
+	return [title1 compare: title2];
+	
+	
+}
+
 - (void) buildSectionTitlesForResults:(NSArray*)results {
 		
 	
 	if (results == nil || [results count] == 0 ) {
 		return;
 	}
+	
+	
+	// sort the results first
+	results = [results sortedArrayUsingFunction:gameSort context:NULL];
 	
 	NSMutableArray * array = [ [NSMutableArray alloc] initWithCapacity:100];
 	sectionTitles = array;
@@ -214,53 +244,12 @@
 		}
 		
 		//NSString * firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
+
+		NSString * sortTitle = _scubTitleForSort(result.primaryTitle);
 		
-		NSString * firstLetter = nil;
+	
+		NSString * 	firstLetter = [sortTitle substringToIndex:1];
 		
-		NSString * sortTitle = [result.primaryTitle uppercaseString];
-		
-		// look for THE
-		NSRange range = [sortTitle rangeOfString:@"THE "];
-		if ( range.location != NSNotFound && range.location == 0 ) {
-			if ( range.location + range.length < sortTitle.length +1 ) {
-				firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
-			}
-		}
-		
-		// look for A
-		if ( firstLetter == nil ) {
-			range = [sortTitle rangeOfString:@"A "];
-			if ( range.location != NSNotFound && range.location == 0) {
-				if ( range.location + range.length < sortTitle.length +1 ) {
-					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
-				}
-			}
-		}
-		
-		// look for "
-		if ( firstLetter == nil ) {
-			range = [sortTitle rangeOfString:@"\""];
-			if ( range.location != NSNotFound && range.location == 0) {
-				if ( range.location + range.length < sortTitle.length +1 ) {
-					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
-				}
-			}
-		}		
-		
-		// look for "THE 
-		if ( firstLetter == nil ) {
-			range = [sortTitle rangeOfString:@"\"THE "];
-			if ( range.location != NSNotFound && range.location == 0) {
-				if ( range.location + range.length < sortTitle.length +1 ) {
-					firstLetter = [sortTitle substringWithRange: NSMakeRange(range.location + range.length,1)   ];
-				}
-			}
-		}			
-		
-		//just use first letter
-		if ( firstLetter == nil ) {
-			firstLetter = [ [result.primaryTitle substringToIndex:1] uppercaseString];
-		}
 		
 		
 		NSMutableArray * titles = (NSMutableArray*) [sectionCountsDict objectForKey:firstLetter];
