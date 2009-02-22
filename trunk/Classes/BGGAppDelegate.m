@@ -324,36 +324,55 @@
 }
 
 
-- (NSString*) buildImageFilePathForGameId: (NSString*) gameId {
-	
+//! build a local path to an game image file, check if it exists
+- (NSString*) buildImageFilePathForGameId: (NSString*) gameId checkIfExists: (BOOL) exists {
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *fullPath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@.jpg", gameId] ];
 	
-	NSFileManager * fileManager = [NSFileManager defaultManager];
-	if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
-		return fullPath;
+	if ( exists ) {
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
+			return fullPath;
+		}
+		return nil;	
 	}
 	
+	return fullPath;
 	
-	return nil;
 	
 }
 
-- (NSString*) buildImageThumbFilePathForGameId: (NSString*) gameId {
-	
+//! build a local path to a game image file thumbnail, check if it exists
+- (NSString*) buildImageThumbFilePathForGameId: (NSString*) gameId checkIfExists: (BOOL) exists {
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *fullPath =  [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.jpg", gameId] ];
 	
-	NSFileManager * fileManager = [NSFileManager defaultManager];
-	if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
-		return fullPath;
-	}	
+	if ( exists ) {
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		if ( [fileManager	 fileExistsAtPath:fullPath ] ) {
+			return fullPath;
+		}	
+		
+		return nil;
+	}
 	
-	return nil;
+	return fullPath;
+}
+
+
+- (NSString*) buildImageFilePathForGameId: (NSString*) gameId {
+	
+	return [self buildImageFilePathForGameId: gameId checkIfExists: YES];
+	
+}
+
+- (NSString*) buildImageThumbFilePathForGameId: (NSString*) gameId {
+	
+	return [self buildImageThumbFilePathForGameId: (NSString*) gameId checkIfExists: YES];
 	
 }
 
@@ -362,10 +381,8 @@
 
 -(void) cacheGameImage: (FullGameInfo*) fullGameInfo {
 	
-	NSString * tempFilePath =[self buildImageFilePathForGameId: fullGameInfo.gameId];
-	if ( tempFilePath == nil ) {
-		return;
-	}
+	NSString * tempFilePath =[self buildImageFilePathForGameId: fullGameInfo.gameId checkIfExists: NO];
+	
 	
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	if ( [fileManager	 fileExistsAtPath:tempFilePath ] ) {
@@ -378,7 +395,7 @@
 	[imageData writeToFile:tempFilePath atomically:YES];
 	
 	// now resize and save again
-	NSString * thumbImagePath = [self buildImageThumbFilePathForGameId: fullGameInfo.gameId];
+	NSString * thumbImagePath = [self buildImageThumbFilePathForGameId: fullGameInfo.gameId checkIfExists: NO];
 	
 	
 	CGSize newSize = CGSizeMake( 40, 40 );

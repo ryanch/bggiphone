@@ -69,7 +69,7 @@
 		captureChars = YES;
 	}
 	
-	else if ( [elementName isEqualToString:@"thumbnail" ] || [elementName isEqualToString:@"image" ] ) {
+	else if ( [elementName isEqualToString:@"thumbnail" ]  ) {
 		[stringBuffer setString:@""];
 		captureChars = YES;
 	}
@@ -117,7 +117,7 @@
 		[desc release];
 	}
 	
-	else if ( [elementName isEqualToString:@"thumbnail" ] || [elementName isEqualToString:@"image" ] ) {
+	else if ( [elementName isEqualToString:@"thumbnail" ]  ) {
 		NSString *thumb = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.imageURL = thumb;
 		[thumb	release];

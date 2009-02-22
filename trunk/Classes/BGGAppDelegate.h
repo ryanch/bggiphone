@@ -114,6 +114,13 @@ typedef NSInteger BGGResumeState;
 //! build a local path to a game image file thumbnail
 - (NSString*) buildImageThumbFilePathForGameId: (NSString*) gameId;
 
+//! build a local path to an game image file, check if it exists
+- (NSString*) buildImageFilePathForGameId: (NSString*) gameId checkIfExists: (BOOL) exists;
+
+//! build a local path to a game image file thumbnail, check if it exists
+- (NSString*) buildImageThumbFilePathForGameId: (NSString*) gameId checkIfExists: (BOOL) exists;
+
+
 //! cache a games image, creating a thumbail as well
 -(void) cacheGameImage: (FullGameInfo*) fullGameInfo;
 
