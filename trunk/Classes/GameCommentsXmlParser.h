@@ -12,8 +12,9 @@
 @interface GameCommentsXmlParser : NSObject {
 	NSMutableString *stringBuffer;
 	NSMutableString *pageBuffer;
+	NSMutableString *otherUserComments;
+	NSMutableString *currentUserComments;
 	BOOL inCommentTag;
-	BOOL hitMaxComments;
 	NSString *author;
 	NSString * writeToPath;
 	NSInteger commentCount;
@@ -25,5 +26,6 @@
 - (void) addComment: (NSString *) comment author: (NSString*)author;
 - (void) addHTMLFooter;
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error;
+
 
 @end

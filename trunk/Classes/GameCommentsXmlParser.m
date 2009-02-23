@@ -7,6 +7,8 @@
 //
 
 #import "GameCommentsXmlParser.h"
+#import "BGGAppDelegate.h"
+#import	"PlistSettings.h"
 
 #define MAX_COMMENTS 50
 
@@ -16,11 +18,16 @@
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 	
-	hitMaxComments = NO;
+
+	[currentUserComments release];
+	currentUserComments = [[NSMutableString alloc] initWithCapacity:10*1024];
+	
+	[otherUserComments release];
+	otherUserComments = [[NSMutableString alloc] initWithCapacity:25*1024];	
 	
 	commentCount = 0;
 	
-	[self addHTMLHeader];
+	
 	
 	inCommentTag = NO;
 	
@@ -43,6 +50,18 @@
     }
     else {
 	
+		
+		[self addHTMLHeader];
+		
+		[pageBuffer appendString:currentUserComments];
+		[currentUserComments release];
+		currentUserComments = nil;
+		
+		
+		[pageBuffer appendString:otherUserComments];
+		[otherUserComments release];
+		otherUserComments = nil;
+		
 		[self addHTMLFooter];
 		
 	
@@ -67,9 +86,7 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
 	
-	if ( hitMaxComments ) {
-		return;
-	}
+
 	
 	inCommentTag = NO;
 	
@@ -79,12 +96,9 @@
 	
 	if ( [elementName isEqualToString:@"comment"] ) {
 		
-		if ( commentCount > MAX_COMMENTS ) {
-			hitMaxComments = YES;
-			return;
-		}
+
 		
-		commentCount++;
+		
 		
 		[author release];
 		author = (NSString*) [attributeDict objectForKey:@"username"];
@@ -100,9 +114,7 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
 	
-	if ( hitMaxComments ) {
-		return;
-	}	
+
 	
 	if ( inCommentTag ) {
 		[stringBuffer appendString:string];
@@ -114,9 +126,7 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {     
 	
-	if ( hitMaxComments ) {
-		return;
-	}	
+
 	
 	if (qName) {
         elementName = qName;
@@ -139,6 +149,8 @@
 
 - (void) dealloc
 {
+	[otherUserComments release];
+	[currentUserComments release];
 	[writeToPath release];
 	[pageBuffer release];
 	[author release];
@@ -150,7 +162,7 @@
 - (void) addHTMLHeader {
 	[pageBuffer release];
 	pageBuffer = nil;
-	pageBuffer = [[NSMutableString alloc] initWithCapacity:25*1024];
+	pageBuffer = [[NSMutableString alloc] initWithCapacity:35*1024];
 	[pageBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];
 	[pageBuffer appendString:@"<style> .comment{border-bottom: 1px solid silver; padding-top: 5px; padding-bottom: 5px; }   * {font-family: helvetica;} .sttitle { font-weight: bold; text-align: right;} </style></head><body>"];
 	[pageBuffer appendString: [NSString stringWithFormat: @"<center><i>First %d comments.</i></center>",MAX_COMMENTS] ];
@@ -158,17 +170,53 @@
 
 - (void) addComment: (NSString *) comment author: (NSString*)authorText {
 	
-	[pageBuffer appendString:@"<div class=\"comment\">"];
+	BOOL isCurrentUser = NO;
 	
-	[pageBuffer appendString:@"<b>"];
+	NSMutableString * buffer = nil;
 	
-	[pageBuffer appendString:[authorText stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"] ];
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	[pageBuffer appendString:@"</b>: "];
+	NSString * currentUsername = [appDelegate getCurrentUserName];
 	
-	[pageBuffer appendString:[comment stringByReplacingOccurrencesOfString:@"<" withString: @"&lt;"] ];
+	if ( currentUsername != nil && [authorText isEqualToString: currentUsername] ) {
+		buffer = currentUserComments;
+		isCurrentUser = YES;
+	}	
+	else {
+		
+		if ( commentCount > MAX_COMMENTS ) {
+			return;
+		}
+		
+		commentCount++;
+		
+		buffer = otherUserComments;
+	}
 	
-	[pageBuffer appendString:@"</div>"];
+	
+	[buffer appendString:@"<div class=\"comment\">"];
+	
+
+	
+	[buffer appendString:@"<b>"];
+	
+	if ( isCurrentUser  ) {
+		[buffer appendString:@"<u>"];
+	}
+	
+	[buffer appendString:[authorText stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"] ];
+	
+	if ( isCurrentUser  ) {
+		[buffer appendString:@"</u>"];
+	}	
+	
+	[buffer appendString:@"</b>: "];
+	
+
+	
+	[buffer appendString:[comment stringByReplacingOccurrencesOfString:@"<" withString: @"&lt;"] ];
+	
+	[buffer appendString:@"</div>"];
 }
 
 - (void) addHTMLFooter {
