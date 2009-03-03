@@ -1,0 +1,16 @@
+PRAGMA legacy_file_format=OFF; 
+
+create table Project (
+	projectId INTEGER PRIMARY KEY,
+	projectName text
+);
+
+create table Task (
+	taskId INTEGER PRIMARY KEY,
+	taskName text,
+	dateOpen double,
+	minutesLogged integer,
+	projectParentId integer
+);
+
+
