@@ -1,5 +1,7 @@
 PRAGMA legacy_file_format=OFF; 
 
+
+
 create table Project (
 	projectId INTEGER PRIMARY KEY,
 	projectName text
