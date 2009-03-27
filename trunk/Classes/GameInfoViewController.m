@@ -23,6 +23,7 @@
 #import "FullGameInfo.h"
 #import "BBGSearchResult.h"
 #import "BGGAppDelegate.h"
+#import "HtmlTemplate.h"
 
 
 @implementation GameInfoViewController
@@ -66,116 +67,48 @@
 	NSString * tempFilePath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/h/%@_stats.html", gameInfo.gameId] ];
 
 	
-	//NSString * tempFilePath = [NSString stringWithFormat:@"%@/tmp/%@.html", [ [NSBundle mainBundle] resourcePath ], gameInfo.gameId];
+	// generate contents from template
 	
-	//NSString * tempFilePath = [NSString stringWithFormat:@"%@/%@.html",NSTemporaryDirectory(),gameInfo.gameId];
+	NSString * template = [ NSString stringWithFormat:@"%@/stats_template.html", [ [NSBundle mainBundle] bundlePath]  ];
+	HtmlTemplate * gameTemplate = [[HtmlTemplate alloc] initWithFileName:template];
 	
-	NSMutableString *stringBuffer = [[NSMutableString alloc] initWithCapacity:10*1024];
-	[stringBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];
-	[stringBuffer appendString:@"<style>* {font-family: helvetica;} .sttitle { font-weight: bold; text-align: right;} </style></head><body>"];
+	NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:20];
 	
-
-	[stringBuffer appendString:@"<p  align=\"center\"  ><b style=\"font-size: 1.1em;\">"];
-	[stringBuffer appendString:gameInfo.title];
-	[stringBuffer appendString:@" "];
-	[stringBuffer appendString:NSLocalizedString(@"Game Statistics",@"game statistics title for stats page") ];
-	[stringBuffer appendString:@"</b></p><table>"];
+	[params setObject: gameInfo.title forKey:@"#!gameTitle#"];
 	
-	
-	// rank
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Rank:",@"rank label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.rank] ];
-	[stringBuffer appendString:@"</td><tr>"];
-		
-	// average
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Average Rating:",@"Average Rating label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];
-	
-	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal: gameInfo.average] ] ];
-	[stringBuffer appendString:@"</td><tr>"];		
-	
-	// bayesaverage
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Bayesian Average:",@"Bayesian Average label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];
-	
-	
-	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal:gameInfo.bayesaverage ] ] ];
-	[stringBuffer appendString:@"</td><tr>"];	
-	
-	// usersrated
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Users Rated:",@"Users Rated: label for a game, as in the number of users that rated it") ];
-	[stringBuffer appendString:@"</td><td>"];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.usersrated] ];
-	[stringBuffer appendString:@"</td><tr>"];
-	
-	// averageweight
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Average Weight:",@"Average Weight: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%@", [self trimToDecimal:gameInfo.averageweight] ] ];
-	[stringBuffer appendString:@"</td><tr>"];		
-	
-	// numweights
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Number of Weights:",@"Number of Weights: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];	
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.numweights] ];
-	[stringBuffer appendString:@"</td><tr>"];	
-	
-	// owned
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Copies Owned:",@"Copies Owned: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];		
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.owned] ];
-	[stringBuffer appendString:@"</td><tr>"];	
-
-	// trading
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Copies For Trade:",@"Copies For Trade: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];		
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.trading] ];
-	[stringBuffer appendString:@"</td><tr>"];		
-	
-	// wanting
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Copies Wanted:",@"Copies Wanted: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];		
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.wanting] ];
-	[stringBuffer appendString:@"</td><tr>"];		
-	
-	// wishing
-	[stringBuffer appendString:@"<tr><td class=\"sttitle\">"];
-	[stringBuffer appendString:NSLocalizedString(@"Copies Wished For:",@"Copies Wished For: label for a game") ];
-	[stringBuffer appendString:@"</td><td>"];		
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.wishing] ];
-	[stringBuffer appendString:@"</td><tr>"];		
-	
-	
-	[stringBuffer appendString:@"</table>"];
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.rank] forKey:@"#!rank#"];
 	
 
+	float avgRatingFloatValue = [gameInfo.average floatValue];
+	NSString * avgRating = [NSString stringWithFormat:@"%1.2f", avgRatingFloatValue];	
+	[params setObject: avgRating	forKey: @"#!avgRating#" ];
 	
 	
 	
-	[stringBuffer appendString:@"</table>"];
-	[stringBuffer appendString:@"</html></body>"];
+	[params setObject:  [self trimToDecimal:gameInfo.bayesaverage ]  forKey:@"#!bayAvg#"];
+	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.usersrated] forKey:@"#!usersRated#"];
+	
+	[params setObject: [self trimToDecimal:gameInfo.averageweight] forKey:@"#!avgWeight#"];
+	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.numweights] forKey:@"#!numWeights#"];
+
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.owned] forKey:@"#!copiesOwned#"];
+	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.trading] forKey:@"#!copiesForTrade#"];
+	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.wanting] forKey:@"#!copiesWanted#"];
+	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.wishing] forKey:@"#!copiesWishedFor#"];
 	
 	
-	//NSLog( tempFilePath );
-	//NSLog( stringBuffer );
 	
-	
-	
-	
-	// write to file
-	[stringBuffer writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[stringBuffer release];
-	
+	// Merge the template
+	NSString * pageText = [gameTemplate allocMergeWithData:params];
+	[gameTemplate release];
+
+	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
+	[pageText release];
 	
 	// hide and show
 	[loadingView stopAnimating];
@@ -185,10 +118,23 @@
 	
 	
 	// set the web view to load it
-	NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: tempFilePath  ] ];
+	//NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: tempFilePath  ] ];
 	//NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString:@"http://google.com"  ] ];
-	[self.webView loadRequest: url ];
-	[url autorelease];
+	//[self.webView loadRequest: url ];
+	//[url autorelease];
+	
+	
+	
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSURL *baseURL = [NSURL fileURLWithPath:path];
+	
+	
+	NSString * fileContents = [NSString stringWithContentsOfFile:tempFilePath];
+	
+	
+	[webView loadHTMLString:fileContents baseURL:  baseURL   ];	
+	
+	[params release];
 	
 }
 
@@ -205,83 +151,54 @@
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString * tempFilePath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/h/%@.html", gameInfo.gameId] ];
 	 
+	NSString * template = [ NSString stringWithFormat:@"%@/game_template.html", [ [NSBundle mainBundle] bundlePath]  ];
+	HtmlTemplate * gameTemplate = [[HtmlTemplate alloc] initWithFileName:template];
 	
-	//NSString * tempFilePath = [NSString stringWithFormat:@"%@/tmp/%@.html", [ [NSBundle mainBundle] resourcePath ], gameInfo.gameId];
-	 
-	//NSString * tempFilePath = [NSString stringWithFormat:@"%@/%@.html",NSTemporaryDirectory(),gameInfo.gameId];
+	NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:20];
 	
-	NSMutableString *stringBuffer = [[NSMutableString alloc] initWithCapacity:10*1024];
-	[stringBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];
-	[stringBuffer appendString:@"<style>* {font-family: helvetica;}  .header { margin-bottom: 3px;  border-bottom: 1px solid silver; } </style></head><body>"];
+	[params setObject: gameInfo.title forKey:@"#!title#"];
 	
+	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.rank] forKey:@"#!rank#"];
 	
-	[stringBuffer appendString: @"<div class=\"header\" ><b style=\"font-size: x-large;\">"	];
-	[stringBuffer appendString: gameInfo.title ];
-	[stringBuffer appendString: @"</b><br/>"	];
+	NSString * players = [NSString stringWithFormat:@"%d-%d",gameInfo.minPlayers,gameInfo.maxPlayers];
+	[params setObject:players forKey:@"#!players#"];
 	
+	NSString * gameTime = [NSString stringWithFormat:@"%d min",gameInfo.playingTime];
+	[params setObject: gameTime	forKey: @"#!time#" ];
+	
+
 	
 	float avgRatingFloatValue = [gameInfo.average floatValue];
 	NSString * avgRating = [NSString stringWithFormat:@"%1.2f", avgRatingFloatValue];
+	
+	[params setObject: avgRating	forKey: @"#!rating#" ];
+	
+	NSString * star = @"star_yellow.gif";
+	NSString * halfStar = @"star_yellowhalf.gif";
+	NSString * noStar = @"star_white.gif";
+	
+	NSMutableString * starBuffer = [[NSMutableString alloc] initWithCapacity:200];
 
-	[stringBuffer appendString: @"<b>Rating:</b>"	];
-	
-
-	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-	NSURL *resourcePath = [NSURL fileURLWithPath:bundlePath];
-	
-	
-	NSString * star = [NSString stringWithFormat:@"%@/star_yellow.gif",resourcePath];
-	NSString * halfStar = [NSString stringWithFormat:@"%@/star_yellowhalf.gif",resourcePath];
-	NSString * noStar = [NSString stringWithFormat:@"%@/star_white.gif",resourcePath];
-	
-	
-	NSLog(star);
-	
-	//NSString * star = @"http://files.boardgamegeek.com/images/star_yellow.gif";
-	//NSString * halfStar = @"http://files.boardgamegeek.com/images/star_yellowhalf.gif";
-	//NSString * noStar = @"http://files.boardgamegeek.com/images/star_white.gif";
-	
 	for ( float i = 0; i < 10; i++ ) {
 		if ( avgRatingFloatValue > 1+i ) {
-			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", star] ];
-		}	
+			[starBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", star] ];
+		}       
 		else if ( avgRatingFloatValue > 0.2 + i ) {
-			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", halfStar] ];	
+			[starBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", halfStar] ];        
 		}
 		else {
-			[stringBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", noStar] ];	
+			[starBuffer appendString: [NSString stringWithFormat:@"<img src=\"%@\">", noStar] ];  
 		}
 	}
 	
-		
-	[stringBuffer appendString: [NSString stringWithFormat: @"&nbsp;<b>%@&nbsp;/&nbsp;10</b><br/>", avgRating ]	];
-	
-	
-	[stringBuffer appendString:@"<b>"];
-	[stringBuffer appendString:NSLocalizedString(@"Rank:", @"rank label for a game")];
-	[stringBuffer appendString:@"</b> "];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.rank] ];
-	
-	[stringBuffer appendString:@" <b>"];
-	[stringBuffer appendString:NSLocalizedString(@"Players:", @"players label for a game")];
-	[stringBuffer appendString:@"</b> "];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d-%d", gameInfo.minPlayers, gameInfo.maxPlayers] ];
-	
-	
-	[stringBuffer appendString:@" <b>"];
-	[stringBuffer appendString:NSLocalizedString(@"Time:", @"time label for a game")];
-	[stringBuffer appendString:@"</b> "];
-	[stringBuffer appendString: [NSString stringWithFormat:@"%d", gameInfo.playingTime] ];
-	[stringBuffer appendString:@" "];
-	[stringBuffer appendString:NSLocalizedString(@"min", @"minutes abbreviation")];
-	
-	[stringBuffer appendString:@"</div>"];
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * gameImagePath = [appDelegate buildImageFilePathForGameId:gameInfo.gameId];
 	
+	NSString * imageTag = nil;
 	if ( gameImagePath != nil ) {
-	
+        
+		/*
 		[stringBuffer appendString:@"<img src=\""];
 		//[stringBuffer appendString:gameInfo.imageURL];
 		
@@ -292,25 +209,36 @@
 		[stringBuffer appendString: [imageURL absoluteString] ];
 		
 		[stringBuffer appendString:@"\" align=\"left\"  />"];
+		*/
+		
+		imageTag = [NSString stringWithFormat: @"<img src=\"%@\" align=\"left\" class=\"image\"  />",gameImagePath];
+ 
 		
 	}
+	else {
+			imageTag = @"";
+	}
+	[params setObject: imageTag	forKey: @"#!gameImage#" ];
 	
-	[stringBuffer appendString:@"<p>"];
-	[stringBuffer appendString:gameInfo.desc];
-	[stringBuffer appendString:@"</p>"];
-	[stringBuffer appendString:@"</html></body>"];
-	
-	
-	//NSLog( tempFilePath );
-	//NSLog( stringBuffer );
+	[params setObject: starBuffer	forKey: @"#!stars#" ];
+	[starBuffer release];
 	
 	
+	// stringByReplacingOccurrencesOfString:withString:
+	
+	NSString * desc = [ gameInfo.desc stringByReplacingOccurrencesOfString: @"\n" withString: @"<p/>" ];
+	
+	[params setObject: desc	forKey: @"#!gameBody#" ];
+	
+	// Merge the template
+	NSString * pageText = [gameTemplate allocMergeWithData:params];
+	[gameTemplate release];
 	
 	
-	// write to file
-	[stringBuffer writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[stringBuffer release];
+	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
+	[pageText release];
 	
+
 	
 	// hide and show
 	[loadingView stopAnimating];
@@ -320,13 +248,21 @@
 
 	
 	// set the web view to load it
-	NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: tempFilePath  ] ];
+	//NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: tempFilePath  ] ];
 	//NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString:@"http://google.com"  ] ];
-	[self.webView loadRequest: url ];
-	[url autorelease];
+	//[self.webView loadRequest: url ];
+	
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSURL *baseURL = [NSURL fileURLWithPath:path];
 	
 
+	NSString * fileContents = [NSString stringWithContentsOfFile:tempFilePath];
 	
+
+	[webView loadHTMLString:fileContents baseURL:  baseURL   ];
+	
+
+	[params release];
 }
 
 

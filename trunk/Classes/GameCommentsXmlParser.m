@@ -9,6 +9,7 @@
 #import "GameCommentsXmlParser.h"
 #import "BGGAppDelegate.h"
 #import	"PlistSettings.h"
+#import "HtmlTemplate.h"
 
 #define MAX_COMMENTS 50
 
@@ -51,22 +52,29 @@
     else {
 	
 		
-		[self addHTMLHeader];
+		NSString * template = [ NSString stringWithFormat:@"%@/comment_template.html", [ [NSBundle mainBundle] bundlePath]  ];
+		HtmlTemplate * commentsTemplate = [[HtmlTemplate alloc] initWithFileName:template];			   
+	
+		NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:20];
 		
-		[pageBuffer appendString:currentUserComments];
+		[params setObject: currentUserComments forKey:@"#!currentUserComments#"];
+		[params setObject: otherUserComments forKey:@"#!otherComments#"];		
+		
+		NSString * pageText = [commentsTemplate allocMergeWithData:params];
+		[commentsTemplate release];
+		[params release];
+		
+
+		
 		[currentUserComments release];
-		currentUserComments = nil;
+		currentUserComments = nil;	
 		
-		
-		[pageBuffer appendString:otherUserComments];
 		[otherUserComments release];
-		otherUserComments = nil;
-		
-		[self addHTMLFooter];
+		otherUserComments = nil;		
 		
 	
-		success =[pageBuffer writeToFile:writeToPath	atomically:YES encoding:NSUTF8StringEncoding error:nil];
-		
+		success =[pageText writeToFile:writeToPath	atomically:YES encoding:NSUTF8StringEncoding error:nil];
+		[pageText release];
 		
 
 	
@@ -170,6 +178,9 @@
 
 - (void) addComment: (NSString *) comment author: (NSString*)authorText {
 	
+	
+	
+	
 	BOOL isCurrentUser = NO;
 	
 	NSMutableString * buffer = nil;
@@ -196,7 +207,6 @@
 	
 	[buffer appendString:@"<div class=\"comment\">"];
 	
-
 	
 	[buffer appendString:@"<b>"];
 	
@@ -212,9 +222,11 @@
 	
 	[buffer appendString:@"</b>: "];
 	
-
 	
-	[buffer appendString:[comment stringByReplacingOccurrencesOfString:@"<" withString: @"&lt;"] ];
+	NSString * commentUpdated = [ comment stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;" ];
+	commentUpdated = [ comment stringByReplacingOccurrencesOfString: @"\n" withString: @"<p/>" ];
+	
+	[buffer appendString:commentUpdated ];
 	
 	[buffer appendString:@"</div>"];
 }

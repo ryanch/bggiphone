@@ -78,9 +78,14 @@
 	
 	
 	// set the web view to load it
-	NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: pageToLoad  ] ];
-	[webView loadRequest: url ];
-	[url autorelease];
+	//NSURLRequest * url = [[NSURLRequest alloc] initWithURL: [NSURL fileURLWithPath: pageToLoad  ] ];
+	//[webView loadRequest: url ];
+	//[url autorelease];
+	
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSURL *baseURL = [NSURL fileURLWithPath:path];
+	NSString * fileContents = [NSString stringWithContentsOfFile:pageToLoad];
+	[webView loadHTMLString:fileContents baseURL:  baseURL   ];	
 	
 	webView.hidden = NO;
 	loadingView.hidden = YES;

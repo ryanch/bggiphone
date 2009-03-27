@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale = 1.0; user-scalable=no; width=device-width;">
+<style> 
+.header{
+	border-bottom: 3px solid #8BA5D6;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #fcfcfc;
+	background-image: url(commentgrad.jpg);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	line-height: 130%;
+	padding: 5px;
+}   
+.image {
+	padding: 2px;
+	border: 1px solid #000000;
+	margin: 0 8px 8px 0;
+}
+* {font-family: helvetica;} .sttitle { font-weight: bold; text-align: right;} 
+body {
+	background: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+.title {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #4B5F97;
+	padding: 3px;
+	border-bottom: 3px solid #DBF6FF;
+	background-image: url(topgrad.jpg);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	text-align:center;
+}
+.content {
+	padding: 10px;
+}
+.topinfo {
+	font-size:14px;
+	margin-top: 3px;
+}
+.info {
+	margin: 3px;
+	border-left: 1px solid 8BA5D6;
+}
+</style>
+</head>
+<body>
+<div class="title">#!title#</div><div class="header">
+  <b>Rating:</b>#!stars#&nbsp;<b>#!rating#&nbsp;/&nbsp;10</b><br/>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="topinfo">
+
+    <tr>
+      <td width="33%"><div align="center"><b>Rank:</b> #!rank#</div></td>
+      <td width="33%" class="info"><div align="center"><b>Players:</b> #!players#</div></td>
+      <td width="33%" class="info"><div align="center"><b>Time:</b> #!time# </div></td>
+
+    </tr>
+  </table>
+</div>
+  <div class="content">
+
+
+#!gameImage#
+
+
+<p>
+
+#!gameBody#
+
+  </p>
+  </div>
+</html>
+</body>

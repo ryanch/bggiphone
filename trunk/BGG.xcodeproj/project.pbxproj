@@ -23,6 +23,8 @@
 		BA03E8500EA8619B0069F8D6 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA03E84F0EA8619B0069F8D6 /* settings.plist */; };
 		BA0CF3510EF22B5B000AE1EF /* bgg13.db in Resources */ = {isa = PBXBuildFile; fileRef = BA0CF3500EF22B5B000AE1EF /* bgg13.db */; };
 		BA1C98FB0F2BA4C800E65F69 /* GameCollectionSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1C98FA0F2BA4C800E65F69 /* GameCollectionSettings.xib */; };
+		BA256A240F60FB5B00C37A64 /* HtmlTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA256A230F60FB5B00C37A64 /* HtmlTemplate.m */; };
+		BA256A410F61059000C37A64 /* game_template.html in Resources */ = {isa = PBXBuildFile; fileRef = BA256A400F61059000C37A64 /* game_template.html */; };
 		BA3C7D240EC75BF000F24BF4 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D230EC75BF000F24BF4 /* header.png */; };
 		BA3C7D300EC75F4200F24BF4 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D2F0EC75F4200F24BF4 /* footer.png */; };
 		BA3C7D8F0EC76A0B00F24BF4 /* GameCommentsXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */; };
@@ -45,6 +47,10 @@
 		BA48C82C0EB52932005B4297 /* GameInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82B0EB52932005B4297 /* GameInfo.xib */; };
 		BA48C82F0EB52978005B4297 /* GameActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82E0EB52978005B4297 /* GameActions.xib */; };
 		BA4DE14F0EB8119100B18E17 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DE14E0EB8119100B18E17 /* Entitlements.plist */; };
+		BA8D20DA0F7D77D100578409 /* commentgrad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA8D20D80F7D77D100578409 /* commentgrad.jpg */; };
+		BA8D20DB0F7D77D100578409 /* topgrad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA8D20D90F7D77D100578409 /* topgrad.jpg */; };
+		BA8D21630F7D8BE800578409 /* stats_template.html in Resources */ = {isa = PBXBuildFile; fileRef = BA8D21620F7D8BE800578409 /* stats_template.html */; };
+		BA8D217C0F7D8F0D00578409 /* comment_template.html in Resources */ = {isa = PBXBuildFile; fileRef = BA8D217B0F7D8F0D00578409 /* comment_template.html */; };
 		BAB288160EB6DEBF00A6AEE3 /* stats.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288130EB6DEBF00A6AEE3 /* stats.png */; };
 		BAB288170EB6DEBF00A6AEE3 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288140EB6DEBF00A6AEE3 /* info.png */; };
 		BAB288180EB6DEBF00A6AEE3 /* actions.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288150EB6DEBF00A6AEE3 /* actions.png */; };
@@ -108,6 +114,9 @@
 		BA03E84F0EA8619B0069F8D6 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		BA0CF3500EF22B5B000AE1EF /* bgg13.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg13.db; path = sql/bgg13.db; sourceTree = "<group>"; };
 		BA1C98FA0F2BA4C800E65F69 /* GameCollectionSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCollectionSettings.xib; sourceTree = "<group>"; };
+		BA256A220F60FB5B00C37A64 /* HtmlTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HtmlTemplate.h; sourceTree = "<group>"; };
+		BA256A230F60FB5B00C37A64 /* HtmlTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HtmlTemplate.m; sourceTree = "<group>"; };
+		BA256A400F61059000C37A64 /* game_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = game_template.html; sourceTree = "<group>"; };
 		BA3C7D230EC75BF000F24BF4 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header.png; path = images/header.png; sourceTree = "<group>"; };
 		BA3C7D2F0EC75F4200F24BF4 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = images/footer.png; sourceTree = "<group>"; };
 		BA3C7D8D0EC76A0B00F24BF4 /* GameCommentsXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommentsXmlParser.h; sourceTree = "<group>"; };
@@ -141,6 +150,10 @@
 		BA48C82B0EB52932005B4297 /* GameInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameInfo.xib; sourceTree = "<group>"; };
 		BA48C82E0EB52978005B4297 /* GameActions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameActions.xib; sourceTree = "<group>"; };
 		BA4DE14E0EB8119100B18E17 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		BA8D20D80F7D77D100578409 /* commentgrad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = commentgrad.jpg; path = images/commentgrad.jpg; sourceTree = "<group>"; };
+		BA8D20D90F7D77D100578409 /* topgrad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = topgrad.jpg; path = images/topgrad.jpg; sourceTree = "<group>"; };
+		BA8D21620F7D8BE800578409 /* stats_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = stats_template.html; sourceTree = "<group>"; };
+		BA8D217B0F7D8F0D00578409 /* comment_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = comment_template.html; sourceTree = "<group>"; };
 		BAB288130EB6DEBF00A6AEE3 /* stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stats.png; sourceTree = "<group>"; };
 		BAB288140EB6DEBF00A6AEE3 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		BAB288150EB6DEBF00A6AEE3 /* actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actions.png; sourceTree = "<group>"; };
@@ -211,6 +224,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BA256A290F61000F00C37A64 /* template */,
 				BABC9B860F2505AF00926B50 /* bggConnect */,
 				BAEC7C120EC797AC00151693 /* gamepicker */,
 				BA3C7D8A0EC769CA00F24BF4 /* comments */,
@@ -295,6 +309,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA8D20D80F7D77D100578409 /* commentgrad.jpg */,
+				BA8D20D90F7D77D100578409 /* topgrad.jpg */,
+				BA256A3F0F61059000C37A64 /* html */,
 				BABC9B780F24FD8300926B50 /* star_white.gif */,
 				BABC9B790F24FD8300926B50 /* star_yellow.gif */,
 				BABC9B7A0F24FD8300926B50 /* star_yellowhalf.gif */,
@@ -341,6 +358,25 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA256A290F61000F00C37A64 /* template */ = {
+			isa = PBXGroup;
+			children = (
+				BA256A220F60FB5B00C37A64 /* HtmlTemplate.h */,
+				BA256A230F60FB5B00C37A64 /* HtmlTemplate.m */,
+			);
+			name = template;
+			sourceTree = "<group>";
+		};
+		BA256A3F0F61059000C37A64 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				BA8D217B0F7D8F0D00578409 /* comment_template.html */,
+				BA8D21620F7D8BE800578409 /* stats_template.html */,
+				BA256A400F61059000C37A64 /* game_template.html */,
+			);
+			path = html;
 			sourceTree = "<group>";
 		};
 		BA3C7D8A0EC769CA00F24BF4 /* comments */ = {
@@ -481,6 +517,11 @@
 				BABC9B7C0F24FD8300926B50 /* star_yellow.gif in Resources */,
 				BABC9B7D0F24FD8300926B50 /* star_yellowhalf.gif in Resources */,
 				BA1C98FB0F2BA4C800E65F69 /* GameCollectionSettings.xib in Resources */,
+				BA256A410F61059000C37A64 /* game_template.html in Resources */,
+				BA8D20DA0F7D77D100578409 /* commentgrad.jpg in Resources */,
+				BA8D20DB0F7D77D100578409 /* topgrad.jpg in Resources */,
+				BA8D21630F7D8BE800578409 /* stats_template.html in Resources */,
+				BA8D217C0F7D8F0D00578409 /* comment_template.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +559,7 @@
 				BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */,
 				BABC9B890F2505D500926B50 /* BGGConnect.m in Sources */,
 				BABC9B970F250C8F00926B50 /* PostWorker.m in Sources */,
+				BA256A240F60FB5B00C37A64 /* HtmlTemplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
