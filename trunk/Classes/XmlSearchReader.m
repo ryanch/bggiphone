@@ -215,12 +215,21 @@
 			// see if we have game names
 			if ( [gameNames count] > 0 ) {
 				currentResult.alternateNames = [[NSArray alloc] initWithArray: gameNames];
+				
+				// if we have no primary title, but have a alternate title, then use it.
+				if ( currentResult.primaryTitle == nil || [currentResult.primaryTitle length] == 0 ) {
+					currentResult.primaryTitle =  [currentResult.alternateNames objectAtIndex:0];
+				}
 			}
+			
+
 			
 			// if we finished the current game, and 
 			// we had a current result then add it to the
 			// search results
-			[searchResults addObject:currentResult];
+			if ( currentResult.primaryTitle != nil && [currentResult.primaryTitle length] > 0 ) {
+				[searchResults addObject:currentResult];
+			}
 			[currentResult release];
 			currentResult = nil;
 		}

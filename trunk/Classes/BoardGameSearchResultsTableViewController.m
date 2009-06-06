@@ -273,7 +273,10 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	}
 	
 	
-	
+	if ( [sectionTitles count] == 0 ) {
+		[sectionTitles release];
+		sectionTitles = nil;
+	}
 	
 	
 	
