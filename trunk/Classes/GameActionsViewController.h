@@ -28,6 +28,7 @@
 	FullGameInfo * fullGameInfo;
 	IBOutlet UIButton * logPlayButton;
 	IBOutlet UIButton * safariButton;
+	IBOutlet UIButton * modifyButton;
 }
 
 
@@ -39,5 +40,6 @@
 
 - (IBAction) openRecordAPlay;
 - (IBAction) openGameInSafari;
+- (IBAction) manageGameInCollection;
 
 @end

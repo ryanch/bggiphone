@@ -151,9 +151,7 @@
 }
 
 
-//! update game state in collection
-- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId flag: (BGGConnectCollectionFlag) flag setFlag: (BOOL) shouldSet  {
-
+- (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId {
 	// see if we have auth key
 	if ( authCookies == nil ) {
 		[self connectForAuthKey];
@@ -163,7 +161,9 @@
 	if ( authCookies == nil ) {
 		return AUTH_ERROR;
 	}
-
+	
+	
+	
 	
 	// post worker test
 	PostWorker* worker = [[PostWorker alloc] init];
@@ -174,94 +174,247 @@
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekcollection.php";
 	
-	// bgg params
-	/*
-	 ajax=1
-	 &action=savedata
-	 &fieldname=status
-	 &collid=7820316
-	 &own=1
-	 &wishlistpriority=3
-	 */
 	
 	// setup params
 	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:2];
 	
-	// these do not change
+	// request an item to be added for this user
 	[params setObject:@"1" forKey:@"ajax"];
-	[params setObject:@"savedata" forKey:@"action"];
-	[params setObject:@"status" forKey:@"fieldname"];
-	[params setObject:@"boardgame" forKey:@"objecttype"];
+	[params setObject:@"additem" forKey:@"action"];
+	[params setObject:[NSString stringWithFormat: @"%d", gameId] forKey:@"objectid"];
+	[params setObject:@"thing" forKey:@"objecttype"];
 	
-	// these change based on what type of action
 	
-	return AUTH_ERROR;
+	NSLog(@"creating db entry with: %@", [params description]);
 	
-	/*
-	COLLECTION_FLAG_OWN,
-	COLLECTION_FLAG_PREV_OWN,
-	COLLECTION_FLAG_FOR_TRADE,
-	COLLECTION_FLAG_WANT_IN_TRADE,
-	COLLECTION_FLAG_WANT_TO_BUY,
-	COLLECTION_FLAG_WANT_TO_PLAY,
-	COLLECTION_FLAG_NOTIFY_CONTENT,
-	COLLECTION_FLAG_NOTIFY_SALES,
-	COLLECTION_FLAG_NOTIFY_AUCTIONS,
-	COLLECTION_FLAG_PREORDED	
-	
-	if ( flag == COLLECTION_FLAG_OWN ) {
-		if ( shouldSet ) {
-			[params setObject:@"1" forKey:@"own"];
-		}
-		else {
-			[params setObject:@"0" forKey:@"own"];
-		}
-	}
-	
-	// set the game id
-	[params setObject:[NSString stringWithFormat:@"%d", gameId] forKey:@"objectid"];
-	
-	// set the quantity
-	[params setObject:[NSString stringWithFormat:@"%d", plays] forKey:@"quantity"];
-	
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat: @"yyyy-MM-dd"];
-	NSString * datePlayedStr = [dateFormatter stringFromDate:date];
-	[dateFormatter release];
-	
-	// add play date
-	[params setObject:datePlayedStr forKey:@"playdate"];
-	[params setObject:datePlayedStr forKey:@"dateinput"];
-	
-	// set the params on request
 	worker.params = params;
 	[params release];
 	
-	
 	BOOL success = [worker start];
+	[worker release];
 	
 	if ( success ) {
-		NSString * responseBody = [[NSString alloc] initWithData:worker.responseData encoding:  NSASCIIStringEncoding];
-		if ( [responseBody length] > 300 ) {
-			return SUCCESS;
-		}
+		return SUCCESS;
 	}
 	
 	return CONNECTION_ERROR;
 	
-	*/
-
-}
-
-//! update game state in wishlist
-- (BGGConnectResponse) saveWishListStateForGameId: (NSInteger) gameId flag: (BGGConnectWishListState) stateToSave  {
-	
-
-	
 	
 }
 
 
+- (BGGConnectResponse) fetchGameCollectionId:(NSInteger) gameId {
+	// see if we have auth key
+	if ( authCookies == nil ) {
+		[self connectForAuthKey];
+	}
+	
+	// see if we got the auth key
+	if ( authCookies == nil ) {
+		return AUTH_ERROR;
+	}
+	
+	
+	// post worker test
+	PostWorker* worker = [[PostWorker alloc] init];
+	
+	// set the auth cookies
+	worker.requestCookies = authCookies;
+	
+	// the log play URL
+	worker.url = @"http://boardgamegeek.com/geekcollection.php";
+	
+	
+	// setup params
+	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:2];
+	
+	// request an item to be added for this user
+	[params setObject:@"1" forKey:@"ajax"];
+	[params setObject:@"module" forKey:@"action"];
+	[params setObject:[NSString stringWithFormat: @"%d", gameId] forKey:@"objectid"];
+	[params setObject:@"thing" forKey:@"objecttype"];
+	[params setObject:@"24" forKey:@"instanceid"];
+	
+	worker.params = params;
+	[params release];
+	
+	BOOL success = [worker start];
+	
+	NSLog(@"fetching collection id with: %@", [params description]);
+	
+	if ( !success ) {
+		return CONNECTION_ERROR;
+	}
+	
+	NSString * data = [[NSString alloc] initWithData: worker.responseData encoding:NSUTF8StringEncoding];
+	[worker release];
+
+	NSRange collIdRange = [data rangeOfString:@"collid"];
+	if ( collIdRange.location == NSNotFound ) {
+		[data release];
+		NSLog(@"not able to find collid");
+		return BAD_CONTENT;
+	}
+	
+	// now get the collection id
+	NSInteger numberIndex = 0;
+	unichar lettersForNumber[50];
+	NSInteger searchIndex = collIdRange.location;
+	
+	BOOL isNumber = NO;
+	BOOL foundNumber = NO;
+	BOOL cleanBreak = NO;
+	while( numberIndex < 40 ) {
+		isNumber = NO;
+		unichar letter = [data characterAtIndex:searchIndex];
+		if ( letter == '0' || letter == '1' || letter == '2' || letter == '3' || letter == '4' || letter == '5' || letter == '6' || letter == '7' || letter == '8' || letter == '9' ) {
+			isNumber = YES;
+			foundNumber = YES;
+		}
+		
+		if ( isNumber ) {
+			lettersForNumber[numberIndex] = letter;
+			numberIndex++;
+		}
+		
+		// see if we are at the end
+		if ( foundNumber == YES && isNumber == NO ) {
+			cleanBreak = YES;
+			break;
+		}
+		
+		// next letter
+		searchIndex++;
+		
+	}
+	
+	if ( !cleanBreak ) {
+		[data release];
+		NSLog(@"unable to fetch collection id");
+		return BAD_CONTENT;
+	}
+	
+	gameCollectionId = [[NSString alloc] initWithCharacters:lettersForNumber length:numberIndex];
+	
+	[data release];
+
+	return SUCCESS;
+}
+
+
+- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave {
+	
+	// see if the game already exists in the users collection
+	BGGConnectResponse response = [self fetchGameCollectionId: gameId];
+	
+	if ( response == BAD_CONTENT ) {
+		
+		// if bad conntent it might not exist
+		response = [self createDbGameEntryForGameId:gameId];
+		if ( response != SUCCESS ) {
+			return response;
+		}
+		
+		// after creating try again
+		response = [self fetchGameCollectionId:gameId];
+		if ( response != SUCCESS ) {
+			return response;
+		}
+		
+	}
+	else if ( response != SUCCESS ) {
+		return response;
+	}
+	
+	// post worker test
+	PostWorker* worker = [[PostWorker alloc] init];
+	
+	// set the auth cookies
+	worker.requestCookies = authCookies;
+	
+	// the log play URL
+	worker.url = @"http://boardgamegeek.com/geekcollection.php";
+	
+	
+	// setup params
+	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:50];
+	
+	///gameCollectionId = @"8488980";
+
+	// request an item to be added for this user
+	[params setObject:@"1" forKey:@"ajax"];
+	[params setObject:@"savedata" forKey:@"action"];
+	[params setObject:gameCollectionId forKey:@"collid"];
+	[params setObject:@"status" forKey:@"fieldname"];
+	
+	// add params based on the contents of the dictionary
+	if ( [paramsToSave objectForKey:@"fortrade"] != nil ) {
+		[params setObject:@"1" forKey:@"fortrade"];
+	}
+	
+	if ( [paramsToSave objectForKey:@"notifyauction"] != nil ) {
+		[params setObject:@"1" forKey:@"notifyauction"];
+	}
+	
+	if ( [paramsToSave objectForKey:@"notifycontent"] != nil ) {
+		[params setObject:@"1" forKey:@"notifycontent"];
+	}	
+	
+	if ( [paramsToSave objectForKey:@"notifysale"] != nil ) {
+		[params setObject:@"1" forKey:@"notifysale"];
+	}		
+	
+	if ( [paramsToSave objectForKey:@"own"] != nil ) {
+		[params setObject:@"1" forKey:@"own"];
+	}	
+	
+	if ( [paramsToSave objectForKey:@"preordered"] != nil ) {
+		[params setObject:@"1" forKey:@"preordered"];
+	}	
+	
+	if ( [paramsToSave objectForKey:@"prevowned"] != nil ) {
+		[params setObject:@"1" forKey:@"prevowned"];
+	}	
+	
+	if ( [paramsToSave objectForKey:@"want"] != nil ) {
+		[params setObject:@"1" forKey:@"want"];
+	}	
+	
+	if ( [paramsToSave objectForKey:@"wanttobuy"] != nil ) {
+		[params setObject:@"1" forKey:@"wanttobuy"];
+	}		
+
+	if ( [paramsToSave objectForKey:@"wanttoplay"] != nil ) {
+		[params setObject:@"1" forKey:@"wanttoplay"];
+	}		
+	
+	if ( [paramsToSave objectForKey:@"wishlist"] != nil ) {
+		[params setObject:@"1" forKey:@"wishlist"];
+	}		
+	
+	if ( [paramsToSave objectForKey:@"wishlistpriority"] != nil ) {
+		[params setObject:[paramsToSave objectForKey:@"wishlistpriority"] forKey:@"wishlistpriority"];
+	}		
+			
+	
+	NSLog(@"going to log with params: %@", [params description] );
+	
+	worker.params = params;
+	[params release];
+	
+	BOOL success = [worker start];
+	[worker release];
+	
+	if ( success ) {
+		return SUCCESS;
+	}
+	else {
+		return CONNECTION_ERROR;
+	}
+	
+	
+	
+}
 
 - (id) init
 {
@@ -274,6 +427,7 @@
 
 - (void) dealloc
 {
+	[gameCollectionId release];
 	[authCookies release];
 	[username release];
 	[password release];

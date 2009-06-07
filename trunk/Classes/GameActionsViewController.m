@@ -25,7 +25,8 @@
 #import "BGGAppDelegate.h"
 #import "SettingsUIViewController.h"
 #import "PlistSettings.h"
-
+#import "WebViewController.h"
+#import "CollectionItemEditViewController.h"
 
 @implementation GameActionsViewController
 
@@ -73,6 +74,13 @@
 	
 	safariButton.backgroundColor = [UIColor clearColor];	
 	
+	// set the bg on the button
+	[modifyButton setBackgroundImage:newImage forState:UIControlStateNormal];
+	
+	[modifyButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
+	
+	modifyButton.backgroundColor = [UIColor clearColor];		
+	
 	
 }
 
@@ -94,6 +102,7 @@
 	[fullGameInfo release];
 	[logPlayButton release];
 	[safariButton release];
+	[modifyButton release];
     [super dealloc];
 }
 
@@ -108,7 +117,20 @@
 	NSString  * urlString = [NSString stringWithFormat:@"http://www.boardgamegeek.com/boardgame/%@", gameId ];
 
 	
-	[[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlString] ];
+	//[[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlString] ];
+	
+	WebViewController * web = [[WebViewController alloc] initWithNibName:@"WebView" bundle:nil];
+	[web setURL:urlString];
+	web.title = @"Browser";
+	
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[appDelegate.navigationController pushViewController: web animated: YES];
+	
+	
+	
+	[web release];
+	
 }
 
 - (IBAction) openRecordAPlay {
@@ -130,6 +152,17 @@
 }
 
 
-
+- (IBAction) manageGameInCollection {
+	
+	CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
+	col.gameId = [fullGameInfo.gameId intValue];
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[appDelegate.navigationController pushViewController: col animated: YES];
+	
+	[col release];
+	
+	
+}
 
 @end

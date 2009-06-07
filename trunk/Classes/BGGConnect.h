@@ -28,38 +28,15 @@ enum {
 	CONNECTION_ERROR = 2,
 	//! success
 	SUCCESS = 3,	
+	
+	//! unexepected content
+	BAD_CONTENT =4,
 };
 typedef NSInteger BGGConnectResponse;
 
 
-///
-/// these are collection flags
-///
-enum {
-	COLLECTION_FLAG_OWN,
-	COLLECTION_FLAG_PREV_OWN,
-	COLLECTION_FLAG_FOR_TRADE,
-	COLLECTION_FLAG_WANT_IN_TRADE,
-	COLLECTION_FLAG_WANT_TO_BUY,
-	COLLECTION_FLAG_WANT_TO_PLAY,
-	COLLECTION_FLAG_NOTIFY_CONTENT,
-	COLLECTION_FLAG_NOTIFY_SALES,
-	COLLECTION_FLAG_NOTIFY_AUCTIONS,
-	COLLECTION_FLAG_PREORDED
-};
-typedef NSInteger BGGConnectCollectionFlag;
 
-///
-/// these are wishlist states
-///
-enum {
-	MUST_HAVE,
-	LOVE_TO_HAVE,
-	LIKE_TO_HAVE,
-	THINKING_ABOUT_IT,
-	DONT_BUY_THIS,
-	REMOVE_FROM_WISHLIST
-};
+
 typedef NSInteger BGGConnectWishListState;
 
 
@@ -67,6 +44,7 @@ typedef NSInteger BGGConnectWishListState;
 	NSString * username;
 	NSString * password;
 	NSArray * authCookies;
+	NSString * gameCollectionId;
 }
 
 
@@ -83,14 +61,10 @@ typedef NSInteger BGGConnectWishListState;
 //! Log a play, with simple params
 - (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId forDate: (NSDate *) date numPlays: (NSInteger) plays;
 
+- (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId;
 
-//! update game state in collection
-- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId flag: (BGGConnectCollectionFlag) flag setFlag: (BOOL) shouldSet;
+- (BGGConnectResponse) fetchGameCollectionId:(NSInteger) gameId;
 
-//! update game state in wishlist
-- (BGGConnectResponse) saveWishListStateForGameId: (NSInteger) gameId flag: (BGGConnectWishListState) stateToSave;
-
-
-
+- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave;
 
 @end
