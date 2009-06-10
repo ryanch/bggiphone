@@ -46,6 +46,9 @@
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 
+	[duplicateIdDict release];
+	duplicateIdDict = [[NSMutableDictionary alloc] initWithCapacity:1000];
+	
 	inNameTag = NO;
 
 	
@@ -109,7 +112,13 @@
 			// save the object id
 			currentResult.gameId = [attributeDict valueForKey: @"objectid" ];
 
-			[searchResults addObject:currentResult];
+			if ( [duplicateIdDict objectForKey:currentResult.gameId] == nil ) {
+			
+				[searchResults addObject:currentResult];
+				
+				[duplicateIdDict setObject:currentResult.gameId forKey:currentResult.gameId];
+				
+			}
 			
 		}
 		else if ( [elementName isEqualToString:@"name"] ) { 
@@ -309,6 +318,7 @@
 
 
 - (void)dealloc {
+	[duplicateIdDict release];
 	[searchURL release];
 	[searchResults release];
 	[currentResult release];

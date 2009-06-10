@@ -55,6 +55,9 @@
 	
 	//! this is the url that will be searched
 	NSURL *searchURL;
+	
+	//! this is for removing duplicate games from list
+	NSMutableDictionary *duplicateIdDict;
 }
 
 
