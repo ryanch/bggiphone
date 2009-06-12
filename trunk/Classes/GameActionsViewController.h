@@ -41,5 +41,6 @@
 - (IBAction) openRecordAPlay;
 - (IBAction) openGameInSafari;
 - (IBAction) manageGameInCollection;
+- (BOOL) confirmUserNameAndPassAvailable;
 
 @end

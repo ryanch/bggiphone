@@ -109,17 +109,15 @@
 					<object class="IBUILabel" id="294049379">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 252}, {280, 108}}</string>
+						<string key="NSFrame">{{20, 291}, {280, 69}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">VGhlICJSZWNvcmQgYSBQbGF5IiBhY3Rpb24gcmVxdWlyZXMgeW91ciBwYXNzd29yZC4gVGhpcyBhY3Rp
-b24gaXMgZG9uZSBhcyBzZWN1cmVseSBhcyBCb2FyZEdhbWVHZWVrLmNvbSBoYW5kbGVzIHlvdXIgcGFz
-c3dvcmQuA</string>
+						<string key="IBUIText">The some actions require your password. Theses actions are done as securely as BoardGameGeek.com handles your password.</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">1.700000e+01</double>
+							<double key="NSSize">1.200000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -221,10 +219,10 @@ c3dvcmQuA</string>
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="294049379"/>
 							<reference ref="794471271"/>
 							<reference ref="581724145"/>
 							<reference ref="495698813"/>
+							<reference ref="294049379"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 					</object>

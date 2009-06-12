@@ -154,6 +154,10 @@
 
 - (IBAction) manageGameInCollection {
 	
+	if ( ![self confirmUserNameAndPassAvailable] ) {
+		return;
+	}
+	
 	CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
 	col.gameId = [fullGameInfo.gameId intValue];
 	
@@ -162,6 +166,32 @@
 	
 	[col release];
 	
+	
+}
+
+
+- (BOOL) confirmUserNameAndPassAvailable {
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+	NSString * username = [appDelegate.appSettings.dict objectForKey:@"username"];
+	NSString * password = [appDelegate.appSettings.dict objectForKey:@"password"];
+	
+	if ( username == nil || [username length] == 0 || password == nil || [password length] == 0 ) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Need Username and Password", @"ask user to provide username and pass title")
+														message:NSLocalizedString(@"Please enter your username and password to modify your collection.", @"please give your username and password to modify your collection.")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];	
+		
+		
+		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
+		
+		[appDelegate.navigationController pushViewController:settings		animated:YES];
+		
+		return NO;
+	}
+	
+	return YES;
 	
 }
 

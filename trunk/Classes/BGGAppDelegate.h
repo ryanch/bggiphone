@@ -32,6 +32,23 @@
 #define ABOUT_MENU_CHOICE 5
 #define PICK_GAME_CHOICE 2
 
+
+///
+/// these are error responses
+///
+enum {
+	//! authorization error
+	AUTH_ERROR = 1,
+	//! connection error
+	CONNECTION_ERROR = 2,
+	//! success
+	SUCCESS = 3,	
+	
+	//! unexepected content
+	BAD_CONTENT =4,
+};
+typedef NSInteger BGGConnectResponse;
+
 ///
 /// these are types of searches todo
 ///

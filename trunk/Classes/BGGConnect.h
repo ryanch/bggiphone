@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BGGAppDelegate.h"
 
+@class CollectionItemData;
 
 /*
  
@@ -18,21 +20,7 @@
 
 
 
-///
-/// these are error responses
-///
-enum {
-	//! authorization error
-	AUTH_ERROR = 1,
-	//! connection error
-	CONNECTION_ERROR = 2,
-	//! success
-	SUCCESS = 3,	
-	
-	//! unexepected content
-	BAD_CONTENT =4,
-};
-typedef NSInteger BGGConnectResponse;
+
 
 
 
@@ -44,7 +32,7 @@ typedef NSInteger BGGConnectWishListState;
 	NSString * username;
 	NSString * password;
 	NSArray * authCookies;
-	NSString * gameCollectionId;
+
 }
 
 
@@ -57,14 +45,17 @@ typedef NSInteger BGGConnectWishListState;
 //! Connect and get a auth key from bgg
 - (void) connectForAuthKey;
 
+- (BOOL) scanForCheckedForm: (NSString*) name fromData: (NSString*) data;
 
 //! Log a play, with simple params
 - (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId forDate: (NSDate *) date numPlays: (NSInteger) plays;
 
 - (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId;
 
-- (BGGConnectResponse) fetchGameCollectionId:(NSInteger) gameId;
+- (CollectionItemData*) _fetchGameCollectionItemDataHelper:(NSInteger) gameId;
 
-- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave;
+- (CollectionItemData*) fetchGameCollectionItemData:(NSInteger) gameId;
+
+- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData;
 
 @end

@@ -8,7 +8,8 @@
 
 #import "BGGConnect.h"
 #import "PostWorker.h"
-
+#import "CollectionItemData.h"
+#import "BGGAppDelegate.h"
 
 @implementation BGGConnect
 
@@ -202,8 +203,8 @@
 	
 }
 
+- (CollectionItemData*) fetchGameCollectionItemData:(NSInteger) gameId {
 
-- (BGGConnectResponse) fetchGameCollectionId:(NSInteger) gameId {
 	// see if we have auth key
 	if ( authCookies == nil ) {
 		[self connectForAuthKey];
@@ -211,9 +212,42 @@
 	
 	// see if we got the auth key
 	if ( authCookies == nil ) {
-		return AUTH_ERROR;
+		CollectionItemData * itemData = [[CollectionItemData alloc] init];
+		itemData.response = AUTH_ERROR;
+		[itemData autorelease];
+		return itemData;
 	}
 	
+	
+	
+
+	CollectionItemData * itemData = [self _fetchGameCollectionItemDataHelper: gameId];
+	
+
+	
+	
+	
+	if ( itemData == nil ) {
+
+		// if bad conntent it might not exist
+		BGGConnectResponse response = [self createDbGameEntryForGameId:gameId];
+		if ( response != SUCCESS ) {
+			return nil;
+		}
+		
+	}
+	
+	// after creating try again
+	return [self _fetchGameCollectionItemDataHelper: gameId];
+
+	
+	
+}
+
+- (CollectionItemData*) _fetchGameCollectionItemDataHelper:(NSInteger) gameId {
+
+	
+	CollectionItemData * itemData = [[CollectionItemData alloc] init];
 	
 	// post worker test
 	PostWorker* worker = [[PostWorker alloc] init];
@@ -224,6 +258,9 @@
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekcollection.php";
 	
+	
+	// http://boardgamegeek.com/geekcollection.php?ajax=1&action=module&objectid=1&objecttype=thing&instanceid=24
+	// http://boardgamegeek.com/geekcollection.php?ajax=1&action=module&objectid=25417&objecttype=thing&instanceid=24
 	
 	// setup params
 	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:2];
@@ -243,18 +280,26 @@
 	NSLog(@"fetching collection id with: %@", [params description]);
 	
 	if ( !success ) {
-		return CONNECTION_ERROR;
+		itemData.response = CONNECTION_ERROR;
+		[itemData release];
+		return nil;
 	}
 	
 	NSString * data = [[NSString alloc] initWithData: worker.responseData encoding:NSUTF8StringEncoding];
 	[worker release];
 
+	// check if the collection id is even in the page
 	NSRange collIdRange = [data rangeOfString:@"collid"];
 	if ( collIdRange.location == NSNotFound ) {
+		
+		NSLog(@"collid not found in data: %@", data); 
+		
 		[data release];
 		NSLog(@"not able to find collid");
-		return BAD_CONTENT;
+		[itemData release];
+		return nil;
 	}
+	
 	
 	// now get the collection id
 	NSInteger numberIndex = 0;
@@ -291,40 +336,124 @@
 	if ( !cleanBreak ) {
 		[data release];
 		NSLog(@"unable to fetch collection id");
-		return BAD_CONTENT;
+		return nil;
 	}
 	
-	gameCollectionId = [[NSString alloc] initWithCharacters:lettersForNumber length:numberIndex];
+	// set the collection id
+	
+	NSString * collIdString = [[NSString alloc] initWithCharacters:lettersForNumber length:numberIndex];
+	
+	itemData.collId = [collIdString intValue];
+	
+	[collIdString release];
+	
+	// check if things are checked
+	itemData.own = [self scanForCheckedForm: @"own" fromData: data];
+	itemData.prevOwn = [self scanForCheckedForm: @"prevowned" fromData: data];
+	itemData.forTrade = [self scanForCheckedForm: @"fortrade" fromData: data];
+	itemData.wantInTrade = [self scanForCheckedForm: @"want" fromData: data];
+	itemData.wantToBuy = [self scanForCheckedForm: @"wanttobuy" fromData: data];
+	itemData.wantToPlay = [self scanForCheckedForm: @"wanttoplay" fromData: data];
+	itemData.preOrdered = [self scanForCheckedForm: @"preordered" fromData: data];
+	itemData.forTrade = [self scanForCheckedForm: @"fortrade" fromData: data];
+	itemData.inWish = [self scanForCheckedForm: @"wishlist" fromData: data];
+	
+	
+	
+	
+	// set the value of the wish priority
+	if ( [data rangeOfString:@"SELECTED>3 - Like to have"].location != NSNotFound ) {
+		itemData.wishValue = 2;
+	}	
+	else if ( [data rangeOfString:@"SELECTED>1 - Must have"].location != NSNotFound ) {
+		itemData.wishValue = 0;
+	}	
+	else if ( [data rangeOfString:@"SELECTED>2 - Love to have"].location != NSNotFound ) {
+		itemData.wishValue = 1;
+	}
+
+	else if ( [data rangeOfString:@"SELECTED>4 - Thinking about it"].location != NSNotFound ) {
+		itemData.wishValue = 3;
+	}
+	else if ( [data rangeOfString:@"SELECTED>5 - Don't buy this"].location != NSNotFound ) {
+		itemData.wishValue = 4;
+	}	
+	
+	
 	
 	[data release];
 
-	return SUCCESS;
+	[itemData autorelease];
+	return itemData;
+}
+
+- (BOOL) scanForCheckedForm: (NSString*) name fromData: (NSString*) data {
+	
+	
+	NSRange range = [data rangeOfString:name];
+	if ( range.location == NSNotFound ) {
+		return NO;
+	}
+	
+	
+	NSInteger bufferIndex = 0;
+	unichar searchBuffer[50];
+	NSInteger searchIndex = range.location;
+	
+	while( bufferIndex < 50 ) {
+	
+		unichar letter = [data characterAtIndex:searchIndex];
+		searchIndex++;
+
+		if ( letter == '>' ) {
+			break;
+		}
+		
+		searchBuffer[bufferIndex] = letter;
+		bufferIndex++;
+		
+	}	
+	
+	NSString * buffString = [[NSString alloc] initWithCharacters:searchBuffer length:bufferIndex];
+	
+	if ( [buffString rangeOfString:@"CHECKED"].location != NSNotFound ) {
+		[buffString release];
+		return YES;
+	}
+	
+	if ( [buffString rangeOfString:@"checked"].location != NSNotFound ) {
+		[buffString release];
+		return YES;
+	}	
+	
+	[buffString release];	
+	return NO;
 }
 
 
-- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave {
+- (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData {
+	
+	// see if we have auth key
+	if ( authCookies == nil ) {
+		[self connectForAuthKey];
+	}
+	
+	// see if we got the auth key
+	if ( authCookies == nil ) {
+		return AUTH_ERROR;
+	}
+	
+	
 	
 	// see if the game already exists in the users collection
-	BGGConnectResponse response = [self fetchGameCollectionId: gameId];
+	if ( itemData == nil ) {
+		itemData = [self fetchGameCollectionItemData: gameId];
+	}
 	
-	if ( response == BAD_CONTENT ) {
-		
-		// if bad conntent it might not exist
-		response = [self createDbGameEntryForGameId:gameId];
-		if ( response != SUCCESS ) {
-			return response;
-		}
-		
-		// after creating try again
-		response = [self fetchGameCollectionId:gameId];
-		if ( response != SUCCESS ) {
-			return response;
-		}
-		
+	if ( itemData == nil ) {
+		return BAD_CONTENT;
 	}
-	else if ( response != SUCCESS ) {
-		return response;
-	}
+
 	
 	// post worker test
 	PostWorker* worker = [[PostWorker alloc] init];
@@ -341,10 +470,13 @@
 	
 	///gameCollectionId = @"8488980";
 
+	
+	
+	
 	// request an item to be added for this user
 	[params setObject:@"1" forKey:@"ajax"];
 	[params setObject:@"savedata" forKey:@"action"];
-	[params setObject:gameCollectionId forKey:@"collid"];
+	[params setObject:[NSString stringWithFormat: @"%d",   itemData.collId] forKey:@"collid"];
 	[params setObject:@"status" forKey:@"fieldname"];
 	
 	// add params based on the contents of the dictionary
@@ -394,7 +526,7 @@
 	
 	if ( [paramsToSave objectForKey:@"wishlistpriority"] != nil ) {
 		[params setObject:[paramsToSave objectForKey:@"wishlistpriority"] forKey:@"wishlistpriority"];
-	}		
+	}		                                           
 			
 	
 	NSLog(@"going to log with params: %@", [params description] );
@@ -427,7 +559,7 @@
 
 - (void) dealloc
 {
-	[gameCollectionId release];
+
 	[authCookies release];
 	[username release];
 	[password release];
