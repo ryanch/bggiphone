@@ -498,13 +498,13 @@
 			if (  searchType == BGG_SEARCH_OWNED ) {
 				for ( NSInteger i = 0; i < [results count]; i++ ) {
 					BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:i];
-					[self.dbAccess saveGameAsOwnedGameId:[result.gameId intValue] title:result.primaryTitle];
+					[self.dbAccess saveGameAsOwnedGameId:[result.gameId intValue] title:result.primaryTitle isInList: YES];
 				}
 			}
 			else if ( searchType == BGG_SEARCH_WISH ) {
 				for ( NSInteger i = 0; i < [results count]; i++ ) {
 					BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:i];
-					[self.dbAccess saveGameForListGameId:[result.gameId intValue] title:result.primaryTitle list: LIST_TYPE_WISH];
+					[self.dbAccess saveGameForListGameId:[result.gameId intValue] title:result.primaryTitle list: LIST_TYPE_WISH isInList: YES];
 				}
 			}
 			

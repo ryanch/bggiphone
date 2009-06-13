@@ -204,9 +204,9 @@
 	
 	FMDatabase* db = [FMDatabase databaseWithPath:noNutsLocalDb];
 	
-#ifdef __DEBUGGING__
+
 	//[db setTraceExecution:YES];
-#endif
+
 	
 	
 	database = db;
@@ -558,6 +558,9 @@
 	
 	// delete from the db first
 	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where gameId=%d and username=?", tableName, gameId];
+	
+	//NSLog(@"remove game from list: %@", deleteQuery);
+	
 	[database executeUpdate: deleteQuery,username];
 	
 	// if is in the db, then insert 
@@ -571,6 +574,9 @@
 		}
 		else {
 			query = [NSString stringWithFormat:@"insert into %@ (gameId,username) values (?,?)",tableName];
+			
+			//NSLog(@"insert game into list: %@", query);
+			
 			[database executeUpdate: query,[NSNumber numberWithInt:gameId],username];
 		}
 	}
@@ -578,7 +584,7 @@
 	
 }
 
-- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType {
+- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType isInList: (BOOL) inList {
 	
 	// see if this game exists in the db already
 	
@@ -609,7 +615,7 @@
 	
 	BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
 	
-	[self saveGameInList:gameId	list:listType	inList:YES forUser: [appDelegate getCurrentUserName]  ];
+	[self saveGameInList:gameId	list:listType	inList:inList forUser: [appDelegate getCurrentUserName]  ];
 	
 	
 	if ([database hadError]) {
@@ -619,9 +625,9 @@
 	
 }
 
-- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title {
+- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title isInList: (BOOL) inList {
 	
-	[self saveGameForListGameId: gameId title: title list: LIST_TYPE_OWN];
+	[self saveGameForListGameId: gameId title: title list: LIST_TYPE_OWN isInList: inList];
 
 	
 }

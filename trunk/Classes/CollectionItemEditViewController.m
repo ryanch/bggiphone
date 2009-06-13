@@ -13,6 +13,7 @@
 #import "PlistSettings.h"
 #import "Beacon.h"
 #import "CollectionItemData.h"
+#import "DbAccess.h"
 
 #define OBJECT_ID_OWN 1
 #define OBJECT_ID_WANT_TO_PLAY 2
@@ -27,6 +28,7 @@
 
 @implementation CollectionItemEditViewController
 
+@synthesize gameTitle;
 @synthesize scroller;
 @synthesize collectionForm;
 @synthesize gameId;
@@ -114,6 +116,7 @@
 	disclLabel.hidden = NO;
 	savingIndicator.hidden = YES;
 	loadingLabel.hidden = YES;
+	itemData.gameId = gameId;
 	
 	if ( itemData == nil ) {
 		return;
@@ -225,6 +228,7 @@
 
 
 - (void)dealloc {
+	[gameTitle release];
 	[itemData release];
 	[paramsToSave release];
 	[collectionForm release];
@@ -320,6 +324,20 @@
 }
 
 - (void) doModifyCollectionComplete {
+	
+	// update lists
+	//- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType {
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	DbAccess * dbAccess = appDelegate.dbAccess;
+	
+	[dbAccess saveGameForListGameId:itemData.gameId title:gameTitle list:LIST_TYPE_OWN isInList: itemData.own];
+	[dbAccess saveGameForListGameId:itemData.gameId title:gameTitle list:LIST_TYPE_WISH isInList: itemData.inWish];
+	[dbAccess saveGameForListGameId:itemData.gameId title:gameTitle list:LIST_TYPE_TOPLAY isInList: itemData.wantToPlay];
+	
+
+	
+	
 	disclLabel.hidden = NO;
 	savingLabel.hidden = YES;
 	savingIndicator.hidden = YES;
@@ -379,29 +397,38 @@
 	
 	NSString * name;
 	
+	BOOL segOneActive = (control.selectedSegmentIndex == 0);
 	
 	if( control.tag == OBJECT_ID_OWN ) {
-			name = @"own";
+		itemData.own = segOneActive;
+		name = @"own";
 	}
 	else if( control.tag == OBJECT_ID_WANT_TO_BUY ) {
+		itemData.wantToBuy = segOneActive;
 		name = @"wanttobuy";
 	}		
 	else if( control.tag == OBJECT_ID_WANT_TO_PLAY ) {
+		itemData.wantToPlay = segOneActive;
 		name = @"wanttoplay";
 	}	
 	else if( control.tag == OBJECT_ID_FOR_TRADE ) {
+		itemData.forTrade = segOneActive;
 		name = @"fortrade";
 	}	
 	else if( control.tag == OBJECT_ID_WANT_IN_TRADE ) {
+		itemData.wantInTrade = segOneActive;
 		name = @"want";
 	}	
 	else if( control.tag == OBJECT_ID_PREORDERED ) {
+		itemData.preOrdered = segOneActive;
 		name = @"preordered";
 	}	
 	else if( control.tag == OBJECT_ID_WISHLIST ) {
+		itemData.inWish = segOneActive;
 		name = @"wishlist";
 	}	
 	else if( control.tag == OBJECT_ID_OWNED ) {
+		itemData.prevOwn = segOneActive;
 		name = @"prevowned";
 	}
 	else {
@@ -410,12 +437,16 @@
 	
 	NSLog(@"control changed: %d, name: %@ tag: %d", control.selectedSegmentIndex, name, control.tag );
 	
-	if ( control.selectedSegmentIndex == 0 ) {
+	
+	
+	if ( segOneActive ) {
 		[paramsToSave setObject:@"1" forKey:name];
 	}
 	else {
 		[paramsToSave removeObjectForKey:name];
 	}
+	
+
 	
 }
 

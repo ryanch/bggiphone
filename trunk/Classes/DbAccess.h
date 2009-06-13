@@ -138,12 +138,12 @@
 ///
 /// save a game as owned by the current user in the owned list
 ///
-- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title;
+- (void) saveGameAsOwnedGameId: (NSInteger) gameId title: (NSString*) title isInList: (BOOL) inList;
 
 ///
 /// save a game in the list requested for the current user
 ///
-- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType;
+- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType isInList: (BOOL) inList;
 
 ///
 /// do search in the local db for the game, return the a list of BBGSearchResult objects

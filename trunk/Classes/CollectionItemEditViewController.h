@@ -27,9 +27,10 @@
 	NSMutableDictionary *paramsToSave;
 	CollectionItemData* itemData;
 	NSArray * wishTexts;
+	NSString * gameTitle;
 }
 
-
+@property( nonatomic,retain) NSString * gameTitle;
 @property (nonatomic ) NSInteger gameId;
 
 @property (nonatomic, retain ) UIScrollView * scroller;

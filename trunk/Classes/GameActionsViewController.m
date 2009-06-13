@@ -160,6 +160,7 @@
 	
 	CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
 	col.gameId = [fullGameInfo.gameId intValue];
+	col.gameTitle = fullGameInfo.title;
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	[appDelegate.navigationController pushViewController: col animated: YES];
