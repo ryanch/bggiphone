@@ -112,11 +112,16 @@
 	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: datePicker.date numPlays: playCount ];
 	
 	if ( response == SUCCESS ) {
+		/*
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
 														message:NSLocalizedString(@"Your play was logged.", @"Your play was logged")
 													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		[alert show];	
 		[alert release];		
+		 */
+		
+		playLogLabel.hidden = NO;
+		
 	}
 	else if ( response == CONNECTION_ERROR ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")

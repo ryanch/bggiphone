@@ -28,6 +28,7 @@
 	IBOutlet UIButton * logPlayButton;
 	IBOutlet UIDatePicker * datePicker;
 	IBOutlet UIActivityIndicatorView * loadingView;
+	IBOutlet UILabel * playLogLabel;
 	NSInteger playCount;
 	NSString *gameId;
 }
