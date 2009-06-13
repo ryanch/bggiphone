@@ -123,60 +123,6 @@
 	}
 	
 	
-	/*
-	// see if we can  use the ownded games cache
-	if ( searchingOwnedGames == YES ) {
-		self.resultsToDisplay = [appDelegate.dbAccess findGamesOwned];
-	}
-	
-	// check the cache
-	if (resultsToDisplay == nil) {
-		
-
-	
-		NSError * parseError = nil;
-		
-		
-		BOOL success = [currentSearch parseXMLAtSearchURLWithError:&parseError]; 
-		
-
-		
-		if ( success &&  currentSearch.searchResults != nil && [ currentSearch.searchResults count ] > 0 ) {
-			self.resultsToDisplay = currentSearch.searchResults;
-			
-			// update ownership
-			if ( searchingOwnedGames == YES ) {
-				for ( NSInteger i = 0; i < [self.resultsToDisplay count]; i++ ) {
-					BBGSearchResult * result = (BBGSearchResult*) [self.resultsToDisplay objectAtIndex:i];
-					[appDelegate.dbAccess saveGameAsOwnedGameId:[result.gameId intValue] title:result.primaryTitle];
-				}
-			}
-			
-		}
-		
-		if ( success ) {
-			if ( [resultsToDisplay count] == 0 ) {
-
-				
-					// wait one second for cpu to settle from error
-					[NSThread sleepForTimeInterval:1.0];
-			}
-		}
-		else {
-			parseErrorMessage = [[parseError localizedDescription] retain];
-			//[parseError release];
-			
-			// wait one second to let the cpu settle from the error
-			[NSThread sleepForTimeInterval:1.0];
-
-			
-		}
-		
-		
-		
-	}
-	 */
-	
 	
 	[self buildSectionTitlesForResults:resultsToDisplay];
 

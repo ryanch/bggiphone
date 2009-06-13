@@ -40,7 +40,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return ABOUT_MENU_CHOICE;
 }
 
 
@@ -65,6 +65,10 @@
 	}
 	else if ( indexPath.row == OWNED_MENU_CHOICE ) {
 		cell.text = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
+		cell.image = [UIImage imageNamed:@"own.png" ];
+	}	
+	else if ( indexPath.row == WANT_TO_PLAY_CHOICE ) {
+		cell.text = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
 		cell.image = [UIImage imageNamed:@"own.png" ];
 	}	
 	else if ( indexPath.row == WISH_MENU_CHOICE ) {
