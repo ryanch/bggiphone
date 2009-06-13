@@ -208,7 +208,7 @@
 	FMDatabase* db = [FMDatabase databaseWithPath:noNutsLocalDb];
 	
 
-	[db setTraceExecution:YES];
+	//[db setTraceExecution:YES];
 
 	
 	
