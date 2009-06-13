@@ -728,11 +728,17 @@
         NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
     }
 	
-	[database executeUpdate:@"delete from GameInfo"];
+	[database executeUpdate:@"delete from GamesPlayedList"];
 	
 	if ([database hadError]) {
         NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
     }	
+	
+	[database executeUpdate:@"delete from GameInfo"];
+	
+	if ([database hadError]) {
+        NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+    }		
 	
 }
 

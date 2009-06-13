@@ -473,7 +473,7 @@
 			return nil;
 		}
 		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_SEARCH_OWNED forUser:username];
+		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_OWN forUser:username];
 	}
 	else if ( searchType == BGG_SEARCH_WISH ) {
 		
@@ -482,7 +482,7 @@
 			return nil;
 		}
 		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_SEARCH_WISH forUser:username];
+		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_WISH forUser:username];
 	}
 	else if ( searchType == BGG_GAMES_TO_PLAY_LIST ) {
 		
@@ -491,7 +491,7 @@
 			return nil;
 		}
 		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_GAMES_TO_PLAY_LIST forUser:username];
+		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_TOPLAY forUser:username];
 	}	
 	else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
 		
@@ -500,7 +500,7 @@
 			return nil;
 		}
 		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_GAMES_PLAYED_LIST forUser:username];
+		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_PLAYED forUser:username];
 	}		
 	
 	
