@@ -659,6 +659,7 @@
 			
 			resultsViewer.title = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
 			resultsViewer.searchGameType = BGG_SEARCH_OWNED;
+			resultsViewer.currentResumeState = BGG_RESUME_OWNED;
 		}
 		if ( menuItem == WANT_TO_PLAY_CHOICE ) {
 			
@@ -668,6 +669,7 @@
 			
 			resultsViewer.title = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
 			resultsViewer.searchGameType = BGG_GAMES_TO_PLAY_LIST;
+			resultsViewer.currentResumeState = BGG_RESUME_GAMES_TO_PLAY_LIST;
 		}	
 		if ( menuItem == GAMES_PLAYED_MENU_CHOICE ) {
 			
@@ -677,6 +679,7 @@
 			
 			resultsViewer.title = NSLocalizedString(@"Games Played" , @"games played menu item" );
 			resultsViewer.searchGameType = BGG_GAMES_PLAYED_LIST;
+			resultsViewer.currentResumeState = BGG_RESUME_GAMES_PLAYED_LIST;
 		}			
 		else if (  menuItem == WISH_MENU_CHOICE ) {
 			[self saveResumePoint:BGG_RESUME_WISH withString:nil];
@@ -686,6 +689,7 @@
 			resultsViewer.title = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
 			
 			resultsViewer.searchGameType = BGG_SEARCH_WISH;
+			resultsViewer.currentResumeState = BGG_RESUME_WISH;
 		}
 		
 		//resultsViewer.resultsToDisplay = search.searchResults;

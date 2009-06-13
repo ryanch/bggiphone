@@ -73,7 +73,7 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	BoardGameSearchResultsTableViewController * resultsViewer = [[BoardGameSearchResultsTableViewController alloc]  initWithStyle:UITableViewStylePlain];
-	
+	resultsViewer.currentResumeState = BGG_RESUME_SEARCH;
 	
 
 	resultsViewer.title = NSLocalizedString(@"Search Results" , @"search results title" );

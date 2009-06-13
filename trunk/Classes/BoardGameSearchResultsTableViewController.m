@@ -35,6 +35,7 @@
 @synthesize resultsToDisplay;
 @synthesize currentSearch;
 @synthesize searchGameType;
+@synthesize currentResumeState;
 
 
 - (void) userRequestedReload {
@@ -506,6 +507,13 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	[self setupAccelRandomPicker];	
+	
+	//NSLog(@"show");
+	
+	// save the current state
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[appDelegate saveResumePoint:currentResumeState withString:nil];
+	
 }
 
 

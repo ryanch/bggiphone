@@ -59,6 +59,9 @@
 	
 	//! this holds the time since the last accell
 	CFTimeInterval		lastTime;
+	
+	//! this is where to resume too
+	BGGResumeState currentResumeState;
 }
 
 //! start the search, show the animated loading icon, and call thrSearch
@@ -94,7 +97,7 @@
 
 @property (nonatomic, retain ) XmlSearchReader * currentSearch;
 
-
+@property (nonatomic) BGGResumeState currentResumeState;
 
 
 
