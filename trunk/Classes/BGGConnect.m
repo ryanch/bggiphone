@@ -13,13 +13,18 @@
 
 @implementation BGGConnect
 
-@synthesize username, password, authCookies;
+@synthesize username, password;
 
 //! Connect and get a auth key from bgg
 - (void) connectForAuthKey {
 	
-	[authCookies release];
-	authCookies = nil;
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	if ( appDelegate.authCookies != nil ) {
+		return;
+	}
+	
+	
+	NSLog(@"fetching auth key cookies");
 	
 	// post worker test
 	PostWorker* worker = [[PostWorker alloc] init];
@@ -44,7 +49,7 @@
 			NSHTTPCookie * cookie = (NSHTTPCookie*) [ cookies objectAtIndex:i];
 			// see if the bggpassword cookie is set, if it is then auth is good
 			if ( [ @"bggpassword" isEqualToString: [cookie name] ] ) {
-				self.authCookies = cookies;
+				appDelegate.authCookies = cookies;
 				break;
 			} // end if is password cookie
 		} // end for 
@@ -57,13 +62,15 @@
 //! Log a play, with simple params
 - (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId forDate: (NSDate *) date numPlays: (NSInteger) plays {
 	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
 	// see if we have auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		[self connectForAuthKey];
 	}
 	
 	// see if we got the auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		return AUTH_ERROR;
 	}
 	
@@ -73,7 +80,7 @@
 	PostWorker* worker = [[PostWorker alloc] init];
 	
 	// set the auth cookies
-	worker.requestCookies = authCookies;
+	worker.requestCookies = appDelegate.authCookies;
 	
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekplay.php";
@@ -153,13 +160,16 @@
 
 
 - (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId {
+	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
 	// see if we have auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		[self connectForAuthKey];
 	}
 	
 	// see if we got the auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		return AUTH_ERROR;
 	}
 	
@@ -170,7 +180,7 @@
 	PostWorker* worker = [[PostWorker alloc] init];
 	
 	// set the auth cookies
-	worker.requestCookies = authCookies;
+	worker.requestCookies = appDelegate.authCookies;
 	
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekcollection.php";
@@ -205,13 +215,15 @@
 
 - (CollectionItemData*) fetchGameCollectionItemData:(NSInteger) gameId {
 
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
 	// see if we have auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		[self connectForAuthKey];
 	}
 	
 	// see if we got the auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		CollectionItemData * itemData = [[CollectionItemData alloc] init];
 		itemData.response = AUTH_ERROR;
 		[itemData autorelease];
@@ -246,6 +258,7 @@
 
 - (CollectionItemData*) _fetchGameCollectionItemDataHelper:(NSInteger) gameId {
 
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	CollectionItemData * itemData = [[CollectionItemData alloc] init];
 	
@@ -253,7 +266,7 @@
 	PostWorker* worker = [[PostWorker alloc] init];
 	
 	// set the auth cookies
-	worker.requestCookies = authCookies;
+	worker.requestCookies = appDelegate.authCookies;
 	
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekcollection.php";
@@ -433,13 +446,15 @@
 
 - (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData {
 	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
 	// see if we have auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		[self connectForAuthKey];
 	}
 	
 	// see if we got the auth key
-	if ( authCookies == nil ) {
+	if ( appDelegate.authCookies == nil ) {
 		return AUTH_ERROR;
 	}
 	
@@ -459,7 +474,7 @@
 	PostWorker* worker = [[PostWorker alloc] init];
 	
 	// set the auth cookies
-	worker.requestCookies = authCookies;
+	worker.requestCookies = appDelegate.authCookies;
 	
 	// the log play URL
 	worker.url = @"http://boardgamegeek.com/geekcollection.php";
@@ -552,7 +567,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		authCookies = nil;
+	
 	}
 	return self;
 }
@@ -560,7 +575,7 @@
 - (void) dealloc
 {
 
-	[authCookies release];
+
 	[username release];
 	[password release];
 	[super dealloc];

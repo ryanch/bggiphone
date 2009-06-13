@@ -114,8 +114,12 @@ typedef NSInteger BGGResumeState;
 	
 	//! this is our access layer to the SQLlite db
 	DbAccess *dbAccess;
+	
+	// cached auth cookies
+	NSArray * authCookies;
 }
 
+@property (nonatomic, retain) NSArray *authCookies;
 @property (nonatomic, retain) DbAccess *dbAccess;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
@@ -169,6 +173,9 @@ typedef NSInteger BGGResumeState;
 
 //! this will return the current username, without checking if it is actually set
 - (NSString*) getCurrentUserName;
+
+- (BOOL) confirmUserNameAndPassAvailable;
+
 
 @end
 

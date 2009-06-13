@@ -31,14 +31,13 @@ typedef NSInteger BGGConnectWishListState;
 @interface BGGConnect : NSObject {
 	NSString * username;
 	NSString * password;
-	NSArray * authCookies;
+
 
 }
 
 
 @property (nonatomic, retain) NSString *  username;
 @property (nonatomic, retain) NSString *  password;
-@property (nonatomic, retain) NSArray *  authCookies;
 
 
 

@@ -722,6 +722,11 @@
 - (void) clearDB {
 	
 	
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+	[appDelegate.authCookies release];
+	appDelegate.authCookies = nil;
+	
 	[database executeUpdate:@"delete from RecentGameList"];
 	
 	if ([database hadError]) {

@@ -46,6 +46,7 @@
 @synthesize appSettings;
 @synthesize downloadOperation;
 @synthesize dbAccess;
+@synthesize authCookies;
 
 
 
@@ -259,6 +260,32 @@
 	}
 	return username;
 }
+
+- (BOOL) confirmUserNameAndPassAvailable {
+
+	
+	NSString * username = [self.appSettings.dict objectForKey:@"username"];
+	NSString * password = [self.appSettings.dict objectForKey:@"password"];
+	
+	if ( username == nil || [username length] == 0 || password == nil || [password length] == 0 ) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Need Username and Password", @"ask user to provide username and pass title")
+														message:NSLocalizedString(@"Please enter your username and password to modify your collection.", @"please give your username and password to modify your collection.")
+													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		[alert show];	
+		[alert release];	
+		
+		
+		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
+		
+		[self.navigationController pushViewController:settings		animated:YES];
+		
+		return NO;
+	}
+	
+	return YES;
+	
+}
+
 
 - (NSString *) handleMissingUsername {
 	NSString * username = (NSString*)[self.appSettings.dict objectForKey:@"username"];
@@ -648,6 +675,7 @@
 
 
 - (void)dealloc {
+	[authCookies release];
 	[dbAccess release];
 	[navigationController release];
 	[appSettings release];
