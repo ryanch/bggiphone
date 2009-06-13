@@ -113,7 +113,7 @@
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>Want to play</string>
-							<string>Played out</string>
+							<string type="base64-UTF8">RG9uJ3Q</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -256,7 +256,7 @@
 						<int key="IBSelectedSegmentIndex">1</int>
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>Owned</string>
+							<string>Prev Owned</string>
 							<string>Not Prev Owned</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
@@ -1001,5 +1001,6 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.LastKnownRelativeProjectPath">BGG.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>
 </archive>
