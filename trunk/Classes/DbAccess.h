@@ -29,6 +29,7 @@
 #define LIST_TYPE_WISH 2
 #define LIST_TYPE_RECENT 3
 #define LIST_TYPE_TOPLAY 4
+#define	LIST_TYPE_PLAYED 5
 
 ///
 /// this class wraps access to the SQLLite database
@@ -150,5 +151,6 @@
 ///
 - (NSArray*) localDbSearchByName: (NSString*) gameName;
 
+- (NSString*) _getTableNameForList: (NSInteger) listType;
 
 @end

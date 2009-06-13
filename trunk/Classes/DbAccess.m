@@ -168,6 +168,13 @@
 		[fileManager removeItemAtPath:oldNutsLocalDb	error:nil];
 	}	
 	
+	// delete old dbs
+	oldNutsLocalDb = [documentsDirectory stringByAppendingPathComponent:@"bgg13.db"];
+	
+	if ( [fileManager fileExistsAtPath:oldNutsLocalDb ] ) {
+		[fileManager removeItemAtPath:oldNutsLocalDb	error:nil];
+	}		
+	
 }
 
 
@@ -179,18 +186,14 @@
 	// build a file name for the index
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *noNutsLocalDb = [documentsDirectory stringByAppendingPathComponent:@"bgg13.db"];
+	NSString *noNutsLocalDb = [documentsDirectory stringByAppendingPathComponent:@"bgg14.db"];
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
-
-	
-	
 	
 	if ( ![fileManager fileExistsAtPath:noNutsLocalDb ] ) {
 		
 		// local copy does not exist, so copy from bundle
-		NSString *pathToDbInBundle = [[NSBundle mainBundle] pathForResource:@"bgg13" ofType:@"db"];
+		NSString *pathToDbInBundle = [[NSBundle mainBundle] pathForResource:@"bgg14" ofType:@"db"];
 		
 		if ( ![fileManager copyItemAtPath:pathToDbInBundle   toPath:noNutsLocalDb error: nil] ) {
 			[self showError: NSLocalizedString( @"Error preparing database, make sure your device has some free space.", @"erorr shown when trying to load database." ) withTitle:@"DB Error"];
@@ -205,8 +208,10 @@
 	FMDatabase* db = [FMDatabase databaseWithPath:noNutsLocalDb];
 	
 
-	//[db setTraceExecution:YES];
+	[db setTraceExecution:YES];
 
+	
+	
 	
 	
 	database = db;
@@ -376,21 +381,8 @@
 // check if a game is in a list
 - (BOOL) checkIfGameInList:(NSInteger) gameId list: (NSInteger) listType forUser: (NSString *) username {
 	
-	NSString* tableName = nil;
+	NSString* tableName = [self _getTableNameForList: listType];
 	
-	
-	if ( LIST_TYPE_OWN == listType ) {
-		tableName = @"GameOwnList";
-	}
-	else if ( LIST_TYPE_WISH == listType ) {
-		tableName = @"GameWantList";
-	}	
-	else if ( LIST_TYPE_TOPLAY == listType ) {
-		tableName = @"GameToPlayList";
-	}	
-	else if ( LIST_TYPE_RECENT == listType ) {
-		tableName = @"RecentGameList";
-	}	
 	
 	NSString * query = [NSString stringWithFormat:@"select * from %@ where gameId=%d and username=?", tableName, gameId];
 	
@@ -410,22 +402,8 @@
 
 - (NSInteger) countGamesInList: (NSInteger) listType forUser: (NSString*) username {
 	
-	NSString * tableName;
+	NSString* tableName = [self _getTableNameForList: listType];
 	
-	if ( LIST_TYPE_OWN == listType ) {
-		tableName = @"GameOwnList";
-	}
-	else if ( LIST_TYPE_WISH == listType ) {
-		tableName = @"GameWantList";
-	}	
-	else if ( LIST_TYPE_TOPLAY == listType ) {
-		tableName = @"GameToPlayList";
-	}	
-	else if ( LIST_TYPE_RECENT == listType ) {
-		tableName = @"RecentGameList";
-		
-		
-	}	
 	
 	NSString * countQuery = [NSString stringWithFormat:@"select count(*) as c from %@ where username=?", tableName];
 	
@@ -442,20 +420,11 @@
 
 // get all of the games in a list
 - (NSArray*) getAllGamesInListByType: (NSInteger) listType forUser: (NSString *) username  {
-	NSString* tableName = nil;
+	NSString* tableName = [self _getTableNameForList: listType];
 	
-	if ( LIST_TYPE_OWN == listType ) {
-		tableName = @"GameOwnList";
-	}
-	else if ( LIST_TYPE_WISH == listType ) {
-		tableName = @"GameWantList";
-	}	
-	else if ( LIST_TYPE_TOPLAY == listType ) {
-		tableName = @"GameToPlayList";
-	}	
-	else if ( LIST_TYPE_RECENT == listType ) {
-		tableName = @"RecentGameList";
-		
+	
+	if ( LIST_TYPE_RECENT == listType ) {
+	
 		// for this list, we need to delete all old entries first
 	
 		NSDate* date = [[NSDate date] addTimeInterval: -(3*60*60*24) ];
@@ -515,8 +484,7 @@
 }
 
 
-- (void) removeAllGamesInList: (NSInteger) listType forUser: (NSString*) username {
-	
+- (NSString*) _getTableNameForList: (NSInteger) listType {
 	NSString* tableName = nil;
 	
 	if ( LIST_TYPE_OWN == listType ) {
@@ -531,6 +499,18 @@
 	else if ( LIST_TYPE_RECENT == listType ) {
 		tableName = @"RecentGameList";
 	}	
+	else if ( LIST_TYPE_PLAYED == listType ) {
+		tableName = @"GamesPlayedList";
+	}		
+	
+	return tableName;
+}
+
+- (void) removeAllGamesInList: (NSInteger) listType forUser: (NSString*) username {
+	
+	NSString* tableName = [self _getTableNameForList: listType];
+	
+	
 	
 	// delete from the db first
 	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where username=?", tableName];
@@ -541,20 +521,8 @@
 // save a game in a list, or remove from a list
 - (void) saveGameInList: (NSInteger) gameId list: (NSInteger) listType inList: (BOOL) isInList forUser: (NSString *) username{
 	
-	NSString* tableName = nil;
+	NSString* tableName = [self _getTableNameForList: listType];
 	
-	if ( LIST_TYPE_OWN == listType ) {
-		tableName = @"GameOwnList";
-	}
-	else if ( LIST_TYPE_WISH == listType ) {
-		tableName = @"GameWantList";
-	}	
-	else if ( LIST_TYPE_TOPLAY == listType ) {
-		tableName = @"GameToPlayList";
-	}	
-	else if ( LIST_TYPE_RECENT == listType ) {
-		tableName = @"RecentGameList";
-	}	
 	
 	// delete from the db first
 	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where gameId=%d and username=?", tableName, gameId];

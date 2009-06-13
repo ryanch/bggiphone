@@ -36,6 +36,11 @@ create table GameToPlayList (
 	username text
 );
 
+create table GamesPlayedList (
+	gameId integer,
+	username text
+);
+
 create table RecentGameList (
 	gameId integer,
 	username text,

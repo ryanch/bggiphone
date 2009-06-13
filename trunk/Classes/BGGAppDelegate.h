@@ -28,11 +28,12 @@
 #define SEARCH_MENU_CHOICE 0
 #define OWNED_MENU_CHOICE 1
 #define WISH_MENU_CHOICE 3
-#define SETTINGS_MENU_CHOICE 5
+#define SETTINGS_MENU_CHOICE 6
 #define PICK_GAME_CHOICE 2
 #define WANT_TO_PLAY_CHOICE 4
+#define GAMES_PLAYED_MENU_CHOICE 5
 // this is also the total count since it is last
-#define ABOUT_MENU_CHOICE 6
+#define ABOUT_MENU_CHOICE 7
 
 ///
 /// these are error responses
@@ -59,7 +60,9 @@ enum {
 	//! search current user wish list
 	BGG_SEARCH_WISH = 2,
 	//! games to play list
-	BGG_GAMES_TO_PLAY_LIST = 3
+	BGG_GAMES_TO_PLAY_LIST = 3,
+	//! games played
+	BGG_GAMES_PLAYED_LIST = 4
 };
 typedef NSInteger BGGSearchGameType;
 
@@ -90,7 +93,10 @@ enum {
 		BGG_RESUME_PICK_GAME = 8,
 	
 		//! resume on the to play list
-		BGG_RESUME_GAMES_TO_PLAY_LIST = 9
+		BGG_RESUME_GAMES_TO_PLAY_LIST = 9,
+	
+		//! resume on the played list
+		BGG_RESUME_GAMES_PLAYED_LIST = 10
 };
 typedef NSInteger BGGResumeState;
 

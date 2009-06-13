@@ -158,6 +158,9 @@
 	else if ( stateCodeInt == BGG_RESUME_GAMES_TO_PLAY_LIST ) {
 		[self loadMenuItem:WANT_TO_PLAY_CHOICE];
 	}	
+	else if ( stateCodeInt == BGG_RESUME_GAMES_PLAYED_LIST ) {
+		[self loadMenuItem:GAMES_PLAYED_MENU_CHOICE];
+	}			
 	else if ( stateCodeInt == BGG_RESUME_PICK_GAME ) {
 		[self loadMenuItem:PICK_GAME_CHOICE];
 	}
@@ -490,6 +493,15 @@
 		
 		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_GAMES_TO_PLAY_LIST forUser:username];
 	}	
+	else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
+		
+		NSString * username = [appDelegate handleMissingUsername];
+		if ( username == nil ) {
+			return nil;
+		}
+		
+		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:BGG_GAMES_PLAYED_LIST forUser:username];
+	}		
 	
 	
 	if ( results != nil ) {
@@ -526,6 +538,12 @@
 					[self.dbAccess saveGameForListGameId:[result.gameId intValue] title:result.primaryTitle list: LIST_TYPE_TOPLAY isInList: YES];
 				}
 			}
+			else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
+				for ( NSInteger i = 0; i < [results count]; i++ ) {
+					BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:i];
+					[self.dbAccess saveGameForListGameId:[result.gameId intValue] title:result.primaryTitle list: LIST_TYPE_PLAYED isInList: YES];
+				}
+			}			
 			
 			
 		}
@@ -616,7 +634,7 @@
 		[navigationController pushViewController:about	animated:YES]; 
 		[about release];
 	}
-	else if ( menuItem == OWNED_MENU_CHOICE || menuItem== WISH_MENU_CHOICE || menuItem == WANT_TO_PLAY_CHOICE) { 
+	else if ( menuItem == OWNED_MENU_CHOICE || menuItem== WISH_MENU_CHOICE || menuItem == WANT_TO_PLAY_CHOICE || menuItem == GAMES_PLAYED_MENU_CHOICE) { 
 		
 		
 		
@@ -646,11 +664,20 @@
 			
 			[self saveResumePoint:BGG_RESUME_GAMES_TO_PLAY_LIST withString:nil];
 			
-			[[Beacon shared] startSubBeaconWithName:@"games owned menu click" timeSession:NO];
+			[[Beacon shared] startSubBeaconWithName:@"games to play menu click" timeSession:NO];
 			
 			resultsViewer.title = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
 			resultsViewer.searchGameType = BGG_GAMES_TO_PLAY_LIST;
-		}		
+		}	
+		if ( menuItem == GAMES_PLAYED_MENU_CHOICE ) {
+			
+			[self saveResumePoint:BGG_RESUME_GAMES_PLAYED_LIST withString:nil];
+			
+			[[Beacon shared] startSubBeaconWithName:@"games played menu click" timeSession:NO];
+			
+			resultsViewer.title = NSLocalizedString(@"Games Played" , @"games played menu item" );
+			resultsViewer.searchGameType = BGG_GAMES_PLAYED_LIST;
+		}			
 		else if (  menuItem == WISH_MENU_CHOICE ) {
 			[self saveResumePoint:BGG_RESUME_WISH withString:nil];
 			
@@ -685,6 +712,10 @@
 		}
 		else if (menuItem == WANT_TO_PLAY_CHOICE ) {
 			urlStr = [NSString stringWithFormat:@"http://boardgamegeek.com/xmlapi/collection/%@?wanttoplay=1", username ];
+			
+		}	
+		else if (menuItem == GAMES_PLAYED_MENU_CHOICE ) {
+			urlStr = [NSString stringWithFormat:@"http://boardgamegeek.com/xmlapi/collection/%@?played=1", username ];
 			
 		}			
 		
