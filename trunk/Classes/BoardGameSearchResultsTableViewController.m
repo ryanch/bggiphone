@@ -423,16 +423,30 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:indexPath.row];
 	
 	
-	cell.text = result.primaryTitle;
+	cell.textLabel.text = result.primaryTitle;
+	
+	if ( result.yearPublished == 0 ) {
+		cell.detailTextLabel.text = @"";
+		
+	}
+	else {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"Published: %d", result.yearPublished];	
+	}
+	
+	
+	
+	//cell.text = result.primaryTitle;
 	
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
 	if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
-		cell.image = [UIImage imageWithContentsOfFile: imagePath];
+		cell.imageView.image = [UIImage imageWithContentsOfFile: imagePath];
+		//cell.image = [UIImage imageWithContentsOfFile: imagePath];
 	}
 	else {
-		cell.image = nil;
+		//cell.image = nil;
+		cell.imageView.image = nil;
 	}
 	
 	

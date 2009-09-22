@@ -34,6 +34,36 @@
 
 @implementation RootViewController
 
+
+// Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        // Custom initialization
+		self.title = NSLocalizedString( @"BGG", @"BGG app title" );
+    }
+    return self;
+}
+
+
+- (id)initWithStyle:(UITableViewStyle)style {
+    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+    if (self = [super initWithStyle:style]) {
+		self.title = NSLocalizedString( @"BGG", @"BGG app title" );
+    }
+    return self;
+}
+
+
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		self.title = NSLocalizedString( @"BGG", @"BGG app title" );
+	}
+	return self;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -56,36 +86,36 @@
     
 	
 	if ( indexPath.row == SEARCH_MENU_CHOICE ) {
-		cell.text = NSLocalizedString( @"Search" , @"search menu item" );
-		cell.image = [UIImage imageNamed:@"search.png" ];
+		cell.textLabel.text = NSLocalizedString( @"Search" , @"search menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"search.png" ];
 	}
 	else if ( indexPath.row == PICK_GAME_CHOICE ) {
-		cell.text = NSLocalizedString(@"Search Owned Game" , @"pick game menu item" );
-		cell.image = [UIImage imageNamed:@"search_own.png" ];
+		cell.textLabel.text = NSLocalizedString(@"Search Owned Game" , @"pick game menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"search_own.png" ];
 	}
 	else if ( indexPath.row == OWNED_MENU_CHOICE ) {
-		cell.text = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
-		cell.image = [UIImage imageNamed:@"own.png" ];
+		cell.textLabel.text = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"own.png" ];
 	}	
 	else if ( indexPath.row == WANT_TO_PLAY_CHOICE ) {
-		cell.text = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
-		cell.image = [UIImage imageNamed:@"own.png" ];
+		cell.textLabel.text = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"own.png" ];
 	}	
 	else if ( indexPath.row == GAMES_PLAYED_MENU_CHOICE ) {
-		cell.text = NSLocalizedString(@"Games Played" , @"games played" );
-		cell.image = [UIImage imageNamed:@"own.png" ];
+		cell.textLabel.text = NSLocalizedString(@"Games Played" , @"games played" );
+		cell.imageView.image = [UIImage imageNamed:@"own.png" ];
 	}		
 	else if ( indexPath.row == WISH_MENU_CHOICE ) {
-		cell.text = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
-		cell.image = [UIImage imageNamed:@"wish.png" ];
+		cell.textLabel.text = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"wish.png" ];
 	}	
 	else if ( indexPath.row == SETTINGS_MENU_CHOICE ) {
-		cell.text = NSLocalizedString( @"Settings" , @"settings menu item" );
-		cell.image = [UIImage imageNamed:@"settings.png" ];
+		cell.textLabel.text = NSLocalizedString( @"Settings" , @"settings menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"settings.png" ];
 	}		
 	else if ( indexPath.row == ABOUT_MENU_CHOICE ) {
-		cell.text = NSLocalizedString( @"About" , @"about menu item" );
-		cell.image = [UIImage imageNamed:@"about.png" ];
+		cell.textLabel.text = NSLocalizedString( @"About" , @"about menu item" );
+		cell.imageView.image = [UIImage imageNamed:@"about.png" ];
 	}		
 	
     // Set up the cell

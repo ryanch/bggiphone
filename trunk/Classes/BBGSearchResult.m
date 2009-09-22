@@ -32,6 +32,7 @@
 
 - init {
 	if (self = [super init]) {
+		yearPublished = 0;
 		// init code goes here
 		//thumbNailURL = nil; NSData
 	}

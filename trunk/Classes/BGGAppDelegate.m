@@ -106,6 +106,19 @@
 	
 	
 	// Configure and show the window
+	
+	
+	
+	RootViewController * rootView = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
+	
+	navigationController = [[UINavigationController alloc] initWithRootViewController: rootView];
+	navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+	
+	
+	
+	[rootView release];
+	
+	
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 	

@@ -28,6 +28,7 @@
 		BA3C7D240EC75BF000F24BF4 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D230EC75BF000F24BF4 /* header.png */; };
 		BA3C7D300EC75F4200F24BF4 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = BA3C7D2F0EC75F4200F24BF4 /* footer.png */; };
 		BA3C7D8F0EC76A0B00F24BF4 /* GameCommentsXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */; };
+		BA3DE4DC0FE0B13C005402D8 /* CollectionItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3DE4DB0FE0B13C005402D8 /* CollectionItemData.m */; };
 		BA476C8A0EB53B350035E2E4 /* GameInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476C890EB53B350035E2E4 /* GameInfoViewController.m */; };
 		BA476C8D0EB53B400035E2E4 /* GameActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476C8C0EB53B400035E2E4 /* GameActionsViewController.m */; };
 		BA476D610EB587030035E2E4 /* FullGameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BA476D600EB587030035E2E4 /* FullGameInfo.m */; };
@@ -46,11 +47,16 @@
 		BA48C7760EB51D17005B4297 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7750EB51D17005B4297 /* CoreLocation.framework */; };
 		BA48C82C0EB52932005B4297 /* GameInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82B0EB52932005B4297 /* GameInfo.xib */; };
 		BA48C82F0EB52978005B4297 /* GameActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C82E0EB52978005B4297 /* GameActions.xib */; };
+		BA4B53330FE3642F003E4FFA /* bgg14.db in Resources */ = {isa = PBXBuildFile; fileRef = BA4B53320FE3642F003E4FFA /* bgg14.db */; };
 		BA4DE14F0EB8119100B18E17 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DE14E0EB8119100B18E17 /* Entitlements.plist */; };
 		BA8D20DA0F7D77D100578409 /* commentgrad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA8D20D80F7D77D100578409 /* commentgrad.jpg */; };
 		BA8D20DB0F7D77D100578409 /* topgrad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA8D20D90F7D77D100578409 /* topgrad.jpg */; };
 		BA8D21630F7D8BE800578409 /* stats_template.html in Resources */ = {isa = PBXBuildFile; fileRef = BA8D21620F7D8BE800578409 /* stats_template.html */; };
 		BA8D217C0F7D8F0D00578409 /* comment_template.html in Resources */ = {isa = PBXBuildFile; fileRef = BA8D217B0F7D8F0D00578409 /* comment_template.html */; };
+		BAA7D0190FDAF430002D5FCD /* CollectionItemEdit.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA7D0180FDAF430002D5FCD /* CollectionItemEdit.xib */; };
+		BAA7D01F0FDAF964002D5FCD /* CollectionItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA7D01E0FDAF964002D5FCD /* CollectionItemEditViewController.m */; };
+		BAA7D0B70FDB1C65002D5FCD /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA7D0B60FDB1C65002D5FCD /* WebView.xib */; };
+		BAA7D0BB0FDB1CAB002D5FCD /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA7D0BA0FDB1CAB002D5FCD /* WebViewController.m */; };
 		BAB288160EB6DEBF00A6AEE3 /* stats.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288130EB6DEBF00A6AEE3 /* stats.png */; };
 		BAB288170EB6DEBF00A6AEE3 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288140EB6DEBF00A6AEE3 /* info.png */; };
 		BAB288180EB6DEBF00A6AEE3 /* actions.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB288150EB6DEBF00A6AEE3 /* actions.png */; };
@@ -121,6 +127,8 @@
 		BA3C7D2F0EC75F4200F24BF4 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = images/footer.png; sourceTree = "<group>"; };
 		BA3C7D8D0EC76A0B00F24BF4 /* GameCommentsXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCommentsXmlParser.h; sourceTree = "<group>"; };
 		BA3C7D8E0EC76A0B00F24BF4 /* GameCommentsXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCommentsXmlParser.m; sourceTree = "<group>"; };
+		BA3DE4DA0FE0B13C005402D8 /* CollectionItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionItemData.h; sourceTree = "<group>"; };
+		BA3DE4DB0FE0B13C005402D8 /* CollectionItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionItemData.m; sourceTree = "<group>"; };
 		BA476C880EB53B350035E2E4 /* GameInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoViewController.h; sourceTree = "<group>"; };
 		BA476C890EB53B350035E2E4 /* GameInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoViewController.m; sourceTree = "<group>"; };
 		BA476C8B0EB53B400035E2E4 /* GameActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionsViewController.h; sourceTree = "<group>"; };
@@ -149,11 +157,18 @@
 		BA48C7750EB51D17005B4297 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BA48C82B0EB52932005B4297 /* GameInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameInfo.xib; sourceTree = "<group>"; };
 		BA48C82E0EB52978005B4297 /* GameActions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameActions.xib; sourceTree = "<group>"; };
+		BA4B53320FE3642F003E4FFA /* bgg14.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = bgg14.db; path = sql/bgg14.db; sourceTree = "<group>"; };
 		BA4DE14E0EB8119100B18E17 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		BA8D20D80F7D77D100578409 /* commentgrad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = commentgrad.jpg; path = images/commentgrad.jpg; sourceTree = "<group>"; };
 		BA8D20D90F7D77D100578409 /* topgrad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = topgrad.jpg; path = images/topgrad.jpg; sourceTree = "<group>"; };
 		BA8D21620F7D8BE800578409 /* stats_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = stats_template.html; sourceTree = "<group>"; };
 		BA8D217B0F7D8F0D00578409 /* comment_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = comment_template.html; sourceTree = "<group>"; };
+		BAA7D0180FDAF430002D5FCD /* CollectionItemEdit.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionItemEdit.xib; sourceTree = "<group>"; };
+		BAA7D01D0FDAF964002D5FCD /* CollectionItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionItemEditViewController.h; sourceTree = "<group>"; };
+		BAA7D01E0FDAF964002D5FCD /* CollectionItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionItemEditViewController.m; sourceTree = "<group>"; };
+		BAA7D0B60FDB1C65002D5FCD /* WebView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
+		BAA7D0B90FDB1CAB002D5FCD /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BAA7D0BA0FDB1CAB002D5FCD /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BAB288130EB6DEBF00A6AEE3 /* stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stats.png; sourceTree = "<group>"; };
 		BAB288140EB6DEBF00A6AEE3 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		BAB288150EB6DEBF00A6AEE3 /* actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actions.png; sourceTree = "<group>"; };
@@ -224,6 +239,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BAA7D01C0FDAF93A002D5FCD /* collectionman */,
 				BA256A290F61000F00C37A64 /* template */,
 				BABC9B860F2505AF00926B50 /* bggConnect */,
 				BAEC7C120EC797AC00151693 /* gamepicker */,
@@ -261,6 +277,8 @@
 				BA476D5F0EB587030035E2E4 /* FullGameInfo.h */,
 				BA476D600EB587030035E2E4 /* FullGameInfo.m */,
 				BA476E5C0EB599ED0035E2E4 /* XmlGameInfoReader.h */,
+				BAA7D0B90FDB1CAB002D5FCD /* WebViewController.h */,
+				BAA7D0BA0FDB1CAB002D5FCD /* WebViewController.m */,
 				BA476E5D0EB599ED0035E2E4 /* XmlGameInfoReader.m */,
 				BADB59FB0EB8259800742CA6 /* DownloadGameInfoOperation.h */,
 				BADB59FC0EB8259800742CA6 /* DownloadGameInfoOperation.m */,
@@ -309,6 +327,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA4B53320FE3642F003E4FFA /* bgg14.db */,
 				BA8D20D80F7D77D100578409 /* commentgrad.jpg */,
 				BA8D20D90F7D77D100578409 /* topgrad.jpg */,
 				BA256A3F0F61059000C37A64 /* html */,
@@ -336,6 +355,7 @@
 				BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */,
 				BA48C7690EB51CBB005B4297 /* Beacon.h */,
 				BA48C7550EB51BED005B4297 /* About.xib */,
+				BAA7D0B60FDB1C65002D5FCD /* WebView.xib */,
 				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				BA03E84F0EA8619B0069F8D6 /* settings.plist */,
@@ -343,6 +363,7 @@
 				BA03E7C80EA858760069F8D6 /* Search.xib */,
 				BA03E7DD0EA85A310069F8D6 /* Settings.xib */,
 				BA48C6D80EB51639005B4297 /* LoadingCell.xib */,
+				BAA7D0180FDAF430002D5FCD /* CollectionItemEdit.xib */,
 				BA48C82E0EB52978005B4297 /* GameActions.xib */,
 				BA48C82B0EB52932005B4297 /* GameInfo.xib */,
 				BADB5A8F0EBAB9B800742CA6 /* RecordPlay.xib */,
@@ -390,6 +411,15 @@
 			name = comments;
 			sourceTree = "<group>";
 		};
+		BAA7D01C0FDAF93A002D5FCD /* collectionman */ = {
+			isa = PBXGroup;
+			children = (
+				BAA7D01D0FDAF964002D5FCD /* CollectionItemEditViewController.h */,
+				BAA7D01E0FDAF964002D5FCD /* CollectionItemEditViewController.m */,
+			);
+			name = collectionman;
+			sourceTree = "<group>";
+		};
 		BABC9B860F2505AF00926B50 /* bggConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +427,8 @@
 				BABC9B880F2505D500926B50 /* BGGConnect.m */,
 				BABC9B950F250C8F00926B50 /* PostWorker.h */,
 				BABC9B960F250C8F00926B50 /* PostWorker.m */,
+				BA3DE4DA0FE0B13C005402D8 /* CollectionItemData.h */,
+				BA3DE4DB0FE0B13C005402D8 /* CollectionItemData.m */,
 			);
 			name = bggConnect;
 			sourceTree = "<group>";
@@ -522,6 +554,9 @@
 				BA8D20DB0F7D77D100578409 /* topgrad.jpg in Resources */,
 				BA8D21630F7D8BE800578409 /* stats_template.html in Resources */,
 				BA8D217C0F7D8F0D00578409 /* comment_template.html in Resources */,
+				BAA7D0190FDAF430002D5FCD /* CollectionItemEdit.xib in Resources */,
+				BAA7D0B70FDB1C65002D5FCD /* WebView.xib in Resources */,
+				BA4B53330FE3642F003E4FFA /* bgg14.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +595,9 @@
 				BABC9B890F2505D500926B50 /* BGGConnect.m in Sources */,
 				BABC9B970F250C8F00926B50 /* PostWorker.m in Sources */,
 				BA256A240F60FB5B00C37A64 /* HtmlTemplate.m in Sources */,
+				BAA7D01F0FDAF964002D5FCD /* CollectionItemEditViewController.m in Sources */,
+				BAA7D0BB0FDB1CAB002D5FCD /* WebViewController.m in Sources */,
+				BA3DE4DC0FE0B13C005402D8 /* CollectionItemData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,7 +650,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84949213-6858-4CA1-A33C-BE2C0566489D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4A2DDB5-A973-430F-A8DD-E8B21EB5500B";
 				SDKROOT = iphoneos2.1;
 			};
 			name = Adhoc2;
@@ -637,13 +675,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan CHRISTIANSON";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D253F492-DED8-44E7-B5E4-B998506065D8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A330384B-472E-41B0-9FE1-3619BF3669F4";
 				SDKROOT = iphoneos2.1;
 			};
 			name = Debug;
@@ -657,7 +695,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126F3B1D-5FDB-4FCF-8B7B-2966A280B6D5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D253F492-DED8-44E7-B5E4-B998506065D8";
 				SDKROOT = iphoneos2.1;
 			};
 			name = Release;
