@@ -97,6 +97,19 @@
 	[self.tableView reloadData];
 }
 
+
+-(void) processingFailed
+{
+	loading = NO;
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
+													message:[NSString stringWithFormat:NSLocalizedString(@"Error processing markup from BGG site.", @"Error reading markup from BGG site.")]
+												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
+}
+
+
 -(void) backgroundLoad
 {
 	if(cancelLoading)
@@ -107,13 +120,30 @@
 	
 	NSURLResponse *response = nil;
 	NSError *error = nil;
-	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
+	// see if we have cached
+	NSData *responseData = [self fetchCachedTop100File];
+	
+	BOOL loadedFromCache = YES;
+	
+	if ( responseData == nil ) {
+		responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+		loadedFromCache = NO;
+	}
+		
+	
+	// see if we got data
 	if(responseData == nil)
 	{
 		NSLog(@"Download error '%@'.", error);
-		[self performSelectorOnMainThread:@selector(downloadFailed:) withObject:error waitUntilDone:NO];
+		[self performSelectorOnMainThread:@selector(loadFailed:) withObject:error waitUntilDone:NO];
 		return;
+	}
+	else {
+		// we got data, so cache it if we didnt load from cache
+		if( !loadedFromCache ) {
+			[self saveCachedTop100File:responseData];
+		}
 	}
 	
 	if(cancelLoading)
@@ -243,6 +273,20 @@
 	[appDelegate saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
 	
 	[self.tableView reloadData];
+	
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedTop100File] ) {
+		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
+		
+		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+		
+		[refreshButton release];
+	}
+	
+
+	
 }
 
 -(void) viewDidLoad
@@ -268,6 +312,67 @@
 	
 	[super dealloc];
 }
+
+- (NSData*) fetchCachedTop100File {
+
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if ( [fileManager fileExistsAtPath:cacheFile ] ) {
+		return [NSData dataWithContentsOfFile:cacheFile];
+	}
+	else{
+		return nil;
+	}
+	
+}
+
+- (void) saveCachedTop100File: (NSData*) data {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if ( [fileManager fileExistsAtPath:cacheFile ] ) {
+		[fileManager removeItemAtPath:cacheFile error:nil];
+	}
+	
+	if ( data != nil ) {
+	
+		[data writeToFile:cacheFile atomically:YES];
+		
+	}
+	
+		
+}
+- (void) clearCachedTop100File {
+	[self saveCachedTop100File: nil];
+}
+
+- (BOOL) hasCachedTop100File {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	return [fileManager fileExistsAtPath:cacheFile ];
+	
+
+}
+
+- (void) userRequestedReload {
+	[games release];
+	games = nil;
+	[self clearCachedTop100File];
+	[self startLoadingTop100];
+	[self.tableView reloadData];
+}
+
 
 
 @end

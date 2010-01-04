@@ -34,6 +34,7 @@
 
 -(void) startLoading;
 
+-(void) loadFailed:(NSError *)error;
 
 
 // Protected methods.

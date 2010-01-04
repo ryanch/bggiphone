@@ -39,6 +39,22 @@
 	[alert release];
 }
 
+-(void) processingFailed
+{
+	loading = NO;
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
+													message:[NSString stringWithFormat:NSLocalizedString(@"Error processing markup from BGG site.", @"Error reading markup from BGG site.")]
+												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
+}
+
+
+
+
+
+
 -(void) takeResults:(NSArray *)results
 {
 	loading = NO;
@@ -64,7 +80,7 @@
 	if(responseData == nil)
 	{
 		NSLog(@"Download error '%@'.", error);
-		[self performSelectorOnMainThread:@selector(downloadFailed:) withObject:error waitUntilDone:NO];
+		[self performSelectorOnMainThread:@selector(loadFailed:) withObject:error waitUntilDone:NO];
 		return;
 	}
 	

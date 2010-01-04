@@ -30,4 +30,11 @@
 	BOOL			cancelLoading;
 }
 
+- (NSData*) fetchCachedTop100File;
+- (void) saveCachedTop100File: (NSData*) data;
+- (void) clearCachedTop100File;
+- (BOOL) hasCachedTop100File;
+- (void) userRequestedReload;
+
+
 @end
