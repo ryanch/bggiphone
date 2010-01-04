@@ -16,6 +16,17 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */; };
+		943543F210F1BC9E00E545D3 /* BGGForum.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E110F1BC9E00E545D3 /* BGGForum.m */; };
+		943543F310F1BC9E00E545D3 /* BGGHTMLScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E310F1BC9E00E545D3 /* BGGHTMLScraper.m */; };
+		943543F410F1BC9E00E545D3 /* BGGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E510F1BC9E00E545D3 /* BGGMessage.m */; };
+		943543F510F1BC9E00E545D3 /* BGGThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E710F1BC9E00E545D3 /* BGGThread.m */; };
+		943543F610F1BC9E00E545D3 /* GameComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E910F1BC9E00E545D3 /* GameComment.m */; };
+		943543F710F1BC9E00E545D3 /* GameForumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543EB10F1BC9E00E545D3 /* GameForumsViewController.m */; };
+		943543F810F1BC9E00E545D3 /* GameViewTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543ED10F1BC9E00E545D3 /* GameViewTabController.m */; };
+		943543F910F1BC9E00E545D3 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543EF10F1BC9E00E545D3 /* LoadingViewController.m */; };
+		943543FA10F1BC9E00E545D3 /* MessageThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543F110F1BC9E00E545D3 /* MessageThreadViewController.m */; };
+		943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */ = {isa = PBXBuildFile; fileRef = 943543FB10F1BCAE00E545D3 /* thread_messages_template.html */; };
+		9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */; };
 		BA03E7C90EA858760069F8D6 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7C80EA858760069F8D6 /* Search.xib */; };
 		BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */; };
 		BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7DD0EA85A310069F8D6 /* Settings.xib */; };
@@ -112,6 +123,27 @@
 		2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseTop100ViewController.h; sourceTree = "<group>"; };
 		2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseTop100ViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		943543E010F1BC9E00E545D3 /* BGGForum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGForum.h; sourceTree = "<group>"; };
+		943543E110F1BC9E00E545D3 /* BGGForum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGForum.m; sourceTree = "<group>"; };
+		943543E210F1BC9E00E545D3 /* BGGHTMLScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGHTMLScraper.h; sourceTree = "<group>"; };
+		943543E310F1BC9E00E545D3 /* BGGHTMLScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGHTMLScraper.m; sourceTree = "<group>"; };
+		943543E410F1BC9E00E545D3 /* BGGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGMessage.h; sourceTree = "<group>"; };
+		943543E510F1BC9E00E545D3 /* BGGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGMessage.m; sourceTree = "<group>"; };
+		943543E610F1BC9E00E545D3 /* BGGThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGThread.h; sourceTree = "<group>"; };
+		943543E710F1BC9E00E545D3 /* BGGThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGThread.m; sourceTree = "<group>"; };
+		943543E810F1BC9E00E545D3 /* GameComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameComment.h; sourceTree = "<group>"; };
+		943543E910F1BC9E00E545D3 /* GameComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameComment.m; sourceTree = "<group>"; };
+		943543EA10F1BC9E00E545D3 /* GameForumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameForumsViewController.h; sourceTree = "<group>"; };
+		943543EB10F1BC9E00E545D3 /* GameForumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameForumsViewController.m; sourceTree = "<group>"; };
+		943543EC10F1BC9E00E545D3 /* GameViewTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewTabController.h; sourceTree = "<group>"; };
+		943543ED10F1BC9E00E545D3 /* GameViewTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewTabController.m; sourceTree = "<group>"; };
+		943543EE10F1BC9E00E545D3 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
+		943543EF10F1BC9E00E545D3 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
+		943543F010F1BC9E00E545D3 /* MessageThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageThreadViewController.h; sourceTree = "<group>"; };
+		943543F110F1BC9E00E545D3 /* MessageThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageThreadViewController.m; sourceTree = "<group>"; };
+		943543FB10F1BCAE00E545D3 /* thread_messages_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = thread_messages_template.html; sourceTree = "<group>"; };
+		9435440610F1BCF600E545D3 /* ForumThreadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumThreadsViewController.h; sourceTree = "<group>"; };
+		9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumThreadsViewController.m; sourceTree = "<group>"; };
 		BA03E7C80EA858760069F8D6 /* Search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search.xib; sourceTree = "<group>"; };
 		BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUIViewController.h; sourceTree = "<group>"; };
 		BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUIViewController.m; sourceTree = "<group>"; };
@@ -242,6 +274,26 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9435440610F1BCF600E545D3 /* ForumThreadsViewController.h */,
+				9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */,
+				943543E010F1BC9E00E545D3 /* BGGForum.h */,
+				943543E110F1BC9E00E545D3 /* BGGForum.m */,
+				943543E210F1BC9E00E545D3 /* BGGHTMLScraper.h */,
+				943543E310F1BC9E00E545D3 /* BGGHTMLScraper.m */,
+				943543E410F1BC9E00E545D3 /* BGGMessage.h */,
+				943543E510F1BC9E00E545D3 /* BGGMessage.m */,
+				943543E610F1BC9E00E545D3 /* BGGThread.h */,
+				943543E710F1BC9E00E545D3 /* BGGThread.m */,
+				943543E810F1BC9E00E545D3 /* GameComment.h */,
+				943543E910F1BC9E00E545D3 /* GameComment.m */,
+				943543EA10F1BC9E00E545D3 /* GameForumsViewController.h */,
+				943543EB10F1BC9E00E545D3 /* GameForumsViewController.m */,
+				943543EC10F1BC9E00E545D3 /* GameViewTabController.h */,
+				943543ED10F1BC9E00E545D3 /* GameViewTabController.m */,
+				943543EE10F1BC9E00E545D3 /* LoadingViewController.h */,
+				943543EF10F1BC9E00E545D3 /* LoadingViewController.m */,
+				943543F010F1BC9E00E545D3 /* MessageThreadViewController.h */,
+				943543F110F1BC9E00E545D3 /* MessageThreadViewController.m */,
 				BAA7D01C0FDAF93A002D5FCD /* collectionman */,
 				BA256A290F61000F00C37A64 /* template */,
 				BABC9B860F2505AF00926B50 /* bggConnect */,
@@ -398,6 +450,7 @@
 		BA256A3F0F61059000C37A64 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				943543FB10F1BCAE00E545D3 /* thread_messages_template.html */,
 				BA8D217B0F7D8F0D00578409 /* comment_template.html */,
 				BA8D21620F7D8BE800578409 /* stats_template.html */,
 				BA256A400F61059000C37A64 /* game_template.html */,
@@ -562,6 +615,7 @@
 				BAA7D0190FDAF430002D5FCD /* CollectionItemEdit.xib in Resources */,
 				BAA7D0B70FDB1C65002D5FCD /* WebView.xib in Resources */,
 				BA4B53330FE3642F003E4FFA /* bgg14.db in Resources */,
+				943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +658,16 @@
 				BAA7D0BB0FDB1CAB002D5FCD /* WebViewController.m in Sources */,
 				BA3DE4DC0FE0B13C005402D8 /* CollectionItemData.m in Sources */,
 				2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */,
+				943543F210F1BC9E00E545D3 /* BGGForum.m in Sources */,
+				943543F310F1BC9E00E545D3 /* BGGHTMLScraper.m in Sources */,
+				943543F410F1BC9E00E545D3 /* BGGMessage.m in Sources */,
+				943543F510F1BC9E00E545D3 /* BGGThread.m in Sources */,
+				943543F610F1BC9E00E545D3 /* GameComment.m in Sources */,
+				943543F710F1BC9E00E545D3 /* GameForumsViewController.m in Sources */,
+				943543F810F1BC9E00E545D3 /* GameViewTabController.m in Sources */,
+				943543F910F1BC9E00E545D3 /* LoadingViewController.m in Sources */,
+				943543FA10F1BC9E00E545D3 /* MessageThreadViewController.m in Sources */,
+				9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

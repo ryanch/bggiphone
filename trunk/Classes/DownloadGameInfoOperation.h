@@ -23,6 +23,7 @@
 
 @class GameInfoViewController;
 @class GameActionsViewController;
+@class GameForumsViewController;
 @class BBGSearchResult;
 @class FullGameInfo;
 
@@ -30,6 +31,7 @@
 	GameInfoViewController * statsController;
 	GameInfoViewController * infoController;
 	GameActionsViewController * actionsController;
+	GameForumsViewController * forumsController;
 	UITabBarController * tabBarController;
 	
 	BBGSearchResult * searchResult;
@@ -42,6 +44,7 @@
 @property (nonatomic, retain) GameInfoViewController * statsController;
 @property (nonatomic, retain) GameInfoViewController * infoController;
 @property (nonatomic, retain) GameActionsViewController * actionsController;
+@property (nonatomic, retain) GameForumsViewController * forumsController;
 @property (nonatomic, retain) BBGSearchResult * searchResult;
 
 - (void) doTheWork;

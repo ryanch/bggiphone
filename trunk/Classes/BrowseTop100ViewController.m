@@ -22,6 +22,7 @@
 #import "BrowseTop100ViewController.h"
 #import "BBGSearchResult.h"
 #import "BGGAppDelegate.h"
+#import "BGGHTMLScraper.h"
 
 
 @implementation BrowseTop100ViewController
@@ -120,109 +121,17 @@
 	
 	NSString *document = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease];
 	
-	NSRange tableStart = [document rangeOfString:@"id='collectionitems"];
-	
-	if(tableStart.location == NSNotFound)
-	{
-		NSLog(@"Invalid data, missing table start");
-		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:NO];
-		return;
-	}
-	
-	NSRange tableEnd = [document rangeOfString:@"</table" options:0 range:NSMakeRange(NSMaxRange(tableStart), [document length] - NSMaxRange(tableStart))];
-	
-	if(tableStart.location == NSNotFound)
-	{
-		NSLog(@"Invalid data, missing table end");
-		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:NO];
-		return;
-	}
+	BGGHTMLScraper *htmlScraper = [[[BGGHTMLScraper alloc] init] autorelease];
+	NSArray *results = [htmlScraper scrapeGamesFromTop100:document];
 	
 	if(cancelLoading)
 		return;
 	
-	// <a  href="/boardgame/17226/descent-journeys-in-the-dark"   >Descent: Journeys in the Dark</a>
-	
-	NSMutableArray *results = [NSMutableArray array];
-	
-	NSRange ahrefStart = NSMakeRange(NSMaxRange(tableStart), 0);
-	while(ahrefStart.location != NSNotFound && ahrefStart.location < tableEnd.location)
+	if(results == nil)
 	{
-		NSRange ahrefSearchRange = NSMakeRange(ahrefStart.location, [document length] - ahrefStart.location);
-		NSString *ahrefSearchString = @"<a  href=\"/boardgame/";
-		ahrefStart = [document rangeOfString:ahrefSearchString options:0 range:ahrefSearchRange];
-		
-		if(ahrefStart.location == NSNotFound)
-			break;
-		
-		NSRange ahrefEndSearchRange = NSMakeRange(NSMaxRange(ahrefStart), [document length] - NSMaxRange(ahrefStart));
-		NSRange ahrefURLEnd = [document rangeOfString:@"\"" options:0 range:ahrefEndSearchRange];
-		
-		if(ahrefURLEnd.location == NSNotFound)
-		{
-			NSLog(@"ERROR: a href end not found.");
-			break;
-		}
-		
-		NSRange urlRange = NSMakeRange(NSMaxRange(ahrefStart), ahrefURLEnd.location - NSMaxRange(ahrefStart));
-		
-		NSRange gameIDEndRange = [document rangeOfString:@"/" options:0 range:urlRange];
-		
-		if(gameIDEndRange.location == NSNotFound)
-		{
-			NSLog(@"ERROR: game ID '/' separator not found.");
-			break;
-		}
-		
-		NSRange gameIdRange = NSMakeRange(urlRange.location, gameIDEndRange.location - urlRange.location);
-		NSString *gameId = [document substringWithRange:gameIdRange];
-		
-		NSRange nameStart = [document rangeOfString:@">" options:0 range:NSMakeRange(ahrefURLEnd.location, [document length] - ahrefURLEnd.location)];
-		
-		if(nameStart.location == NSNotFound)
-		{
-			NSLog(@"ERROR: Name start not found.");
-			break;
-		}
-		
-		NSRange nameEnd = [document rangeOfString:@"<" options:0 range:NSMakeRange(nameStart.location, [document length] - nameStart.location)];
-		
-		NSRange nameRange = NSMakeRange(NSMaxRange(nameStart), nameEnd.location - NSMaxRange(nameStart));
-		NSString *name = [document substringWithRange:nameRange];
-		
-		
-		NSString *imageURLStartString = [NSString stringWithFormat:@"<a   href=\"/boardgame/%@\" ><img border=0  src=\"", [document substringWithRange:urlRange]];
-		
-		NSRange imageURLStartRange = [document rangeOfString:imageURLStartString options:NSBackwardsSearch];
-		
-		NSString *imageURL = nil;
-		if(imageURLStartRange.location != NSNotFound)
-		{
-			NSRange imageURLEndRange = [document rangeOfString:@"\"" options:0 range:NSMakeRange(NSMaxRange(imageURLStartRange), [document length] - NSMaxRange(imageURLStartRange))];
-			
-			if(imageURLEndRange.location != NSNotFound)
-			{
-				NSRange imageURLRange = NSMakeRange(NSMaxRange(imageURLStartRange), imageURLEndRange.location - NSMaxRange(imageURLStartRange));
-				imageURL = [document substringWithRange:imageURLRange];
-			}
-		}
-		
-		BBGSearchResult *result = [[[BBGSearchResult alloc] init] autorelease];
-		
-		result.gameId = gameId;
-		result.primaryTitle = name;
-		result.imageURL = imageURL;
-		
-		[results addObject:result];
-		
-		ahrefStart.location = NSMaxRange(ahrefURLEnd);
-		
-		if(cancelLoading)
-			return;
-	}
-	
-	if(cancelLoading)
+		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:NO];
 		return;
+	}
 	
 	[self performSelectorOnMainThread:@selector(takeResuts:) withObject:results waitUntilDone:NO];
 }

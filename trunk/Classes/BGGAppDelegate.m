@@ -32,6 +32,7 @@
 #import "SettingsUIViewController.h"
 #import "AboutViewController.h"
 #import "BoardGameSearchResultsTableViewController.h"
+#import "GameForumsViewController.h"
 #import "BrowseTop100ViewController.h"
 #import "XmlSearchReader.h"
 #import "CommentsUIViewController.h"
@@ -90,7 +91,7 @@
 	[result autorelease];
 	return result;
 }
-																										  
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
 	RANDOM_SEED();
@@ -234,7 +235,14 @@
 	gameActions.tabBarItem = actionsItem;
 	[actionsItem release];
 	
-	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats,gameComments, gameActions, nil];
+	GameForumsViewController *gameForums  = [[[GameForumsViewController alloc] init] autorelease];	
+	gameForums.title = NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game");
+	UITabBarItem * forumsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game") image:[UIImage imageNamed:@"comments.png"] tag:0];
+	gameForums.tabBarItem = forumsItem;
+	[forumsItem release];
+	
+
+	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments, gameActions, gameForums, nil];
 	//[tabBarController setViewControllers: [NSArray arrayWithObjects:gameActions, gameInfo, nil] animated:NO];
 	
 	
@@ -248,6 +256,7 @@
 	dl.infoController = gameInfo;
 	dl.statsController = gameStats;
 	dl.actionsController = gameActions;
+	dl.forumsController = gameForums;
 	dl.tabBarController = tabBarController;
 	dl.searchResult = searchResult;
 	

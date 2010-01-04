@@ -23,6 +23,7 @@
 
 #import "GameInfoViewController.h";
 #import "GameActionsViewController.h";
+#import "GameForumsViewController.h";
 #import "BBGSearchResult.h"
 #import "FullGameInfo.h";
 #import "XmlGameInfoReader.h"
@@ -36,6 +37,7 @@
 @synthesize infoController;
 @synthesize actionsController;
 @synthesize searchResult;
+@synthesize forumsController;
 
 
 - (id) init {
@@ -62,7 +64,7 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	fullGameInfo = [appDelegate getFullGameInfoByGameIdFromBGG:searchResult.gameId];	
-	[fullGameInfo retain];
+
 		
 		
 	if ( [self isCancelled] == NO ) {
@@ -114,12 +116,10 @@
 	
 	if ( [self isCancelled] == NO ) {
 		[infoController updateForGameInfo: fullGameInfo];
-	}
-	if ( [self isCancelled] == NO ) {
 		[statsController updateForGameStats:fullGameInfo];
-	}
-	if ( [self isCancelled] == NO ) {
 		actionsController.fullGameInfo = fullGameInfo;
+		forumsController.fullGameInfo = fullGameInfo;
+		[forumsController startLoading];
 	}	
 }
 
@@ -152,7 +152,7 @@
 	[infoController release];
 	[actionsController release];
 	[searchResult release];	
-	
+	[forumsController release];
 	
 	[super dealloc];
 }
