@@ -39,10 +39,14 @@
 	
 	//! other names this game goes by -- note this is not used currently
 	NSArray * alternateNames;
+	
+	//! thumbnail image URL
+	NSString * imageURL;
 }
 
 @property (nonatomic, copy) NSString * primaryTitle;
 @property (nonatomic, retain) NSString *  gameId;
 @property int yearPublished;
 @property (nonatomic, retain) NSArray * alternateNames;
+@property (nonatomic, readwrite, retain) NSString *imageURL;
 @end

@@ -26,14 +26,15 @@
 #define RANDOM_INT(__MIN__, __MAX__) ((__MIN__) + random() % ((__MAX__+1) - (__MIN__)))
 
 #define SEARCH_MENU_CHOICE 0
-#define OWNED_MENU_CHOICE 1
-#define WISH_MENU_CHOICE 3
-#define SETTINGS_MENU_CHOICE 6
-#define PICK_GAME_CHOICE 2
-#define WANT_TO_PLAY_CHOICE 4
-#define GAMES_PLAYED_MENU_CHOICE 5
+#define BROWSE_TOP_100_MENU_CHOICE 1
+#define OWNED_MENU_CHOICE 2
+#define PICK_GAME_CHOICE 3
+#define WISH_MENU_CHOICE 4
+#define WANT_TO_PLAY_CHOICE 5
+#define GAMES_PLAYED_MENU_CHOICE 6
+#define SETTINGS_MENU_CHOICE 7
 // this is also the total count since it is last
-#define ABOUT_MENU_CHOICE 7
+#define ABOUT_MENU_CHOICE 8
 
 ///
 /// these are error responses
@@ -96,7 +97,10 @@ enum {
 		BGG_RESUME_GAMES_TO_PLAY_LIST = 9,
 	
 		//! resume on the played list
-		BGG_RESUME_GAMES_PLAYED_LIST = 10
+		BGG_RESUME_GAMES_PLAYED_LIST = 10,
+	
+		//! resume on the browse top 100 games page
+		BGG_RESUME_BROWSE_TOP_100_GAMES = 11,
 };
 typedef NSInteger BGGResumeState;
 
@@ -156,11 +160,13 @@ typedef NSInteger BGGResumeState;
 
 //! cache a games image, creating a thumbail as well
 -(void) cacheGameImage: (FullGameInfo*) fullGameInfo;
+-(void) cacheGameImageAtURL:(NSString *)imageURLString gameID:(NSString *)gameId;
+-(void) cacheGameImageData:(NSData *)imageData gameID:(NSString *)gameId;
 
 ///
 /// this will execute a game search specified in searchReader, unless it can find the search results in the local cache.
 /// if not found in local cache, it will cache the results before returning.
-- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType;
+- (NSArray*)  getGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType;
 
 //! return the current username, or nil if not provided. If no user name it will pop a dialog and open the setting page
 - (NSString*) handleMissingUsername;
@@ -178,7 +184,7 @@ typedef NSInteger BGGResumeState;
 - (void) resumeFromSavedPoint;
 
 //! this will load a full game from the db if found or from the web if not. if loaded from web, it will cache it locally before returning
-- (FullGameInfo*) initFullGameInfoByGameIdFromBGG: (NSString*) gameId;
+- (FullGameInfo*) getFullGameInfoByGameIdFromBGG: (NSString*) gameId;
 
 //! this will load the menu item that you requested
 - (void) loadMenuItem:(NSInteger) menuItem;

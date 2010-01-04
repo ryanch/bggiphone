@@ -98,12 +98,10 @@
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString * tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"../tmp/i/" ];
+	NSString * tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"imgs" ];
 	
 	[[NSFileManager defaultManager] removeItemAtPath:tempFilePath	error:nil];
 	
-	
-	tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"../tmp/i/" ];
 	[[NSFileManager defaultManager]  createDirectoryAtPath:tempFilePath		attributes:nil];
 	
 }

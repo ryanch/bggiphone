@@ -28,13 +28,13 @@
 @synthesize gameId;
 @synthesize yearPublished;
 @synthesize alternateNames;
+@synthesize imageURL = imageURL;
 
 
-- init {
+
+-(id) init {
 	if (self = [super init]) {
 		yearPublished = 0;
-		// init code goes here
-		//thumbNailURL = nil; NSData
 	}
 	return self;
 }
@@ -45,6 +45,7 @@
 	[primaryTitle release];
 	[gameId release];
 	[alternateNames release];
+	[imageURL release];
 	[super dealloc];
 }
 

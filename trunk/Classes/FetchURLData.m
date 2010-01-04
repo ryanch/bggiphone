@@ -52,7 +52,7 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	[theConnection release];
 	[receivedData release];
-	NSLog( [error localizedDescription] );
+	NSLog( @"%@", [error localizedDescription] );
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

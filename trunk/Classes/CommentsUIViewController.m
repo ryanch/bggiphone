@@ -84,7 +84,14 @@
 	
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 	NSURL *baseURL = [NSURL fileURLWithPath:path];
-	NSString * fileContents = [NSString stringWithContentsOfFile:pageToLoad];
+	NSError *error = nil;
+	NSString * fileContents = [NSString stringWithContentsOfFile:pageToLoad encoding:NSUTF8StringEncoding error:&error];
+	if(fileContents == nil)
+	{
+		NSLog(@"ERROR: Couldn't load file at path '%@' because of error '%@'.", pageToLoad, [error localizedDescription]);
+		return;
+	}
+	
 	[webView loadHTMLString:fileContents baseURL:  baseURL   ];	
 	
 	webView.hidden = NO;

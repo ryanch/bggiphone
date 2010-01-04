@@ -15,6 +15,7 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */; };
 		BA03E7C90EA858760069F8D6 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7C80EA858760069F8D6 /* Search.xib */; };
 		BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */; };
 		BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7DD0EA85A310069F8D6 /* Settings.xib */; };
@@ -108,6 +109,8 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseTop100ViewController.h; sourceTree = "<group>"; };
+		2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseTop100ViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA03E7C80EA858760069F8D6 /* Search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search.xib; sourceTree = "<group>"; };
 		BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUIViewController.h; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				BADB5AB60EBABD8E00742CA6 /* LogPlayUIViewController.m */,
 				BAD111570EBD07C100C4F518 /* DbAccess.h */,
 				BAD111580EBD07C100C4F518 /* DbAccess.m */,
+				2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */,
+				2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				BAA7D01F0FDAF964002D5FCD /* CollectionItemEditViewController.m in Sources */,
 				BAA7D0BB0FDB1CAB002D5FCD /* WebViewController.m in Sources */,
 				BA3DE4DC0FE0B13C005402D8 /* CollectionItemData.m in Sources */,
+				2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +614,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan CHRISTIANSON";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -620,7 +625,6 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "027620C1-1F10-4E36-B41B-7F6D3AA57D0C";
 			};
 			name = Debug;
 		};
@@ -649,9 +653,11 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4A2DDB5-A973-430F-A8DD-E8B21EB5500B";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Adhoc2;
 		};
@@ -675,14 +681,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan CHRISTIANSON";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A330384B-472E-41B0-9FE1-3619BF3669F4";
-				SDKROOT = iphoneos2.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -694,9 +702,11 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D253F492-DED8-44E7-B5E4-B998506065D8";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};

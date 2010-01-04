@@ -95,7 +95,7 @@
 /// find a game in the users collection that is missing data. fetch all of the data for that
 /// game and return it, and save to db.
 ///
-- (FullGameInfo *) initNextMissingGameForCollection;
+- (FullGameInfo *) getNextMissingGameForCollection;
 
 
 ///

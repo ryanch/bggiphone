@@ -252,7 +252,7 @@
 	
 }
 
-- (FullGameInfo *) initNextMissingGameForCollection {
+- (FullGameInfo *) getNextMissingGameForCollection {
 
 	BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
 	NSString * username = [appDelegate getCurrentUserName];	
@@ -278,7 +278,7 @@
 	}
 	
 
-	FullGameInfo * gameInfo = [appDelegate initFullGameInfoByGameIdFromBGG:gameId];
+	FullGameInfo * gameInfo = [appDelegate getFullGameInfoByGameIdFromBGG:gameId];
 	return gameInfo;
 	
 	

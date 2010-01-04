@@ -47,7 +47,9 @@
     BOOL success = [parser parse];
     
     if (!success) {
-        *error =  [parser parserError];
+		if ( error != nil ) {
+			*error =  [parser parserError];
+		}
     }
     else {
 	
@@ -224,7 +226,7 @@
 	
 	
 	NSString * commentUpdated = [ comment stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;" ];
-	commentUpdated = [ comment stringByReplacingOccurrencesOfString: @"\n" withString: @"<p/>" ];
+	commentUpdated = [ commentUpdated stringByReplacingOccurrencesOfString: @"\n" withString: @"<p/>" ];
 	
 	[buffer appendString:commentUpdated ];
 	

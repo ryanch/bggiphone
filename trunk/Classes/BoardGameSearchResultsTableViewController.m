@@ -117,7 +117,8 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	NSError * parseError = nil;
-	resultsToDisplay = [appDelegate initGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType];
+	resultsToDisplay = [appDelegate getGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType];
+	[resultsToDisplay retain];
 	if ( resultsToDisplay == nil ) {
 		parseErrorMessage = [[parseError localizedDescription] retain];
 		[NSThread sleepForTimeInterval:1.0]; 
@@ -133,7 +134,7 @@
 	
 	[self performSelectorOnMainThread:@selector(doneSearch) withObject:self waitUntilDone:YES];
 	
-	
+	[resultsToDisplay release];
 
 	[autoreleasepool release];
 	
@@ -424,6 +425,9 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	
 	
 	cell.textLabel.text = result.primaryTitle;
+	cell.textLabel.adjustsFontSizeToFitWidth = YES;
+	cell.textLabel.minimumFontSize = 12.0;
+	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	
 	if ( result.yearPublished == 0 ) {
 		cell.detailTextLabel.text = @"";

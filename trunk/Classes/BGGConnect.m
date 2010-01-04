@@ -127,11 +127,15 @@
 		if ( responseBody != nil ) {
 			NSRange range = [responseBody rangeOfString:@"Plays"];
 			if ( range.location != NSNotFound ) {
+				[responseBody release];
+				[worker release];
 				return SUCCESS;
 			}
 		}
+		[responseBody release];
 	}
 	
+	[worker release];
 	return CONNECTION_ERROR;
 	
 	
@@ -295,6 +299,7 @@
 	if ( !success ) {
 		itemData.response = CONNECTION_ERROR;
 		[itemData release];
+		[worker release];
 		return nil;
 	}
 	

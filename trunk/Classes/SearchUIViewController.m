@@ -124,7 +124,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }	
 	
@@ -133,15 +133,19 @@
 		return nil;
 	}
 	
-	cell.text = result.primaryTitle;
+	cell.textLabel.text = result.primaryTitle;
+	cell.textLabel.adjustsFontSizeToFitWidth = YES;
+	cell.textLabel.minimumFontSize = 12.0;
+	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
 	if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
-		cell.image = [UIImage imageWithContentsOfFile: imagePath];
+		cell.imageView.image = [UIImage imageWithContentsOfFile: imagePath];
+		cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	}
 	else {
-		cell.image = nil;
+		cell.imageView.image = nil;
 	}
 	
 	return cell;

@@ -1,5 +1,5 @@
 /*
- Copyright 2008 Ryan Christianson
+ Copyright 2010 Petteri Kamppuri
  
  Licensed under the Apache License, Version 2.0 (the "License"); 
  you may not use this file except in compliance with the License. 
@@ -12,30 +12,22 @@
  */ 
 
 //
-//  FetchURLData.h
+//  BrowseTop100ViewController.h
 //  BGG
 //
-//  Created by RYAN CHRISTIANSON on 10/26/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
+//  Created by Petteri Kamppuri on 2.1.2010.
+//  Copyright 2010 Petteri Kamppuri. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#define FETCH_URL_MODE_SEARCH_RESULTS  1
 
-@interface FetchURLData : NSObject {
-	NSMutableData * receivedData;
-	NSURLConnection *theConnection;
-	NSInteger mode;
+@interface BrowseTop100ViewController : UITableViewController
+{
+	NSArray			*games;
+	NSMutableSet	*imagesLoading;
+	BOOL			loading;
+	BOOL			cancelLoading;
 }
-
-@property NSInteger mode;
-
-- (void) startRequest: (NSURLRequest *) request;
-
-- (void) cancel;
-
-- (void) handleSearchResults;
-
 
 @end

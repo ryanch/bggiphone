@@ -85,6 +85,8 @@
 	
 	self.webView.delegate = self;
 	[self.webView loadRequest: url ];
+	[url release];
+	
 	
     [super viewDidLoad];
 	

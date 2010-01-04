@@ -108,7 +108,7 @@
 	[gameTemplate release];
 
 	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[pageText release];
+	[pageText autorelease];
 	
 	// hide and show
 	[loadingView stopAnimating];
@@ -129,10 +129,7 @@
 	NSURL *baseURL = [NSURL fileURLWithPath:path];
 	
 	
-	NSString * fileContents = [NSString stringWithContentsOfFile:tempFilePath];
-	
-	
-	[webView loadHTMLString:fileContents baseURL:  baseURL   ];	
+	[webView loadHTMLString:pageText baseURL:  baseURL   ];	
 	
 	[params release];
 	
@@ -236,7 +233,7 @@
 	
 	
 	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[pageText release];
+	[pageText autorelease];
 	
 
 	
@@ -256,10 +253,7 @@
 	NSURL *baseURL = [NSURL fileURLWithPath:path];
 	
 
-	NSString * fileContents = [NSString stringWithContentsOfFile:tempFilePath];
-	
-
-	[webView loadHTMLString:fileContents baseURL:  baseURL   ];
+	[webView loadHTMLString:pageText baseURL:  baseURL   ];
 	
 
 	[params release];

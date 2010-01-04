@@ -13,8 +13,14 @@
 
 -(void) _loadFile: (NSString*) fileName {
 
+	NSError *error = nil;
+	NSString * fileContents = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:&error];
 	
-	NSString * fileContents = [NSString stringWithContentsOfFile:fileName];
+	if(fileContents == nil)
+	{
+		NSLog(@"ERROR: Couldn't load file at path '%@' because of error '%@'.", fileName, [error localizedDescription]);
+		return;
+	}
 	
 	NSMutableArray *tempParts = [[NSMutableArray alloc] initWithCapacity:100];
 	unichar tempChars[3024];
@@ -59,6 +65,7 @@
 	if ( tempIndex != 0 ) {
 		NSString * str = [[NSString alloc] initWithCharacters:tempChars length:tempIndex];
 		[tempParts addObject: str  ];
+		[str release];
 	}
 	
 	parts = tempParts;

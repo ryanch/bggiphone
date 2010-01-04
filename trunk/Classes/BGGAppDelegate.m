@@ -32,6 +32,7 @@
 #import "SettingsUIViewController.h"
 #import "AboutViewController.h"
 #import "BoardGameSearchResultsTableViewController.h"
+#import "BrowseTop100ViewController.h"
 #import "XmlSearchReader.h"
 #import "CommentsUIViewController.h"
 #import "GamePickerUIViewController.h"
@@ -192,6 +193,9 @@
 	else if ( stateCodeInt == BGG_RESUME_SETTINGS ) {
 		[self loadMenuItem:SETTINGS_MENU_CHOICE];
 	}
+	else if ( stateCodeInt == BGG_RESUME_BROWSE_TOP_100_GAMES ) {
+		[self loadMenuItem:BROWSE_TOP_100_MENU_CHOICE];
+	}
 	
 }
 
@@ -327,12 +331,12 @@
 }
 
 
-- (FullGameInfo*) initFullGameInfoByGameIdFromBGG: (NSString*) gameId {
+- (FullGameInfo*) getFullGameInfoByGameIdFromBGG: (NSString*) gameId {
 	
 	
 	FullGameInfo* fullGameInfo = [self.dbAccess fetchFullGameInfoByGameId: [gameId intValue] ];
 	if ( fullGameInfo != nil && fullGameInfo.isCached == YES  ) {
-		[fullGameInfo retain];
+		//[fullGameInfo retain];
 		return fullGameInfo;
 	}
 	
@@ -347,15 +351,18 @@
 	BOOL success = [reader parseXMLAtURL:url	parseError:nil];
 
 	if ( !success ) {
+		[reader release];	
 		return nil;
 	}
 	
 	fullGameInfo = reader.gameInfo;
+	[fullGameInfo retain];
+	[fullGameInfo autorelease];
 	fullGameInfo.isCached = YES;
 
 	fullGameInfo.gameId = gameId;
 
-	[fullGameInfo retain];
+	//[fullGameInfo retain];
 	
 	// cache game image first
 	[self cacheGameImage: fullGameInfo];
@@ -395,7 +402,7 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *fullPath =  [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.jpg", gameId] ];
+	NSString *fullPath =  [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"imgs/%@_t.png", gameId] ];
 	
 	if ( exists ) {
 		NSFileManager * fileManager = [NSFileManager defaultManager];
@@ -422,12 +429,11 @@
 	
 }
 
-
-
-
--(void) cacheGameImage: (FullGameInfo*) fullGameInfo {
+-(void) cacheGameImageData:(NSData *)imageData gameID:(NSString *)gameId {
 	
-	NSString * tempFilePath =[self buildImageFilePathForGameId: fullGameInfo.gameId checkIfExists: NO];
+	// NOTE: This method can be called from background threads.
+	
+	NSString * tempFilePath = [self buildImageFilePathForGameId: gameId checkIfExists: NO];
 	
 	
 	NSFileManager * fileManager = [NSFileManager defaultManager];
@@ -435,41 +441,83 @@
 		return;
 	}
 	
-	NSURL * url = [NSURL URLWithString:fullGameInfo.imageURL];
-	
-	NSData * imageData = [[NSData alloc] initWithContentsOfURL: url];
 	[imageData writeToFile:tempFilePath atomically:YES];
 	
 	// now resize and save again
-	NSString * thumbImagePath = [self buildImageThumbFilePathForGameId: fullGameInfo.gameId checkIfExists: NO];
+	NSString * thumbImagePath = [self buildImageThumbFilePathForGameId:gameId checkIfExists: NO];
 	
 	
-	CGSize newSize = CGSizeMake( 40, 40 );
+	CGSize maxSize = CGSizeMake( 41, 41 );
 	
 	UIImage * image = [[UIImage alloc] initWithData:imageData];
 	
-	UIGraphicsBeginImageContext( newSize );
-	[image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-	UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
+	CGSize newSize = image.size;
 	
-	NSData * thumbData = UIImageJPEGRepresentation( newImage, 1.0f );
+	if(newSize.width > maxSize.width)
+	{
+		newSize.height = newSize.height * maxSize.width / newSize.width;
+		newSize.width = maxSize.width;
+	}
+	if(newSize.height > maxSize.height)
+	{
+		newSize.width = newSize.width * maxSize.height / newSize.height;
+		newSize.height = maxSize.height;
+	}
+	
+	// UI* calls are not thread safe, but the code still uses UIImage and UIImagePNGRepresentation() because there doesn't seem to be a way to create JPEGs using purely Core Graphics.
+	
+	//UIGraphicsBeginImageContext( maxSize );
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bitmapContext = CGBitmapContextCreate(nil, maxSize.width, maxSize.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
+	CGColorSpaceRelease(colorSpace);
+	
+	CGContextClearRect(bitmapContext, CGRectMake(0, 0, maxSize.width, maxSize.height));
+	
+	CGRect imageRect = CGRectMake((maxSize.width - newSize.width) / 2.0,
+								  (maxSize.height - newSize.height) / 2.0,
+								  newSize.width,
+								  newSize.height);
+	
+	//[image drawInRect:CGRectIntegral(imageRect)];
+	CGContextDrawImage(bitmapContext, imageRect, image.CGImage);
+	
+	//UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+	//UIGraphicsEndImageContext();
+	CGImageRef newCGImage = CGBitmapContextCreateImage(bitmapContext);
+	CGContextRelease(bitmapContext);
+	UIImage *newImage = [[[UIImage alloc] initWithCGImage:newCGImage] autorelease];
+	CGImageRelease(newCGImage);
+	
+	NSData * thumbData = UIImagePNGRepresentation( newImage );
 	[thumbData writeToFile:thumbImagePath atomically:YES];
 	
 	
 	// clean up
 	// NOTE newImage is autorelease
-	//[thumbData release];
 	[image release];
 	[imageData release];
-	
-	
-	
-	
-	
 }
 
-- (NSArray*)  initGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType {
+
+-(void) cacheGameImageAtURL:(NSString *)imageURLString gameID:(NSString *)gameId {
+	
+	NSURL * url = [NSURL URLWithString:imageURLString];
+	
+	NSData * imageData = [[NSData alloc] initWithContentsOfURL: url];
+	
+	[self cacheGameImageData:imageData gameID:gameId];
+}
+
+
+-(void) cacheGameImage: (FullGameInfo*) fullGameInfo {
+	
+	[self cacheGameImageAtURL:fullGameInfo.imageURL gameID:fullGameInfo.gameId];
+	
+}	
+
+
+
+- (NSArray*)  getGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType {
 
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 
@@ -518,7 +566,7 @@
 	
 	
 	if ( results != nil ) {
-		[results retain];
+		//[results retain];
 		return results; 
 	}
 	
@@ -570,7 +618,7 @@
 			return nil;
 		}
 	
-		[results retain];
+		//[results retain];
 		return results;		
 	
 	
@@ -588,6 +636,16 @@
 		
 		SearchUIViewController * search = [SearchUIViewController buildSearchUIViewController];
 		[navigationController pushViewController:search		animated:YES];
+	}
+	
+	else if ( menuItem == BROWSE_TOP_100_MENU_CHOICE ) {
+		
+		[self saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
+		
+		[[Beacon shared] startSubBeaconWithName:@"browse top 100 menu click" timeSession:NO];
+		
+		BrowseTop100ViewController *browseTop100 = [[[BrowseTop100ViewController alloc] init ] autorelease];
+		[navigationController pushViewController:browseTop100 animated:YES];
 	}
 	
 	else if ( menuItem == PICK_GAME_CHOICE ) {

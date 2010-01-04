@@ -61,8 +61,8 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	fullGameInfo = [appDelegate initFullGameInfoByGameIdFromBGG:searchResult.gameId];	
-
+	fullGameInfo = [appDelegate getFullGameInfoByGameIdFromBGG:searchResult.gameId];	
+	[fullGameInfo retain];
 		
 		
 	if ( [self isCancelled] == NO ) {

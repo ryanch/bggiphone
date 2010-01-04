@@ -63,7 +63,9 @@
     BOOL success = [parser parse];
     
     if (!success) {
-        *error =  [parser parserError];
+		if ( error != nil ) {
+			*error =  [parser parserError];
+		}
     }
     
     [parser release];
@@ -261,6 +263,9 @@
 			}
 
 		}
+		
+		[currentName release];
+		currentName = nil;
 		
 	}
 	

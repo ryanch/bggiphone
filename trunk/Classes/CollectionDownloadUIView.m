@@ -84,14 +84,14 @@
 		
 		NSError * error = nil;
 		
-		NSArray *results = [appDelegate initGameSearchResults:search	withError:&error searchGameType: BGG_SEARCH_OWNED];
+		NSArray *results = [appDelegate getGameSearchResults:search	withError:&error searchGameType: BGG_SEARCH_OWNED];
 		
 		BOOL hadResults = YES;
 		if ( results == nil ) {
 			hadResults = NO;
 		}
 
-		[results release];
+	
 		[search release];
 
 		if ( !hadResults ) {
@@ -114,13 +114,13 @@
 	}
 	
 	// try to download al lgames
-	FullGameInfo * gameInfo  = [appDelegate.dbAccess initNextMissingGameForCollection];
+	FullGameInfo * gameInfo  = [appDelegate.dbAccess getNextMissingGameForCollection];
 	while( gameInfo != nil && !isCanceled) {
 		
 		[message release];
 		message = gameInfo.title;
 		[message retain];
-		[gameInfo release];
+		//[gameInfo release];
 		gameInfo = nil;
 		
 		percentComplete = 1- (float)[appDelegate.dbAccess fetchTotalMissingGameInfoFromCollection] / (float)startCount;
@@ -131,12 +131,12 @@
 		[NSThread sleepForTimeInterval:0.1];
 		
 		if ( !isCanceled ) {
-			gameInfo = [appDelegate.dbAccess initNextMissingGameForCollection];
+			gameInfo = [appDelegate.dbAccess getNextMissingGameForCollection];
 		}
 	}
 	
 	
-	[gameInfo release];
+	//[gameInfo release];
 	
 	startCount  = [appDelegate.dbAccess fetchTotalMissingGameInfoFromCollection];
 	

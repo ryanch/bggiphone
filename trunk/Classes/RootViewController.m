@@ -89,6 +89,10 @@
 		cell.textLabel.text = NSLocalizedString( @"Search" , @"search menu item" );
 		cell.imageView.image = [UIImage imageNamed:@"search.png" ];
 	}
+	else if ( indexPath.row == BROWSE_TOP_100_MENU_CHOICE ) {
+		cell.textLabel.text = NSLocalizedString(@"Browse Top 100 Games" , @"browse top 100 games" );
+		cell.imageView.image = [UIImage imageNamed:@"own.png" ];
+	}
 	else if ( indexPath.row == PICK_GAME_CHOICE ) {
 		cell.textLabel.text = NSLocalizedString(@"Search Owned Game" , @"pick game menu item" );
 		cell.imageView.image = [UIImage imageNamed:@"search_own.png" ];
