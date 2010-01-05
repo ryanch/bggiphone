@@ -24,9 +24,11 @@ http://boardgamegeek.com/article/4436728
 
 ==How To Report Issues==
 
-# Try to figure out how to reproduce your issue. This will help us fix the issue.
-# Submit your issue using [http://code.google.com/p/bggiphone/issues/entry?template=Beta%20Tester%20Issue%20Report this form].
-# After you submit your issue, make sure you Sync your iphone with iTunes, this will submit any crash reports to Apple, and then we will get them.
+  # Try to figure out how to reproduce your issue. This will help us fix the issue.
+
+  # Submit your issue using [http://code.google.com/p/bggiphone/issues/entry?template=Beta%20Tester%20Issue%20Report this form].
+
+  # After you submit your issue, make sure you Sync your iphone with iTunes, this will submit any crash reports to Apple, and then we will get them.
 
 ==Testing  Tasks==
 
