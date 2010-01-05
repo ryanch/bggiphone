@@ -5,7 +5,7 @@ http://boardgamegeek.com/article/4436728
 
 ==How To Install The Beta==
 
-1) You will receive an email with a zip file.
+1) Download the beta zip file from here http://bggiphone.googlecode.com/files/Adhoc2-iphoneos.zip
 
 2) Unzip the zip file.
 
