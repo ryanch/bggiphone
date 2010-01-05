@@ -26,7 +26,7 @@ http://boardgamegeek.com/article/4436728
 
 1) Try to figure out how to reproduce your issue. This will help us fix the issue.
 
-2) Submit your issue using [http://code.google.com/p/bggiphone/issues/entry?template=Beta%20Tester%20Issue%20Report this form].
+2) Submit your issue using [http://code.google.com/p/bggiphone/issues/entry?template=Beta%20Tester%20Issue%20Report this form]. Include the steps to reproduce your issue. When you submit your issue, use the "Beta Test Issue Report" template.
 
 3) After you submit your issue, make sure you Sync your iphone with iTunes, this will submit any crash reports to Apple, and then we will get them.
 
