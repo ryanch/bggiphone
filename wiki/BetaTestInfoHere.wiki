@@ -1,0 +1,45 @@
+If you are a beta test for bggiphone thanks for your time!
+
+If you are interested in being a beta tester, watch this forum for calls for testers:
+http://boardgamegeek.com/article/4436728
+
+==How To Install The Beta==
+
+1) You will receive an email with a zip file.
+
+2) Unzip the zip file.
+
+3) The zip file will include a .mobileprovision file, and a .app file.
+
+4) Open iTunes on your computer.
+
+5) Drag the mobile provision file into iTunes.
+
+6) Drag the .app file into iTunes.
+
+7) Connect your device.
+
+8) Sync your device.
+
+
+==How To Report Issues==
+
+# Try to figure out how to reproduce your issue. This will help us fix the issue.
+# Submit your issue using [http://code.google.com/p/bggiphone/issues/entry?template=Beta%20Tester%20Issue%20Report this form].
+# After you submit your issue, make sure you Sync your iphone with iTunes, this will submit any crash reports to Apple, and then we will get them.
+
+==Testing  Tasks==
+
+The following are some activities that you could do to help get a complete test.
+
+===Normal Work===
+
+Do things that you would normally do. Try to do all of the tasks that you would normally do. Just use the app as you would normally.
+
+===Test To Break===
+
+Try to do weird things, like have someone call you while you are using the app, or try different actions while your phone is in air plane mode.
+
+===Test It All===
+
+Try to do all of the actions that are possible, on each screen, and try them in random ordering.
