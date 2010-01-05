@@ -21,7 +21,6 @@ http://boardgamegeek.com/article/4436728
 
 8) Sync your device.
 
-
 ==How To Report Issues==
 
 1) Try to figure out how to reproduce your issue. This will help us fix the issue.
