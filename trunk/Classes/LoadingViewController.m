@@ -58,7 +58,7 @@
 	[self updateViews];
 }
 
--(void) takeResults:(NSArray *)results
+-(void) takeResults:(id)results
 {
 	loading = NO;
 	
@@ -66,6 +66,23 @@
 	items = [results retain];
 	
 	[self updateViews];
+}
+
+-(void) didFinishLoadingWithResults:(id)results
+{
+	[self takeResults:results];
+	
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedData] )
+	{
+		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
+		
+		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+		
+		[refreshButton release];
+	}
 }
 
 -(void) backgroundLoad
@@ -79,9 +96,12 @@
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSData *responseData = nil;
+	BOOL loadedDataFromCache = NO;
 	
 	// First try to find cached data
 	responseData = [self loadDataFromCache];
+	if(responseData != nil)
+		loadedDataFromCache = YES;
 	
 	if(responseData == nil)
 		responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -110,9 +130,10 @@
 		return;
 	}
 	
-	[self cacheResponseData:responseData results:results];
+	if(loadedDataFromCache == NO)
+		[self cacheResponseData:responseData results:results];
 	
-	[self performSelectorOnMainThread:@selector(takeResults:) withObject:results waitUntilDone:NO];
+	[self performSelectorOnMainThread:@selector(didFinishLoadingWithResults:) withObject:results waitUntilDone:NO];
 }
 
 -(void) backgroundLoadThread
@@ -220,7 +241,6 @@
 	
 	[self startLoading];
 	[self updateViews];
-	
 	
 	// save the current state
 	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];

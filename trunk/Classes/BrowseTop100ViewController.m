@@ -83,17 +83,6 @@
 	// save the current state
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	[appDelegate saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
-	
-	// add a reload button to right nav bar
-	// see if we have reload button
-	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedData] ) {
-		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
-										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
-		
-		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
-		
-		[refreshButton release];
-	}
 }
 
 #pragma mark LoadingViewController overrides
