@@ -27,7 +27,6 @@
 #import "BBGSearchResult.h"
 #import "FullGameInfo.h";
 #import "XmlGameInfoReader.h"
-#import "DbAccess.h"
 #import "BGGAppDelegate.h"
 
 @implementation DownloadGameInfoOperation
