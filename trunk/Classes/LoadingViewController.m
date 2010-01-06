@@ -52,9 +52,6 @@
 
 
 
-
-
-
 -(void) takeResults:(NSArray *)results
 {
 	loading = NO;
@@ -101,6 +98,8 @@
 		return;
 	}
 	
+	[self cacheResponseData:responseData results:results];
+	
 	[self performSelectorOnMainThread:@selector(takeResults:) withObject:results waitUntilDone:NO];
 }
 
@@ -117,16 +116,23 @@
 
 -(void) updateViews
 {
-	
+	// Intentionally empty implementation in abstract base class.
+}
+
+-(void) cacheResponseData:(NSData *)responseData results:(id)results
+{
+	// Intentionally empty implementation in abstract base class.
 }
 
 -(NSString *) urlStringForLoading
 {
+	// Intentionally empty implementation in abstract base class.
 	return nil;
 }
 
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
 {
+	// Intentionally empty implementation in abstract base class.
 	return nil;
 }
 

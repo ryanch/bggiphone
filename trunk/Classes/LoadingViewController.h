@@ -42,6 +42,7 @@
 -(void) updateViews;
 
 -(NSString *) urlStringForLoading;
+-(void) cacheResponseData:(NSData *)responseData results:(id)results;
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper;
 
 @end
