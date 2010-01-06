@@ -47,7 +47,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIActivityIndicatorView" id="1021015487">
 								<reference key="NSNextResponder" ref="162492583"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{151, 12}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="162492583"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
