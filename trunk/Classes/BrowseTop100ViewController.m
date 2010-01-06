@@ -93,7 +93,7 @@
 		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 		
 		[refreshButton release];
-	}	
+	}
 }
 
 #pragma mark LoadingViewController overrides
@@ -101,23 +101,6 @@
 -(NSString *) cacheFileName
 {
 	return @"top100.cache.html";
-}
-
--(void) cacheResponseData:(NSData *)responseData results:(id)results
-{
-	NSString *cacheFilePath = [self pathForCachedFile];
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
-	if ( [fileManager fileExistsAtPath:cacheFilePath ] ) {
-		[fileManager removeItemAtPath:cacheFilePath error:nil];
-	}
-	
-	if ( responseData != nil ) {
-		
-		[responseData writeToFile:cacheFilePath atomically:YES];
-		
-	}
 }
 
 -(NSString *) urlStringForLoading

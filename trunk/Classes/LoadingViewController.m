@@ -133,7 +133,14 @@
 
 -(void) cacheResponseData:(NSData *)responseData results:(id)results
 {
-	// Intentionally empty implementation in abstract base class.
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if ( [fileManager fileExistsAtPath:cacheFilePath ] )
+		[fileManager removeItemAtPath:cacheFilePath error:NULL];
+	
+	[responseData writeToFile:cacheFilePath atomically:YES];
 }
 
 -(NSString *) urlStringForLoading
@@ -192,7 +199,7 @@
 	NSString *cacheFilePath = [self pathForCachedFile];
 	
 	if(cacheFilePath)
-		[[NSFileManager defaultManager] removeItemAtPath:cacheFilePath error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:cacheFilePath error:NULL];
 }
 
 #pragma mark UIViewController overrides

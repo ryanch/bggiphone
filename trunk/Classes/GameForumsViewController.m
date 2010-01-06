@@ -46,6 +46,14 @@
 	return [htmlScraper scrapeForumsFromList:document];
 }
 
+-(NSString *) cacheFileName
+{
+	if(self.fullGameInfo == nil)
+		return nil;
+	
+	return [NSString stringWithFormat:@"game-forums-list-%@.cache.html", self.fullGameInfo.gameId];
+}
+
 #pragma mark LoadingTableViewController overrides
 
 -(void) tappedAtItemAtIndexPath:(NSIndexPath *)indexPath
