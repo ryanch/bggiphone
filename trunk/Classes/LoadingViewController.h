@@ -34,6 +34,8 @@
 
 -(void) startLoading;
 
+@property (nonatomic, readonly, assign, getter=isLoading) BOOL loading;
+
 // Protected methods.
 
 -(void) updateViews;

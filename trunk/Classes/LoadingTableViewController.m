@@ -51,7 +51,7 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableViewActed numberOfRowsInSection:(NSInteger)section {
-	if ( items == nil)
+	if ( self.isLoading )
 		return 1;
 	else
 		return [items count];
@@ -59,7 +59,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if ( items == nil) {
+	if ( self.isLoading) {
 		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
 		
 		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;

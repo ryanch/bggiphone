@@ -26,17 +26,45 @@
 
 @implementation LoadingViewController
 
+@synthesize loading;
+
 #pragma mark Private
+
+-(void) showRefreshButton
+{
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil && ([self hasCachedData] || items == nil) )
+	{
+		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
+		
+		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+		
+		[refreshButton release];
+	}	
+	
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
+-(void) disableRefreshButton
+{
+	self.navigationItem.rightBarButtonItem.enabled = NO;
+}
 
 -(void) loadFailed:(NSError *)error
 {
 	loading = NO;
 	
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
-													message:[NSString stringWithFormat:NSLocalizedString(@"Error downloading forums: %@.", @"error download forums."), error]
+													message:[NSString stringWithFormat:NSLocalizedString(@"Download failed: %@.", @"download failed error."), [error localizedDescription]]
 												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
 	[alert show];	
 	[alert release];
+	
+	[self updateViews];
+	
+	[self showRefreshButton];
 }
 
 -(void) processingFailed
@@ -48,6 +76,10 @@
 												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
 	[alert show];	
 	[alert release];
+	
+	[self updateViews];
+	
+	[self showRefreshButton];
 }
 
 - (void) userRequestedReload {
@@ -72,17 +104,7 @@
 {
 	[self takeResults:results];
 	
-	// add a reload button to right nav bar
-	// see if we have reload button
-	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedData] )
-	{
-		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
-										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
-		
-		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
-		
-		[refreshButton release];
-	}
+	[self showRefreshButton];
 }
 
 -(void) backgroundLoad
@@ -269,6 +291,8 @@
 	
 	cancelLoading = NO;
 	loading = YES;
+	
+	[self disableRefreshButton];
 	
 	[NSThread detachNewThreadSelector:@selector(backgroundLoadThread) toTarget:self withObject:nil];
 }
