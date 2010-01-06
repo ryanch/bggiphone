@@ -51,6 +51,10 @@
 	// dump current results
 	[resultsToDisplay release];
 	resultsToDisplay = nil;
+	[sectionTitles release];
+	sectionTitles = nil;
+	[sectionCountsDict release];
+	sectionCountsDict = nil;
 	
 	// reload the table
 	[self.tableView reloadData];
