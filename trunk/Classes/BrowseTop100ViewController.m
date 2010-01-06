@@ -186,6 +186,20 @@
 	[NSThread detachNewThreadSelector:@selector(backgroundLoadThread) toTarget:self withObject:nil];
 }
 
+-(NSString *) cacheFileName
+{
+	return @"top100.cache.html";
+}
+
+-(NSString *) fullPathForCachedFile
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:[self cacheFileName]];
+	
+	return cacheFile;
+}
+
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableViewActed numberOfRowsInSection:(NSInteger)section {
@@ -296,28 +310,11 @@
 	[self startLoadingTop100];
 }
 
--(id) init
-{
-	if((self = [super init]) != nil)
-	{
-		self.title = NSLocalizedString( @"Top 100", @"browse top 100 title" );
-	}
-	return self;
-}
-
--(void) dealloc
-{
-	[games release];
-	[imagesLoading release];
-	
-	[super dealloc];
-}
+#pragma mark Public
 
 - (NSData*) fetchCachedTop100File {
-
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
+	
+	NSString *cacheFile = [self fullPathForCachedFile];
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
@@ -331,9 +328,8 @@
 }
 
 - (void) saveCachedTop100File: (NSData*) data {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
+	
+	NSString *cacheFile = [self fullPathForCachedFile];
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
@@ -354,13 +350,10 @@
 }
 
 - (BOOL) hasCachedTop100File {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:@"top100.cache.html"];
 	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSString *cacheFile = [self fullPathForCachedFile];
 	
-	return [fileManager fileExistsAtPath:cacheFile ];
+	return [[NSFileManager defaultManager] fileExistsAtPath:cacheFile ];
 	
 
 }
@@ -373,6 +366,21 @@
 	[self.tableView reloadData];
 }
 
+-(id) init
+{
+	if((self = [super init]) != nil)
+	{
+		self.title = NSLocalizedString( @"Top 100", @"browse top 100 title" );
+	}
+	return self;
+}
 
+-(void) dealloc
+{
+	[games release];
+	[imagesLoading release];
+	
+	[super dealloc];
+}
 
 @end
