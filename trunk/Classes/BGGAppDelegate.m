@@ -528,50 +528,31 @@
 
 - (NSArray*)  getGameSearchResults: (XmlSearchReader*) searchReader withError: (NSError**) parseError searchGameType: (BGGSearchGameType) searchType {
 
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-
-	
-	
 	NSArray * results = nil;
 	
 	// see if we can  use the ownded games cache
 
+	NSString * username = [self handleMissingUsername];
+	if ( username == nil ) {
+		return nil;
+	}
+	
 	if ( searchType == BGG_SEARCH_OWNED ) {
-		
-		NSString * username = [appDelegate handleMissingUsername];
-		if ( username == nil ) {
-			return nil;
-		}
 		
 		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_OWN forUser:username];
 	}
 	else if ( searchType == BGG_SEARCH_WISH ) {
 		
-		NSString * username = [appDelegate handleMissingUsername];
-		if ( username == nil ) {
-			return nil;
-		}
-		
 		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_WISH forUser:username];
 	}
 	else if ( searchType == BGG_GAMES_TO_PLAY_LIST ) {
-		
-		NSString * username = [appDelegate handleMissingUsername];
-		if ( username == nil ) {
-			return nil;
-		}
 		
 		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_TOPLAY forUser:username];
 	}	
 	else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
 		
-		NSString * username = [appDelegate handleMissingUsername];
-		if ( username == nil ) {
-			return nil;
-		}
-		
 		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_PLAYED forUser:username];
-	}		
+	}
 	
 	
 	if ( results != nil ) {
