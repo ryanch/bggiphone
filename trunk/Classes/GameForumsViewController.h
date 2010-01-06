@@ -19,27 +19,17 @@
 //  Copyright 2010 Petteri Kamppuri. All rights reserved.
 //
 
-#import "LoadingViewController.h"
+#import "LoadingTableViewController.h"
 
 
 @class FullGameInfo;
 
 
-@interface GameForumsViewController : LoadingViewController <UITableViewDelegate, UITableViewDataSource>
+@interface GameForumsViewController : LoadingTableViewController
 {
 	FullGameInfo	*fullGameInfo;
 }
 
 @property (nonatomic, retain ) FullGameInfo * fullGameInfo;
-@property (nonatomic, readonly, retain ) UITableView *tableView;
-
-
-// Protected methods
-
--(void) tappedAtItemAtIndexPath:(NSIndexPath *)indexPath;
-
--(UITableViewCellStyle) cellStyle;
-
--(void) updateCell:(UITableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

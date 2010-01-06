@@ -50,7 +50,13 @@
 	[alert release];
 }
 
-
+- (void) userRequestedReload {
+	[items release];
+	items = nil;
+	[self clearCachedData];
+	[self startLoading];
+	[self updateViews];
+}
 
 -(void) takeResults:(NSArray *)results
 {
@@ -72,7 +78,13 @@
 	
 	NSURLResponse *response = nil;
 	NSError *error = nil;
-	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	NSData *responseData = nil;
+	
+	// First try to find cached data
+	responseData = [self loadDataFromCache];
+	
+	if(responseData == nil)
+		responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
 	if(responseData == nil)
 	{
@@ -136,6 +148,53 @@
 	return nil;
 }
 
+-(NSString *) cacheFileName
+{
+	return nil;
+}
+
+-(NSString *) pathForCachedFile
+{
+	NSString *cacheFileName = [self cacheFileName];
+	
+	if(cacheFileName == nil)
+		return nil;
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFilePath = [documentsDirectory stringByAppendingPathComponent:cacheFileName];
+	
+	return cacheFilePath;
+}
+
+- (NSData *) loadDataFromCache
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if ( cacheFilePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath ] )
+		return [NSData dataWithContentsOfFile:cacheFilePath];
+	else
+		return nil;
+}
+
+- (BOOL) hasCachedData
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if(cacheFilePath)
+		return [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath ];
+	else
+		return NO;
+}
+
+- (void) clearCachedData
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if(cacheFilePath)
+		[[NSFileManager defaultManager] removeItemAtPath:cacheFilePath error:nil];
+}
+
 #pragma mark UIViewController overrides
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -157,7 +216,7 @@
 	
 	
 	// save the current state
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	//FIXME! [appDelegate saveResumePoint:BGG_RESUME_GAME withString:self.fullGameInfo.gameId];	
 }
 

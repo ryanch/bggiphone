@@ -19,22 +19,12 @@
 //  Copyright 2010 Petteri Kamppuri. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LoadingTableViewController.h"
 
 
-@interface BrowseTop100ViewController : UITableViewController
+@interface BrowseTop100ViewController : LoadingTableViewController
 {
-	NSArray			*games;
 	NSMutableSet	*imagesLoading;
-	BOOL			loading;
-	BOOL			cancelLoading;
 }
-
-- (NSData*) fetchCachedTop100File;
-- (void) saveCachedTop100File: (NSData*) data;
-- (void) clearCachedTop100File;
-- (BOOL) hasCachedTop100File;
-- (void) userRequestedReload;
-
 
 @end

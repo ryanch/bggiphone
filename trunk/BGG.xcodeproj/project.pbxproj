@@ -15,6 +15,7 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B22EC1510F4C00300FCE834 /* LoadingTableViewController.m */; };
 		2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */; };
 		943543F210F1BC9E00E545D3 /* BGGForum.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E110F1BC9E00E545D3 /* BGGForum.m */; };
 		943543F310F1BC9E00E545D3 /* BGGHTMLScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E310F1BC9E00E545D3 /* BGGHTMLScraper.m */; };
@@ -120,6 +121,8 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B22EC1410F4C00300FCE834 /* LoadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingTableViewController.h; sourceTree = "<group>"; };
+		2B22EC1510F4C00300FCE834 /* LoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingTableViewController.m; sourceTree = "<group>"; };
 		2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseTop100ViewController.h; sourceTree = "<group>"; };
 		2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseTop100ViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				943543ED10F1BC9E00E545D3 /* GameViewTabController.m */,
 				943543EE10F1BC9E00E545D3 /* LoadingViewController.h */,
 				943543EF10F1BC9E00E545D3 /* LoadingViewController.m */,
+				2B22EC1410F4C00300FCE834 /* LoadingTableViewController.h */,
+				2B22EC1510F4C00300FCE834 /* LoadingTableViewController.m */,
 				943543F010F1BC9E00E545D3 /* MessageThreadViewController.h */,
 				943543F110F1BC9E00E545D3 /* MessageThreadViewController.m */,
 				BAA7D01C0FDAF93A002D5FCD /* collectionman */,
@@ -668,6 +673,7 @@
 				943543F910F1BC9E00E545D3 /* LoadingViewController.m in Sources */,
 				943543FA10F1BC9E00E545D3 /* MessageThreadViewController.m in Sources */,
 				9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */,
+				2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

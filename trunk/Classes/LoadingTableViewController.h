@@ -12,40 +12,33 @@
  */ 
 
 //
-//  LoadingViewController.h
+//  LoadingTableViewController.h
 //  BGG
 //
-//  Created by Petteri Kamppuri on 3.1.2010.
+//  Created by Petteri Kamppuri on 6.1.2010.
 //  Copyright 2010 Petteri Kamppuri. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LoadingViewController.h"
 
 
-@class BGGHTMLScraper;
+@class FullGameInfo;
 
 
-@interface LoadingViewController : UIViewController
+@interface LoadingTableViewController : LoadingViewController <UITableViewDelegate, UITableViewDataSource>
 {
-	NSArray			*items;
-	BOOL			loading;
-	BOOL			cancelLoading;	
+	
 }
 
--(void) startLoading;
+@property (nonatomic, readonly, retain) UITableView *tableView;
 
-// Protected methods.
 
--(void) updateViews;
+// Protected methods
 
--(NSString *) urlStringForLoading;
--(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper;
+-(void) tappedAtItemAtIndexPath:(NSIndexPath *)indexPath;
 
--(NSString *) pathForCachedFile;
+-(UITableViewCellStyle) cellStyle;
 
--(void) cacheResponseData:(NSData *)responseData results:(id)results;
--(NSData *) loadDataFromCache;
-- (BOOL) hasCachedData;
--(void) clearCachedData;
+-(void) updateCell:(UITableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -33,11 +33,6 @@
 
 #pragma mark LoadingViewController overrides
 
--(void) updateViews
-{
-	[self.tableView reloadData];
-}
-
 -(NSString *) urlStringForLoading
 {
 	if(self.fullGameInfo == nil)
@@ -51,12 +46,7 @@
 	return [htmlScraper scrapeForumsFromList:document];
 }
 
-#pragma mark Protected overrides
-
--(UITableViewCellStyle) cellStyle
-{
-	return UITableViewCellStyleDefault;
-}
+#pragma mark LoadingTableViewController overrides
 
 -(void) tappedAtItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,68 +67,6 @@
 	
 	cell.textLabel.text = forum.name;
 	cell.textLabel.adjustsFontSizeToFitWidth = NO;
-}
-
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableViewActed numberOfRowsInSection:(NSInteger)section {
-	if ( items == nil) {
-		return 1;
-	}
-	else
-	{
-		return [items count];
-	}
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	if ( items == nil) {
-		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
-		
-		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
-		[[cell retain] autorelease];
-		
-		[loadingCell release];
-		
-		return cell;
-	}
-	
-	static NSString *CellIdentifier = @"Cell";
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:[self cellStyle] reuseIdentifier:CellIdentifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	}
-	
-	[self updateCell:cell forItemAtIndexPath:indexPath];
-	
-	return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	[self tappedAtItemAtIndexPath:indexPath];
-}
-
-#pragma mark UIViewController overrides
-
--(void) loadView
-{
-	UITableView *tableView = [[[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStylePlain] autorelease];
-	
-	tableView.dataSource = self;
-	tableView.delegate = self;
-	
-	self.view = tableView;
-}
-
-#pragma mark Public
-
--(UITableView *) tableView
-{
-	return (UITableView *) self.view;
 }
 
 @end

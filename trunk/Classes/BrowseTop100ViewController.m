@@ -36,7 +36,7 @@
 	
 	[imagesLoading removeObject:result.imageURL];
 	
-	NSInteger row = [games indexOfObjectIdenticalTo:result];
+	NSInteger row = [items indexOfObjectIdenticalTo:result];
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
 	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 	
@@ -74,167 +74,75 @@
 	[NSThread detachNewThreadSelector:@selector(backgroundImageLoad:) toTarget:self withObject:result];
 }
 
--(void) loadFailed:(NSError *)error
+#pragma mark UIViewController overrides
+
+-(void) viewWillAppear:(BOOL)animated
 {
-	loading = NO;
+	[super viewWillAppear:animated];
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
-													message:[NSString stringWithFormat:NSLocalizedString(@"Error downloading games: %@.", @"error download top100."), error]
-												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
-	[alert show];	
-	[alert release];
+	// save the current state
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[appDelegate saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
 	
-	[self.navigationController popViewControllerAnimated:YES];
-}
-
--(void) takeResuts:(NSArray *)results
-{
-	loading = NO;
-	
-	[games release];
-	games = [results retain];
-	
-	[self.tableView reloadData];
-}
-
-
--(void) processingFailed
-{
-	loading = NO;
-	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
-													message:[NSString stringWithFormat:NSLocalizedString(@"Error processing markup from BGG site.", @"Error reading markup from BGG site.")]
-												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
-	[alert show];	
-	[alert release];
-}
-
-
--(void) backgroundLoad
-{
-	if(cancelLoading)
-		return;
-	
-	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-	[request setURL:[NSURL URLWithString:@"http://www.boardgamegeek.com/browse/boardgame"]];
-	
-	NSURLResponse *response = nil;
-	NSError *error = nil;
-	
-	// see if we have cached
-	NSData *responseData = [self fetchCachedTop100File];
-	
-	BOOL loadedFromCache = YES;
-	
-	if ( responseData == nil ) {
-		responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-		loadedFromCache = NO;
-	}
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedData] ) {
+		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
 		
-	
-	// see if we got data
-	if(responseData == nil)
-	{
-		NSLog(@"Download error '%@'.", error);
-		[self performSelectorOnMainThread:@selector(loadFailed:) withObject:error waitUntilDone:NO];
-		return;
-	}
-	else {
-		// we got data, so cache it if we didnt load from cache
-		if( !loadedFromCache ) {
-			[self saveCachedTop100File:responseData];
-		}
-	}
-	
-	if(cancelLoading)
-		return;
-	
-	NSString *document = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease];
-	
-	BGGHTMLScraper *htmlScraper = [[[BGGHTMLScraper alloc] init] autorelease];
-	NSArray *results = [htmlScraper scrapeGamesFromTop100:document];
-	
-	if(cancelLoading)
-		return;
-	
-	if(results == nil)
-	{
-		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:NO];
-		return;
-	}
-	
-	[self performSelectorOnMainThread:@selector(takeResuts:) withObject:results waitUntilDone:NO];
+		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+		
+		[refreshButton release];
+	}	
 }
 
--(void) backgroundLoadThread
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	[self backgroundLoad];
-	
-	[pool release];
-}
-
--(void) startLoadingTop100
-{
-	if(loading)
-		return;
-	
-	cancelLoading = NO;
-	loading = YES;
-	
-	[NSThread detachNewThreadSelector:@selector(backgroundLoadThread) toTarget:self withObject:nil];
-}
+#pragma mark LoadingViewController overrides
 
 -(NSString *) cacheFileName
 {
 	return @"top100.cache.html";
 }
 
--(NSString *) fullPathForCachedFile
+-(void) cacheResponseData:(NSData *)responseData results:(id)results
 {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *cacheFile = [documentsDirectory stringByAppendingPathComponent:[self cacheFileName]];
+	NSString *cacheFilePath = [self pathForCachedFile];
 	
-	return cacheFile;
-}
-
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableViewActed numberOfRowsInSection:(NSInteger)section {
-	if ( games == nil) {
-		return 1;
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if ( [fileManager fileExistsAtPath:cacheFilePath ] ) {
+		[fileManager removeItemAtPath:cacheFilePath error:nil];
 	}
-	else
-	{
-		return [games count];
+	
+	if ( responseData != nil ) {
+		
+		[responseData writeToFile:cacheFilePath atomically:YES];
+		
 	}
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(NSString *) urlStringForLoading
+{
+	return @"http://www.boardgamegeek.com/browse/boardgame";
+}
+
+-(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
+{
+	return [htmlScraper scrapeGamesFromTop100:document];
+}
+
+#pragma mark LoadingTableViewController overrides
+
+-(void) tappedAtItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	BBGSearchResult * result = (BBGSearchResult*) [items objectAtIndex:indexPath.row];
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	if ( games == nil) {
-		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
-		
-		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
-		[[cell retain] autorelease];
-		
-		[loadingCell release];
-		
-		return cell;
-	}
-	
-	static NSString *CellIdentifier = @"Cell";
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	}
-	
-	
-	BBGSearchResult * result = (BBGSearchResult*) [games objectAtIndex:indexPath.row];
+	[appDelegate loadGameFromSearchResult: result];
+}
+
+-(void) updateCell:(UITableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	BBGSearchResult * result = (BBGSearchResult*) [items objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = [NSString stringWithFormat:@"%d. %@", indexPath.row + 1, result.primaryTitle];
 	cell.textLabel.adjustsFontSizeToFitWidth = NO;
@@ -250,121 +158,9 @@
 		cell.imageView.image = [UIImage imageWithContentsOfFile: imagePath];
 	else
 		cell.imageView.image = nil;
-	
-	return cell;
-}
-
-- (void) loadGameFromSearchResult: (BBGSearchResult*) searchResult {
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
-	[appDelegate loadGameFromSearchResult: searchResult];
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	BBGSearchResult * result = (BBGSearchResult*) [games objectAtIndex:indexPath.row];
-	
-	[self loadGameFromSearchResult: result];
-}
-
-#pragma mark UIViewController overrides
-
--(void) viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-	
-	cancelLoading = YES;
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	
-	cancelLoading = NO;
-	
-	// save the current state
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	[appDelegate saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
-	
-	[self.tableView reloadData];
-	
-	// add a reload button to right nav bar
-	// see if we have reload button
-	if ( self.navigationItem.rightBarButtonItem == nil && [self hasCachedTop100File] ) {
-		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] 
-										   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(userRequestedReload)];
-		
-		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
-		
-		[refreshButton release];
-	}
-	
-
-	
-}
-
--(void) viewDidLoad
-{
-	[super viewDidLoad];
-	
-	[self startLoadingTop100];
 }
 
 #pragma mark Public
-
-- (NSData*) fetchCachedTop100File {
-	
-	NSString *cacheFile = [self fullPathForCachedFile];
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
-	if ( [fileManager fileExistsAtPath:cacheFile ] ) {
-		return [NSData dataWithContentsOfFile:cacheFile];
-	}
-	else{
-		return nil;
-	}
-	
-}
-
-- (void) saveCachedTop100File: (NSData*) data {
-	
-	NSString *cacheFile = [self fullPathForCachedFile];
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
-	if ( [fileManager fileExistsAtPath:cacheFile ] ) {
-		[fileManager removeItemAtPath:cacheFile error:nil];
-	}
-	
-	if ( data != nil ) {
-	
-		[data writeToFile:cacheFile atomically:YES];
-		
-	}
-	
-		
-}
-- (void) clearCachedTop100File {
-	[self saveCachedTop100File: nil];
-}
-
-- (BOOL) hasCachedTop100File {
-	
-	NSString *cacheFile = [self fullPathForCachedFile];
-	
-	return [[NSFileManager defaultManager] fileExistsAtPath:cacheFile ];
-	
-
-}
-
-- (void) userRequestedReload {
-	[games release];
-	games = nil;
-	[self clearCachedTop100File];
-	[self startLoadingTop100];
-	[self.tableView reloadData];
-}
 
 -(id) init
 {
@@ -377,7 +173,6 @@
 
 -(void) dealloc
 {
-	[games release];
 	[imagesLoading release];
 	
 	[super dealloc];
