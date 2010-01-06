@@ -64,7 +64,7 @@
 	BGGThread *thread = [items objectAtIndex:indexPath.row];
 	
 	MessageThreadViewController *threadViewController = [[[MessageThreadViewController alloc] init] autorelease];
-	threadViewController.title = NSLocalizedString(@"Thread", @"message thread view controller title");
+	threadViewController.title = thread.title;
 	threadViewController.thread = thread;
 	
 	[self.navigationController pushViewController:threadViewController animated:YES];
