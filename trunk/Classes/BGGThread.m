@@ -26,8 +26,9 @@
 
 @synthesize title;
 @synthesize threadURL;
-@synthesize threadId = threadId;
-@synthesize lastEditDate;
+@synthesize threadId;
+@synthesize lastPoster = lastPoster;
+@synthesize lastPostDate;
 
 -(void) dealloc
 {
@@ -39,9 +40,12 @@
 	
 	[threadId release];
 	threadId = nil;
-
-	[lastEditDate release];
-	lastEditDate = nil;
+	
+	[lastPoster release];
+	lastPoster = nil;
+	
+	[lastPostDate release];
+	lastPostDate = nil;
 	
 	[super dealloc];
 }

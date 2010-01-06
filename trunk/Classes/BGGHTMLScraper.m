@@ -170,13 +170,18 @@
 		// Get thread title
 		NSString *threadTitle = [document substringWithRange:NSMakeRange(NSMaxRange(urlEnd), titleEnd.location - NSMaxRange(urlEnd))];
 		
-		// Get last edit date
-		NSRange lastEditDateRange;
-		NSString *lastEditDate = [self contentsOfTagWithStart:@"<div class='sf' style='line-height:16px; white-space:nowrap;'>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<a href=\"/article/" startTagEnd:@">" endTag:@"\n" inRange:NSMakeRange(NSMaxRange(titleEnd), [document length] - NSMaxRange(titleEnd)) foundRange:&lastEditDateRange inSource:document];
-		lastEditDate = [lastEditDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+		// Get last post date
+		NSRange lastPostDateRange;
+		NSString *lastPostDate = [self contentsOfTagWithStart:@"<div class='sf' style='line-height:16px; white-space:nowrap;'>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<a href=\"/article/" startTagEnd:@">" endTag:@"\n" inRange:NSMakeRange(NSMaxRange(titleEnd), [document length] - NSMaxRange(titleEnd)) foundRange:&lastPostDateRange inSource:document];
+		lastPostDate = [lastPostDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+		
+		// Get last poster
+		NSRange lastPosterRange;
+		NSString *lastPoster = [self contentsOfTagWithStart:@"<div>\n\t\t\t\t\t\tby <a href=\"/user/" startTagEnd:@">" endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(lastPostDateRange), [document length] - NSMaxRange(lastPostDateRange)) foundRange:&lastPosterRange inSource:document];
+		lastPostDate = [lastPostDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
 		
 		// Advance
-		urlStart.location = NSMaxRange(urlEnd);
+		urlStart.location = NSMaxRange(lastPosterRange);
 		urlStart.length = 0;
 		
 		
@@ -191,7 +196,8 @@
 		thread.title = threadTitle;
 		thread.threadURL = threadURL;
 		thread.threadId = threadId;
-		thread.lastEditDate = lastEditDate;
+		thread.lastPoster = lastPoster;
+		thread.lastPostDate = lastPostDate;
 		
 		[results addObject:thread];
 	}

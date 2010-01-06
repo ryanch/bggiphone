@@ -89,7 +89,8 @@
 	cell.textLabel.numberOfLines = 2;
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
 	
-	cell.detailTextLabel.text = thread.lastEditDate;
+	cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last Post %@ by %@", @"forum threads list last post format string"), thread.lastPostDate, thread.lastPoster];
+	cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 -(void) dealloc

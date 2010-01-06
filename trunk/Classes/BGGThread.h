@@ -26,13 +26,15 @@
 {
 	NSString	*title;
 	NSString	*threadURL;
-	NSString	*lastEditDate;
 	NSString	*threadId;
+	NSString	*lastPoster;
+	NSString	*lastPostDate;
 }
 
 @property (nonatomic, readwrite, retain) NSString *title;
 @property (nonatomic, readwrite, retain) NSString *threadURL;
 @property (nonatomic, readwrite, retain) NSString *threadId;
-@property (nonatomic, readwrite, retain) NSString *lastEditDate;
+@property (nonatomic, readwrite, retain) NSString *lastPoster;
+@property (nonatomic, readwrite, retain) NSString *lastPostDate;
 
 @end
