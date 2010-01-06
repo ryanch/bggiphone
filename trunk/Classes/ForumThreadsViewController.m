@@ -42,8 +42,19 @@
 
 #pragma mark LoadingViewController overrides
 
+-(NSString *) cacheFileName
+{
+	if(self.forum == nil)
+		return nil;
+	
+	return [NSString stringWithFormat:@"forum-threads-%@-page-1.cache.html", self.forum.forumId];
+}
+
 -(NSString *) urlStringForLoading
 {
+	if(self.forum == nil)
+		return nil;
+	
 	return [@"http://boardgamegeek.com/" stringByAppendingString:self.forum.forumURL];
 }
 

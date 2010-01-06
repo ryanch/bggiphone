@@ -62,7 +62,6 @@
 	
 	ForumThreadsViewController *threadsViewController = [[[ForumThreadsViewController alloc] init] autorelease];
 	threadsViewController.title = forum.name;
-	threadsViewController.fullGameInfo = self.fullGameInfo;
 	threadsViewController.forum = forum;
 	[threadsViewController startLoading];
 	

@@ -19,13 +19,13 @@
 //  Copyright 2010 Petteri Kamppuri. All rights reserved.
 //
 
-#import "GameForumsViewController.h"
+#import "LoadingTableViewController.h"
 
 
 @class BGGForum;
 
 
-@interface ForumThreadsViewController : GameForumsViewController
+@interface ForumThreadsViewController : LoadingTableViewController
 {
 	BGGForum	*forum;
 }

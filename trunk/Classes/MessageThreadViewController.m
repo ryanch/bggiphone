@@ -32,7 +32,7 @@
 @synthesize loadingView;
 @synthesize thread;
 
-#pragma mark GameForumsViewController overrides
+#pragma mark LoadingViewController overrides
 
 -(void) updateViews
 {
@@ -105,6 +105,14 @@
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
 {
 	return [htmlScraper scrapeMessagesFromThread:document];
+}
+
+-(NSString *) cacheFileName
+{
+	if(self.thread == nil)
+		return nil;
+	
+	return [NSString stringWithFormat:@"thread-%@-page-1.cache.html", self.thread.threadId];
 }
 
 #pragma mark Public
