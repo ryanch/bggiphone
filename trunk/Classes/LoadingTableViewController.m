@@ -54,7 +54,12 @@
 	if ( self.isLoading )
 		return 1;
 	else
-		return [items count];
+	{
+		if(items != nil && [items count] == 0) // No items
+			return 1;
+		else
+			return [items count];
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,6 +71,20 @@
 		[[cell retain] autorelease];
 		
 		[loadingCell release];
+		
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		
+		return cell;
+	}
+	
+	if(items != nil && [items count] == 0) // No items
+	{
+		UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+		
+		cell.textLabel.textAlignment = UITextAlignmentCenter;
+		cell.textLabel.textColor = [UIColor grayColor];
+		cell.textLabel.text = NSLocalizedString(@"No items.", @"empty list text for no items.");
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
 		return cell;
 	}
@@ -85,6 +104,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if(self.isLoading) // Do nothing when loading.
+		return;
+	if(items != nil && [items count] == 0) // Do nothing when there are no items.
+		return;
+	
 	[self tappedAtItemAtIndexPath:indexPath];
 }
 
