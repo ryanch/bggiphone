@@ -29,7 +29,7 @@
 {
 	NSArray			*items;
 	BOOL			loading;
-	BOOL			cancelLoading;	
+	BOOL			cancelLoading;
 }
 
 -(void) startLoading;
