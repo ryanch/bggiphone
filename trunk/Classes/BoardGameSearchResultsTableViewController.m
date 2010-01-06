@@ -117,8 +117,8 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	NSError * parseError = nil;
-	resultsToDisplay = [appDelegate getGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType];
-	[resultsToDisplay retain];
+	resultsToDisplay = [[appDelegate getGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType] retain];
+
 	if ( resultsToDisplay == nil ) {
 		parseErrorMessage = [[parseError localizedDescription] retain];
 		[NSThread sleepForTimeInterval:1.0]; 
@@ -134,8 +134,6 @@
 	
 	[self performSelectorOnMainThread:@selector(doneSearch) withObject:self waitUntilDone:YES];
 	
-	[resultsToDisplay release];
-
 	[autoreleasepool release];
 	
 	//[self doneSearch];
