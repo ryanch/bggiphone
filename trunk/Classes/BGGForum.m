@@ -26,6 +26,7 @@
 
 @synthesize name;
 @synthesize forumURL;
+@synthesize forumId;
 
 -(void) dealloc
 {
@@ -34,6 +35,9 @@
 	
 	[forumURL release];
 	forumURL = nil;
+	
+	[forumId release];
+	forumId = nil;
 	
 	[super dealloc];
 }

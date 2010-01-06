@@ -26,9 +26,11 @@
 {
 	NSString *name;
 	NSString *forumURL;
+	NSString *forumId;
 }
 
 @property (nonatomic, readwrite, retain) NSString *name;
 @property (nonatomic, readwrite, retain) NSString *forumURL;
+@property (nonatomic, readwrite, retain) NSString *forumId;
 
 @end

@@ -24,20 +24,24 @@
 
 @implementation BGGThread
 
-@synthesize lastEditDate;
-@synthesize threadURL;
 @synthesize title;
+@synthesize threadURL;
+@synthesize threadId = threadId;
+@synthesize lastEditDate;
 
 -(void) dealloc
 {
-	[lastEditDate release];
-	lastEditDate = nil;
+	[title release];
+	title = nil;
 	
 	[threadURL release];
 	threadURL = nil;
 	
-	[title release];
-	title = nil;
+	[threadId release];
+	threadId = nil;
+
+	[lastEditDate release];
+	lastEditDate = nil;
 	
 	[super dealloc];
 }

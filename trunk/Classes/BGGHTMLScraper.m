@@ -180,10 +180,17 @@
 		urlStart.length = 0;
 		
 		
+		// Get threadId
+		NSString *threadId = nil;
+		NSArray *threadURLComponents = [threadURL componentsSeparatedByString:@"/"];
+		if([threadURLComponents count] >= 3)
+			threadId = [threadURLComponents objectAtIndex:2];
+		
 		BGGThread *thread = [[[BGGThread alloc] init] autorelease];
 		
 		thread.title = threadTitle;
 		thread.threadURL = threadURL;
+		thread.threadId = threadId;
 		thread.lastEditDate = lastEditDate;
 		
 		[results addObject:thread];
@@ -229,10 +236,17 @@
 		urlStart.length = 0;
 		
 		
+		// Get forumId
+		NSString *forumId = nil;
+		NSArray *forumURLComponents = [forumURL componentsSeparatedByString:@"/"];
+		if([forumURLComponents count] >= 3)
+			forumId = [forumURLComponents objectAtIndex:2];
+		
 		BGGForum *forum = [[[BGGForum alloc] init] autorelease];
 		
 		forum.name = forumName;
 		forum.forumURL = forumURL;
+		forum.forumId = forumId;
 		
 		[results addObject:forum];
 	}
