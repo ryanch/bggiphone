@@ -575,7 +575,6 @@
 	
 	
 	if ( results != nil ) {
-		//[results retain];
 		return results; 
 	}
 	
@@ -627,7 +626,6 @@
 			return nil;
 		}
 	
-		//[results retain];
 		return results;		
 	
 	
