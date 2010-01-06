@@ -88,8 +88,17 @@
 }
 
 - (IBAction) clearGameCache {
+	// Clear database
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	[appDelegate.dbAccess clearDB];
+	
+	// Clear caches directory
+	NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *cacheDirectory = [cachePaths objectAtIndex:0];
+	for(NSString *itemName in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDirectory error:NULL])
+	{
+		[[NSFileManager defaultManager] removeItemAtPath:[cacheDirectory stringByAppendingPathComponent:itemName] error:NULL];
+	}
 	
 	[self clearImageCache];
 }
