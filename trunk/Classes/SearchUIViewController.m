@@ -76,6 +76,8 @@
 	resultsViewer.currentResumeState = BGG_RESUME_SEARCH;
 	
 
+	resultsViewer.searchGameType = BGG_ALL_GAMES;
+	
 	resultsViewer.title = NSLocalizedString(@"Search Results" , @"search results title" );
 
 

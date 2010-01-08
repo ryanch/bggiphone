@@ -532,33 +532,34 @@
 	
 	// see if we can  use the ownded games cache
 
-	NSString * username = [self handleMissingUsername];
-	if ( username == nil ) {
-		return nil;
-	}
 	
-	if ( searchType == BGG_SEARCH_OWNED ) {
-		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_OWN forUser:username];
-	}
-	else if ( searchType == BGG_SEARCH_WISH ) {
-		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_WISH forUser:username];
-	}
-	else if ( searchType == BGG_GAMES_TO_PLAY_LIST ) {
-		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_TOPLAY forUser:username];
-	}	
-	else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
-		
-		results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_PLAYED forUser:username];
-	}
+	NSString * username = [self getCurrentUserName];
+	if ( username != nil && searchType != BGG_ALL_GAMES) {
+
 	
-	
-	if ( results != nil ) {
-		return results; 
+		if ( searchType == BGG_SEARCH_OWNED ) {
+			
+			results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_OWN forUser:username];
+		}
+		else if ( searchType == BGG_SEARCH_WISH ) {
+			
+			results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_WISH forUser:username];
+		}
+		else if ( searchType == BGG_GAMES_TO_PLAY_LIST ) {
+			
+			results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_TOPLAY forUser:username];
+		}	
+		else if ( searchType == BGG_GAMES_PLAYED_LIST ) {
+			
+			results = [self.dbAccess getAllGamesInListByTypeAsSearchResults:LIST_TYPE_PLAYED forUser:username];
+		}
+		
+		
+		if ( results != nil ) {
+			return results; 
+		}
+		
 	}
-	
 	
 		
 		

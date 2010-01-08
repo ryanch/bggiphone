@@ -726,7 +726,7 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4A2DDB5-A973-430F-A8DD-E8B21EB5500B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "570F9FA3-F0D1-4B99-9F88-FE0FB1420665";
 				SDKROOT = iphoneos3.1;
 			};
 			name = Adhoc2;

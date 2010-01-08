@@ -63,7 +63,9 @@ enum {
 	//! games to play list
 	BGG_GAMES_TO_PLAY_LIST = 3,
 	//! games played
-	BGG_GAMES_PLAYED_LIST = 4
+	BGG_GAMES_PLAYED_LIST = 4,
+	//! all games
+	BGG_ALL_GAMES = 5
 };
 typedef NSInteger BGGSearchGameType;
 
