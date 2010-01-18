@@ -23,12 +23,38 @@
 #import "BBGSearchResult.h"
 #import "BGGAppDelegate.h"
 #import "BGGHTMLScraper.h"
+#import "Top100ImageDownloadOperation.h"
 
 
 @implementation BrowseTop100ViewController
 
 #pragma mark Private
 
+
+-(void) nsOperationDidFinishLoadingResult:(BBGSearchResult *)result
+{
+
+	
+	[imagesLoading removeObject:result.imageURL];
+	
+	NSInteger row = [items indexOfObjectIdenticalTo:result];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	
+	//if(cell == nil)
+	//	return; // Cell for this game isn't visible.
+	
+	//[self.tableView reloadData];
+	[self updateCellImage:cell withSearchResult:result];
+	
+	
+	
+	
+	//[self.tableView reloadRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+	
+}
+
+/*
 -(void) backgroundImageLoadDidFinish:(BBGSearchResult *)result
 {
 	if(cancelLoading)
@@ -45,7 +71,9 @@
 	
 	[self.tableView reloadData];
 }
+*/ 
 
+/*
 -(void) backgroundImageLoad:(BBGSearchResult *)result
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -57,6 +85,8 @@
 	
 	[pool release];	
 }
+ */
+
 
 -(void) startLoadingImageForResult:(BBGSearchResult *)result
 {
@@ -65,20 +95,33 @@
 	
 	if([imagesLoading containsObject:result.imageURL])
 		return;
-	
-	if(imagesLoading == nil)
-		imagesLoading = [[NSMutableSet alloc] init];
-	
+		
 	[imagesLoading addObject:result.imageURL];
 	
-	[NSThread detachNewThreadSelector:@selector(backgroundImageLoad:) toTarget:self withObject:result];
+	
+	Top100ImageDownloadOperation * operation = [[Top100ImageDownloadOperation alloc] initWithResult:result forView:self]; 
+	
+	[imageDownloadQueue addOperation:operation];
+	
+	
+	[operation release];
+	
+	//[NSThread detachNewThreadSelector:@selector(backgroundImageLoad:) toTarget:self withObject:result];
 }
 
+ 
 #pragma mark UIViewController overrides
 
 -(void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	
+	[imagesLoading release];
+	imagesLoading = [[NSMutableSet alloc] init];	
+	
+	[imageDownloadQueue release];
+	imageDownloadQueue = [[NSOperationQueue alloc] init];
+	[imageDownloadQueue setMaxConcurrentOperationCount:2];
 	
 	// save the current state
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -119,6 +162,10 @@
 	cell.textLabel.text = [NSString stringWithFormat:@"%d. %@", indexPath.row + 1, result.primaryTitle];
 	cell.textLabel.adjustsFontSizeToFitWidth = NO;
 	
+	[self updateCellImage:cell withSearchResult:result];
+}
+
+- (void) updateCellImage: (UITableViewCell*) cell withSearchResult: (BBGSearchResult*) result {
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
 	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
@@ -126,11 +173,14 @@
 	if(fileExists == NO && result.imageURL != nil)
 		[self startLoadingImageForResult:result];
 	
-	if (imagePath != nil && fileExists )
+	if (imagePath != nil && fileExists ) {
 		cell.imageView.image = [UIImage imageWithContentsOfFile: imagePath];
-	else
-		cell.imageView.image = nil;
+	}
+	else {
+		cell.imageView.image = [UIImage imageNamed:@"loading.jpg"];
+	}
 }
+
 
 #pragma mark Public
 
@@ -146,6 +196,7 @@
 -(void) dealloc
 {
 	[imagesLoading release];
+	[imageDownloadQueue release];
 	
 	[super dealloc];
 }

@@ -21,10 +21,17 @@
 
 #import "LoadingTableViewController.h"
 
+@class BBGSearchResult;
 
 @interface BrowseTop100ViewController : LoadingTableViewController
 {
 	NSMutableSet	*imagesLoading;
+	NSOperationQueue * imageDownloadQueue;
 }
+
+
+-(void) nsOperationDidFinishLoadingResult:(BBGSearchResult *)result;
+
+- (void) updateCellImage: (UITableViewCell*) cell withSearchResult: (BBGSearchResult*) result;
 
 @end

@@ -28,6 +28,8 @@
 		943543FA10F1BC9E00E545D3 /* MessageThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543F110F1BC9E00E545D3 /* MessageThreadViewController.m */; };
 		943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */ = {isa = PBXBuildFile; fileRef = 943543FB10F1BCAE00E545D3 /* thread_messages_template.html */; };
 		9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */; };
+		94A96F761104ED4200112CAE /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94A96F751104ED4200112CAE /* loading.jpg */; };
+		94CD5631110259120081FEDF /* Top100ImageDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CD5630110259120081FEDF /* Top100ImageDownloadOperation.m */; };
 		BA03E7C90EA858760069F8D6 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7C80EA858760069F8D6 /* Search.xib */; };
 		BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */; };
 		BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7DD0EA85A310069F8D6 /* Settings.xib */; };
@@ -147,6 +149,9 @@
 		943543FB10F1BCAE00E545D3 /* thread_messages_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = thread_messages_template.html; sourceTree = "<group>"; };
 		9435440610F1BCF600E545D3 /* ForumThreadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumThreadsViewController.h; sourceTree = "<group>"; };
 		9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumThreadsViewController.m; sourceTree = "<group>"; };
+		94A96F751104ED4200112CAE /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = loading.jpg; path = images/loading.jpg; sourceTree = "<group>"; };
+		94CD562F110259120081FEDF /* Top100ImageDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Top100ImageDownloadOperation.h; sourceTree = "<group>"; };
+		94CD5630110259120081FEDF /* Top100ImageDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Top100ImageDownloadOperation.m; sourceTree = "<group>"; };
 		BA03E7C80EA858760069F8D6 /* Search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search.xib; sourceTree = "<group>"; };
 		BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUIViewController.h; sourceTree = "<group>"; };
 		BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUIViewController.m; sourceTree = "<group>"; };
@@ -348,6 +353,8 @@
 				BAD111580EBD07C100C4F518 /* DbAccess.m */,
 				2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */,
 				2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */,
+				94CD562F110259120081FEDF /* Top100ImageDownloadOperation.h */,
+				94CD5630110259120081FEDF /* Top100ImageDownloadOperation.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -389,6 +396,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				94A96F751104ED4200112CAE /* loading.jpg */,
 				BA4B53320FE3642F003E4FFA /* bgg14.db */,
 				BA8D20D80F7D77D100578409 /* commentgrad.jpg */,
 				BA8D20D90F7D77D100578409 /* topgrad.jpg */,
@@ -621,6 +629,7 @@
 				BAA7D0B70FDB1C65002D5FCD /* WebView.xib in Resources */,
 				BA4B53330FE3642F003E4FFA /* bgg14.db in Resources */,
 				943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */,
+				94A96F761104ED4200112CAE /* loading.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +683,7 @@
 				943543FA10F1BC9E00E545D3 /* MessageThreadViewController.m in Sources */,
 				9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */,
 				2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */,
+				94CD5631110259120081FEDF /* Top100ImageDownloadOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
