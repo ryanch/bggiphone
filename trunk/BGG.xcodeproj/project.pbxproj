@@ -785,7 +785,7 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D253F492-DED8-44E7-B5E4-B998506065D8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E37302CB-4DD1-4774-83F1-E2D98ABD6475";
 				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
