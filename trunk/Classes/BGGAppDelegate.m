@@ -237,7 +237,7 @@
 	
 	GameForumsViewController *gameForums  = [[[GameForumsViewController alloc] init] autorelease];	
 	gameForums.title = NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game");
-	UITabBarItem * forumsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game") image:[UIImage imageNamed:@"comments.png"] tag:0];
+	UITabBarItem * forumsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game") image:[UIImage imageNamed:@"forums.png"] tag:0];
 	gameForums.tabBarItem = forumsItem;
 	[forumsItem release];
 	

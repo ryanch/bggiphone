@@ -17,6 +17,7 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B22EC1510F4C00300FCE834 /* LoadingTableViewController.m */; };
 		2B559E2C10EFA35700CCF5E4 /* BrowseTop100ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */; };
+		2BF3FA241176020B00F07377 /* forums.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF3FA231176020B00F07377 /* forums.png */; };
 		943543F210F1BC9E00E545D3 /* BGGForum.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E110F1BC9E00E545D3 /* BGGForum.m */; };
 		943543F310F1BC9E00E545D3 /* BGGHTMLScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E310F1BC9E00E545D3 /* BGGHTMLScraper.m */; };
 		943543F410F1BC9E00E545D3 /* BGGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 943543E510F1BC9E00E545D3 /* BGGMessage.m */; };
@@ -127,6 +128,7 @@
 		2B22EC1510F4C00300FCE834 /* LoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingTableViewController.m; sourceTree = "<group>"; };
 		2B559E2A10EFA35700CCF5E4 /* BrowseTop100ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseTop100ViewController.h; sourceTree = "<group>"; };
 		2B559E2B10EFA35700CCF5E4 /* BrowseTop100ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseTop100ViewController.m; sourceTree = "<group>"; };
+		2BF3FA231176020B00F07377 /* forums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forums.png; path = images/forums.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		943543E010F1BC9E00E545D3 /* BGGForum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGForum.h; sourceTree = "<group>"; };
 		943543E110F1BC9E00E545D3 /* BGGForum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGForum.m; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				BADA03E40ED5360500748D14 /* bgg12.db */,
 				BAEC7D040EC7ADD100151693 /* bgg11.db */,
 				BAEC7BE80EC7838F00151693 /* comments.png */,
+				2BF3FA231176020B00F07377 /* forums.png */,
 				BAEC7B440EC77DBE00151693 /* GameComments.xib */,
 				BA3C7D2F0EC75F4200F24BF4 /* footer.png */,
 				BA3C7D230EC75BF000F24BF4 /* header.png */,
@@ -630,6 +633,7 @@
 				BA4B53330FE3642F003E4FFA /* bgg14.db in Resources */,
 				943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */,
 				94A96F761104ED4200112CAE /* loading.jpg in Resources */,
+				2BF3FA241176020B00F07377 /* forums.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
