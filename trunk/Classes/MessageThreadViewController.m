@@ -56,18 +56,22 @@
 			
 			[messagesHTML appendString:@"<div class=\"header\">"];
 			[messagesHTML appendString:@"<span class=\"username\">"];
-			[messagesHTML appendString:message.username];
+			if(message.username)
+				[messagesHTML appendString:message.username];
 			[messagesHTML appendString:@"</span>"];
 			[messagesHTML appendString:@" (<span class=\"nickname\">"];
-			[messagesHTML appendString:message.nickname];
+			if(message.nickname)
+				[messagesHTML appendString:message.nickname];
 			[messagesHTML appendString:@"</span>)<br>"];
 			[messagesHTML appendString:@"<span class=\"postdate\">"];
-			[messagesHTML appendString:message.postDate];
+			if(message.postDate)
+				[messagesHTML appendString:message.postDate];
 			[messagesHTML appendString:@"</span>"];
 			[messagesHTML appendString:@"</div>"];
 			
 			[messagesHTML appendString:@"<div class=\"content\">"];
-			[messagesHTML appendString:message.contents];
+			if(message.contents)
+				[messagesHTML appendString:message.contents];
 			[messagesHTML appendString:@"</div>"];
 			
 			[messagesHTML appendString:@"</div>"];
