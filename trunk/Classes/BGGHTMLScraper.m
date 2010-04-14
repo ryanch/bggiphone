@@ -113,7 +113,7 @@
 		NSString *messageContents = [self contentsOfTagWithStart:@"<div class='article_body' id='articlebody_" startTagEnd:@">" endTag:@"\t\t\t\t\t\t\t\t\t</div>\n\t\t\t</td>" inRange:NSMakeRange(NSMaxRange(nameEnd), [document length] - NSMaxRange(nameEnd)) foundRange:&messageRange inSource:document];
 		
 		NSRange dateRange;
-		NSString *postedDate = [self contentsOfTagWithStart:@"http://geekdo-images.com/images/icon_minipost.gif\" border=0> Posted " startTagEnd:nil endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(messageRange), [document length] - NSMaxRange(messageRange)) foundRange:&dateRange inSource:document];
+		NSString *postedDate = [self contentsOfTagWithStart:@"http://geekdo-images.com/images/pixel.gif' /> Posted " startTagEnd:nil endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(messageRange), [document length] - NSMaxRange(messageRange)) foundRange:&dateRange inSource:document];
 		postedDate = [postedDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
 		
 		// Advance
