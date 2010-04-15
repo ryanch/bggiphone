@@ -31,6 +31,7 @@
 		9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */; };
 		94A96F761104ED4200112CAE /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94A96F751104ED4200112CAE /* loading.jpg */; };
 		94CD5631110259120081FEDF /* Top100ImageDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CD5630110259120081FEDF /* Top100ImageDownloadOperation.m */; };
+		B4830A181176BD00003646A0 /* libPMAnalytics-r91.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4830A171176BD00003646A0 /* libPMAnalytics-r91.a */; };
 		BA03E7C90EA858760069F8D6 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7C80EA858760069F8D6 /* Search.xib */; };
 		BA03E7CD0EA858B20069F8D6 /* SearchUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */; };
 		BA03E7DE0EA85A310069F8D6 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA03E7DD0EA85A310069F8D6 /* Settings.xib */; };
@@ -57,7 +58,6 @@
 		BA48C7360EB51BAF005B4297 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA48C7350EB51BAF005B4297 /* AboutViewController.m */; };
 		BA48C7560EB51BED005B4297 /* About.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA48C7550EB51BED005B4297 /* About.xib */; };
 		BA48C7580EB51C08005B4297 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = BA48C7570EB51C08005B4297 /* about.html */; };
-		BA48C76A0EB51CBC005B4297 /* libPinchAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */; };
 		BA48C7700EB51D03005B4297 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */; };
 		BA48C7720EB51D0E005B4297 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7710EB51D0E005B4297 /* SystemConfiguration.framework */; };
 		BA48C7760EB51D17005B4297 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA48C7750EB51D17005B4297 /* CoreLocation.framework */; };
@@ -154,6 +154,7 @@
 		94A96F751104ED4200112CAE /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = loading.jpg; path = images/loading.jpg; sourceTree = "<group>"; };
 		94CD562F110259120081FEDF /* Top100ImageDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Top100ImageDownloadOperation.h; sourceTree = "<group>"; };
 		94CD5630110259120081FEDF /* Top100ImageDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Top100ImageDownloadOperation.m; sourceTree = "<group>"; };
+		B4830A171176BD00003646A0 /* libPMAnalytics-r91.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPMAnalytics-r91.a"; sourceTree = "<group>"; };
 		BA03E7C80EA858760069F8D6 /* Search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search.xib; sourceTree = "<group>"; };
 		BA03E7CB0EA858B20069F8D6 /* SearchUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUIViewController.h; sourceTree = "<group>"; };
 		BA03E7CC0EA858B20069F8D6 /* SearchUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUIViewController.m; sourceTree = "<group>"; };
@@ -195,7 +196,6 @@
 		BA48C7350EB51BAF005B4297 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BA48C7550EB51BED005B4297 /* About.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = About.xib; sourceTree = "<group>"; };
 		BA48C7570EB51C08005B4297 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
-		BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPinchAnalytics.a; sourceTree = "<group>"; };
 		BA48C7690EB51CBB005B4297 /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
 		BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		BA48C7710EB51D0E005B4297 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -271,10 +271,10 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
-				BA48C76A0EB51CBC005B4297 /* libPinchAnalytics.a in Frameworks */,
 				BA48C7700EB51D03005B4297 /* libsqlite3.0.dylib in Frameworks */,
 				BA48C7720EB51D0E005B4297 /* SystemConfiguration.framework in Frameworks */,
 				BA48C7760EB51D17005B4297 /* CoreLocation.framework in Frameworks */,
+				B4830A181176BD00003646A0 /* libPMAnalytics-r91.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +398,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B4830A171176BD00003646A0 /* libPMAnalytics-r91.a */,
 				94A96F751104ED4200112CAE /* loading.jpg */,
 				BA4B53320FE3642F003E4FFA /* bgg14.db */,
 				BA8D20D80F7D77D100578409 /* commentgrad.jpg */,
@@ -425,7 +426,6 @@
 				BAB288140EB6DEBF00A6AEE3 /* info.png */,
 				BAB288150EB6DEBF00A6AEE3 /* actions.png */,
 				BA48C7570EB51C08005B4297 /* about.html */,
-				BA48C7680EB51CBB005B4297 /* libPinchAnalytics.a */,
 				BA48C7690EB51CBB005B4297 /* Beacon.h */,
 				BA48C7550EB51BED005B4297 /* About.xib */,
 				BAA7D0B60FDB1C65002D5FCD /* WebView.xib */,
@@ -770,6 +770,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
