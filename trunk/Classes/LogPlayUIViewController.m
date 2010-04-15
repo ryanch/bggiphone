@@ -289,8 +289,10 @@
 	logPlayButton.hidden = YES;
 	loadingView.hidden = NO;
 	
+#ifdef PINCH_ENABLED
 	 [[Beacon shared] startSubBeaconWithName:@"log play click" timeSession:NO];
-
+#endif
+	
 	[NSThread detachNewThreadSelector:@selector(doLogPlay) toTarget:self withObject:nil];
 	//[self doLogPlay];
 	

@@ -100,9 +100,11 @@
 	
 	downloadOperation = nil;
 	
+
+#ifdef PINCH_ENABLED	
 	NSString *applicationCode = @"6825067cd78da89cf8b5409da91ea9df";
-	[Beacon initAndStartBeaconWithApplicationCode:applicationCode useCoreLocation:NO];
-	
+	[Beacon initAndStartBeaconWithApplicationCode:applicationCode useCoreLocation:NO useOnlyWiFi:YES];
+#endif	
 	
 	appSettings = [[PlistSettings alloc] initWithSettingsNamed:@"settings"];
 	
@@ -266,8 +268,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	
+#ifdef PINCH_ENABLED	
 	[[Beacon shared] endBeacon];
-	
+#endif 	
 	// Save data if appropriate
 	[appSettings saveSettings];
 	
@@ -621,8 +624,9 @@
 		
 		[self saveResumePoint:BGG_RESUME_SEARCH withString:nil];
 		
+#ifdef PINCH_ENABLED		
 		[[Beacon shared] startSubBeaconWithName:@"search menu click" timeSession:NO];
-		
+#endif		
 		SearchUIViewController * search = [SearchUIViewController buildSearchUIViewController];
 		[navigationController pushViewController:search		animated:YES];
 	}
@@ -630,9 +634,10 @@
 	else if ( menuItem == BROWSE_TOP_100_MENU_CHOICE ) {
 		
 		[self saveResumePoint:BGG_RESUME_BROWSE_TOP_100_GAMES withString:nil];
-		
+
+#ifdef PINCH_ENABLED		
 		[[Beacon shared] startSubBeaconWithName:@"browse top 100 menu click" timeSession:NO];
-		
+#endif 		
 		BrowseTop100ViewController *browseTop100 = [[[BrowseTop100ViewController alloc] init ] autorelease];
 		[navigationController pushViewController:browseTop100 animated:YES];
 	}
@@ -663,8 +668,9 @@
 		
 		[self saveResumePoint:BGG_RESUME_PICK_GAME withString:nil];
 		
+#ifdef PINCH_ENABLED		
 		[[Beacon shared] startSubBeaconWithName:@"pick game menu click" timeSession:NO];
-		
+#endif		
 		
 		GamePickerUIViewController * gamePicker = [GamePickerUIViewController buildGamePickerUIViewController];
 		
@@ -675,8 +681,9 @@
 		
 		[self saveResumePoint:BGG_RESUME_SETTINGS withString:nil];
 		
-		
+#ifdef PINCH_ENABLED
 		[[Beacon shared] startSubBeaconWithName:@"settings menu click" timeSession:NO];
+#endif
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
 		
@@ -685,8 +692,10 @@
 	else if ( menuItem == ABOUT_MENU_CHOICE ) {
 		
 		[self saveResumePoint:BGG_RESUME_ABOUT withString:nil];
-		
+
+#ifdef PINCH_ENABLED		
 		[[Beacon shared] startSubBeaconWithName:@"about page menu click" timeSession:NO];
+#endif
 		
 		AboutViewController * about = [[AboutViewController alloc] initWithNibName:@"About" bundle:nil];
 		about.pageToLoad = @"about";
@@ -715,8 +724,9 @@
 			
 			[self saveResumePoint:BGG_RESUME_OWNED withString:nil];
 			
+#ifdef PINCH_ENABLED			
 			[[Beacon shared] startSubBeaconWithName:@"games owned menu click" timeSession:NO];
-			
+#endif			
 			resultsViewer.title = NSLocalizedString(@"Games Owned" , @"games owned menu item" );
 			resultsViewer.searchGameType = BGG_SEARCH_OWNED;
 			resultsViewer.currentResumeState = BGG_RESUME_OWNED;
@@ -725,8 +735,9 @@
 			
 			[self saveResumePoint:BGG_RESUME_GAMES_TO_PLAY_LIST withString:nil];
 			
+#ifdef PINCH_ENABLED			
 			[[Beacon shared] startSubBeaconWithName:@"games to play menu click" timeSession:NO];
-			
+#endif			
 			resultsViewer.title = NSLocalizedString(@"Games To Play" , @"games on to play list menu item" );
 			resultsViewer.searchGameType = BGG_GAMES_TO_PLAY_LIST;
 			resultsViewer.currentResumeState = BGG_RESUME_GAMES_TO_PLAY_LIST;
@@ -735,8 +746,9 @@
 			
 			[self saveResumePoint:BGG_RESUME_GAMES_PLAYED_LIST withString:nil];
 			
+#ifdef PINCH_ENABLED			
 			[[Beacon shared] startSubBeaconWithName:@"games played menu click" timeSession:NO];
-			
+#endif			
 			resultsViewer.title = NSLocalizedString(@"Games Played" , @"games played menu item" );
 			resultsViewer.searchGameType = BGG_GAMES_PLAYED_LIST;
 			resultsViewer.currentResumeState = BGG_RESUME_GAMES_PLAYED_LIST;
@@ -744,8 +756,9 @@
 		else if (  menuItem == WISH_MENU_CHOICE ) {
 			[self saveResumePoint:BGG_RESUME_WISH withString:nil];
 			
+#ifdef PINCH_ENABLED			
 			[[Beacon shared] startSubBeaconWithName:@"games on wish list menu click" timeSession:NO];
-			
+#endif			
 			resultsViewer.title = NSLocalizedString( @"Games On Wishlist" , @"games on wishlist menu item" );
 			
 			resultsViewer.searchGameType = BGG_SEARCH_WISH;

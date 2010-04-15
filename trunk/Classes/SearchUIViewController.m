@@ -67,8 +67,9 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
 
-	
+#ifdef PINCH_ENABLED
 	 [[Beacon shared] startSubBeaconWithName:@"search click" timeSession:NO];
+#endif
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	

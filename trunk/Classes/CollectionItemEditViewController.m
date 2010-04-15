@@ -254,8 +254,9 @@
 	[savingIndicator startAnimating];
 	[scroller scrollRectToVisible:CGRectMake(0	, 0, 1, 1) animated:YES];
 	
+#ifdef PINCH_ENABLED	
 	[[Beacon shared] startSubBeaconWithName:@"modify collection" timeSession:NO];
-	
+#endif	
 
 	// start the network thread
 	[NSThread detachNewThreadSelector:@selector(doModifyCollection) toTarget:self withObject:nil];

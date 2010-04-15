@@ -62,9 +62,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	
+#ifdef PINCH_ENABLED
 	if ( [ [request.URL host] hasPrefix:@"phobos"] ) {
 		[[Beacon shared] startSubBeaconWithName:@"about page phobos click" timeSession:NO];
 	}
+#endif
 	
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         [[UIApplication sharedApplication] openURL:request.URL];
@@ -90,8 +92,9 @@
 	
     [super viewDidLoad];
 	
-	
+#ifdef PINCH_ENABLED	
 	[[Beacon shared] startSubBeaconWithName:@"about page" timeSession:NO];
+#endif
 }
 
 
