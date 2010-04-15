@@ -163,6 +163,14 @@
 	
 	[wishListTitle	setText: [wishTexts objectAtIndex:wishChoiceValue] ];
 	
+	
+	UIBarButtonItem * save = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave target: self action: @selector(saveButtonPressed)];
+	
+	[save setEnabled:YES];
+	self.navigationItem.rightBarButtonItem = save;
+	
+	[save release];
+	
 }
 
 
@@ -199,12 +207,7 @@
 	[scroller setContentSize: collectionForm.frame.size ];
 	[scroller addSubview:collectionForm];
 		
-	UIBarButtonItem * save = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave target: self action: @selector(saveButtonPressed)];
-	
-	[save setEnabled:YES];
-	self.navigationItem.rightBarButtonItem = save;
-	
-	[save release];
+
 	
 	
 	[wishSlider addTarget:self	action:@selector(wishSliderUpdated) forControlEvents:UIControlEventValueChanged];
