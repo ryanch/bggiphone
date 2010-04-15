@@ -148,14 +148,14 @@
 	
 	if(results == nil)
 	{
-		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:NO];
+		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:YES];
 		return;
 	}
 	
 	if(loadedDataFromCache == NO)
 		[self cacheResponseData:responseData results:results];
 	
-	[self performSelectorOnMainThread:@selector(didFinishLoadingWithResults:) withObject:results waitUntilDone:NO];
+	[self performSelectorOnMainThread:@selector(didFinishLoadingWithResults:) withObject:results waitUntilDone:YES];
 }
 
 -(void) backgroundLoadThread
@@ -165,6 +165,8 @@
 	[self backgroundLoad];
 	
 	[pool release];
+	
+	[NSThread exit];
 }
 
 #pragma mark Protected
