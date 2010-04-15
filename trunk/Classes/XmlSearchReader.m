@@ -225,7 +225,12 @@
 			
 			// see if we have game names
 			if ( [gameNames count] > 0 ) {
-				currentResult.alternateNames = [[NSArray alloc] initWithArray: gameNames];
+				
+				NSArray * altNames = [[NSArray alloc] initWithArray: gameNames];
+				
+				currentResult.alternateNames = altNames;
+				
+				[altNames release];
 				
 				// if we have no primary title, but have a alternate title, then use it.
 				if ( currentResult.primaryTitle == nil || [currentResult.primaryTitle length] == 0 ) {
@@ -251,7 +256,7 @@
 		
 		inNameTag = NO;
 		
-		NSString *currentName = [ [NSString alloc] initWithString: stringBuffer]; 
+		NSString *currentName = [NSString stringWithString: stringBuffer]; 
 		
 		if ( currentNameIsPrimary ) {
 			currentResult.primaryTitle = currentName;
@@ -264,8 +269,7 @@
 
 		}
 		
-		[currentName release];
-		currentName= nil;
+
 		
 		
 	}
