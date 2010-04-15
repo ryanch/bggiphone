@@ -265,7 +265,8 @@
 		}
 		
 		[currentName release];
-		currentName = nil;
+		currentName= nil;
+		
 		
 	}
 	
@@ -311,10 +312,10 @@
 - init {
 	if (self = [super init]) {
 		numberGamesFound = 0;
-		self.searchResults = [[NSMutableArray alloc] initWithCapacity: MAX_SEARCH_RESULTS];
+		searchResults = [[NSMutableArray alloc] initWithCapacity: MAX_SEARCH_RESULTS];
 		currentResult = nil;
 		self.stringBuffer = [NSMutableString string];
-		self.gameNames = [[NSMutableArray alloc] initWithCapacity:MAX_GAME_NAMES];
+		gameNames = [[NSMutableArray alloc] initWithCapacity:MAX_GAME_NAMES];
 		inNameTag = NO;
 		parseItemFormat = NO;
 	}
