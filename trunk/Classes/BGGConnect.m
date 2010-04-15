@@ -304,6 +304,9 @@
 	}
 	
 	NSString * data = [[NSString alloc] initWithData: worker.responseData encoding:NSUTF8StringEncoding];
+	
+	//NSLog( @"col data: %@", data );
+	
 	[worker release];
 
 	// check if the collection id is even in the page
@@ -366,15 +369,15 @@
 	[collIdString release];
 	
 	// check if things are checked
-	itemData.own = [self scanForCheckedForm: @"own" fromData: data];
-	itemData.prevOwn = [self scanForCheckedForm: @"prevowned" fromData: data];
-	itemData.forTrade = [self scanForCheckedForm: @"fortrade" fromData: data];
-	itemData.wantInTrade = [self scanForCheckedForm: @"want" fromData: data];
-	itemData.wantToBuy = [self scanForCheckedForm: @"wanttobuy" fromData: data];
-	itemData.wantToPlay = [self scanForCheckedForm: @"wanttoplay" fromData: data];
-	itemData.preOrdered = [self scanForCheckedForm: @"preordered" fromData: data];
-	itemData.forTrade = [self scanForCheckedForm: @"fortrade" fromData: data];
-	itemData.inWish = [self scanForCheckedForm: @"wishlist" fromData: data];
+	itemData.own = [self scanForCheckedForm: @"name='own'" fromData: data];
+	itemData.prevOwn = [self scanForCheckedForm: @"name='prevowned'" fromData: data];
+	itemData.forTrade = [self scanForCheckedForm: @"name='fortrade'" fromData: data];
+	itemData.wantInTrade = [self scanForCheckedForm: @"name='want'" fromData: data];
+	itemData.wantToBuy = [self scanForCheckedForm: @"name='wanttobuy'" fromData: data];
+	itemData.wantToPlay = [self scanForCheckedForm: @"name='wanttoplay'" fromData: data];
+	itemData.preOrdered = [self scanForCheckedForm: @"name='preordered'" fromData: data];
+	itemData.forTrade = [self scanForCheckedForm: @"name='fortrade'" fromData: data];
+	itemData.inWish = [self scanForCheckedForm: @"name='wishlist'" fromData: data];
 	
 	
 	
