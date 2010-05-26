@@ -17,7 +17,7 @@
 
 - (void) executeActionAnimated: (BOOL) animated withCore: (BGCore*) core;
 
-- (void) operationMain;
+- (void) operationMain: (NSOperation*) theOperationObject;
 
 
 @end

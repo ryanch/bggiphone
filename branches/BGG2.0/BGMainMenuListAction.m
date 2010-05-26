@@ -12,6 +12,7 @@
 #import "DataRow.h"
 #import "BGMainMenuListAction.h"
 #import "BGActionOperation.h"
+#import "Top100BoardGameListAction.h"
 
 
 @implementation BGMainMenuListAction
@@ -25,7 +26,7 @@
 
 
 /// this method is called in the ns operation queue
-- (void) operationMain {
+- (void) operationMain: (NSOperation*) theOperationObject {
 	
 	NSManagedObjectContext * managedObjectContext = [bgCore managedObjectContext];
 	
@@ -46,7 +47,7 @@
 	}
 	
 	list.key = key;
-	list.listTitle = @"Menu";
+	list.listTitle = NSLocalizedString( @"Main", @"Main menu title" );
 	
 	
 	
@@ -58,7 +59,8 @@
 					 inManagedObjectContext:managedObjectContext];
 	row.detailText = nil;
 	row.imageURL = @"images/mainMenuIcons/own.png";
-	row.topText = @"Test";
+	row.topText = NSLocalizedString( @"Browse Top 100", @"Browse Top 100 screen title" );
+	row.actionURL = ACTION_URL_TOP_100;
 	
 	[newRows addObject:row];
 	
@@ -72,6 +74,10 @@
 	
 	
 	[newRows release];
+	
+	if ( [theOperationObject isCancelled] ) {
+		return;
+	}
 	
 	
 	[self performSelectorOnMainThread:@selector(dataIsReady:) withObject:list.listTitle  waitUntilDone:YES];

@@ -49,6 +49,8 @@
 - (void) showLoadingContentsInMainViewAnimated: (BOOL) animated;
 @property (nonatomic,retain) UINavigationController * mainNavController;
 
+- (void) dataErrorForAction: (NSString*) action withError: (NSError*) error;
+
 #pragma mark data list helpers
 - (NSString*) dataListHasContentsForKey:(NSString*) key;
 - (DataList*) getDataListForKey:(NSString*) key;

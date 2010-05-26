@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BGListAction.h"
 
-#define ACTION_URL_MAIN_MENU @"com.boardgamegeek.com#main"
+#define ACTION_URL_MAIN_MENU @"com.boardgamegeek#main"
 
 @interface BGMainMenuListAction : BGListAction {
 

@@ -8,6 +8,7 @@
 
 #import "BGActionFactory.h"
 #import "BGMainMenuListAction.h"
+#import "Top100BoardGameListAction.h"
 
 @implementation BGActionFactory
 
@@ -17,10 +18,13 @@
 	
 	/// main menu match
 	if ( [actionURL isEqualToString:ACTION_URL_MAIN_MENU ] ) {
-		BGMainMenuListAction * mainMenu = [[BGMainMenuListAction alloc] init];
-		[mainMenu autorelease];
-		return mainMenu;
+		return [[[BGMainMenuListAction alloc] init] autorelease];
 	}
+	else if ( [actionURL isEqualToString:ACTION_URL_TOP_100 ] ) {
+		return [[[Top100BoardGameListAction alloc] init] autorelease];
+	}	
+	
+	
 	
 	[NSException raise:@"dont know action" format:@"unknown action: %@", actionURL];
 	

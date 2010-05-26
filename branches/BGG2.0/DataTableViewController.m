@@ -10,6 +10,8 @@
 #import "DataRow.h"
 #import "DataList.h"
 #import "TableCellImageLoader.h"
+#import "BaseAppDelegate.h"
+#import "BGCore.h"
 
 #import "DownloadImageOperation.h"
 
@@ -154,6 +156,16 @@
 		cell.detailTextLabel.text = dataRow.detailText;
 	}
 	
+	
+	if ( dataRow.actionURL == nil ) {
+		cell.accessoryType = UITableViewCellAccessoryNone;
+	}
+	else {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	}
+	
+	
+	
 	cell.textLabel.text = dataRow.topText;
 
 	if ( dataRow.imageURL != nil ) {
@@ -200,6 +212,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+
+	
+	DataRow* dataRow = (DataRow*)[fetchedResultsController objectAtIndexPath:indexPath];    
+	
+	if (dataRow.actionURL == nil ) {
+		return;
+	}
+	
+	BaseAppDelegate * baseAppDelegate = (BaseAppDelegate*)[UIApplication sharedApplication].delegate;
+	BGCore * core = [baseAppDelegate core];
+	[core pushAction:dataRow.actionURL animated:YES];
+	
+	
+	
 }
 
 

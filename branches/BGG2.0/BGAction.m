@@ -25,7 +25,7 @@
 }
 
 
-- (void) operationMain {
+- (void) operationMain: (NSOperation*) theOperationObject {
 	// to be done by sub class
 }
 

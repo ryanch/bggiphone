@@ -58,6 +58,9 @@
 	}
 	 */
 	
+	
+	// TODO load main menu for iphone only, for ipad load something else
+	
 	BGAction * action = [actionFactory fetchBGAction:ACTION_URL_MAIN_MENU];
 	
 	[self pr_pushActionToView:action animated:NO];
@@ -114,8 +117,7 @@
 			mainNavController = [[UINavigationController alloc] initWithRootViewController:controller];
 			[window addSubview:mainNavController.view];
 		}
-		
-		
+
 	}
 	else {
 		[mainNavController pushViewController:controller animated:isAnimated];
@@ -128,9 +130,12 @@
 }
 
 - (void) showLoadingContentsInMainViewAnimated: (BOOL) animated {
-	// TODO 
+	// TODO show loading view with cancel button
 }
 
+- (void) dataErrorForAction: (NSString*) action withError: (NSError*) error {
+	// TODO show data error, clear data loading
+}
 
 
 #pragma mark -

@@ -10,6 +10,7 @@
 #import "BGDevice.h"
 #import "BGAction.h"
 
+
 @interface BGActionFactory : NSObject {
 	BGDevice * device;
 }

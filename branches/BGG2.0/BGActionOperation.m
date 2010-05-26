@@ -21,7 +21,7 @@
 
 - (void) main {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	[bgAction operationMain];
+	[bgAction operationMain: self];
 	[pool release];
 }
 
