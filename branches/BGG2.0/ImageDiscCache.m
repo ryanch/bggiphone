@@ -52,6 +52,17 @@
 			[managedObjectContext refreshObject:item mergeChanges:YES];
 			[managedObjectContext save:nil];
 		}
+		else {
+			FileIdGen * item = [NSEntityDescription
+							 insertNewObjectForEntityForName:@"FileIdGen"
+							 inManagedObjectContext:managedObjectContext];	
+			item.imageFileId = [NSNumber numberWithInt:1];
+			newId = 1;
+			
+			[managedObjectContext refreshObject:item mergeChanges:YES];
+			[managedObjectContext save:nil];			
+			
+		}
 		
 		
 		
@@ -133,6 +144,7 @@
 	
 	
 	UIImage * image = [[UIImage alloc] initWithContentsOfFile:path];
+	
 	[image autorelease];
 	return image;
 	

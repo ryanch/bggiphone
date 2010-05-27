@@ -6,13 +6,15 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import "BGListAction.h"
 
 
 #define ACTION_URL_TOP_100 @"com.boardgamegeek#top100"
 
-@interface Top100BoardGameListAction : BGListAction{
+@interface Top100BoardGameListAction : BGListAction {
 
+	NSOperation * operation;
 	NSMutableData * activeDownload;
 	NSURLConnection * urlConnection;
 	BOOL isDone;

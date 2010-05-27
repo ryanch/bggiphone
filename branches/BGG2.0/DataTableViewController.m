@@ -153,6 +153,7 @@
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 		
+		cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 		cell.detailTextLabel.text = dataRow.detailText;
 	}
 	
@@ -165,7 +166,7 @@
 	}
 	
 	
-	
+	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.text = dataRow.topText;
 
 	if ( dataRow.imageURL != nil ) {
@@ -183,7 +184,7 @@
 		
 		if ( image == nil ) {
 			// use default
-			cell.imageView.image = [UIImage imageNamed:@"default_image_table_cell.png"];
+			cell.imageView.image = [UIImage imageNamed:@"images/default_image_table_cell.png"];
 			
 			// see if we are still, if so, then fetch
 			if (self.tableView.dragging == NO && self.tableView.decelerating == NO) {

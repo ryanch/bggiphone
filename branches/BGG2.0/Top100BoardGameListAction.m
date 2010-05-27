@@ -7,7 +7,11 @@
 //
 
 #import "Top100BoardGameListAction.h"
-
+#import "BGGHTMLScraper.h"
+#import "BGCore.h"
+#import "BBGSearchResult.h"
+#import "DataRow.h"
+#import "DataList.h"
 
 @implementation Top100BoardGameListAction
 
@@ -19,6 +23,9 @@
 
 /// this method is called in the ns operation queue
 - (void) operationMain: (NSOperation*) theOperationObject {
+	
+	operation = theOperationObject;
+	[operation retain];
 	
 	NSManagedObjectContext * managedObjectContext = [bgCore managedObjectContext];
 	
@@ -41,18 +48,17 @@
 	list.key = key;
 	list.listTitle = NSLocalizedString( @"Browse Top 100", @"Browse Top 100 screen title" );
 	
-	// save to db
-	[managedObjectContext refreshObject:list mergeChanges:YES];
-	[managedObjectContext save:nil];
+
 	
 	
-	NSString * dataURL = nil;
+	NSString * dataURL = @"http://www.boardgamegeek.com/browse/boardgame";
 	
 	// now start the url fetch
 	isDone = NO;
 	
-	downloadedImage = nil;
-	
+	activeDownload = [NSMutableData data];
+	[activeDownload retain];
+
 	urlConnection = [NSMutableData data];
 	[urlConnection retain];
 	
@@ -64,14 +70,78 @@
 	[urlConnection start];
 	
 	
+	// spin our wheels downloading
 	if (urlConnection != nil) {
 		do {
 			[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-		} while (!isDone && ![self isCancelled]);
+		} while (!isDone && ![operation isCancelled]);
 	}		
 	
+	// bail out if we got canceled
+	if ( [operation isCancelled] ) {
+		return;
+	}	
 	
-	//[self performSelectorOnMainThread:@selector(dataIsReady:) withObject:list.listTitle  waitUntilDone:YES];
+	
+	// create the string
+	NSString * markup = [[NSString alloc] initWithData:activeDownload encoding:  NSUTF8StringEncoding];	
+	
+	//NSLog( @"markup: %@", markup );
+	
+	[markup autorelease];
+	
+	// don't need the data any more
+	[activeDownload release];
+    activeDownload = nil;
+	
+	// parse the markup data
+	BGGHTMLScraper * scaper = [[BGGHTMLScraper alloc] init];
+	NSArray * top100list = [scaper scrapeGamesFromTop100: markup];
+	[scaper release];
+	scaper = nil;
+	
+	
+	
+	if ( top100list == nil || [top100list count] == 0 ) {
+		NSString * errorMsg = NSLocalizedString( @"Error loading top 100 from web site.", @"error loading" );
+		[bgCore dataErrorForAction:[self buildDataListKey] withErrorString:errorMsg];
+		return;
+	}
+	
+	
+	NSInteger count = [top100list count];
+	NSMutableSet * newRows = [[NSMutableSet alloc] initWithCapacity:count];
+	
+	for ( NSInteger i = 0; i < count; i++ ) {
+		BBGSearchResult * result = [top100list objectAtIndex:i];
+		
+		// add the menu items to the list
+		DataRow * row = [NSEntityDescription
+						 insertNewObjectForEntityForName:@"DataRow"
+						 inManagedObjectContext:managedObjectContext];
+		row.detailText = nil;
+		row.imageURL = result.imageURL;
+		row.topText = result.primaryTitle;
+		row.actionURL = ACTION_URL_TOP_100;
+		row.sortTitle = result.primaryTitle;
+		
+		[newRows addObject:row];		
+		
+	}
+	
+	// save the rows to the db
+	list.rows = newRows;
+	
+	
+	// save to db
+	[managedObjectContext refreshObject:list mergeChanges:YES];
+	[managedObjectContext save:nil];
+	
+	if ( [operation isCancelled] ) {
+		return;
+	}
+	
+	[self performSelectorOnMainThread:@selector(dataIsReady:) withObject:list.listTitle  waitUntilDone:YES];
 	
 }
 
@@ -81,7 +151,7 @@
 #pragma mark Download support (NSURLConnectionDelegate)
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {	
-	if ( [self isCancelled] ) {
+	if ( [operation isCancelled] ) {
 		[urlConnection cancel];
 		return;
 	}	
@@ -108,11 +178,19 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	
-// TODO parse the page and insert into 
-	
+
 	isDone = YES;
 	
 }
+
+
+- (void) dealloc
+{
+	[operation release];
+	[activeDownload release];
+	[urlConnection release];
+	[super dealloc];
+}
+
 
 @end

@@ -50,6 +50,7 @@
 @property (nonatomic,retain) UINavigationController * mainNavController;
 
 - (void) dataErrorForAction: (NSString*) action withError: (NSError*) error;
+- (void) dataErrorForAction: (NSString*) action withErrorString: (NSString*) errorStr;
 
 #pragma mark data list helpers
 - (NSString*) dataListHasContentsForKey:(NSString*) key;

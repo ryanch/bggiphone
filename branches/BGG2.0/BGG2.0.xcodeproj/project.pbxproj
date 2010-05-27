@@ -34,9 +34,14 @@
 		B401CE2A11A896BE00EC0156 /* BGMainMenuListAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B401CE2911A896BE00EC0156 /* BGMainMenuListAction.m */; };
 		B401CE4911A89E3B00EC0156 /* BGActionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B401CE4811A89E3B00EC0156 /* BGActionOperation.m */; };
 		B401CE9211A9DA1900EC0156 /* DataList.m in Sources */ = {isa = PBXBuildFile; fileRef = B401CE9111A9DA1900EC0156 /* DataList.m */; };
-		B401CEC411A9E23A00EC0156 /* images in Resources */ = {isa = PBXBuildFile; fileRef = B401CEA911A9E23A00EC0156 /* images */; };
 		B4F5ABA611ACD71D001B1ECA /* DataRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABA511ACD71D001B1ECA /* DataRow.m */; };
 		B4F5ABBA11ACD8A4001B1ECA /* Top100BoardGameListAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */; };
+		B4F5ABF011AE1FE0001B1ECA /* BGGHTMLScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABEF11AE1FE0001B1ECA /* BGGHTMLScraper.m */; };
+		B4F5ABFB11AE24CD001B1ECA /* BGGForum.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABF611AE24CD001B1ECA /* BGGForum.m */; };
+		B4F5ABFC11AE24CD001B1ECA /* BGGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABF811AE24CD001B1ECA /* BGGMessage.m */; };
+		B4F5ABFD11AE24CD001B1ECA /* BGGThread.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABFA11AE24CD001B1ECA /* BGGThread.m */; };
+		B4F5AC0311AE24F4001B1ECA /* BBGSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5AC0211AE24F4001B1ECA /* BBGSearchResult.m */; };
+		B4F5ACD411AE2BAD001B1ECA /* images in Resources */ = {isa = PBXBuildFile; fileRef = B4F5ACD311AE2BAD001B1ECA /* images */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,11 +94,21 @@
 		B401CE4811A89E3B00EC0156 /* BGActionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGActionOperation.m; sourceTree = "<group>"; };
 		B401CE9011A9DA1900EC0156 /* DataList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataList.h; sourceTree = "<group>"; };
 		B401CE9111A9DA1900EC0156 /* DataList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataList.m; sourceTree = "<group>"; };
-		B401CEA911A9E23A00EC0156 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		B4F5ABA411ACD71D001B1ECA /* DataRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRow.h; sourceTree = "<group>"; };
 		B4F5ABA511ACD71D001B1ECA /* DataRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRow.m; sourceTree = "<group>"; };
 		B4F5ABB811ACD8A4001B1ECA /* Top100BoardGameListAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Top100BoardGameListAction.h; sourceTree = "<group>"; };
 		B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Top100BoardGameListAction.m; sourceTree = "<group>"; };
+		B4F5ABEE11AE1FE0001B1ECA /* BGGHTMLScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGHTMLScraper.h; sourceTree = "<group>"; };
+		B4F5ABEF11AE1FE0001B1ECA /* BGGHTMLScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGHTMLScraper.m; sourceTree = "<group>"; };
+		B4F5ABF511AE24CD001B1ECA /* BGGForum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGForum.h; sourceTree = "<group>"; };
+		B4F5ABF611AE24CD001B1ECA /* BGGForum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGForum.m; sourceTree = "<group>"; };
+		B4F5ABF711AE24CD001B1ECA /* BGGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGMessage.h; sourceTree = "<group>"; };
+		B4F5ABF811AE24CD001B1ECA /* BGGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGMessage.m; sourceTree = "<group>"; };
+		B4F5ABF911AE24CD001B1ECA /* BGGThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGThread.h; sourceTree = "<group>"; };
+		B4F5ABFA11AE24CD001B1ECA /* BGGThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGThread.m; sourceTree = "<group>"; };
+		B4F5AC0111AE24F4001B1ECA /* BBGSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGSearchResult.h; sourceTree = "<group>"; };
+		B4F5AC0211AE24F4001B1ECA /* BBGSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGSearchResult.m; sourceTree = "<group>"; };
+		B4F5ACD311AE2BAD001B1ECA /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +165,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				B401CEA911A9E23A00EC0156 /* images */,
+				B4F5ACD311AE2BAD001B1ECA /* images */,
 				B401CD1F11A8711800EC0156 /* Classes */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
@@ -185,6 +200,7 @@
 		B401CD1F11A8711800EC0156 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B4F5ABF411AE2491001B1ECA /* bggInt */,
 				B401CD9F11A8900100EC0156 /* dataTable */,
 				B401CD3711A873A700EC0156 /* actions */,
 				B401CD2211A8712800EC0156 /* BaseAppDelegate.h */,
@@ -268,6 +284,23 @@
 			name = base;
 			sourceTree = "<group>";
 		};
+		B4F5ABF411AE2491001B1ECA /* bggInt */ = {
+			isa = PBXGroup;
+			children = (
+				B4F5AC0111AE24F4001B1ECA /* BBGSearchResult.h */,
+				B4F5AC0211AE24F4001B1ECA /* BBGSearchResult.m */,
+				B4F5ABF511AE24CD001B1ECA /* BGGForum.h */,
+				B4F5ABF611AE24CD001B1ECA /* BGGForum.m */,
+				B4F5ABF711AE24CD001B1ECA /* BGGMessage.h */,
+				B4F5ABF811AE24CD001B1ECA /* BGGMessage.m */,
+				B4F5ABF911AE24CD001B1ECA /* BGGThread.h */,
+				B4F5ABFA11AE24CD001B1ECA /* BGGThread.m */,
+				B4F5ABEE11AE1FE0001B1ECA /* BGGHTMLScraper.h */,
+				B4F5ABEF11AE1FE0001B1ECA /* BGGHTMLScraper.m */,
+			);
+			name = bggInt;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,7 +345,7 @@
 			files = (
 				2860E329111B887F00E27156 /* MainWindow_Phone.xib in Resources */,
 				2860E32F111B888700E27156 /* MainWindow_Pad.xib in Resources */,
-				B401CEC411A9E23A00EC0156 /* images in Resources */,
+				B4F5ACD411AE2BAD001B1ECA /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +379,11 @@
 				B401CE9211A9DA1900EC0156 /* DataList.m in Sources */,
 				B4F5ABA611ACD71D001B1ECA /* DataRow.m in Sources */,
 				B4F5ABBA11ACD8A4001B1ECA /* Top100BoardGameListAction.m in Sources */,
+				B4F5ABF011AE1FE0001B1ECA /* BGGHTMLScraper.m in Sources */,
+				B4F5ABFB11AE24CD001B1ECA /* BGGForum.m in Sources */,
+				B4F5ABFC11AE24CD001B1ECA /* BGGMessage.m in Sources */,
+				B4F5ABFD11AE24CD001B1ECA /* BGGThread.m in Sources */,
+				B4F5AC0311AE24F4001B1ECA /* BBGSearchResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
