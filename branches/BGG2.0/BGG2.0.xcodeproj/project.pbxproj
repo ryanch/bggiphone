@@ -42,6 +42,7 @@
 		B4F5ABFD11AE24CD001B1ECA /* BGGThread.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5ABFA11AE24CD001B1ECA /* BGGThread.m */; };
 		B4F5AC0311AE24F4001B1ECA /* BBGSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5AC0211AE24F4001B1ECA /* BBGSearchResult.m */; };
 		B4F5ACD411AE2BAD001B1ECA /* images in Resources */ = {isa = PBXBuildFile; fileRef = B4F5ACD311AE2BAD001B1ECA /* images */; };
+		B4F5AD2E11AE3066001B1ECA /* URLGameListAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,8 @@
 		B4F5AC0111AE24F4001B1ECA /* BBGSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGSearchResult.h; sourceTree = "<group>"; };
 		B4F5AC0211AE24F4001B1ECA /* BBGSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGSearchResult.m; sourceTree = "<group>"; };
 		B4F5ACD311AE2BAD001B1ECA /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		B4F5AD2C11AE3066001B1ECA /* URLGameListAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLGameListAction.h; sourceTree = "<group>"; };
+		B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLGameListAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +268,8 @@
 				B401CE2911A896BE00EC0156 /* BGMainMenuListAction.m */,
 				B4F5ABB811ACD8A4001B1ECA /* Top100BoardGameListAction.h */,
 				B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */,
+				B4F5AD2C11AE3066001B1ECA /* URLGameListAction.h */,
+				B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */,
 			);
 			name = actionImpls;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				B4F5ABFC11AE24CD001B1ECA /* BGGMessage.m in Sources */,
 				B4F5ABFD11AE24CD001B1ECA /* BGGThread.m in Sources */,
 				B4F5AC0311AE24F4001B1ECA /* BBGSearchResult.m in Sources */,
+				B4F5AD2E11AE3066001B1ECA /* URLGameListAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

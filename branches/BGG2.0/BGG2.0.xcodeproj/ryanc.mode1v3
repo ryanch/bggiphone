@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>B4F5AD2A11AE2FBA001B1ECA</string>
+						<string>B4F5AD4311AE330A001B1ECA</string>
 						<key>history</key>
 						<array>
 							<string>B4F5ABD711AE19BA001B1ECA</string>
@@ -310,7 +310,6 @@
 								<string>B4F5ABF411AE2491001B1ECA</string>
 								<string>B401CD9F11A8900100EC0156</string>
 								<string>B401CD3711A873A700EC0156</string>
-								<string>B401CE5011A8A14700EC0156</string>
 								<string>B401CE2711A896A300EC0156</string>
 								<string>2860E32A111B888700E27156</string>
 								<string>2860E324111B887F00E27156</string>
@@ -319,8 +318,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>39</integer>
-									<integer>33</integer>
+									<integer>52</integer>
+									<integer>48</integer>
+									<integer>46</integer>
 									<integer>21</integer>
 									<integer>0</integer>
 								</array>
@@ -363,7 +363,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>DataTableViewController.m</string>
+								<string>Top100BoardGameListAction.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -371,11 +371,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>DataTableViewController.m</string>
+										<string>Top100BoardGameListAction.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4F5AD2911AE2FBA001B1ECA</string>
+										<string>B4F5AD4211AE330A001B1ECA</string>
 										<key>history</key>
 										<array>
 											<string>B401CDA011A8900800EC0156</string>
@@ -411,16 +411,18 @@
 											<string>B4F5AC4F11AE2806001B1ECA</string>
 											<string>B4F5AC6411AE28A8001B1ECA</string>
 											<string>B4F5AC6511AE28A8001B1ECA</string>
-											<string>B4F5AC6611AE28A8001B1ECA</string>
 											<string>B4F5AC6B11AE28B1001B1ECA</string>
 											<string>B4F5ACAA11AE29F4001B1ECA</string>
 											<string>B4F5ACAB11AE29F4001B1ECA</string>
 											<string>B4F5ACEF11AE2D59001B1ECA</string>
 											<string>B4F5AD0111AE2E25001B1ECA</string>
-											<string>B4F5AD1711AE2F0E001B1ECA</string>
 											<string>B4F5AD2711AE2FBA001B1ECA</string>
 											<string>B4F5AD2811AE2FBA001B1ECA</string>
-											<string>B4F5AD0011AE2E25001B1ECA</string>
+											<string>B4F5AD3711AE32B8001B1ECA</string>
+											<string>B4F5AD3811AE32B8001B1ECA</string>
+											<string>B4F5AD3911AE32B8001B1ECA</string>
+											<string>B4F5AD4111AE330A001B1ECA</string>
+											<string>B4F5AD3A11AE32B8001B1ECA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -618,15 +620,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B4F5AD2B11AE2FBA001B1ECA</string>
+		<string>B4F5AD4411AE330A001B1ECA</string>
 		<string>B4F5AD1511AE2EA9001B1ECA</string>
 		<string>B4F5AC5511AE2806001B1ECA</string>
 		<string>B4F5AC4811AE27D7001B1ECA</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>B401CD5E11A8845400EC0156</string>
 		<string>B401CF0511A9E95300EC0156</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>B401CD5E11A8845400EC0156</string>
 		<string>/Users/ryanc/Documents/iphoneProjects/bggiphone/branches/BGG2.0/BGG2.0.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -646,14 +648,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Top100BoardGameListAction.m</string>
+								<string>BGCore.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -670,6 +670,8 @@
 							<string>333pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -722,7 +724,7 @@
 			<key>WindowToolGUID</key>
 			<string>B401CD5E11A8845400EC0156</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

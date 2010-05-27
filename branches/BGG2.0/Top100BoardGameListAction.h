@@ -8,16 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "BGListAction.h"
-
+#import "URLGameListAction.h"
 
 #define ACTION_URL_TOP_100 @"com.boardgamegeek#top100"
 
-@interface Top100BoardGameListAction : BGListAction {
+@interface Top100BoardGameListAction : URLGameListAction {
 
-	NSOperation * operation;
-	NSMutableData * activeDownload;
-	NSURLConnection * urlConnection;
-	BOOL isDone;
 	
 }
 

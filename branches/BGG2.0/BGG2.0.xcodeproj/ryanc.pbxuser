@@ -252,6 +252,16 @@
 			B4F5AD2811AE2FBA001B1ECA /* PBXTextBookmark */ = B4F5AD2811AE2FBA001B1ECA /* PBXTextBookmark */;
 			B4F5AD2911AE2FBA001B1ECA /* PBXTextBookmark */ = B4F5AD2911AE2FBA001B1ECA /* PBXTextBookmark */;
 			B4F5AD2A11AE2FBA001B1ECA /* PBXTextBookmark */ = B4F5AD2A11AE2FBA001B1ECA /* PBXTextBookmark */;
+			B4F5AD3711AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3711AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3811AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3811AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3911AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3911AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3A11AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3A11AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3B11AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3B11AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3C11AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3C11AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD3D11AE32B8001B1ECA /* PBXTextBookmark */ = B4F5AD3D11AE32B8001B1ECA /* PBXTextBookmark */;
+			B4F5AD4111AE330A001B1ECA /* PBXTextBookmark */ = B4F5AD4111AE330A001B1ECA /* PBXTextBookmark */;
+			B4F5AD4211AE330A001B1ECA /* PBXTextBookmark */ = B4F5AD4211AE330A001B1ECA /* PBXTextBookmark */;
+			B4F5AD4311AE330A001B1ECA /* PBXTextBookmark */ = B4F5AD4311AE330A001B1ECA /* PBXTextBookmark */;
 		};
 		sourceControlManager = B401CD2011A8711800EC0156 /* Source Control */;
 		userBuildSettings = {
@@ -384,7 +394,7 @@
 	};
 	B401CD8E11A8883900EC0156 /* BGListAction.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1049, 949}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1049, 1001}}";
 			sepNavSelRange = "{631, 0}";
 			sepNavVisRange = "{216, 1270}";
 			sepNavWindowFrame = "{{84, 24}, {1108, 786}}";
@@ -925,16 +935,16 @@
 	};
 	B4F5ABB811ACD8A4001B1ECA /* Top100BoardGameListAction.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1068, 525}}";
-			sepNavSelRange = "{148, 0}";
-			sepNavVisRange = "{0, 437}";
+			sepNavIntBoundsRect = "{{0, 0}, {1068, 502}}";
+			sepNavSelRange = "{353, 0}";
+			sepNavVisRange = "{0, 364}";
 		};
 	};
 	B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {919, 2600}}";
-			sepNavSelRange = "{2655, 15}";
-			sepNavVisRange = "{1336, 591}";
+			sepNavIntBoundsRect = "{{0, 0}, {1068, 1495}}";
+			sepNavSelRange = "{554, 0}";
+			sepNavVisRange = "{147, 921}";
 		};
 	};
 	B4F5ABBD11AE19BA001B1ECA /* XDModelBookmark */ = {
@@ -1106,8 +1116,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB811ACD8A4001B1ECA /* Top100BoardGameListAction.h */;
 		name = "Top100BoardGameListAction.h: 17";
-		rLen = 13;
-		rLoc = 398;
+		rLen = 0;
+		rLoc = 353;
 		rType = 0;
 		vrLen = 375;
 		vrLoc = 0;
@@ -1136,8 +1146,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 96";
-		rLen = 70;
-		rLoc = 4050;
+		rLen = 0;
+		rLoc = 2593;
 		rType = 0;
 		vrLen = 980;
 		vrLoc = 1713;
@@ -1147,7 +1157,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 112";
 		rLen = 0;
-		rLoc = 4437;
+		rLoc = 2593;
 		rType = 0;
 		vrLen = 868;
 		vrLoc = 1825;
@@ -1211,7 +1221,7 @@
 		comments = "'NSManagedObjectContext' undeclared (first use in this function)";
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 1;
+		rLen = 0;
 		rLoc = 29;
 		rType = 1;
 	};
@@ -1219,8 +1229,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 93";
-		rLen = 15;
-		rLoc = 2655;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 625;
 		vrLoc = 1922;
@@ -1330,7 +1340,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 120";
 		rLen = 0;
-		rLoc = 3236;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1107;
 		vrLoc = 2036;
@@ -1340,7 +1350,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 108";
 		rLen = 0;
-		rLoc = 2778;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 943;
 		vrLoc = 2542;
@@ -1370,7 +1380,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 108";
 		rLen = 0;
-		rLoc = 2778;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 942;
 		vrLoc = 2542;
@@ -1480,7 +1490,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 108";
 		rLen = 0;
-		rLoc = 2778;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 917;
 		vrLoc = 947;
@@ -1490,7 +1500,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 54";
 		rLen = 0;
-		rLoc = 1288;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 912;
 		vrLoc = 1001;
@@ -1519,7 +1529,7 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		rLen = 0;
-		rLoc = 26;
+		rLoc = 29;
 		rType = 1;
 	};
 	B4F5AC6D11AE28B1001B1ECA /* PBXTextBookmark */ = {
@@ -1527,7 +1537,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 27";
 		rLen = 0;
-		rLoc = 577;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 955;
 		vrLoc = 147;
@@ -1547,7 +1557,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 27";
 		rLen = 0;
-		rLoc = 577;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 955;
 		vrLoc = 147;
@@ -1567,7 +1577,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 27";
 		rLen = 0;
-		rLoc = 577;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 955;
 		vrLoc = 147;
@@ -1577,7 +1587,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 27";
 		rLen = 0;
-		rLoc = 577;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 955;
 		vrLoc = 147;
@@ -1596,8 +1606,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 49";
-		rLen = 6;
-		rLoc = 1160;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 928;
 		vrLoc = 713;
@@ -1606,8 +1616,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 49";
-		rLen = 6;
-		rLoc = 1160;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 906;
 		vrLoc = 431;
@@ -1627,7 +1637,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 87";
 		rLen = 0;
-		rLoc = 2130;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1173;
 		vrLoc = 1677;
@@ -1637,7 +1647,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 87";
 		rLen = 0;
-		rLoc = 2130;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1028;
 		vrLoc = 1822;
@@ -1657,7 +1667,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 87";
 		rLen = 0;
-		rLoc = 2130;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1080;
 		vrLoc = 1895;
@@ -1677,7 +1687,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 87";
 		rLen = 0;
-		rLoc = 2130;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1068;
 		vrLoc = 1677;
@@ -1687,7 +1697,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 87";
 		rLen = 0;
-		rLoc = 2130;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1177;
 		vrLoc = 1909;
@@ -1727,7 +1737,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 59";
 		rLen = 0;
-		rLoc = 1355;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 906;
 		vrLoc = 1213;
@@ -1737,7 +1747,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 60";
 		rLen = 0;
-		rLoc = 1401;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 949;
 		vrLoc = 1214;
@@ -1757,7 +1767,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 60";
 		rLen = 0;
-		rLoc = 1401;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1018;
 		vrLoc = 1402;
@@ -1777,7 +1787,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 60";
 		rLen = 0;
-		rLoc = 1401;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1018;
 		vrLoc = 1402;
@@ -1973,8 +1983,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 107";
-		rLen = 15;
-		rLoc = 2655;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 591;
 		vrLoc = 1336;
@@ -1984,7 +1994,7 @@
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 89";
 		rLen = 0;
-		rLoc = 2108;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 1671;
@@ -2083,8 +2093,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 107";
-		rLen = 15;
-		rLoc = 2655;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 591;
 		vrLoc = 1336;
@@ -2122,8 +2132,8 @@
 		isa = PBXTextBookmark;
 		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
 		name = "Top100BoardGameListAction.m: 119";
-		rLen = 141;
-		rLoc = 2954;
+		rLen = 0;
+		rLoc = 668;
 		rType = 0;
 		vrLen = 1185;
 		vrLoc = 2253;
@@ -2229,6 +2239,120 @@
 		vrLoc = 4000;
 	};
 	B4F5AD2A11AE2FBA001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B401CD8E11A8883900EC0156 /* BGListAction.m */;
+		name = "BGListAction.m: 30";
+		rLen = 0;
+		rLoc = 631;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 216;
+	};
+	B4F5AD2C11AE3066001B1ECA /* URLGameListAction.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1068, 525}}";
+			sepNavSelRange = "{413, 29}";
+			sepNavVisRange = "{0, 449}";
+		};
+	};
+	B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1068, 1755}}";
+			sepNavSelRange = "{1594, 45}";
+			sepNavVisRange = "{1212, 658}";
+		};
+	};
+	B4F5AD3711AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B401CDBF11A8903C00EC0156 /* DataTableViewController.m */;
+		name = "DataTableViewController.m: 156";
+		rLen = 0;
+		rLoc = 4423;
+		rType = 0;
+		vrLen = 1042;
+		vrLoc = 4000;
+	};
+	B4F5AD3811AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5ABB811ACD8A4001B1ECA /* Top100BoardGameListAction.h */;
+		name = "Top100BoardGameListAction.h: 16";
+		rLen = 0;
+		rLoc = 353;
+		rType = 0;
+		vrLen = 364;
+		vrLoc = 0;
+	};
+	B4F5AD3911AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5AD2C11AE3066001B1ECA /* URLGameListAction.h */;
+		name = "URLGameListAction.h: 26";
+		rLen = 29;
+		rLoc = 413;
+		rType = 0;
+		vrLen = 449;
+		vrLoc = 0;
+	};
+	B4F5AD3A11AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
+		name = "Top100BoardGameListAction.m: 73";
+		rLen = 0;
+		rLoc = 1921;
+		rType = 0;
+		vrLen = 948;
+		vrLoc = 1647;
+	};
+	B4F5AD3B11AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */;
+		name = "URLGameListAction.m: 83";
+		rLen = 45;
+		rLoc = 1594;
+		rType = 0;
+		vrLen = 796;
+		vrLoc = 1060;
+	};
+	B4F5AD3C11AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */;
+		name = "URLGameListAction.m: 83";
+		rLen = 45;
+		rLoc = 1594;
+		rType = 0;
+		vrLen = 651;
+		vrLoc = 1205;
+	};
+	B4F5AD3D11AE32B8001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B401CD8E11A8883900EC0156 /* BGListAction.m */;
+		name = "BGListAction.m: 30";
+		rLen = 0;
+		rLoc = 631;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 216;
+	};
+	B4F5AD4111AE330A001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5AD2D11AE3066001B1ECA /* URLGameListAction.m */;
+		name = "URLGameListAction.m: 83";
+		rLen = 45;
+		rLoc = 1594;
+		rType = 0;
+		vrLen = 658;
+		vrLoc = 1212;
+	};
+	B4F5AD4211AE330A001B1ECA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4F5ABB911ACD8A4001B1ECA /* Top100BoardGameListAction.m */;
+		name = "Top100BoardGameListAction.m: 26";
+		rLen = 0;
+		rLoc = 554;
+		rType = 0;
+		vrLen = 921;
+		vrLoc = 147;
+	};
+	B4F5AD4311AE330A001B1ECA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B401CD8E11A8883900EC0156 /* BGListAction.m */;
 		name = "BGListAction.m: 30";
