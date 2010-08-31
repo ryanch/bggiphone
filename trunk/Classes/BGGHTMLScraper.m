@@ -110,7 +110,7 @@
 		NSString *nickname = [document substringWithRange:NSMakeRange(NSMaxRange(nameEnd), nickEndRange.location - NSMaxRange(nameEnd))];
 		
 		NSRange messageRange;
-		NSString *messageContents = [self contentsOfTagWithStart:@"<div class='article_body' id='articlebody_" startTagEnd:@">" endTag:@"\t\t\t\t\t\t\t\t\t</div>\n\t\t\t</td>" inRange:NSMakeRange(NSMaxRange(nameEnd), [document length] - NSMaxRange(nameEnd)) foundRange:&messageRange inSource:document];
+		NSString *messageContents = [self contentsOfTagWithStart:@"<dd class=\"right\"" startTagEnd:@">" endTag:@"</dd>" inRange:NSMakeRange(NSMaxRange(nameEnd), [document length] - NSMaxRange(nameEnd)) foundRange:&messageRange inSource:document];
 		
 		NSRange dateRange;
 		NSString *postedDate = [self contentsOfTagWithStart:@"http://geekdo-images.com/images/pixel.gif' /> Posted " startTagEnd:nil endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(messageRange), [document length] - NSMaxRange(messageRange)) foundRange:&dateRange inSource:document];
