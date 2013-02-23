@@ -28,7 +28,7 @@
 #import "GameInfoViewController.h"
 #import "GameActionsViewController.h"
 #import "BBGSearchResult.h"
-#import "SearchUIViewController.h";
+#import "SearchUIViewController.h"
 #import "SettingsUIViewController.h"
 #import "AboutViewController.h"
 #import "BoardGameSearchResultsTableViewController.h"
@@ -133,12 +133,17 @@
 	NSString * tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"../tmp/h/" ];
 	
 	NSFileManager * fileManager = [NSFileManager defaultManager];
-	[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
+    [fileManager createDirectoryAtPath:tempFilePath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+	//[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
 	
 	// create image dir
 	tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"/imgs/" ];
-	[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
-	
+	//[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
+    [fileManager createDirectoryAtPath:tempFilePath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    
+    
 	// try to resume
 	[self resumeFromSavedPoint];
 }

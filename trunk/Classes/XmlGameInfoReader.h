@@ -24,7 +24,7 @@
 
 @class FullGameInfo;
 
-@interface XmlGameInfoReader : NSObject {
+@interface XmlGameInfoReader : NSObject <NSXMLParserDelegate>{
 	NSMutableString * stringBuffer;
 	FullGameInfo * gameInfo;
 	BOOL captureChars;

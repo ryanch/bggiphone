@@ -109,6 +109,7 @@
 		BAEC7D050EC7ADD100151693 /* bgg11.db in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D040EC7ADD100151693 /* bgg11.db */; };
 		BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */; };
 		BAEC7D9D0EC7F04600151693 /* CollectionDownload.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */; };
+		E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -261,6 +262,7 @@
 		BAEC7D990EC7F02200151693 /* CollectionDownloadUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionDownloadUIView.h; sourceTree = "<group>"; };
 		BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionDownloadUIView.m; sourceTree = "<group>"; };
 		BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDownload.xib; sourceTree = "<group>"; };
+		E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +374,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */,
 				BA4DE14E0EB8119100B18E17 /* Entitlements.plist */,
 				BAB2885B0EB6E12300A6AEE3 /* icon.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -561,6 +564,7 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BGG" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -634,6 +638,7 @@
 				943543FC10F1BCAE00E545D3 /* thread_messages_template.html in Resources */,
 				94A96F761104ED4200112CAE /* loading.jpg in Resources */,
 				2BF3FA241176020B00F07377 /* forums.png in Resources */,
+				E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +714,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -725,6 +731,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -758,6 +765,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
+				SDKROOT = iphoneos;
 			};
 			name = Adhoc2;
 		};

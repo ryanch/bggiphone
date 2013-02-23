@@ -414,7 +414,12 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        
+        cell =  [[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease ];
+        
+        
+        
 		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     

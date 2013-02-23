@@ -21,11 +21,11 @@
 
 #import "DownloadGameInfoOperation.h"
 
-#import "GameInfoViewController.h";
-#import "GameActionsViewController.h";
-#import "GameForumsViewController.h";
+#import "GameInfoViewController.h"
+#import "GameActionsViewController.h"
+#import "GameForumsViewController.h"
 #import "BBGSearchResult.h"
-#import "FullGameInfo.h";
+#import "FullGameInfo.h"
 #import "XmlGameInfoReader.h"
 #import "BGGAppDelegate.h"
 

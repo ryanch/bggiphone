@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GameCommentsXmlParser : NSObject {
+@interface GameCommentsXmlParser : NSObject <NSXMLParserDelegate> {
 	NSMutableString *stringBuffer;
 	NSMutableString *pageBuffer;
 	NSMutableString *otherUserComments;

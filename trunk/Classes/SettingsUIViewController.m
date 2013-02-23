@@ -111,8 +111,11 @@
 	
 	[[NSFileManager defaultManager] removeItemAtPath:tempFilePath	error:nil];
 	
-	[[NSFileManager defaultManager]  createDirectoryAtPath:tempFilePath		attributes:nil];
+	//[[NSFileManager defaultManager]  createDirectoryAtPath:tempFilePath		attributes:nil];
 	
+    [[NSFileManager defaultManager]  createDirectoryAtPath:tempFilePath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    
 }
 
 

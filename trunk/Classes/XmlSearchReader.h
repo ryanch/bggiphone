@@ -28,7 +28,7 @@
 ///
 /// This class is used to process the xml of a game search on boardgamegeek.com 
 ///
-@interface XmlSearchReader : NSObject {
+@interface XmlSearchReader : NSObject <NSXMLParserDelegate> {
 	//! this stores the results, as BBGSearchResult obejcts 
 	NSMutableArray * searchResults;
 	
