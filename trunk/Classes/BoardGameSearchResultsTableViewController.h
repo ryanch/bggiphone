@@ -59,10 +59,18 @@
 	
 	//! this holds the time since the last accell
 	CFTimeInterval		lastTime;
+    
+    //! this allows for quick lookup of a path by id
+    NSMutableDictionary * pathByGameId;
+    
+    NSMutableSet	*imagesLoading;
+	NSOperationQueue * imageDownloadQueue;
 	
 	//! this is where to resume too
 	BGGResumeState currentResumeState;
 }
+
+-(void) startLoadingImageForResult:(BBGSearchResult *)result;
 
 //! start the search, show the animated loading icon, and call thrSearch
 - (void) doSearch: (XmlSearchReader*) search;
@@ -90,6 +98,12 @@
 
 //! this is called when a shake is detected
 - (void) appWasShook;
+
+//! this is used to find a search result from an index path
+- (BBGSearchResult*) findResultForPath: (NSIndexPath *) indexPath;
+
+//! find index path for result
+- (NSIndexPath*) findPathforResult: (BBGSearchResult*) result;
 
 @property BGGSearchGameType searchGameType;
 

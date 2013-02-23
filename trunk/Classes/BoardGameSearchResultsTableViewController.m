@@ -29,6 +29,7 @@
 #import	 "XmlGameInfoReader.h"
 #import "DownloadGameInfoOperation.h"
 #import "DbAccess.h"
+#import "Top100ImageDownloadOperation.h"
 
 @implementation BoardGameSearchResultsTableViewController
 
@@ -45,8 +46,6 @@
 	if ( username == nil ) {
 		return;
 	}
-	
-	
 	
 	// dump current results
 	resultsToDisplay = nil;
@@ -90,8 +89,6 @@
 
 	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 	
-	
-	
 }
 									   
 // this is called when we should start a search
@@ -126,14 +123,9 @@
 		[self buildSectionTitlesForResults:resultsToDisplay];
 
 		
-
-		
-		
 		[self performSelectorOnMainThread:@selector(doneSearch) withObject:self waitUntilDone:YES];
 	
 	}
-	
-	//[self doneSearch];
 	
 }
 
@@ -228,6 +220,8 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 // this is called by the thread when done
 - (void) doneSearch {
 	
+    [pathByGameId removeAllObjects];
+    
 	if ( parseErrorMessage != nil ) {
 
 	
@@ -307,25 +301,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 }
 
 
-/*
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-
-	NSInteger totalCount = [sectionTitles count];
-	
-	for( NSInteger i = 0; i < totalCount; i++ ) {
-		NSString * sectionTitle = (NSString*) [sectionTitles objectAtIndex:i];
-		if ( [title hasPrefix:sectionTitle] ) {
-			return i;
-		}
-	}
-	
-	return 0;
-	
-	
-}
- */
-
-
 - (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
 	
 	if ( resultsToDisplay == nil || sectionTitles == nil ) {
@@ -356,68 +331,30 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	return (NSString*) [sectionTitles objectAtIndex:section];
 }
 
-
-
-
-
-
-
-
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
- */
-
-/*
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if ( resultsToDisplay == nil ) {
-		return 1;
-	}
-    return [resultsToDisplay count];
-}
- */
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BBGSearchResult*) findResultForPath: (NSIndexPath *) indexPath {
     
-	if ( resultsToDisplay == nil ) {
-		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
-		
-		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
-		//[cell autorelease];
-		
-		
-		return cell;
-		
-	}
-	
-	
-#ifdef __DEBUGGING__
-	NSLog( @"cellForRowAtIndexPath row: %d", indexPath.row );
-#endif
-	
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-        
-        cell =  [[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-        
-        
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if ( resultsToDisplay == nil ) {
+        return nil;
     }
     
-	// Configure the cell
-	//BBGSearchResult * result = (BBGSearchResult*) [resultsToDisplay objectAtIndex: indexPath.row];
-	
 	NSString * sectionTitle = (NSString*) [ sectionTitles objectAtIndex: indexPath.section];
 	NSArray * results = (NSArray*) [ sectionCountsDict objectForKey:sectionTitle];
 	BBGSearchResult * result = (BBGSearchResult*) [results objectAtIndex:indexPath.row];
-	
-	
+    
+    [pathByGameId setObject:indexPath forKey:result.gameId];
+    
+    return result;
+
+}
+
+
+-(void) updateCell:(UITableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    BBGSearchResult * result = [self findResultForPath:indexPath];
+    if (result == nil) {
+        return;
+    }
+    
 	cell.textLabel.text = result.primaryTitle;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.minimumFontSize = 12.0;
@@ -428,25 +365,73 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 		
 	}
 	else {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"Published: %d", result.yearPublished];	
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"Published: %d", result.yearPublished];
 	}
-	
-	
-	
-	//cell.text = result.primaryTitle;
 	
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	NSString * imagePath = [appDelegate buildImageThumbFilePathForGameId:result.gameId];
 	if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath] ) {
 		cell.imageView.image = [UIImage imageWithContentsOfFile: imagePath];
-		//cell.image = [UIImage imageWithContentsOfFile: imagePath];
 	}
 	else {
-		//cell.image = nil;
-		cell.imageView.image = nil;
+        [self startLoadingImageForResult:result];
+		cell.imageView.image = [UIImage imageNamed:@"loading.jpg"];
+	}
+    
+}
+
+- (NSIndexPath*) findPathforResult: (BBGSearchResult*) result {
+    
+    
+    return [ pathByGameId objectForKey:result.gameId];
+    
+}
+
+
+-(void) nsOperationDidFinishLoadingResult:(BBGSearchResult *)result
+{
+    
+    // dont remove, we only want to try to load each once.
+	// [imagesLoading removeObject:result.gameId];
+    
+	NSIndexPath * indexPath = [self findPathforResult:result];
+    if ( indexPath == nil) {
+        return;
+    }
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    [self updateCell:cell forItemAtIndexPath:indexPath];
+	
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BBGSearchResult * result = [self findResultForPath:indexPath];
+
+    
+    // if no results then show the loading cell
+	if ( result == nil ) {
+		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
+		
+		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
+		return cell;
 	}
 	
+	
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell =  [[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+
+    [self updateCell:cell forItemAtIndexPath:indexPath];
+	
+
 	
     return cell;
 }
@@ -479,47 +464,36 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	
 }
 
-
-/*
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void) startLoadingImageForResult:(BBGSearchResult *)result
+{
+	if(result.gameId == nil) {
+		return;
+    }
+	
+	if([imagesLoading containsObject:result.gameId]) {
+		return;
+    }
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-    }
-    if (editingStyle == UITableViewCellEditingStyleInsert) {
-    }
+	[imagesLoading addObject:result.gameId];
+	
+	Top100ImageDownloadOperation * operation = [[Top100ImageDownloadOperation alloc] initWithResult:result forSearchView:self];
+	
+	[imageDownloadQueue addOperation:operation];
+
 }
-*/
-
-/*
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-
 
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	[self setupAccelRandomPicker];	
 	
+    
+	imagesLoading = [[NSMutableSet alloc] init];
+	imageDownloadQueue = [[NSOperationQueue alloc] init];
+	[imageDownloadQueue setMaxConcurrentOperationCount:2];
+    
+    pathByGameId = [[NSMutableDictionary alloc] initWithCapacity:1000];
+    
 	//NSLog(@"show");
 	
 	// save the current state
@@ -534,20 +508,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	//[[UIAccelerometer sharedAccelerometer] setDelegate: nil];	
 	[super viewWillDisappear:animated];
 }
-
-
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-}
-*/
-/*
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-*/
-
-
-
 
 // Called when the accelerometer detects motion; random player select
 - (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration

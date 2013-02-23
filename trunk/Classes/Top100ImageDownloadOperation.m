@@ -8,24 +8,63 @@
 
 #import "Top100ImageDownloadOperation.h"
 #import "BGGAppDelegate.h"
+#import "FullGameInfo.h"
 
 @implementation Top100ImageDownloadOperation
 
 - (void) main {
 
 	
-	NSLog( @"starting operation for: %@", searchResult.imageURL );
+	NSLog( @"starting operation to get image for: %@", searchResult.primaryTitle );
 	
 	@autoreleasepool {
 	
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+        
+        
+        if ( searchResult.imageURL == nil ) {
+            
+            FullGameInfo * fullGame = [appDelegate getFullGameInfoByGameIdFromBGG: searchResult.gameId];
+            
+            if ( fullGame == nil) {
+                return;
+            }
+            
+            searchResult.imageURL = fullGame.imageURL;
+        }
+        
+        
 		[appDelegate cacheGameImageAtURL:searchResult.imageURL gameID:searchResult.gameId];
 		
+        
+        if ( searchView != nil ) {
+            
+            [searchView performSelectorOnMainThread:@selector(nsOperationDidFinishLoadingResult:) withObject: searchResult waitUntilDone:YES];
+            
+            
+        }
+        else {
+        
 		[top100View performSelectorOnMainThread:@selector(nsOperationDidFinishLoadingResult:) withObject: searchResult waitUntilDone:YES];
+            
+        }
 	
-	}	
+	}
 	
 }
+
+- (id)initWithResult:(BBGSearchResult*)result forSearchView: (BoardGameSearchResultsTableViewController*) view {
+	self = [super init];
+	if (self != nil) {
+		
+		searchResult = result;
+		searchView = view;
+		
+		
+	}
+	return self;
+}
+
 
 - (id)initWithResult:(BBGSearchResult*)result forView: (BrowseTop100ViewController*) view
 {
