@@ -349,9 +349,24 @@
 		NSRange nameRange = NSMakeRange(NSMaxRange(nameStart), nameEnd.location - NSMaxRange(nameStart));
 		NSString *name = [document substringWithRange:nameRange];
 		
+        
+        
 		// Find thumbnail image url start, backwards from game id url start
-		NSString *imageURLStartString = [NSString stringWithFormat:@"<a   href=\"/boardgame/%@\" ><img border=0  src=\"", [document substringWithRange:urlRange]];
+		//NSString *imageURLStartString = [NSString stringWithFormat:@"<a   href=\"/boardgame/%@\" ><img border=0  src=\"", //[document substringWithRange:urlRange]];
+        NSString *imageURLStartString = @" src=\"";
+        
+        
 		NSRange imageURLStartRange = [document rangeOfString:imageURLStartString options:NSBackwardsSearch range:NSMakeRange(0, ahrefStart.location)];
+         
+        
+        /*
+		NSString *imageURLStartString = [NSString stringWithFormat:@"<a   href=\"/boardgame/%@", [document substringWithRange:urlRange]];
+        
+		NSRange linkStartRange = [document rangeOfString:imageURLStartString options:NSBackwardsSearch range:NSMakeRange(0, ahrefStart.location)];
+        
+		NSRange imageURLStartRange = [document rangeOfString:@"src=\"" options:0 range:NSMakeRange(0, linkStartRange.location)];
+         */
+         
 		
 		NSString *imageURL = nil;
 		if(imageURLStartRange.location != NSNotFound)
