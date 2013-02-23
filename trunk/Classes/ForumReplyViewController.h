@@ -12,6 +12,7 @@
 
     IBOutlet UITextField * subject;
     IBOutlet UITextView  * body;
+    IBOutlet UIActivityIndicatorView * actvityView;
     
     
 }
@@ -22,7 +23,7 @@
 @property (nonatomic, readwrite, strong) UITextField *subject;
 @property (nonatomic, readwrite, strong) UITextView *body;
 @property (nonatomic, readwrite, strong) NSString *subjectTitle;
-
+@property (nonatomic, readwrite, strong) UIActivityIndicatorView *actvityView;
 
 - (void) addSendButton;
 - (void) doSubmitReply;

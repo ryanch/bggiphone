@@ -23,6 +23,7 @@
 @synthesize subject;
 @synthesize body;
 @synthesize subjectTitle;
+@synthesize actvityView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,6 +86,11 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if (buttonIndex == 2 ) {
+        
+        self.actvityView.hidden = NO;
+        [self.body setEditable: NO];
+        
+        
         [NSThread detachNewThreadSelector:@selector(doSubmitReply) toTarget:self withObject:nil];
     }
 }
