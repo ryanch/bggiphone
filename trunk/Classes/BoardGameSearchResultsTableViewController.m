@@ -49,11 +49,8 @@
 	
 	
 	// dump current results
-	[resultsToDisplay release];
 	resultsToDisplay = nil;
-	[sectionTitles release];
 	sectionTitles = nil;
-	[sectionCountsDict release];
 	sectionCountsDict = nil;
 	
 	// reload the table
@@ -93,16 +90,13 @@
 
 	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 	
-	[refreshButton release];
 	
 	
 }
 									   
 // this is called when we should start a search
 - (void) doSearch: (XmlSearchReader*) search {
-	[parseErrorMessage release];
 	parseErrorMessage = nil;
-	[currentSearch release];
 	currentSearch = nil;
 	self.currentSearch = search;
 	
@@ -112,33 +106,32 @@
 
 // this is called by the thread
 - (void) thrSearch {
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	
-	[resultsToDisplay release];
-	resultsToDisplay = nil;
-	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
-	NSError * parseError = nil;
-	resultsToDisplay = [[appDelegate getGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType] retain];
+		resultsToDisplay = nil;
+		
+		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+		
+		NSError * parseError = nil;
+		resultsToDisplay = [appDelegate getGameSearchResults: currentSearch withError: &parseError searchGameType: searchGameType];
 
-	if ( resultsToDisplay == nil ) {
-		parseErrorMessage = [[parseError localizedDescription] retain];
-		[NSThread sleepForTimeInterval:1.0]; 
+		if ( resultsToDisplay == nil ) {
+			parseErrorMessage = [parseError localizedDescription];
+			[NSThread sleepForTimeInterval:1.0]; 
+		}
+		
+		
+		
+		[self buildSectionTitlesForResults:resultsToDisplay];
+
+		
+
+		
+		
+		[self performSelectorOnMainThread:@selector(doneSearch) withObject:self waitUntilDone:YES];
+	
 	}
-	
-	
-	
-	[self buildSectionTitlesForResults:resultsToDisplay];
-
-	
-
-	
-	
-	[self performSelectorOnMainThread:@selector(doneSearch) withObject:self waitUntilDone:YES];
-	
-	[autoreleasepool release];
 	
 	//[self doneSearch];
 	
@@ -211,7 +204,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 			
 			
 			[sectionCountsDict setValue: titles forKey:firstLetter];
-			[titles release];
 			
 			
 		}
@@ -224,7 +216,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	
 	
 	if ( [sectionTitles count] == 0 ) {
-		[sectionTitles release];
 		sectionTitles = nil;
 	}
 	
@@ -244,7 +235,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 															message:[NSString stringWithFormat: NSLocalizedString(@"Error parsing XML data. Check your username is correct. BGG could be down. Error message: %@", @"error message for bad xml parsing. The error will be placed where you put the %@"), parseErrorMessage ]
 														   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 			[alert show];	
-			[alert release];		
 			
 		
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -257,7 +247,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 														message:NSLocalizedString(@"There are no results for that list.",@"message shown when there are no games in a list that the user was looking up") 
 													   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button")  otherButtonTitles: nil];
 		[alert show];	
-		[alert release];		
 		
 		
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -396,10 +385,8 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
 		
 		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
-		[cell retain];
-		[cell autorelease];
+		//[cell autorelease];
 		
-		[loadingCell release];
 		
 		return cell;
 		
@@ -416,7 +403,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         
-        cell =  [[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease ];
+        cell =  [[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         
         
@@ -559,14 +546,6 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 }
 */
 
-- (void)dealloc {
-	[sectionCountsDict release];
-	[sectionTitles release];
-	[parseErrorMessage release];
-	[currentSearch release];
-	[resultsToDisplay release];
-    [super dealloc];
-}
 
 
 

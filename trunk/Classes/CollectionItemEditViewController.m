@@ -57,59 +57,53 @@
 - (void) threadLoadCurrentData {
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	BGGConnect * bggConnect = [[BGGConnect alloc] init];
-	
-	
-	bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
-	bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
-	
-	//BGGConnectResponse response = [bggConnect saveCollectionForGameId: gameId withParams: paramsToSave ];
-	
-	BGGConnectResponse response = SUCCESS;
-	
-	[itemData release];
-	itemData = [bggConnect fetchGameCollectionItemData:gameId];
-	[itemData retain];
-	
-	if ( itemData != nil ) {
-		response = itemData.response;
-	}
+		BGGConnect * bggConnect = [[BGGConnect alloc] init];
 		
+		
+		bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+		bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+		
+		//BGGConnectResponse response = [bggConnect saveCollectionForGameId: gameId withParams: paramsToSave ];
+		
+		BGGConnectResponse response = SUCCESS;
+		
+		itemData = [bggConnect fetchGameCollectionItemData:gameId];
+		
+		if ( itemData != nil ) {
+			response = itemData.response;
+		}
+			
+		
+		if ( response == BAD_CONTENT || itemData == nil) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}	
+		else if ( response == CONNECTION_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		else if ( response == AUTH_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		
+		
+		
+		
+		
+		
+		
+		[self performSelectorOnMainThread:@selector(loadCurrentDataComplete) withObject:self waitUntilDone:YES];
 	
-	if ( response == BAD_CONTENT || itemData == nil) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
 	}	
-	else if ( response == CONNECTION_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else if ( response == AUTH_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error Logging Play title")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	
-	
-	
-	[bggConnect	 release];
-	
-	
-	
-	
-	[self performSelectorOnMainThread:@selector(loadCurrentDataComplete) withObject:self waitUntilDone:YES];
-	
-	[autoreleasepool release];	
 }
 
 - (void) loadCurrentDataComplete {
@@ -169,7 +163,6 @@
 	[save setEnabled:YES];
 	self.navigationItem.rightBarButtonItem = save;
 	
-	[save release];
 	
 }
 
@@ -230,15 +223,6 @@
 }
 
 
-- (void)dealloc {
-	[gameTitle release];
-	[itemData release];
-	[paramsToSave release];
-	[collectionForm release];
-	[scroller release];
-	[wishTexts release];
-    [super dealloc];
-}
 
 
 
@@ -269,60 +253,55 @@
 		
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	BGGConnect * bggConnect = [[BGGConnect alloc] init];
-	
-	
-	bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
-	bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
-	
-	BGGConnectResponse response = [bggConnect saveCollectionForGameId: gameId withParams: paramsToSave withData: itemData ];
-	
-	
-	if ( response == SUCCESS ) {
-		/// TODO UPDATE THE LOCAL DB
-	}
-	
-	if ( response == SUCCESS ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success modification")
-														message:NSLocalizedString(@"Your updates were saved.", @"Your updates were saved")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];		
-	}
-	else if ( response == BAD_CONTENT ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}	
-	else if ( response == CONNECTION_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else if ( response == AUTH_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error Logging Play title")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	
-	
-	
-	[bggConnect	 release];
-	
-	
+		BGGConnect * bggConnect = [[BGGConnect alloc] init];
+		
+		
+		bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+		bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+		
+		BGGConnectResponse response = [bggConnect saveCollectionForGameId: gameId withParams: paramsToSave withData: itemData ];
+		
+		
+		if ( response == SUCCESS ) {
+			/// TODO UPDATE THE LOCAL DB
+		}
+		
+		if ( response == SUCCESS ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success modification")
+															message:NSLocalizedString(@"Your updates were saved.", @"Your updates were saved")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		else if ( response == BAD_CONTENT ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}	
+		else if ( response == CONNECTION_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		else if ( response == AUTH_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		
+		
+		
+		
+		
 
+		
+		[self performSelectorOnMainThread:@selector(doModifyCollectionComplete) withObject:self waitUntilDone:YES];
 	
-	[self performSelectorOnMainThread:@selector(doModifyCollectionComplete) withObject:self waitUntilDone:YES];
-	
-	[autoreleasepool release];
+	}
 	
 	
 }

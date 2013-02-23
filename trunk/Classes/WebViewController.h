@@ -14,7 +14,7 @@
 	NSString * startingURL;
 }
 
-@property (nonatomic, retain ) UIWebView * webView;
+@property (nonatomic, strong ) UIWebView * webView;
 
 - (void) setURL: (NSString*) urlString;
 

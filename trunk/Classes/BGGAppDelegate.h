@@ -137,12 +137,12 @@ typedef NSInteger BGGResumeState;
 	NSArray * authCookies;
 }
 
-@property (nonatomic, retain) NSArray *authCookies;
-@property (nonatomic, retain) DbAccess *dbAccess;
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain) PlistSettings * appSettings;
-@property (nonatomic, retain) DownloadGameInfoOperation * downloadOperation;
+@property (nonatomic, strong) NSArray *authCookies;
+@property (nonatomic, strong) DbAccess *dbAccess;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, strong) PlistSettings * appSettings;
+@property (nonatomic, strong) DownloadGameInfoOperation * downloadOperation;
 
 //! url encode a value
 + (NSString*) urlEncode: (NSString*) str;

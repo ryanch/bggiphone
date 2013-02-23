@@ -23,7 +23,7 @@
 
 		GamePickerUIViewController * controller = [[GamePickerUIViewController alloc] initWithNibName:@"GamePicker" bundle:nil];
 		controller.title = NSLocalizedString( @"Search Owned Game", @"Game Picker title" );
-		[controller autorelease];
+		//[controller autorelease];
 		return controller;
 	
 	
@@ -49,7 +49,6 @@
 						   NSLocalizedString( @"9 Player", "9 player game search" ), 
 						   NSLocalizedString( @"10+ Player", "10+ player game search" ), 
 						   nil];
-		[playersChoices retain];
 		
 		
 		timeChoices = [NSArray arrayWithObjects:
@@ -60,7 +59,6 @@
 					   NSLocalizedString( @"< 120 min", "less than 120 min game search" ), 
 					   NSLocalizedString( @"< 150 min", "less than 150 min game search" ), 
 					   nil];
-		[timeChoices retain];
 		
 		weightChoices = [NSArray arrayWithObjects:
 						 NSLocalizedString( @"Any", "any ammount of time game weight" ), 
@@ -70,7 +68,6 @@
 						 NSLocalizedString( @"Med. H.", "Med. Heavy ammount of time game weight" ), 
 						 NSLocalizedString( @"Heavy", "Heavy ammount of time game weight" )
 						 , nil];
-		[weightChoices retain];
 		
     }
     return self;
@@ -203,16 +200,6 @@
 }
 
 
-- (void)dealloc {
-	[ showAllMatchesButton release];
-	[ shakeForRandomButton release];
-	[playersChoices release];
-	[timeChoices release];
-	[weightChoices release];
-	[gamePicker release];
-	[directionsLabel release];
-    [super dealloc];
-}
 
 
 - (NSArray*) doSearch {
@@ -235,7 +222,6 @@
 														message:NSLocalizedString(@"No results were found.", @"No results were found.")
 													   delegate:self cancelButtonTitle:NSLocalizedString( @"OK", @"okay button title") otherButtonTitles: nil];
 		[alert show];	
-		[alert release];
 		
 		return nil;
 	}
@@ -260,7 +246,6 @@
 	[appDelegate.navigationController pushViewController:resultsDisplay	animated:YES];
 	
 	
-	[resultsDisplay release];
 }
 
 

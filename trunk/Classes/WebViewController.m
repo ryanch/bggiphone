@@ -61,7 +61,6 @@
 	
 	
 	startingURL = urlString;
-	[startingURL retain];
 
 	
 }
@@ -72,11 +71,6 @@
 }
 
 
-- (void)dealloc {
-	[startingURL release];
-	[webView release];
-    [super dealloc];
-}
 
 
 @end

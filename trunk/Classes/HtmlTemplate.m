@@ -45,7 +45,6 @@
 		else if ( charFound == hash ) {
 			NSString * str = [[NSString alloc] initWithCharacters:tempChars length:tempIndex];
 			[tempParts addObject: str  ];
-			[str release];
 			tempIndex = 0;
 		}
 		
@@ -54,7 +53,6 @@
 		if ( foundHolder ) {
 			NSString * str = [[NSString alloc] initWithCharacters:tempChars length:tempIndex];
 			[tempParts addObject: str  ];
-			[str release];
 			tempIndex = 0;
 			foundHolder = NO;
 		}
@@ -65,7 +63,6 @@
 	if ( tempIndex != 0 ) {
 		NSString * str = [[NSString alloc] initWithCharacters:tempChars length:tempIndex];
 		[tempParts addObject: str  ];
-		[str release];
 	}
 	
 	parts = tempParts;
@@ -127,11 +124,6 @@
 }
 
 
-- (void) dealloc
-{	
-	[parts release];
-	[super dealloc];
-}
 
 
 @end

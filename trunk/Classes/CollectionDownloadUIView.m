@@ -92,11 +92,9 @@
 		}
 
 	
-		[search release];
 
 		if ( !hadResults ) {
 			errorMessage = NSLocalizedString( @"No games were found as owned. Check your username- is it entered correctly? Do you you have games listed as owned? Also check your network connection.", @"error no games listed as owned, check your username" );
-			[errorMessage retain];
 			return;
 		}
 	}
@@ -117,9 +115,7 @@
 	FullGameInfo * gameInfo  = [appDelegate.dbAccess getNextMissingGameForCollection];
 	while( gameInfo != nil && !isCanceled) {
 		
-		[message release];
 		message = gameInfo.title;
-		[message retain];
 		//[gameInfo release];
 		gameInfo = nil;
 		
@@ -144,7 +140,6 @@
 	// we were not able to download all of the games.
 	if ( startCount > 0 && !isCanceled ) {
 		errorMessage = NSLocalizedString( @"Not able to download all the games in your collecton. Check your username, and your network connection.", @"error no games listed as owned, check your username" );
-		[errorMessage retain];
 	}
 	
 	
@@ -156,16 +151,16 @@
 	
 		
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	// this is here to prevent a bug in the uinav controller
-	[NSThread sleepForTimeInterval:1.0]; 
-	
-	[self startLoadingHelper];
+		[NSThread sleepForTimeInterval:1.0]; 
+		
+		[self startLoadingHelper];
 	
 
 	
-	[autoreleasepool release];
+	}
 	
 	[self performSelectorOnMainThread:@selector(allDone) withObject:self waitUntilDone:YES];	
 	
@@ -195,7 +190,6 @@
 														message:errorMessage
 													   delegate:self cancelButtonTitle: NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
 		[alert show];	
-		[alert release];
 		
 		
 		
@@ -232,17 +226,6 @@
 }
 
 
-- (void)dealloc {
-	[cancelButton release];
-	[errorMessage release];
-	[message	 release];
-	[parentNav release];
-	[currentItemLabel release];
-	[progressView release];
-	[directionsLabel release];
-	
-    [super dealloc];
-}
 
 
 @end

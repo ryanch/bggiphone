@@ -29,14 +29,5 @@
 @synthesize postDate;
 @synthesize username;
 
--(void) dealloc
-{
-	[contents release]; contents = nil;
-	[nickname release]; nickname = nil;
-	[postDate release]; postDate = nil;
-	[username release]; username = nil;
-	
-	[super dealloc];
-}
 
 @end

@@ -37,7 +37,6 @@
 	[params setObject:username forKey:@"username"];
 	[params setObject:password forKey:@"password"];
 	worker.params = params;
-	[params release];
 	
 	
 	BOOL success = [worker start];
@@ -55,7 +54,6 @@
 		} // end for 
 	} // end if success
 	
-	[worker release];
 
 }
 
@@ -109,7 +107,6 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat: @"yyyy-MM-dd"];
 	NSString * datePlayedStr = [dateFormatter stringFromDate:date];
-	[dateFormatter release];
 	
 	// add play date
 	[params setObject:datePlayedStr forKey:@"playdate"];
@@ -117,7 +114,6 @@
 	
 	// set the params on request
 	worker.params = params;
-	[params release];
 
 	
 	BOOL success = [worker start];
@@ -127,15 +123,11 @@
 		if ( responseBody != nil ) {
 			NSRange range = [responseBody rangeOfString:@"Plays"];
 			if ( range.location != NSNotFound ) {
-				[responseBody release];
-				[worker release];
 				return SUCCESS;
 			}
 		}
-		[responseBody release];
 	}
 	
-	[worker release];
 	return CONNECTION_ERROR;
 	
 	
@@ -203,10 +195,8 @@
 	NSLog(@"creating db entry with: %@", [params description]);
 	
 	worker.params = params;
-	[params release];
 	
 	BOOL success = [worker start];
-	[worker release];
 	
 	if ( success ) {
 		return SUCCESS;
@@ -230,7 +220,7 @@
 	if ( appDelegate.authCookies == nil ) {
 		CollectionItemData * itemData = [[CollectionItemData alloc] init];
 		itemData.response = AUTH_ERROR;
-		[itemData autorelease];
+		//[itemData autorelease];
 		return itemData;
 	}
 	
@@ -290,7 +280,6 @@
 	[params setObject:@"24" forKey:@"instanceid"];
 	
 	worker.params = params;
-	[params release];
 	
 	BOOL success = [worker start];
 	
@@ -298,8 +287,6 @@
 	
 	if ( !success ) {
 		itemData.response = CONNECTION_ERROR;
-		[itemData release];
-		[worker release];
 		return nil;
 	}
 	
@@ -307,7 +294,6 @@
 	
 	//NSLog( @"col data: %@", data );
 	
-	[worker release];
 
 	// check if the collection id is even in the page
 	NSRange collIdRange = [data rangeOfString:@"collid"];
@@ -315,9 +301,7 @@
 		
 		NSLog(@"collid not found in data: %@", data); 
 		
-		[data release];
 		NSLog(@"not able to find collid");
-		[itemData release];
 		return nil;
 	}
 	
@@ -355,7 +339,6 @@
 	}
 	
 	if ( !cleanBreak ) {
-		[data release];
 		NSLog(@"unable to fetch collection id");
 		return nil;
 	}
@@ -366,7 +349,6 @@
 	
 	itemData.collId = [collIdString intValue];
 	
-	[collIdString release];
 	
 	// check if things are checked
 	itemData.own = [self scanForCheckedForm: @"name='own'" fromData: data];
@@ -402,9 +384,8 @@
 	
 	
 	
-	[data release];
 
-	[itemData autorelease];
+	//[itemData autorelease];
 	return itemData;
 }
 
@@ -438,16 +419,13 @@
 	NSString * buffString = [[NSString alloc] initWithCharacters:searchBuffer length:bufferIndex];
 	
 	if ( [buffString rangeOfString:@"CHECKED"].location != NSNotFound ) {
-		[buffString release];
 		return YES;
 	}
 	
 	if ( [buffString rangeOfString:@"checked"].location != NSNotFound ) {
-		[buffString release];
 		return YES;
 	}	
 	
-	[buffString release];	
 	return NO;
 }
 
@@ -555,10 +533,8 @@
 	NSLog(@"going to log with params: %@", [params description] );
 	
 	worker.params = params;
-	[params release];
 	
 	BOOL success = [worker start];
-	[worker release];
 	
 	if ( success ) {
 		return SUCCESS;
@@ -580,14 +556,6 @@
 	return self;
 }
 
-- (void) dealloc
-{
-
-
-	[username release];
-	[password release];
-	[super dealloc];
-}
 
 
 @end

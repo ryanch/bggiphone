@@ -32,7 +32,7 @@
 
 
 
-@property (nonatomic, retain) UISearchBar * searchBar;
-@property (nonatomic, retain) UITableView * tableView;
+@property (nonatomic, strong) UISearchBar * searchBar;
+@property (nonatomic, strong) UITableView * tableView;
 
 @end

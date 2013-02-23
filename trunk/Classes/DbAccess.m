@@ -126,12 +126,11 @@
 		
 		
 		[items addObject:result];
-		[result release];
 		
     }
     [rs close]; 
 	
-	[items autorelease];
+	//[items autorelease];
 	return items;
 	
 	
@@ -215,7 +214,6 @@
 	
 	
 	database = db;
-	[db retain];
 	if (![db open]) {
         [self showError:@"Error opening database." withTitle:@"DB Error"];
         return;
@@ -314,25 +312,18 @@
 	return self;
 }
 
-- (void) dealloc {
-	
-	[database dealloc];
-	
-	[super dealloc];
-}
 
 
 - (void) showError: (NSString*) errorMessage withTitle:(NSString*) title {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:errorMessage
 												   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	[alert release];	
 }
 
 
 - (FullGameInfo* ) buildFullGameInfoFromResultRow:(FMResultSet*) rs {
 	FullGameInfo * fullGameInfo = [[FullGameInfo alloc] init];
-	[fullGameInfo autorelease];
+	//[fullGameInfo autorelease];
 	
 	
 	fullGameInfo.title = [rs stringForColumn:@"title"];
@@ -474,10 +465,9 @@
 		}
 	}
 	
-	[gameIds release];
 	
 
-	[results autorelease]; 
+	//[results autorelease];
 	return results;
 	
 	
@@ -575,7 +565,6 @@
 		[self saveFullGameInfo:fullGame];
 		
 		
-		[fullGame release];
 		
 	}
 	
@@ -698,7 +687,7 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	[appDelegate.authCookies release];
+	appDelegate.authCookies;
 	appDelegate.authCookies = nil;
 	
 	[database executeUpdate:@"delete from RecentGameList"];
@@ -792,10 +781,9 @@
 		searchResult.gameId = fullInfo.gameId;
 		
 		[searchResults addObject:searchResult];
-		[searchResult release];
 	}
 	
-	[searchResults autorelease];
+	//[searchResults autorelease];
 	
 	return searchResults;
 }
@@ -830,16 +818,14 @@
 #endif
 		
 		[results addObject:result];
-		[result release];
     }
     [rs close]; 
 	
 	if ( [results count] == 0 ) {
-		[results release];
 		return nil;
 	}
 	else {
-		[results autorelease];
+		//[results autorelease];
 		return results;
 	}
 	

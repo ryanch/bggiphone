@@ -30,45 +30,42 @@
 // this method is done in a thread
 -(void) startLoadingPage {
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	pageToLoad = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/h/%@_comment.html", gameId] ];
-	[pageToLoad retain];
-	
-	NSFileManager * filemanager = [NSFileManager defaultManager];
-	if ( ![filemanager fileExistsAtPath:pageToLoad] ) {
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
+		NSString *documentsDirectory = [paths objectAtIndex:0];
+		pageToLoad = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"../tmp/h/%@_comment.html", gameId] ];
 		
-		GameCommentsXmlParser *comments  = [[GameCommentsXmlParser alloc] init];
-		comments.writeToPath = pageToLoad;
-		
-		NSError *error;
-		
-		NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/boardgame/%@?comments=1", gameId]   ];
-		
-		BOOL success = [comments parseXMLAtURL:url parseError:&error];
-		[comments release];
-		
-		if ( !success ) {
+		NSFileManager * filemanager = [NSFileManager defaultManager];
+		if ( ![filemanager fileExistsAtPath:pageToLoad] ) {
 			
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Comments", @"Error Loading comments dialog title")
-															message:NSLocalizedString(@"There was an error loading comments for this game. Check that you have a network connection.", @"error loading comments message" )
-														   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
-			[alert show];	
-			[alert release];	
+			GameCommentsXmlParser *comments  = [[GameCommentsXmlParser alloc] init];
+			comments.writeToPath = pageToLoad;
 			
+			NSError *error;
 			
-			NSLog( @"error loading comments: %@", [error localizedDescription] );
+			NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"http://www.boardgamegeek.com/xmlapi/boardgame/%@?comments=1", gameId]   ];
+			
+			BOOL success = [comments parseXMLAtURL:url parseError:&error];
+			
+			if ( !success ) {
+				
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Comments", @"Error Loading comments dialog title")
+																message:NSLocalizedString(@"There was an error loading comments for this game. Check that you have a network connection.", @"error loading comments message" )
+															   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
+				[alert show];	
+				
+				
+				NSLog( @"error loading comments: %@", [error localizedDescription] );
+			}
+			
 		}
-		
-	}
 	
 	
 
 	
-	[autoreleasepool release];
+	}
 	
 	// this is done to update the ui
 	[self performSelectorOnMainThread:@selector(loadComplete) withObject:self waitUntilDone:YES];	
@@ -126,13 +123,6 @@
     [super viewDidLoad];
 }
 
-- (void)dealloc {
-	[gameId release];
-	[pageToLoad release];
-	[loadingView release];
-	[webView release];
-    [super dealloc];
-}
 
 
 

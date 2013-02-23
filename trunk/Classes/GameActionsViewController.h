@@ -32,10 +32,10 @@
 }
 
 
-@property (nonatomic, retain ) FullGameInfo * fullGameInfo;
+@property (nonatomic, strong ) FullGameInfo * fullGameInfo;
 
-@property (nonatomic, retain ) UIButton * logPlayButton;
-@property (nonatomic, retain ) UIButton * safariButton;
+@property (nonatomic, strong ) UIButton * logPlayButton;
+@property (nonatomic, strong ) UIButton * safariButton;
 
 
 - (IBAction) openRecordAPlay;

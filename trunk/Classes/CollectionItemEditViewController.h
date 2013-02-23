@@ -30,11 +30,11 @@
 	NSString * gameTitle;
 }
 
-@property( nonatomic,retain) NSString * gameTitle;
+@property( nonatomic,strong) NSString * gameTitle;
 @property (nonatomic ) NSInteger gameId;
 
-@property (nonatomic, retain ) UIScrollView * scroller;
-@property (nonatomic, retain ) UIView * collectionForm;
+@property (nonatomic, strong ) UIScrollView * scroller;
+@property (nonatomic, strong ) UIView * collectionForm;
 
 - (IBAction) saveButtonPressed;
 

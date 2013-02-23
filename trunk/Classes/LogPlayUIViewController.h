@@ -41,10 +41,10 @@
 - (BOOL) confirmUserNameAndPassAvailable;
 
 
-@property (nonatomic,retain) UISegmentedControl * playCountController;
-@property (nonatomic,retain)  UIButton * logPlayButton;
-@property (nonatomic,retain)  UIDatePicker * datePicker;
-@property (nonatomic,retain) NSString * gameId;
-@property (nonatomic,retain) UIActivityIndicatorView * loadingView;
+@property (nonatomic,strong) UISegmentedControl * playCountController;
+@property (nonatomic,strong)  UIButton * logPlayButton;
+@property (nonatomic,strong)  UIDatePicker * datePicker;
+@property (nonatomic,strong) NSString * gameId;
+@property (nonatomic,strong) UIActivityIndicatorView * loadingView;
 
 @end

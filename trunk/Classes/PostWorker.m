@@ -41,13 +41,12 @@
 		
 		
 		postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-		[postString release];
 	}
 	
 	
     
 	// setup the request object
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:url]];
 	
 	
@@ -56,7 +55,6 @@
 		NSDictionary * cookieHeaders = [NSHTTPCookie requestHeaderFieldsWithCookies: requestCookies];
 		NSMutableDictionary * mutableCookieHeaders =[[NSMutableDictionary alloc] initWithDictionary:cookieHeaders];
 		[request setAllHTTPHeaderFields:mutableCookieHeaders];
-		[mutableCookieHeaders release];
 	}
 	
 	// add the params
@@ -81,7 +79,6 @@
 	NSError *error = nil;
 	
 	responseData = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
-	[responseData retain];
 	
 	/*
 #ifdef __DEBUGGING__
@@ -93,7 +90,6 @@
 	 
 	if ( error == nil && response != nil ) {
 		responseCookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[ (NSHTTPURLResponse*)response allHeaderFields] forURL:[NSURL URLWithString:url]];
-		[responseCookies retain];
 	}
 	
 	
@@ -106,15 +102,6 @@
 
 
 
-- (void) dealloc {	
-	[responseData release];
-	[url release];
-	[params release];
-	[urlConnection release];
-	[responseCookies release];
-	[requestCookies release];
-	[super dealloc];
-}
 
 - (id) init
 {

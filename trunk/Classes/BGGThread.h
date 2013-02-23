@@ -31,10 +31,10 @@
 	NSString	*lastPostDate;
 }
 
-@property (nonatomic, readwrite, retain) NSString *title;
-@property (nonatomic, readwrite, retain) NSString *threadURL;
-@property (nonatomic, readwrite, retain) NSString *threadId;
-@property (nonatomic, readwrite, retain) NSString *lastPoster;
-@property (nonatomic, readwrite, retain) NSString *lastPostDate;
+@property (nonatomic, readwrite, strong) NSString *title;
+@property (nonatomic, readwrite, strong) NSString *threadURL;
+@property (nonatomic, readwrite, strong) NSString *threadId;
+@property (nonatomic, readwrite, strong) NSString *lastPoster;
+@property (nonatomic, readwrite, strong) NSString *lastPostDate;
 
 @end

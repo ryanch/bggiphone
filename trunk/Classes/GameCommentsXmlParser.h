@@ -20,7 +20,7 @@
 	NSInteger commentCount;
 }
 
-@property (nonatomic,retain) NSString * writeToPath;
+@property (nonatomic,strong) NSString * writeToPath;
 
 - (void) addHTMLHeader;
 - (void) addComment: (NSString *) comment author: (NSString*)author;

@@ -16,14 +16,14 @@
 	
 	NSLog( @"starting operation for: %@", searchResult.imageURL );
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	[appDelegate cacheGameImageAtURL:searchResult.imageURL gameID:searchResult.gameId];
+		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+		[appDelegate cacheGameImageAtURL:searchResult.imageURL gameID:searchResult.gameId];
+		
+		[top100View performSelectorOnMainThread:@selector(nsOperationDidFinishLoadingResult:) withObject: searchResult waitUntilDone:YES];
 	
-	[top100View performSelectorOnMainThread:@selector(nsOperationDidFinishLoadingResult:) withObject: searchResult waitUntilDone:YES];
-	
-	[pool release];	
+	}	
 	
 }
 
@@ -35,19 +35,14 @@
 		searchResult = result;
 		top100View = view;
 		
-		[searchResult retain];
-		[top100View retain];
 		
 	}
 	return self;
 }
 
 - (void)dealloc {
-    [searchResult release];
 	searchResult = nil;
-	[top100View release]; 
 	top100View = nil;
-    [super dealloc];
 }
 
 

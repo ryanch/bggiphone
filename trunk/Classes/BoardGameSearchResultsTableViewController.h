@@ -93,9 +93,9 @@
 
 @property BGGSearchGameType searchGameType;
 
-@property (nonatomic, retain ) NSArray * resultsToDisplay;
+@property (nonatomic, strong ) NSArray * resultsToDisplay;
 
-@property (nonatomic, retain ) XmlSearchReader * currentSearch;
+@property (nonatomic, strong ) XmlSearchReader * currentSearch;
 
 @property (nonatomic) BGGResumeState currentResumeState;
 

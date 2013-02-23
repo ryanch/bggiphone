@@ -20,10 +20,8 @@
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 	
 
-	[currentUserComments release];
 	currentUserComments = [[NSMutableString alloc] initWithCapacity:10*1024];
 	
-	[otherUserComments release];
 	otherUserComments = [[NSMutableString alloc] initWithCapacity:25*1024];	
 	
 	commentCount = 0;
@@ -32,9 +30,7 @@
 	
 	inCommentTag = NO;
 	
-	[stringBuffer release];
 	stringBuffer = [NSMutableString string];
-	[stringBuffer retain];
 	
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:URL];
     // Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
@@ -63,29 +59,22 @@
 		[params setObject: otherUserComments forKey:@"#!otherComments#"];		
 		
 		NSString * pageText = [commentsTemplate allocMergeWithData:params];
-		[commentsTemplate release];
-		[params release];
 		
 
 		
-		[currentUserComments release];
 		currentUserComments = nil;	
 		
-		[otherUserComments release];
 		otherUserComments = nil;		
 		
 	
 		success =[pageText writeToFile:writeToPath	atomically:YES encoding:NSUTF8StringEncoding error:nil];
-		[pageText release];
 		
 
 	
 	}	
 	
-	[parser release];
 	
 	
-	[pageBuffer release];
 	pageBuffer = nil;
 		
 	return success;
@@ -110,9 +99,7 @@
 		
 		
 		
-		[author release];
 		author = (NSString*) [attributeDict objectForKey:@"username"];
-		[author retain];
 		inCommentTag = YES;
 		[stringBuffer setString:@""];
 	}
@@ -149,7 +136,6 @@
 			
 			[self addComment:comments author:author];
 			
-			[comments release];
 			
 			inCommentTag = NO;
 		}
@@ -157,20 +143,9 @@
 }
 
 
-- (void) dealloc
-{
-	[otherUserComments release];
-	[currentUserComments release];
-	[writeToPath release];
-	[pageBuffer release];
-	[author release];
-	[stringBuffer release];
-	[super dealloc];
-}
 
 
 - (void) addHTMLHeader {
-	[pageBuffer release];
 	pageBuffer = nil;
 	pageBuffer = [[NSMutableString alloc] initWithCapacity:35*1024];
 	[pageBuffer appendString:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0; user-scalable=no; width=device-width;\">"];

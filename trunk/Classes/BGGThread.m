@@ -30,25 +30,6 @@
 @synthesize lastPoster = lastPoster;
 @synthesize lastPostDate;
 
--(void) dealloc
-{
-	[title release];
-	title = nil;
-	
-	[threadURL release];
-	threadURL = nil;
-	
-	[threadId release];
-	threadId = nil;
-	
-	[lastPoster release];
-	lastPoster = nil;
-	
-	[lastPostDate release];
-	lastPostDate = nil;
-	
-	[super dealloc];
-}
 
 
 @end

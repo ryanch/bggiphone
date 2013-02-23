@@ -22,8 +22,8 @@
 -(void) startLoadingPage;
 -(void) loadComplete;
 
-@property (nonatomic, retain) NSString *  gameId;
-@property (nonatomic, retain)  UIWebView * webView;
-@property (nonatomic, retain)  UIActivityIndicatorView * loadingView;
+@property (nonatomic, strong) NSString *  gameId;
+@property (nonatomic, strong)  UIWebView * webView;
+@property (nonatomic, strong)  UIActivityIndicatorView * loadingView;
 
 @end

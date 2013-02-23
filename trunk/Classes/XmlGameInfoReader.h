@@ -32,8 +32,8 @@
 }
 
 
-@property (nonatomic, retain) NSMutableString * stringBuffer;
-@property (nonatomic, retain) FullGameInfo * gameInfo;
+@property (nonatomic, strong) NSMutableString * stringBuffer;
+@property (nonatomic, strong) FullGameInfo * gameInfo;
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error;
 

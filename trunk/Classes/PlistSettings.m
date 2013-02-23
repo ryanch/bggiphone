@@ -32,7 +32,6 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	myPlistPath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%@.plist", plistName] ];
-	[myPlistPath retain];
 	
 	NSFileManager *fileManger = [NSFileManager defaultManager];
 	if ( ![fileManger fileExistsAtPath:myPlistPath] ) {
@@ -47,7 +46,6 @@
 	
 	// now load
 	dict = [NSMutableDictionary dictionaryWithContentsOfFile: myPlistPath];
-	[dict retain];
 	
 	return self;
 	
@@ -59,12 +57,6 @@
 }
 
 
-- (void) dealloc
-{
-	[myPlistPath release];
-	[dict release];
-	[super dealloc];
-}
 
 
 

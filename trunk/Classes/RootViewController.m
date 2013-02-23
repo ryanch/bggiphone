@@ -82,7 +82,7 @@
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		
-        cell =  [[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease ];
+        cell =  [[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -155,7 +155,6 @@
 	
 	self.tableView.tableHeaderView = headerView;
 	
-	[headerView release];
 	
 	
 	//UIImageView * footerView = [[UIImageView alloc] initWithImage:  [UIImage imageNamed:@"footer.png"]];
@@ -241,9 +240,6 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 @end

@@ -45,8 +45,8 @@
 }
 
 @property (nonatomic, copy) NSString * primaryTitle;
-@property (nonatomic, retain) NSString *  gameId;
+@property (nonatomic, strong) NSString *  gameId;
 @property int yearPublished;
-@property (nonatomic, retain) NSArray * alternateNames;
-@property (nonatomic, readwrite, retain) NSString *imageURL;
+@property (nonatomic, strong) NSArray * alternateNames;
+@property (nonatomic, readwrite, strong) NSString *imageURL;
 @end

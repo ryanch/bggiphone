@@ -61,15 +61,15 @@
 }
 
 
-@property (nonatomic, retain) NSMutableArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 @property int numberGamesFound;
-@property (nonatomic, retain) BBGSearchResult * currentResult;
-@property (nonatomic, retain) NSMutableString * stringBuffer;
+@property (nonatomic, strong) BBGSearchResult * currentResult;
+@property (nonatomic, strong) NSMutableString * stringBuffer;
 @property BOOL currentNameIsPrimary;
-@property (nonatomic, retain) NSMutableArray *gameNames;
+@property (nonatomic, strong) NSMutableArray *gameNames;
 @property BOOL inNameTag;
 @property BOOL parseItemFormat;
-@property (nonatomic, retain ) NSURL * searchURL;
+@property (nonatomic, strong ) NSURL * searchURL;
 
 ///
 /// start the search at the url that is passed in

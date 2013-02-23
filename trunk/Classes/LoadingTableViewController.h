@@ -30,7 +30,7 @@
 	
 }
 
-@property (nonatomic, readonly, retain) UITableView *tableView;
+@property (nonatomic, readonly, strong) UITableView *tableView;
 
 
 // Protected methods

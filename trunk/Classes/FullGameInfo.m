@@ -73,21 +73,6 @@
 }
 
 
-- (void) dealloc
-{
-	
-
-	[average release];
-	[bayesaverage release];
-	[averageweight release];
-	
-	
-	[title release];
-	[imageURL release];
-	[gameId release];
-	[desc release];
-	[super dealloc];
-}
 
 
 @end

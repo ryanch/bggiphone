@@ -30,6 +30,6 @@
 	BGGForum	*forum;
 }
 
-@property (nonatomic, retain ) BGGForum * forum;
+@property (nonatomic, strong ) BGGForum * forum;
 
 @end

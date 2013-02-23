@@ -30,9 +30,9 @@
 	NSString	*postDate;
 }
 
-@property (nonatomic, readwrite, retain) NSString *contents;
-@property (nonatomic, readwrite, retain) NSString *nickname;
-@property (nonatomic, readwrite, retain) NSString *postDate;
-@property (nonatomic, readwrite, retain) NSString *username;
+@property (nonatomic, readwrite, strong) NSString *contents;
+@property (nonatomic, readwrite, strong) NSString *nickname;
+@property (nonatomic, readwrite, strong) NSString *postDate;
+@property (nonatomic, readwrite, strong) NSString *username;
 
 @end

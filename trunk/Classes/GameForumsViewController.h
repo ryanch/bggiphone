@@ -30,6 +30,6 @@
 	FullGameInfo	*fullGameInfo;
 }
 
-@property (nonatomic, retain ) FullGameInfo * fullGameInfo;
+@property (nonatomic, strong ) FullGameInfo * fullGameInfo;
 
 @end

@@ -68,7 +68,6 @@
 - (DownloadGameInfoOperation*) cancelExistingCreateNewDownloadGameInfoOperation {
 	if ( downloadOperation != nil ) {
 		[downloadOperation cancel];
-		[downloadOperation release];
 	}
 	
 	self.downloadOperation = [[DownloadGameInfoOperation alloc] init];
@@ -87,8 +86,8 @@
 	CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, NULL, kCFStringEncodingUTF8);
 	
 	
-	NSString * result = (NSString*)urlString;
-	[result autorelease];
+	NSString * result = (__bridge NSString*)urlString;
+	//[result autorelease];
 	return result;
 }
 
@@ -120,7 +119,6 @@
 	
 	
 	
-	[rootView release];
 	
 	
 	[window addSubview:[navigationController view]];
@@ -173,7 +171,7 @@
 		BBGSearchResult * result = [[BBGSearchResult alloc] init];
 		result.primaryTitle = NSLocalizedString( @"Loading..." , @"loading text while loading games" );
 		result.gameId = resumeData;
-		[result autorelease];
+		//[result autorelease];
 		[self loadGameFromSearchResult:result];
 		
 	}
@@ -215,38 +213,33 @@
 	
 	UITabBarController * tabBarController = [[UITabBarController alloc] init];
 	
-	GameInfoViewController *gameInfo = [[[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil] autorelease];
+	GameInfoViewController *gameInfo = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameInfo.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
 	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Info", @"title for the info screen for a board game" )	image:[UIImage imageNamed:@"info.png"] tag:0];
 	gameInfo.tabBarItem = infoItem;
-	[infoItem release];
 	
-	GameInfoViewController *gameStats = [[[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil] autorelease];
+	GameInfoViewController *gameStats = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameStats.title = NSLocalizedString( @"Stats", @"title for the stats screen for a board game" );
 	UITabBarItem * statsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Stats", @"title for the stats screen for a board game" )	image:[UIImage imageNamed:@"stats.png"] tag:0];
 	gameStats.tabBarItem = statsItem;
-	[statsItem release];
 	
 	
-	CommentsUIViewController *gameComments = [[[CommentsUIViewController alloc] initWithNibName:@"GameComments" bundle:nil] autorelease];
+	CommentsUIViewController *gameComments = [[CommentsUIViewController alloc] initWithNibName:@"GameComments" bundle:nil];
 	gameComments.title = NSLocalizedString( @"Comments", @"title for the comments screen for a board game");
 	UITabBarItem * commentsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Comments", @"title for the comments screen for a board game")	image:[UIImage imageNamed:@"comments.png"] tag:0];
 	gameComments.tabBarItem = commentsItem;
 	gameComments.gameId = searchResult.gameId;
-	[commentsItem release];
 	
 	
-	GameActionsViewController *gameActions  = [[[GameActionsViewController alloc] initWithNibName:@"GameActions" bundle:nil] autorelease];	
+	GameActionsViewController *gameActions  = [[GameActionsViewController alloc] initWithNibName:@"GameActions" bundle:nil];	
 	gameActions.title = NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game");
 	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game")	image:[UIImage imageNamed:@"actions.png"] tag:0];
 	gameActions.tabBarItem = actionsItem;
-	[actionsItem release];
 	
-	GameForumsViewController *gameForums  = [[[GameForumsViewController alloc] init] autorelease];	
+	GameForumsViewController *gameForums  = [[GameForumsViewController alloc] init];	
 	gameForums.title = NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game");
 	UITabBarItem * forumsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game") image:[UIImage imageNamed:@"forums.png"] tag:0];
 	gameForums.tabBarItem = forumsItem;
-	[forumsItem release];
 	
 
 	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments, gameActions, gameForums, nil];
@@ -255,7 +248,6 @@
 	
 	tabBarController.title = searchResult.primaryTitle;
 	[self.navigationController pushViewController:tabBarController		animated:YES];
-	[tabBarController release];
 	
 	
 	
@@ -312,7 +304,6 @@
 														message:NSLocalizedString(@"Please enter your username and password to modify your collection.", @"please give your username and password to modify your collection.")
 													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		[alert show];	
-		[alert release];	
 		
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
@@ -335,7 +326,6 @@
 														message:NSLocalizedString(@"Please enter your username, to view your data.", @"please give your username")
 													   delegate:self cancelButtonTitle:NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
 		[alert show];	
-		[alert release];	
 		
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
@@ -368,13 +358,11 @@
 	BOOL success = [reader parseXMLAtURL:url	parseError:nil];
 
 	if ( !success ) {
-		[reader release];	
 		return nil;
 	}
 	
 	fullGameInfo = reader.gameInfo;
-	[fullGameInfo retain];
-	[fullGameInfo autorelease];
+	//[fullGameInfo autorelease];
 	fullGameInfo.isCached = YES;
 
 	fullGameInfo.gameId = gameId;
@@ -387,7 +375,6 @@
 	// then save to db
 	[self.dbAccess saveFullGameInfo:fullGameInfo];
 	
-	[reader release];
 	
 	
 	return fullGameInfo;
@@ -502,7 +489,7 @@
 	//UIGraphicsEndImageContext();
 	CGImageRef newCGImage = CGBitmapContextCreateImage(bitmapContext);
 	CGContextRelease(bitmapContext);
-	UIImage *newImage = [[[UIImage alloc] initWithCGImage:newCGImage] autorelease];
+	UIImage *newImage = [[UIImage alloc] initWithCGImage:newCGImage];
 	CGImageRelease(newCGImage);
 	
 	NSData * thumbData = UIImagePNGRepresentation( newImage );
@@ -511,8 +498,6 @@
 	
 	// clean up
 	// NOTE newImage is autorelease
-	[image release];
-	[imageData release];
 }
 
 
@@ -643,7 +628,7 @@
 #ifdef PINCH_ENABLED		
 		[[Beacon shared] startSubBeaconWithName:@"browse top 100 menu click" timeSession:NO];
 #endif 		
-		BrowseTop100ViewController *browseTop100 = [[[BrowseTop100ViewController alloc] init ] autorelease];
+		BrowseTop100ViewController *browseTop100 = [[BrowseTop100ViewController alloc] init ];
 		[navigationController pushViewController:browseTop100 animated:YES];
 	}
 	
@@ -663,7 +648,6 @@
 			colDl.title = NSLocalizedString( @"Collection Download", @"Collection download title" );
 			colDl.parentNav = navigationController;
 			[navigationController pushViewController:colDl 		animated:YES];
-			[colDl release];
 			
 			
 			return;
@@ -706,7 +690,6 @@
 		about.pageToLoad = @"about";
 		about.title = NSLocalizedString( @"About" , @"about menu item" );
 		[navigationController pushViewController:about	animated:YES]; 
-		[about release];
 	}
 	else if ( menuItem == OWNED_MENU_CHOICE || menuItem== WISH_MENU_CHOICE || menuItem == WANT_TO_PLAY_CHOICE || menuItem == GAMES_PLAYED_MENU_CHOICE) { 
 		
@@ -805,8 +788,6 @@
 		search.searchURL = url;
 		[resultsViewer doSearch: search];
 		
-		[search release];
-		[resultsViewer release];		
 		
 		
 		
@@ -818,14 +799,5 @@
 
 
 
-- (void)dealloc {
-	[authCookies release];
-	[dbAccess release];
-	[navigationController release];
-	[appSettings release];
-	[window release];
-	[downloadOperation release];
-	[super dealloc];
-}
 
 @end

@@ -33,9 +33,9 @@
 	BGGThread	*thread;
 }
 
-@property (nonatomic, readwrite, retain) UIWebView * webView;
-@property (nonatomic, readwrite, retain) UIActivityIndicatorView * loadingView;
+@property (nonatomic, readwrite, strong) UIWebView * webView;
+@property (nonatomic, readwrite, strong) UIActivityIndicatorView * loadingView;
 
-@property (nonatomic, readwrite, retain) BGGThread *thread;
+@property (nonatomic, readwrite, strong) BGGThread *thread;
 
 @end

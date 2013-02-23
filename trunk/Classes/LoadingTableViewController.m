@@ -68,9 +68,8 @@
 		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
 		
 		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
-		[[cell retain] autorelease];
+		//[[cell retain] autorelease];
 		
-		[loadingCell release];
 		
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
@@ -79,7 +78,7 @@
 	
 	if(items != nil && [items count] == 0) // No items
 	{
-		UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+		UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 		
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
 		cell.textLabel.textColor = [UIColor grayColor];
@@ -93,7 +92,7 @@
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:[self cellStyle] reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:[self cellStyle] reuseIdentifier:CellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	
@@ -116,7 +115,7 @@
 
 -(void) loadView
 {
-	UITableView *tableView = [[[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStylePlain] autorelease];
+	UITableView *tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStylePlain];
 	
 	tableView.dataSource = self;
 	tableView.delegate = self;

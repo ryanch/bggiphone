@@ -101,51 +101,48 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 
-	BGGConnect * bggConnect = [[BGGConnect alloc] init];
-	
+		BGGConnect * bggConnect = [[BGGConnect alloc] init];
+		
 
-	bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
-	bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
-	
-	BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: datePicker.date numPlays: playCount ];
-	
-	if ( response == SUCCESS ) {
-		/*
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
-														message:NSLocalizedString(@"Your play was logged.", @"Your play was logged")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];		
-		 */
+		bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+		bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
 		
-		playLogLabel.hidden = NO;
+		BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: datePicker.date numPlays: playCount ];
 		
-	}
-	else if ( response == CONNECTION_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else if ( response == AUTH_ERROR ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
-														message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
+		if ( response == SUCCESS ) {
+			/*
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
+															message:NSLocalizedString(@"Your play was logged.", @"Your play was logged")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+			[alert release];		
+			 */
+			
+			playLogLabel.hidden = NO;
+			
+		}
+		else if ( response == CONNECTION_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
+		else if ( response == AUTH_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];	
+		}
 
+			
 		
+		
+		
+		[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
 	
-	[bggConnect	 release];
-	
-	
-	[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
-	
-	[autoreleasepool release];
+	}
 	
 	
 	/*
@@ -321,14 +318,6 @@
 }
 
 
-- (void)dealloc {
-	[loadingView release];
-	[gameId release];
-	[ playCountController release];
-	[ logPlayButton release];
-	[ datePicker release];
-    [super dealloc];
-}
 
 
 @end

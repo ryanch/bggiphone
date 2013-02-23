@@ -87,7 +87,6 @@
 	
 	self.webView.delegate = self;
 	[self.webView loadRequest: url ];
-	[url release];
 	
 	
     [super viewDidLoad];
@@ -111,11 +110,6 @@
 }
 
 
-- (void)dealloc {
-	[pageToLoad release];
-	[webView release];
-    [super dealloc];
-}
 
 
 @end

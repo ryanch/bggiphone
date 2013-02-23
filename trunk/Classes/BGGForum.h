@@ -29,8 +29,8 @@
 	NSString *forumId;
 }
 
-@property (nonatomic, readwrite, retain) NSString *name;
-@property (nonatomic, readwrite, retain) NSString *forumURL;
-@property (nonatomic, readwrite, retain) NSString *forumId;
+@property (nonatomic, readwrite, strong) NSString *name;
+@property (nonatomic, readwrite, strong) NSString *forumURL;
+@property (nonatomic, readwrite, strong) NSString *forumId;
 
 @end

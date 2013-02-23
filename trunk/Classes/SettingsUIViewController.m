@@ -155,11 +155,6 @@
 }
 
 
-- (void)dealloc {
-	[passwordTextField release];
-	[userNameTextField release];
-    [super dealloc];
-}
 
 
 
@@ -173,7 +168,7 @@
 + (SettingsUIViewController*) buildSettingsUIViewController {
 	SettingsUIViewController * controller = [[SettingsUIViewController alloc] initWithNibName:@"Settings" bundle:nil];
 	controller.title = NSLocalizedString( @"Settings", @"settings title" );
-	[controller autorelease];
+	//[controller autorelease];
 	return controller;
 }
 

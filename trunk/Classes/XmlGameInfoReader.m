@@ -46,7 +46,6 @@
         *error =  [parser parserError];
     }
     
-    [parser release];
 	
 	
 	return success;
@@ -114,100 +113,84 @@
 	if ( [elementName isEqualToString:@"description" ] ) {
 		NSString *desc = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.desc = desc;
-		[desc release];
 	}
 	
 	else if ( [elementName isEqualToString:@"thumbnail" ]  ) {
 		NSString *thumb = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.imageURL = thumb;
-		[thumb	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"usersrated" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.usersrated = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"average" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.average = value;
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"bayesaverage" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.bayesaverage = value;
-		[value	release];
 	}
 	
 	
 	else if ( [elementName isEqualToString:@"playingtime" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.playingTime = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"maxplayers" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.maxPlayers = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"minplayers" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.minPlayers = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"rank" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.rank = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"numweights" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.numweights = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"averageweight" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.averageweight = value;
-		[value	release];
 	}
 	
 	
 	else if ( captureGameTitle == YES && [elementName isEqualToString:@"name" ]  ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.title = value;
-		[value	release];
 	}
 	
 	
 	else if ( [elementName isEqualToString:@"owned" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.owned = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"trading" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.trading = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"wanting" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.wanting = [value intValue];
-		[value	release];
 	}
 	
 	else if ( [elementName isEqualToString:@"wishing" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.wishing = [value intValue];
-		[value	release];
 	}
 	
 	
@@ -237,11 +220,6 @@
 }
 
 
-- (void)dealloc {
-	[gameInfo release];
-	[stringBuffer release];
-	[super dealloc];
-}
 
 
 

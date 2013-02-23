@@ -74,7 +74,7 @@
 {
 	BGGThread *thread = [items objectAtIndex:indexPath.row];
 	
-	MessageThreadViewController *threadViewController = [[[MessageThreadViewController alloc] init] autorelease];
+	MessageThreadViewController *threadViewController = [[MessageThreadViewController alloc] init];
 	threadViewController.title = thread.title;
 	threadViewController.thread = thread;
 	
@@ -93,11 +93,5 @@
 	cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 }
 
--(void) dealloc
-{
-	[forum release];
-	
-	[super dealloc];
-}
 
 @end

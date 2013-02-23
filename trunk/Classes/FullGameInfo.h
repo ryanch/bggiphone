@@ -52,11 +52,11 @@
 @property BOOL isCached;
 
 @property NSInteger usersrated;
-@property (nonatomic,retain) NSString *  average;
-@property (nonatomic,retain) NSString *  bayesaverage;
+@property (nonatomic,strong) NSString *  average;
+@property (nonatomic,strong) NSString *  bayesaverage;
 @property NSInteger rank;
 @property NSInteger numweights;
-@property (nonatomic,retain)NSString *  averageweight;
+@property (nonatomic,strong)NSString *  averageweight;
 @property NSInteger owned;
 @property NSInteger minPlayers;
 @property NSInteger maxPlayers;
@@ -64,9 +64,9 @@
 
 
 
-@property (nonatomic,retain) NSString * title;
-@property (nonatomic,retain) NSString * imageURL;
-@property (nonatomic,retain) NSString * gameId;
-@property (nonatomic,retain) NSString * desc;
+@property (nonatomic,strong) NSString * title;
+@property (nonatomic,strong) NSString * imageURL;
+@property (nonatomic,strong) NSString * gameId;
+@property (nonatomic,strong) NSString * desc;
 
 @end

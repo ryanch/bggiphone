@@ -104,7 +104,6 @@
 	[imageDownloadQueue addOperation:operation];
 	
 	
-	[operation release];
 	
 	//[NSThread detachNewThreadSelector:@selector(backgroundImageLoad:) toTarget:self withObject:result];
 }
@@ -116,10 +115,8 @@
 {
 	[super viewWillAppear:animated];
 	
-	[imagesLoading release];
 	imagesLoading = [[NSMutableSet alloc] init];	
 	
-	[imageDownloadQueue release];
 	imageDownloadQueue = [[NSOperationQueue alloc] init];
 	[imageDownloadQueue setMaxConcurrentOperationCount:2];
 	
@@ -193,12 +190,5 @@
 	return self;
 }
 
--(void) dealloc
-{
-	[imagesLoading release];
-	[imageDownloadQueue release];
-	
-	[super dealloc];
-}
 
 @end

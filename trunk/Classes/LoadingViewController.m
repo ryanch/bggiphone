@@ -41,7 +41,6 @@
 		
 		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 		
-		[refreshButton release];
 	}	
 	
 	self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -60,7 +59,6 @@
 													message:[NSString stringWithFormat:NSLocalizedString(@"Download failed: %@.", @"download failed error."), [error localizedDescription]]
 												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
 	[alert show];	
-	[alert release];
 	
 	[self updateViews];
 	
@@ -75,7 +73,6 @@
 													message:[NSString stringWithFormat:NSLocalizedString(@"Error processing markup from BGG site.", @"Error reading markup from BGG site.")]
 												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
 	[alert show];	
-	[alert release];
 	
 	[self updateViews];
 	
@@ -83,7 +80,6 @@
 }
 
 - (void) userRequestedReload {
-	[items release];
 	items = nil;
 	[self clearCachedData];
 	[self startLoading];
@@ -94,8 +90,7 @@
 {
 	loading = NO;
 	
-	[items release];
-	items = [results retain];
+	items = results;
 	
 	[self updateViews];
 }
@@ -138,9 +133,9 @@
 	if(cancelLoading)
 		return;
 	
-	NSString *document = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease];
+	NSString *document = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	
-	BGGHTMLScraper *htmlScraper = [[[BGGHTMLScraper alloc] init] autorelease];
+	BGGHTMLScraper *htmlScraper = [[BGGHTMLScraper alloc] init];
 	NSArray *results = [self resultsFromDocument:document withHTMLScraper:htmlScraper];
 	
 	if(cancelLoading)
@@ -160,11 +155,11 @@
 
 -(void) backgroundLoadThread
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	[self backgroundLoad];
+		[self backgroundLoad];
 	
-	[pool release];
+	}
 	
 	[NSThread exit];
 }
@@ -299,11 +294,5 @@
 	[NSThread detachNewThreadSelector:@selector(backgroundLoadThread) toTarget:self withObject:nil];
 }
 
--(void) dealloc
-{
-	[items release];
-	
-	[super dealloc];
-}
 
 @end

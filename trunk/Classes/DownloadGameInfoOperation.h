@@ -40,12 +40,12 @@
 	FullGameInfo * fullGameInfo;
 }
 
-@property (nonatomic, retain) UITabBarController * tabBarController;
-@property (nonatomic, retain) GameInfoViewController * statsController;
-@property (nonatomic, retain) GameInfoViewController * infoController;
-@property (nonatomic, retain) GameActionsViewController * actionsController;
-@property (nonatomic, retain) GameForumsViewController * forumsController;
-@property (nonatomic, retain) BBGSearchResult * searchResult;
+@property (nonatomic, strong) UITabBarController * tabBarController;
+@property (nonatomic, strong) GameInfoViewController * statsController;
+@property (nonatomic, strong) GameInfoViewController * infoController;
+@property (nonatomic, strong) GameActionsViewController * actionsController;
+@property (nonatomic, strong) GameForumsViewController * forumsController;
+@property (nonatomic, strong) BBGSearchResult * searchResult;
 
 - (void) doTheWork;
 

@@ -30,9 +30,9 @@
 }
 
 //! the is the ui view to load the page into
-@property (nonatomic,retain) UIWebView *webView;
+@property (nonatomic,strong) UIWebView *webView;
 
 //! this is the page to load
-@property (nonatomic,retain) NSString *pageToLoad;
+@property (nonatomic,strong) NSString *pageToLoad;
 
 @end

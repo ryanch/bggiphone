@@ -29,9 +29,9 @@
 	IBOutlet UIButton * testButton;
 }
 
-@property (nonatomic, retain)  UITextField * userNameTextField;
-@property (nonatomic, retain)  UITextField * passwordTextField;
-@property (nonatomic, retain)  UIButton * testButton;
+@property (nonatomic, strong)  UITextField * userNameTextField;
+@property (nonatomic, strong)  UITextField * passwordTextField;
+@property (nonatomic, strong)  UIButton * testButton;
 
 + (SettingsUIViewController*) buildSettingsUIViewController;
 

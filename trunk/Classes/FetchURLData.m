@@ -28,9 +28,7 @@
 @synthesize mode;
 
 - (void) startRequest: (NSURLRequest *) request {
-	[receivedData release];
-	[theConnection release];
-	receivedData=[[NSMutableData data] retain];	
+	receivedData=[NSMutableData data];	
 	
 	
 	theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -38,7 +36,6 @@
 
 - (void) cancel {
 	[theConnection cancel];
-	[theConnection release];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -50,8 +47,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	[theConnection release];
-	[receivedData release];
 	NSLog( @"%@", [error localizedDescription] );
 }
 
@@ -63,16 +58,9 @@
 	}
 	
 	
-	[connection release];
-    [receivedData release];
 }
 
 
-- (void) dealloc
-{
-	[receivedData release];
-	[super dealloc];
-}
 
 - (void) handleSearchResults {
 		

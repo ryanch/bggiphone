@@ -98,13 +98,6 @@
 }
 
 
-- (void)dealloc {
-	[fullGameInfo release];
-	[logPlayButton release];
-	[safariButton release];
-	[modifyButton release];
-    [super dealloc];
-}
 
 
 - (IBAction) openGameInSafari {
@@ -129,7 +122,6 @@
 	
 	
 	
-	[web release];
 	
 }
 
@@ -148,7 +140,6 @@
 	
 	[appDelegate.navigationController pushViewController: logPlay animated: YES];
 	
-	[logPlay release];
 }
 
 
@@ -165,7 +156,6 @@
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	[appDelegate.navigationController pushViewController: col animated: YES];
 	
-	[col release];
 	
 	
 }

@@ -57,21 +57,21 @@
 	[NSThread sleepForTimeInterval:1.0];
 
 	
-	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	
-	fullGameInfo = [appDelegate getFullGameInfoByGameIdFromBGG:searchResult.gameId];	
+		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+		
+		fullGameInfo = [appDelegate getFullGameInfoByGameIdFromBGG:searchResult.gameId];	
 
-		
-		
-	if ( [self isCancelled] == NO ) {
-		[self performSelectorOnMainThread:@selector(updateControllers) withObject:self waitUntilDone:YES];	
+			
+			
+		if ( [self isCancelled] == NO ) {
+			[self performSelectorOnMainThread:@selector(updateControllers) withObject:self waitUntilDone:YES];	
+		}
+	
+	
 	}
-	
-	
-	[autoreleasepool release];
 	
 
 	
@@ -93,7 +93,6 @@
 														message:NSLocalizedString(@"Error downloading game information. Check your network connection. It is also possible that the boardgamegeek.com website is down.", @"error download game.")
 													   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 		[alert show];	
-		[alert release];
 		
 		
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -143,18 +142,6 @@
 	return isDone;
 }
 
-- (void) dealloc
-{
-	[tabBarController release];
-	[fullGameInfo release];
-	[statsController release];
-	[infoController release];
-	[actionsController release];
-	[searchResult release];	
-	[forumsController release];
-	
-	[super dealloc];
-}
 
 
 

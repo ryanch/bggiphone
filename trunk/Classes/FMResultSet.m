@@ -42,7 +42,7 @@
     [rs setStatement:statement];
     [rs setParentDB:aDB];
     
-    return [rs autorelease];
+    return rs;
 }
 
 - (id)init {
@@ -58,19 +58,15 @@
 - (void)dealloc {
     [self close];
     
-    [query release];
     query = nil;
     
-    [columnNameToIndexMap release];
     columnNameToIndexMap = nil;
     
-	[super dealloc];
 }
 
 - (void) close {
     
     [statement reset];
-    [statement release];
     statement = nil;
     
     [parentDB setInUse:NO];
@@ -341,8 +337,6 @@
 }
 
 - (void)setQuery:(NSString *)value {
-    [value retain];
-    [query release];
     query = value;
 }
 
@@ -351,8 +345,6 @@
 }
 
 - (void)setColumnNameToIndexMap:(NSMutableDictionary *)value {
-    [value retain];
-    [columnNameToIndexMap release];
     columnNameToIndexMap = value;
 }
 
@@ -362,8 +354,7 @@
 
 - (void)setStatement:(FMStatement *)value {
     if (statement != value) {
-        [statement release];
-        statement = [value retain];
+        statement = value;
     }
 }
 

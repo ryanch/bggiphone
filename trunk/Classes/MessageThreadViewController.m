@@ -82,10 +82,10 @@
 		[params setObject:self.thread.title forKey:@"#!title#"];
 		[params setObject:messagesHTML forKey:@"#!messages#"];
 		
-		HtmlTemplate *messagesTemplate = [[[HtmlTemplate alloc] initWithFileName:templateFilePath] autorelease];
+		HtmlTemplate *messagesTemplate = [[HtmlTemplate alloc] initWithFileName:templateFilePath];
 		
 		NSString * pageHTML = [messagesTemplate allocMergeWithData:params];
-		[pageHTML autorelease]; // Against Cocoa conventions...
+		//[pageHTML autorelease]; // Against Cocoa conventions...
 		
 		
 		[loadingView stopAnimating];
@@ -130,13 +130,5 @@
 	return self;
 }
 
--(void) dealloc
-{
-	[thread release];
-	[loadingView release];
-	[webView release];
-	
-	[super dealloc];
-}
 
 @end

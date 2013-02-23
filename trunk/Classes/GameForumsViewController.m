@@ -60,7 +60,7 @@
 {
 	BGGForum *forum = [items objectAtIndex:indexPath.row];
 	
-	ForumThreadsViewController *threadsViewController = [[[ForumThreadsViewController alloc] init] autorelease];
+	ForumThreadsViewController *threadsViewController = [[ForumThreadsViewController alloc] init];
 	threadsViewController.title = forum.name;
 	threadsViewController.forum = forum;
 	[threadsViewController startLoading];

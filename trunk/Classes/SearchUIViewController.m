@@ -99,8 +99,6 @@
 	search.searchURL = url;
 	[resultsViewer doSearch: search];
 	
-	[search release];
-	[resultsViewer release];		
 	
 	
 	
@@ -127,7 +125,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }	
 	
@@ -183,7 +181,6 @@
 	
 	
 	// dump the current results
-	[localDbSearchResults release];
 	localDbSearchResults = nil;
 	
 	
@@ -194,7 +191,6 @@
 	// see if we have new results
 	if ( results != nil ) {
 		localDbSearchResults = results;
-		[localDbSearchResults retain];
 	}
 	
 	
@@ -218,17 +214,11 @@
 }
 
 
-- (void)dealloc {
-	[localDbSearchResults release];
-	[searchBar release];
-	[tableView release];
-    [super dealloc];
-}
 
 + (SearchUIViewController*) buildSearchUIViewController {
 	SearchUIViewController * controller = [[SearchUIViewController alloc] initWithNibName:@"Search" bundle:nil];
 	controller.title = NSLocalizedString( @"Search", @"search title" );
-	[controller autorelease];
+	//[controller autorelease];
 	return controller;
 }
 

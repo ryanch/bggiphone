@@ -22,11 +22,11 @@
 }
 
 
-@property (nonatomic, retain) UILabel * currentItemLabel;
-@property (nonatomic, retain) UINavigationController *parentNav;
-@property (nonatomic, retain) UIProgressView * progressView;
-@property (nonatomic, retain) UIButton * cancelButton;
-@property (nonatomic, retain) UILabel * directionsLabel;
+@property (nonatomic, strong) UILabel * currentItemLabel;
+@property (nonatomic, strong) UINavigationController *parentNav;
+@property (nonatomic, strong) UIProgressView * progressView;
+@property (nonatomic, strong) UIButton * cancelButton;
+@property (nonatomic, strong) UILabel * directionsLabel;
 
 - (void) startLoading;
 

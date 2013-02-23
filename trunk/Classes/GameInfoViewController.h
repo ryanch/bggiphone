@@ -38,8 +38,8 @@
 - (void) updateForGameStats: (FullGameInfo*) newGameInfo;
 
 
-@property (nonatomic, retain)  UIWebView * webView;
-@property (nonatomic, retain)  UIActivityIndicatorView * loadingView;
-@property (nonatomic, retain)  FullGameInfo * gameInfo;
+@property (nonatomic, strong)  UIWebView * webView;
+@property (nonatomic, strong)  UIActivityIndicatorView * loadingView;
+@property (nonatomic, strong)  FullGameInfo * gameInfo;
 
 @end

@@ -89,10 +89,9 @@
 	
 	// Merge the template
 	NSString * pageText = [gameTemplate allocMergeWithData:params];
-	[gameTemplate release];
 
 	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[pageText autorelease];
+	//[pageText autorelease];
 	
 	// hide and show
 	[loadingView stopAnimating];
@@ -115,7 +114,6 @@
 	
 	[webView loadHTMLString:pageText baseURL:  baseURL   ];	
 	
-	[params release];
 	
 }
 
@@ -202,7 +200,6 @@
 	[params setObject: imageTag	forKey: @"#!gameImage#" ];
 	
 	[params setObject: starBuffer	forKey: @"#!stars#" ];
-	[starBuffer release];
 	
 	
 	// stringByReplacingOccurrencesOfString:withString:
@@ -213,11 +210,10 @@
 	
 	// Merge the template
 	NSString * pageText = [gameTemplate allocMergeWithData:params];
-	[gameTemplate release];
 	
 	
 	[pageText writeToFile:tempFilePath	atomically:YES encoding:  NSUTF8StringEncoding error: nil];
-	[pageText autorelease];
+	//[pageText autorelease];
 	
 
 	
@@ -240,7 +236,6 @@
 	[webView loadHTMLString:pageText baseURL:  baseURL   ];
 	
 
-	[params release];
 }
 
 
@@ -262,7 +257,7 @@
 			BBGSearchResult * result = [[BBGSearchResult alloc] init];
 			result.primaryTitle = NSLocalizedString( @"Loading...", @"loading text, as in content is loading" );
 			result.gameId = gameId;
-			[result autorelease];
+			//[result autorelease];
 			
 			BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 			[appDelegate loadGameFromSearchResult:result];
@@ -305,12 +300,6 @@
     [super viewDidLoad];
 }
 
-- (void)dealloc {
-	[gameInfo release];
-	[loadingView release];
-	[webView release];
-    [super dealloc];
-}
 
 
 @end

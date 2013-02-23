@@ -122,7 +122,7 @@
 		
 		
 		
-		BGGMessage *message = [[[BGGMessage alloc] init] autorelease];
+		BGGMessage *message = [[BGGMessage alloc] init];
 		
 		message.username = username;
 		message.nickname = [nickname stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -191,7 +191,7 @@
 		if([threadURLComponents count] >= 3)
 			threadId = [threadURLComponents objectAtIndex:2];
 		
-		BGGThread *thread = [[[BGGThread alloc] init] autorelease];
+		BGGThread *thread = [[BGGThread alloc] init];
 		
 		thread.title = threadTitle;
 		thread.threadURL = threadURL;
@@ -248,7 +248,7 @@
 		if([forumURLComponents count] >= 3)
 			forumId = [forumURLComponents objectAtIndex:2];
 		
-		BGGForum *forum = [[[BGGForum alloc] init] autorelease];
+		BGGForum *forum = [[BGGForum alloc] init];
 		
 		forum.name = forumName;
 		forum.forumURL = forumURL;
@@ -363,7 +363,7 @@
 		ahrefStart.location = NSMaxRange(ahrefURLEnd);
 		
 		
-		BBGSearchResult *result = [[[BBGSearchResult alloc] init] autorelease];
+		BBGSearchResult *result = [[BBGSearchResult alloc] init];
 		
 		result.gameId = gameId;
 		result.primaryTitle = name;

@@ -28,18 +28,5 @@
 @synthesize forumURL;
 @synthesize forumId;
 
--(void) dealloc
-{
-	[name release];
-	name = nil;
-	
-	[forumURL release];
-	forumURL = nil;
-	
-	[forumId release];
-	forumId = nil;
-	
-	[super dealloc];
-}
 
 @end

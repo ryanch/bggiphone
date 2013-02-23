@@ -28,7 +28,7 @@
 }
 
 //! this is where the settings are stored in memory
-@property (nonatomic, retain) NSMutableDictionary * dict;
+@property (nonatomic, strong) NSMutableDictionary * dict;
 
 ///
 /// this method installs the default plist if not already installed

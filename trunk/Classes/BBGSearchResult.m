@@ -40,14 +40,6 @@
 }
 
 
-- (void) dealloc
-{
-	[primaryTitle release];
-	[gameId release];
-	[alternateNames release];
-	[imageURL release];
-	[super dealloc];
-}
 
 
 @end

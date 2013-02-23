@@ -46,7 +46,6 @@
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 
-	[duplicateIdDict release];
 	duplicateIdDict = [[NSMutableDictionary alloc] initWithCapacity:1000];
 	
 	inNameTag = NO;
@@ -68,7 +67,6 @@
 		}
     }
     
-    [parser release];
 	
 	
 	return success;
@@ -106,9 +104,6 @@
 			*/
 			 
 			// make a container for the data 
-			if ( currentResult != nil ) {
-				[currentResult release];
-			}	
 			currentResult = [[BBGSearchResult alloc] init];
 			
 			// save the object id
@@ -149,9 +144,6 @@
 				return;
 			}
 			
-			if ( currentResult != nil ) {
-				[currentResult release];
-			}
 			
 			currentResult = [[BBGSearchResult alloc] init];
 			
@@ -213,7 +205,6 @@
 			
 			currentResult.primaryTitle = currentName;
 			
-			[currentName release];
 		}
 		
 	}
@@ -230,7 +221,6 @@
 				
 				currentResult.alternateNames = altNames;
 				
-				[altNames release];
 				
 				// if we have no primary title, but have a alternate title, then use it.
 				if ( currentResult.primaryTitle == nil || [currentResult.primaryTitle length] == 0 ) {
@@ -246,7 +236,6 @@
 			if ( currentResult.primaryTitle != nil && [currentResult.primaryTitle length] > 0 ) {
 				[searchResults addObject:currentResult];
 			}
-			[currentResult release];
 			currentResult = nil;
 		}
 	} // end item parse
@@ -327,15 +316,6 @@
 }
 
 
-- (void)dealloc {
-	[duplicateIdDict release];
-	[searchURL release];
-	[searchResults release];
-	[currentResult release];
-	[stringBuffer release];
-	[gameNames release];
-	[super dealloc];
-}
 
 
 @end

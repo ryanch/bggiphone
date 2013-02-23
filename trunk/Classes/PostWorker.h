@@ -23,12 +23,12 @@
 
 
 
-@property (nonatomic, retain) NSString *  url;
+@property (nonatomic, strong) NSString *  url;
 @property (nonatomic) BOOL  usePost;
-@property (nonatomic, retain) NSDictionary*  params;
-@property (nonatomic, retain) NSArray*  responseCookies;
-@property (nonatomic, retain) NSData*  responseData;
-@property (nonatomic, retain) NSArray*  requestCookies;
+@property (nonatomic, strong) NSDictionary*  params;
+@property (nonatomic, strong) NSArray*  responseCookies;
+@property (nonatomic, strong) NSData*  responseData;
+@property (nonatomic, strong) NSArray*  requestCookies;
 
 //! start to send the request to the server
 - (BOOL) start;

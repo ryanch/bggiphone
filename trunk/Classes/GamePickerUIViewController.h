@@ -19,10 +19,10 @@
 	IBOutlet UILabel * directionsLabel;
 }
 
-@property (nonatomic, retain ) UIPickerView *gamePicker;
-@property (nonatomic, retain ) UIButton *showAllMatchesButton;
-@property (nonatomic, retain ) UIButton *shakeForRandomButton;
-@property (nonatomic, retain ) UILabel *directionsLabel;
+@property (nonatomic, strong ) UIPickerView *gamePicker;
+@property (nonatomic, strong ) UIButton *showAllMatchesButton;
+@property (nonatomic, strong ) UIButton *shakeForRandomButton;
+@property (nonatomic, strong ) UILabel *directionsLabel;
 
 - (NSInteger) valueFromPickerForComponent: (NSInteger) comp;
 
