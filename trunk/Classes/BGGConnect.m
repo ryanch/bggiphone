@@ -23,6 +23,11 @@
 		return;
 	}
 	
+    
+    if ( username == nil || password == nil) {
+        NSLog(@"must have username and password");
+        return;
+    }
 	
 	NSLog(@"fetching auth key cookies");
 	
@@ -54,6 +59,65 @@
 		} // end for 
 	} // end if success
 	
+
+}
+
+
+// reply to a forum post
+- (BGGConnectResponse) postForumReply: (NSString*) replyId withSubject: (NSString*) subject withBody: (NSString*) body {
+    
+    
+	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+	// see if we have auth key
+	if ( appDelegate.authCookies == nil ) {
+		[self connectForAuthKey];
+	}
+	
+	// see if we got the auth key
+	if ( appDelegate.authCookies == nil ) {
+		return AUTH_ERROR;
+	}
+	
+	
+    
+	// post worker test
+	PostWorker* worker = [[PostWorker alloc] init];
+	
+	// set the auth cookies
+	worker.requestCookies = appDelegate.authCookies;
+	
+	// the log play URL
+	worker.url = @"http://boardgamegeek.com/article/save";
+	
+	// setup params
+	NSMutableDictionary * params= [[NSMutableDictionary alloc] initWithCapacity:2];
+
+    
+	[params setObject:@"save" forKey:@"action"];
+	[params setObject:@"region" forKey:@"objecttype"];
+	[params setObject:@"1" forKey:@"objectid"];
+	[params setObject:replyId forKey:@"replytoid"];
+	[params setObject:@"10" forKey:@"sizesel"];
+	[params setObject:subject forKey:@"subject"];
+    [params setObject:body forKey:@"body"];
+    [params setObject:@"1" forKey:@"notify"];
+	
+		
+	// set the params on request
+	worker.params = params;
+    
+	
+	BOOL success = [worker start];
+	
+	if ( success ) {
+        return SUCCESS;
+	}
+	
+	return CONNECTION_ERROR;
+	
+    
+    
 
 }
 

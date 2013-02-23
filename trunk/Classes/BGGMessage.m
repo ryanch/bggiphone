@@ -28,6 +28,8 @@
 @synthesize nickname;
 @synthesize postDate;
 @synthesize username;
+@synthesize messageId;
+
 
 
 @end

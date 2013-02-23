@@ -24,6 +24,7 @@
 #import "BGGMessage.h"
 #import "BGGHTMLScraper.h"
 #import "HtmlTemplate.h"
+#import "ForumReplyViewController.h"
 
 
 @implementation MessageThreadViewController
@@ -32,15 +33,20 @@
 @synthesize loadingView;
 @synthesize thread;
 
+
 #pragma mark LoadingViewController overrides
 
 -(void) updateViews
 {
+    
+    webView.delegate = self;
+    
 	if ( items == nil )
 	{
 		webView.hidden = YES;
 		[loadingView startAnimating];
 		loadingView.hidden = NO;
+        
 	}
 	else
 	{
@@ -63,16 +69,31 @@
 			if(message.nickname)
 				[messagesHTML appendString:message.nickname];
 			[messagesHTML appendString:@"</span>)<br>"];
+            
+            
+
+            
+            
 			[messagesHTML appendString:@"<span class=\"postdate\">"];
 			if(message.postDate)
 				[messagesHTML appendString:message.postDate];
 			[messagesHTML appendString:@"</span>"];
+            
+
+            
+            
 			[messagesHTML appendString:@"</div>"];
 			
 			[messagesHTML appendString:@"<div class=\"content\">"];
 			if(message.contents)
 				[messagesHTML appendString:message.contents];
 			[messagesHTML appendString:@"</div>"];
+            
+            
+            // add reply link
+            [messagesHTML appendString:@"&#160;<a href=\"bggapp://reply/"];
+            [messagesHTML appendString: message.messageId ];
+            [messagesHTML appendString:@"\" class=\"replylink\" >Reply</a>"];
 			
 			[messagesHTML appendString:@"</div>"];
 		}
@@ -129,6 +150,27 @@
 	}
 	return self;
 }
+
+
+
+# pragma mark UIWebViewDelegate delegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+
+    NSURL * url = [request URL];
+    NSString * prefix = @"bggapp";
+    if ( [url.scheme hasPrefix:prefix] ) {
+        // todo pull the id out.
+        ForumReplyViewController * view = [[ForumReplyViewController alloc] initWithNibName:@"ForumReply" bundle:nil];
+        view.messageId = [url lastPathComponent];
+        view.subjectTitle = self.title;
+        [self.navigationController pushViewController:view animated:YES];
+        return YES;
+    }
+
+    return YES;
+}
+
 
 
 @end

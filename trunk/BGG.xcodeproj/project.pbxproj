@@ -110,6 +110,8 @@
 		BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */; };
 		BAEC7D9D0EC7F04600151693 /* CollectionDownload.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */; };
 		E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */; };
+		E5AC4FCC16D8902200CF5ABE /* ForumReply.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */; };
+		E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -263,6 +265,9 @@
 		BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionDownloadUIView.m; sourceTree = "<group>"; };
 		BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDownload.xib; sourceTree = "<group>"; };
 		E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForumReply.xib; path = ../ForumReply.xib; sourceTree = "<group>"; };
+		E5AC4FCE16D8910E00CF5ABE /* ForumReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumReplyViewController.h; sourceTree = "<group>"; };
+		E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumReplyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +291,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC4FCD16D890E600CF5ABE /* ForumReply */,
 				9435440610F1BCF600E545D3 /* ForumThreadsViewController.h */,
 				9435440710F1BCF600E545D3 /* ForumThreadsViewController.m */,
 				943543E010F1BC9E00E545D3 /* BGGForum.h */,
@@ -537,6 +543,16 @@
 			name = gamepicker;
 			sourceTree = "<group>";
 		};
+		E5AC4FCD16D890E600CF5ABE /* ForumReply */ = {
+			isa = PBXGroup;
+			children = (
+				E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */,
+				E5AC4FCE16D8910E00CF5ABE /* ForumReplyViewController.h */,
+				E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */,
+			);
+			name = ForumReply;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -639,6 +655,7 @@
 				94A96F761104ED4200112CAE /* loading.jpg in Resources */,
 				2BF3FA241176020B00F07377 /* forums.png in Resources */,
 				E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */,
+				E5AC4FCC16D8902200CF5ABE /* ForumReply.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +710,7 @@
 				9435440810F1BCF600E545D3 /* ForumThreadsViewController.m in Sources */,
 				2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */,
 				94CD5631110259120081FEDF /* Top100ImageDownloadOperation.m in Sources */,
+				E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

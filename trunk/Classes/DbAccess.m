@@ -687,7 +687,7 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	appDelegate.authCookies;
+	//appDelegate.authCookies;
 	appDelegate.authCookies = nil;
 	
 	[database executeUpdate:@"delete from RecentGameList"];

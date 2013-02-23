@@ -25,17 +25,20 @@
 @class BGGThread;
 
 
-@interface MessageThreadViewController : LoadingViewController
+@interface MessageThreadViewController : LoadingViewController <UIWebViewDelegate>
 {
 	IBOutlet UIWebView * webView;
 	IBOutlet UIActivityIndicatorView * loadingView;
 	
 	BGGThread	*thread;
+
 }
 
 @property (nonatomic, readwrite, strong) UIWebView * webView;
 @property (nonatomic, readwrite, strong) UIActivityIndicatorView * loadingView;
 
 @property (nonatomic, readwrite, strong) BGGThread *thread;
+
+
 
 @end

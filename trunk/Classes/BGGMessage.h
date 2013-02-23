@@ -28,11 +28,13 @@
 	NSString	*nickname;
 	NSString	*contents;
 	NSString	*postDate;
+    NSString *messageId;
 }
 
 @property (nonatomic, readwrite, strong) NSString *contents;
 @property (nonatomic, readwrite, strong) NSString *nickname;
 @property (nonatomic, readwrite, strong) NSString *postDate;
 @property (nonatomic, readwrite, strong) NSString *username;
+@property (nonatomic, readwrite, strong) NSString *messageId;
 
 @end

@@ -51,6 +51,10 @@ typedef NSInteger BGGConnectWishListState;
 
 - (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId;
 
+- (BGGConnectResponse) postForumReply: (NSString*) replyId withSubject: (NSString*) subject withBody: (NSString*) body;
+    
+    
+
 - (CollectionItemData*) _fetchGameCollectionItemDataHelper:(NSInteger) gameId;
 
 - (CollectionItemData*) fetchGameCollectionItemData:(NSInteger) gameId;

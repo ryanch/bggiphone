@@ -101,6 +101,8 @@
 		// Get username
 		NSString *username = [document substringWithRange:NSMakeRange(NSMaxRange(nameStartRange), nameEnd.location - NSMaxRange(nameStartRange))];
 		
+
+        
 		// Find nickname (URL encoded version) end
 		NSRange nickSearchRange = NSMakeRange(NSMaxRange(nameEnd), [document length] - NSMaxRange(nameEnd));
 		NSRange nickEndRange = [document rangeOfString:@"\"" options:0 range:nickSearchRange];
@@ -116,6 +118,11 @@
 		NSString *postedDate = [self contentsOfTagWithStart:@"http://geekdo-images.com/images/pixel.gif' /> Posted " startTagEnd:nil endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(messageRange), [document length] - NSMaxRange(messageRange)) foundRange:&dateRange inSource:document];
 		postedDate = [postedDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
 		
+        
+        // find the reply id.
+		NSString *replyId = [self contentsOfTagWithStart:@"/reply/" startTagEnd:nil endTag:@"\">Reply<" inRange:NSMakeRange(NSMaxRange(messageRange), [document length] - NSMaxRange(messageRange)) foundRange:&dateRange inSource:document];
+        
+        
 		// Advance
 		nameEnd.location = NSMaxRange(nameEnd);
 		nameEnd.length = 0;
@@ -128,6 +135,7 @@
 		message.nickname = [nickname stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		message.contents = messageContents;
 		message.postDate = postedDate;
+        message.messageId = replyId;
 		
 		[results addObject:message];
 	}
