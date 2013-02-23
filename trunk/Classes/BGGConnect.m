@@ -10,10 +10,32 @@
 #import "PostWorker.h"
 #import "CollectionItemData.h"
 #import "BGGAppDelegate.h"
+#import "PlistSettings.h"
 
 @implementation BGGConnect
 
 @synthesize username, password;
+
+
+- (BOOL) pullDefaultUsernameAndPassword {
+    
+    
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    
+    self.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+    self.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+    
+    if ( self.username == nil || self.password == nil) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
+    
+    
+}
 
 //! Connect and get a auth key from bgg
 - (void) connectForAuthKey {

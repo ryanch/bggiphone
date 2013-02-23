@@ -91,7 +91,7 @@
 
 - (void) doSubmitReply {
 
-        BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+        //BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     
      
@@ -99,8 +99,11 @@
             BGGConnect * bggConnect = [[BGGConnect alloc] init];
             
             
-            bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
-            bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+            //bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+            //bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+    
+            [bggConnect pullDefaultUsernameAndPassword];
+    
     
     BGGConnectResponse response = [bggConnect postForumReply:self.messageId  withSubject:self.subject.text withBody: self.body.text];
     

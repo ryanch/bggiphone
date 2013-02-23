@@ -39,6 +39,4 @@
 
 @property (nonatomic, readwrite, strong) BGGThread *thread;
 
-
-
 @end

@@ -25,7 +25,8 @@
 #import "BGGHTMLScraper.h"
 #import "HtmlTemplate.h"
 #import "ForumReplyViewController.h"
-
+#import "BGGConnect.h"
+#import "SettingsUIViewController.h"
 
 @implementation MessageThreadViewController
 
@@ -160,13 +161,33 @@
     NSURL * url = [request URL];
     NSString * prefix = @"bggapp";
     if ( [url.scheme hasPrefix:prefix] ) {
-        // todo pull the id out.
-        ForumReplyViewController * view = [[ForumReplyViewController alloc] initWithNibName:@"ForumReply" bundle:nil];
-        view.messageId = [url lastPathComponent];
-        view.subjectTitle = self.title;
-        [self.navigationController pushViewController:view animated:YES];
-        return YES;
-    }
+        
+        BGGConnect * bggConnect = [[BGGConnect alloc] init];
+        if ( ![bggConnect pullDefaultUsernameAndPassword]) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error dialog title")
+                                                            message:NSLocalizedString(@"You must provide your username and password.", @"shown when username and password missing")
+                                                           delegate:self cancelButtonTitle: NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
+            [alert show];
+            
+            SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
+            
+            [self.navigationController pushViewController:settings		animated:YES];
+            
+        }
+        else {
+        
+            // todo pull the id out.
+            ForumReplyViewController * view = [[ForumReplyViewController alloc] initWithNibName:@"ForumReply" bundle:nil];
+            view.messageId = [url lastPathComponent];
+            view.subjectTitle = self.title;
+            view.title = NSLocalizedString(@"Reply", @"reply title");
+            [self.navigationController pushViewController:view animated:YES];
+            return YES;
+            
+        }
+        
+    } // end if clicked on url
 
     return YES;
 }

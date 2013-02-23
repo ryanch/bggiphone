@@ -39,7 +39,7 @@ typedef NSInteger BGGConnectWishListState;
 @property (nonatomic, strong) NSString *  username;
 @property (nonatomic, strong) NSString *  password;
 
-
+- (BOOL) pullDefaultUsernameAndPassword;
 
 //! Connect and get a auth key from bgg
 - (void) connectForAuthKey;
