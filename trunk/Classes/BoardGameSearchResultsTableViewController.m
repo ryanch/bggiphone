@@ -269,6 +269,11 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 		sectionTitles = nil;
 		
 		sectionCountsDict = nil;
+        
+        
+        imagesLoading = [[NSMutableSet alloc] init];
+        imageDownloadQueue = [[NSOperationQueue alloc] init];
+        [imageDownloadQueue setMaxConcurrentOperationCount:2];
 		
     }
     return self;
@@ -333,7 +338,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 
 - (BBGSearchResult*) findResultForPath: (NSIndexPath *) indexPath {
     
-    if ( resultsToDisplay == nil ) {
+    if (  sectionTitles == nil ) {
         return nil;
     }
     
@@ -384,7 +389,9 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 - (NSIndexPath*) findPathforResult: (BBGSearchResult*) result {
     
     
-    return [ pathByGameId objectForKey:result.gameId];
+   return [ pathByGameId objectForKey:result.gameId];
+  
+ 
     
 }
 
@@ -409,11 +416,9 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BBGSearchResult * result = [self findResultForPath:indexPath];
 
-    
     // if no results then show the loading cell
-	if ( result == nil ) {
+	if ( resultsToDisplay == nil ) {
 		UIViewController * loadingCell = [[UIViewController alloc] initWithNibName:@"LoadingCell" bundle:nil];
 		
 		UITableViewCell * cell = (UITableViewCell*) loadingCell.view;
@@ -421,6 +426,10 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	}
 	
 	
+    BBGSearchResult * result = [self findResultForPath:indexPath];
+    
+    
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -488,9 +497,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	[self setupAccelRandomPicker];	
 	
     
-	imagesLoading = [[NSMutableSet alloc] init];
-	imageDownloadQueue = [[NSOperationQueue alloc] init];
-	[imageDownloadQueue setMaxConcurrentOperationCount:2];
+
     
     pathByGameId = [[NSMutableDictionary alloc] initWithCapacity:1000];
     
