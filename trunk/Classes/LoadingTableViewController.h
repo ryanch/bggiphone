@@ -25,13 +25,19 @@
 @class FullGameInfo;
 
 
-@interface LoadingTableViewController : LoadingViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LoadingTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
-	
+	BOOL refreshEnabled;
+    NSArray			*items;
+	BOOL			loading;
+	BOOL			cancelLoading;
+    
+    
 }
 
-@property (nonatomic, readonly, strong) UITableView *tableView;
+@property (nonatomic, readonly, assign, getter=isLoading) BOOL loading;
 
+-(void) startLoading;
 
 // Protected methods
 
@@ -40,5 +46,20 @@
 -(UITableViewCellStyle) cellStyle;
 
 -(void) updateCell:(UITableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
+
+-(void) updateViews;
+
+-(NSString *) urlStringForLoading;
+-(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper;
+
+-(NSString *) pathForCachedFile;
+
+-(void) cacheResponseData:(NSData *)responseData results:(id)results;
+-(NSData *) loadDataFromCache;
+- (BOOL) hasCachedData;
+-(void) clearCachedData;
+
+- (void) refreshRequestedByPullDown;
+
 
 @end

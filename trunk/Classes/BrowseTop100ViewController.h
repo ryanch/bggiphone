@@ -27,8 +27,10 @@
 {
 	NSMutableSet	*imagesLoading;
 	NSOperationQueue * imageDownloadQueue;
+    NSInteger pageNumber;
 }
 
+- (void) setPageNumber:(NSInteger) page;
 
 -(void) nsOperationDidFinishLoadingResult:(BBGSearchResult *)result;
 

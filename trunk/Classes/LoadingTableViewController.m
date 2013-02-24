@@ -20,7 +20,7 @@
 //
 
 #import "LoadingTableViewController.h"
-
+#import "BGGHTMLScraper.h"
 
 @implementation LoadingTableViewController
 
@@ -30,6 +30,22 @@
 {
 	[self.tableView reloadData];
 }
+
+
+-(void) showRefreshButton
+{
+    
+    refreshEnabled = YES;
+    
+    [self.refreshControl endRefreshing];
+    
+}
+
+-(void) disableRefreshButton
+{
+	refreshEnabled = NO;
+}
+
 
 #pragma mark Protected overrides
 
@@ -113,15 +129,19 @@
 
 #pragma mark UIViewController overrides
 
+/*
 -(void) loadView
 {
 	UITableView *tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStylePlain];
 	
 	tableView.dataSource = self;
 	tableView.delegate = self;
-	
+    
+  
+
 	self.view = tableView;
 }
+ */
 
 #pragma mark Public
 
@@ -129,5 +149,273 @@
 {
 	return (UITableView *) self.view;
 }
+
+
+#pragma mark loading view methods shared with loading view
+
+@synthesize loading;
+
+#pragma mark Private
+
+
+-(void) loadFailed:(NSError *)error
+{
+	loading = NO;
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
+													message:[NSString stringWithFormat:NSLocalizedString(@"Download failed: %@.", @"download failed error."), [error localizedDescription]]
+												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
+	[alert show];
+	
+	[self updateViews];
+	
+	[self showRefreshButton];
+}
+
+-(void) processingFailed
+{
+	loading = NO;
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error title.")
+													message:[NSString stringWithFormat:NSLocalizedString(@"Error processing markup from BGG site.", @"Error reading markup from BGG site.")]
+												   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"okay button") otherButtonTitles: nil];
+	[alert show];
+	
+	[self updateViews];
+	
+	[self showRefreshButton];
+}
+
+- (void) userRequestedReload {
+	items = nil;
+	[self clearCachedData];
+	[self startLoading];
+	[self updateViews];
+}
+
+-(void) takeResults:(id)results
+{
+	loading = NO;
+	
+	items = results;
+	
+	[self updateViews];
+}
+
+-(void) didFinishLoadingWithResults:(id)results
+{
+	[self takeResults:results];
+	
+	[self showRefreshButton];
+}
+
+-(void) backgroundLoad
+{
+	if(cancelLoading)
+		return;
+	
+	NSString *urlString = [self urlStringForLoading];
+	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSData *responseData = nil;
+	BOOL loadedDataFromCache = NO;
+	
+	// First try to find cached data
+	responseData = [self loadDataFromCache];
+	if(responseData != nil)
+		loadedDataFromCache = YES;
+	
+	if(responseData == nil)
+		responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	if(responseData == nil)
+	{
+		NSLog(@"Download error '%@'.", error);
+		[self performSelectorOnMainThread:@selector(loadFailed:) withObject:error waitUntilDone:NO];
+		return;
+	}
+	
+	if(cancelLoading)
+		return;
+	
+	NSString *document = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	
+	BGGHTMLScraper *htmlScraper = [[BGGHTMLScraper alloc] init];
+	NSArray *results = [self resultsFromDocument:document withHTMLScraper:htmlScraper];
+	
+	if(cancelLoading)
+		return;
+	
+	if(results == nil)
+	{
+		[self performSelectorOnMainThread:@selector(processingFailed) withObject:nil waitUntilDone:YES];
+		return;
+	}
+	
+	if(loadedDataFromCache == NO)
+		[self cacheResponseData:responseData results:results];
+	
+	[self performSelectorOnMainThread:@selector(didFinishLoadingWithResults:) withObject:results waitUntilDone:YES];
+}
+
+-(void) backgroundLoadThread
+{
+	@autoreleasepool {
+        
+		[self backgroundLoad];
+        
+	}
+	
+	[NSThread exit];
+}
+
+#pragma mark Protected
+
+
+
+-(void) cacheResponseData:(NSData *)responseData results:(id)results
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if ( [fileManager fileExistsAtPath:cacheFilePath ] )
+		[fileManager removeItemAtPath:cacheFilePath error:NULL];
+	
+	[responseData writeToFile:cacheFilePath atomically:YES];
+}
+
+-(NSString *) urlStringForLoading
+{
+	// Intentionally empty implementation in abstract base class.
+	return nil;
+}
+
+-(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
+{
+	// Intentionally empty implementation in abstract base class.
+	return nil;
+}
+
+-(NSString *) cacheFileName
+{
+	return nil;
+}
+
+-(NSString *) pathForCachedFile
+{
+	NSString *cacheFileName = [self cacheFileName];
+	
+	if(cacheFileName == nil)
+		return nil;
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *cacheFilePath = [documentsDirectory stringByAppendingPathComponent:cacheFileName];
+	
+	return cacheFilePath;
+}
+
+- (NSData *) loadDataFromCache
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if ( cacheFilePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath ] )
+		return [NSData dataWithContentsOfFile:cacheFilePath];
+	else
+		return nil;
+}
+
+- (BOOL) hasCachedData
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if(cacheFilePath)
+		return [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath ];
+	else
+		return NO;
+}
+
+- (void) clearCachedData
+{
+	NSString *cacheFilePath = [self pathForCachedFile];
+	
+	if(cacheFilePath)
+		[[NSFileManager defaultManager] removeItemAtPath:cacheFilePath error:NULL];
+}
+
+#pragma mark UIViewController overrides
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	cancelLoading = YES;
+	loading = NO;
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	cancelLoading = NO;
+	
+	[self startLoading];
+	[self updateViews];
+	
+	// save the current state
+	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	//FIXME! [appDelegate saveResumePoint:BGG_RESUME_GAME withString:self.fullGameInfo.gameId];
+}
+
+- (void) refreshRequestedByPullDown {
+    if ( refreshEnabled ) {
+        [self userRequestedReload];
+    }
+    
+}
+
+-(void) viewDidLoad
+{
+    
+    
+    
+	[super viewDidLoad];
+    
+    refreshEnabled = NO;
+    
+    UIRefreshControl * refreshControler = [[UIRefreshControl alloc] init];
+    [refreshControler addTarget:self action:@selector(refreshRequestedByPullDown)
+               forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControler;
+	
+	[self startLoading];
+}
+
+#pragma mark Public
+
+-(void) startLoading
+{
+	if(items != nil)
+		return;
+	
+	if(loading)
+		return;
+	
+	if([self urlStringForLoading] == nil)
+		return;
+	
+	cancelLoading = NO;
+	loading = YES;
+	
+	[self disableRefreshButton];
+	
+	[NSThread detachNewThreadSelector:@selector(backgroundLoadThread) toTarget:self withObject:nil];
+}
+
+
+
 
 @end

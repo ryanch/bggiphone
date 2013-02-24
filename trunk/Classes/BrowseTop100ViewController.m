@@ -28,6 +28,7 @@
 
 @implementation BrowseTop100ViewController
 
+
 #pragma mark Private
 
 
@@ -129,18 +130,43 @@
 
 -(NSString *) cacheFileName
 {
-	return @"top100.cache.html";
+    
+    if (pageNumber == 0 ) {
+        return @"top100.cache.html";
+
+        
+    }
+    else {
+        return [NSString stringWithFormat: @"top100p%d.cache.html", pageNumber];
+        
+    }
+    
+	
 }
 
 -(NSString *) urlStringForLoading
 {
-	return @"http://www.boardgamegeek.com/browse/boardgame";
+    if (pageNumber == 0 ) {
+        return @"http://www.boardgamegeek.com/browse/boardgame";
+        
+        
+    }
+    else {
+        return [NSString stringWithFormat: @"http://www.boardgamegeek.com/browse/boardgame/page/%d", pageNumber];
+        
+    }
+    
+    
+	
 }
 
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
 {
 	return [htmlScraper scrapeGamesFromTop100:document];
 }
+
+
+
 
 #pragma mark LoadingTableViewController overrides
 
@@ -178,6 +204,11 @@
 	}
 }
 
+- (void) setPageNumber:(NSInteger) page {
+    self.title  = NSLocalizedString( @"Top 100", @"browse top 100 title" );
+    pageNumber = page;
+}
+
 
 #pragma mark Public
 
@@ -186,6 +217,7 @@
 	if((self = [super init]) != nil)
 	{
 		self.title = NSLocalizedString( @"Top 100", @"browse top 100 title" );
+        pageNumber = 0;
 	}
 	return self;
 }
