@@ -28,14 +28,36 @@
 
 
 @implementation ForumThreadsViewController
-
+@synthesize pageNumber;
 @synthesize forum;
 
 #pragma mark UIViewController overrides
 
+- (void) userWantsMore {
+    
+    ForumThreadsViewController * more = [[ForumThreadsViewController alloc] init];
+    more.pageNumber = self.pageNumber + 1;
+	more.forum = self.forum;
+    more.title = [NSString stringWithFormat:@"Page %d", more.pageNumber];
+    
+    [self.navigationController pushViewController:more animated:YES];
+    
+}
+
 -(void) viewDidLoad
 {
 	[super viewDidLoad];
+    
+    
+ 	if ( self.navigationItem.rightBarButtonItem == nil )
+	{
+		UIBarButtonItem * nextButton = [[UIBarButtonItem alloc]
+                                        initWithTitle:NSLocalizedString(@"More", @"more games toolbar button") style: UIBarButtonItemStyleBordered  target:self action:@selector(userWantsMore)];
+		
+		[self.navigationItem setRightBarButtonItem:nextButton animated:YES];
+		
+	}
+    
 	
 	self.tableView.rowHeight = 64;
 }
@@ -47,7 +69,7 @@
 	if(self.forum == nil)
 		return nil;
 	
-	return [NSString stringWithFormat:@"forum-threads-%@-page-1.cache.html", self.forum.forumId];
+	return [NSString stringWithFormat:@"forum-threads-%@-page-%d.cache.html", self.forum.forumId,pageNumber];
 }
 
 -(NSString *) urlStringForLoading
@@ -55,7 +77,12 @@
 	if(self.forum == nil)
 		return nil;
 	
-	return [@"http://boardgamegeek.com/" stringByAppendingString:self.forum.forumURL];
+	NSString * url =  [@"http://boardgamegeek.com/" stringByAppendingString:self.forum.forumURL];
+    url = [url stringByAppendingFormat:@"/page/%d",pageNumber];
+    
+    NSLog(@"load: %@", url);
+    
+    return url;
 }
 
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
@@ -93,5 +120,14 @@
 	cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 }
 
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        pageNumber = 1;
+    }
+    return self;
+}
 
 @end

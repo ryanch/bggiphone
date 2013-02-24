@@ -28,8 +28,16 @@
 @interface ForumThreadsViewController : LoadingTableViewController
 {
 	BGGForum	*forum;
+    NSInteger pageNumber;
 }
 
+
+
+@property NSInteger pageNumber;
+
 @property (nonatomic, strong ) BGGForum * forum;
+
+
+- (void) userWantsMore;
 
 @end
