@@ -22,6 +22,7 @@
 	NSInteger collId;
 	NSInteger gameId;
 	BGGConnectResponse response;
+    NSInteger rating;
 }
 
 @property (nonatomic) BOOL own;
@@ -35,6 +36,7 @@
 @property (nonatomic) NSInteger wishValue;
 @property (nonatomic) NSInteger collId;
 @property (nonatomic) NSInteger gameId;
+@property (nonatomic) NSInteger rating;
 @property (nonatomic) BGGConnectResponse response;
 
 @end

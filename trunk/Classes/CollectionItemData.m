@@ -23,6 +23,7 @@
 @synthesize   collId;
 @synthesize   gameId;
 @synthesize response;
+@synthesize rating;
 
 - (id) init
 {
@@ -40,6 +41,7 @@
 		collId = 0;
 		gameId= 0;
 		response= SUCCESS;
+         rating = 0;
 	}
 	return self;
 }

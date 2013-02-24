@@ -53,12 +53,18 @@ typedef NSInteger BGGConnectWishListState;
 
 - (BGGConnectResponse) postForumReply: (NSString*) replyId withSubject: (NSString*) subject withBody: (NSString*) body;
     
-    
+
+- (NSInteger) findRatingInData:(NSString*)data;
+
 
 - (CollectionItemData*) _fetchGameCollectionItemDataHelper:(NSInteger) gameId;
 
 - (CollectionItemData*) fetchGameCollectionItemData:(NSInteger) gameId;
 
 - (BGGConnectResponse) saveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData;
+
+- (CollectionItemData*) handleFetchOfCollectionDataOfGameId: (NSInteger) gameId;
+
+- (void) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData;
 
 @end

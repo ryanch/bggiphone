@@ -27,13 +27,15 @@
 #import "PlistSettings.h"
 #import "WebViewController.h"
 #import "CollectionItemEditViewController.h"
+#import "BGGConnect.h"
+#import "CollectionItemData.h"
 
 @implementation GameActionsViewController
 
 @synthesize fullGameInfo;
 @synthesize logPlayButton;
 @synthesize safariButton;
-
+@synthesize rateControl;
 
 
 /*
@@ -52,6 +54,21 @@
 }
 */
 
+
+
+
+- (void) viewWillAppear:(BOOL)animated  {
+    [super viewWillAppear:animated];
+    
+    ratingActivityView.hidden = NO;
+    self.rateControl.hidden = YES;
+    
+    if ( [self confirmUserNameAndPassAvailable] ) {
+    
+        [self performSelectorInBackground:@selector(loadRating) withObject:nil];
+    }
+    
+}
 
 // Implement viewDidLoad to do additional setup after loading the view.
 - (void)viewDidLoad {
@@ -79,9 +96,9 @@
 	
 	[modifyButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 	
-	modifyButton.backgroundColor = [UIColor clearColor];		
-	
-	
+	modifyButton.backgroundColor = [UIColor clearColor];
+    
+
 }
 
 
@@ -172,5 +189,83 @@
 	
 	
 }
+
+
+
+- (void) loadRating {
+    
+	if ( ![self confirmUserNameAndPassAvailable] ) {
+		return;
+	}
+    
+    
+    BGGConnect * connect = [[BGGConnect alloc]init];
+    itemData = [connect handleFetchOfCollectionDataOfGameId: [fullGameInfo.gameId integerValue] ];
+    
+    [self performSelectorOnMainThread:@selector(ratingLoaded) withObject:self waitUntilDone:YES];
+    
+    
+}
+
+- (void) ratingLoaded {
+    
+    ratingActivityView.hidden = YES;
+    self.rateControl.hidden = NO;
+    
+    if ( itemData.rating != 0 ) {
+        [self.rateControl setSelectedSegmentIndex:itemData.rating -1];
+    }
+
+}
+
+
+- (IBAction) segControlChanged: (UISegmentedControl *) control {
+    
+ 	if ( ![self confirmUserNameAndPassAvailable] ) {
+		return;
+	}
+    
+    
+    if ( [self confirmUserNameAndPassAvailable] ) {
+        
+        [rateControl setEnabled:NO];
+        ratingActivityView.hidden = NO;
+        
+        [self performSelectorInBackground:@selector(saveRating) withObject:nil];
+    }
+    
+
+}
+
+
+- (void) saveRating {
+    
+    NSInteger rating = rateControl.selectedSegmentIndex + 1;
+    
+    
+    
+    BGGConnect * connect = [[BGGConnect alloc] init];
+    
+    
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [params setObject:[NSString stringWithFormat:@"%d",rating ] forKey:@"rating"];
+    
+    [connect handleSaveCollectionForGameId:[fullGameInfo.gameId integerValue] withParams:params withData:itemData];
+    
+    [self performSelectorOnMainThread:@selector(ratingSaved) withObject:self waitUntilDone:YES];
+    
+    
+}
+
+
+- (void) ratingSaved {
+    
+    [rateControl setEnabled:YES];
+    ratingActivityView.hidden = YES;
+    
+}
+
+
+
 
 @end

@@ -273,7 +273,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
         
         imagesLoading = [[NSMutableSet alloc] init];
         imageDownloadQueue = [[NSOperationQueue alloc] init];
-        [imageDownloadQueue setMaxConcurrentOperationCount:2];
+        [imageDownloadQueue setMaxConcurrentOperationCount:1];
 		
     }
     return self;
@@ -407,9 +407,12 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
         return;
     }
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
-    [self updateCell:cell forItemAtIndexPath:indexPath];
+    //[self updateCell:cell forItemAtIndexPath:indexPath];
+    
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:(UITableViewRowAnimationNone)];
+    
 	
 }
 
@@ -426,7 +429,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	}
 	
 	
-    BBGSearchResult * result = [self findResultForPath:indexPath];
+   // BBGSearchResult * result = [self findResultForPath:indexPath];
     
     
     

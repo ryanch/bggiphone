@@ -118,7 +118,7 @@
 	imagesLoading = [[NSMutableSet alloc] init];	
 	
 	imageDownloadQueue = [[NSOperationQueue alloc] init];
-	[imageDownloadQueue setMaxConcurrentOperationCount:2];
+	[imageDownloadQueue setMaxConcurrentOperationCount:1];
 	
 	// save the current state
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];

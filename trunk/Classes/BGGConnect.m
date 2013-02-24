@@ -447,7 +447,7 @@
 	itemData.forTrade = [self scanForCheckedForm: @"name='fortrade'" fromData: data];
 	itemData.inWish = [self scanForCheckedForm: @"name='wishlist'" fromData: data];
 	
-	
+	itemData.rating = [self findRatingInData: data];
 	
 	
 	// set the value of the wish priority
@@ -474,6 +474,145 @@
 	//[itemData autorelease];
 	return itemData;
 }
+
+
+
+- (void) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData  {
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+	@autoreleasepool {
+        
+
+		self.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+		self.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+		
+		BGGConnectResponse response = [self saveCollectionForGameId: gameId withParams: paramsToSave withData: itemData ];
+		
+		
+		if ( response == SUCCESS ) {
+			/// TODO UPDATE THE LOCAL DB
+		}
+		
+		if ( response == SUCCESS ) {
+            /*
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success modification")
+															message:NSLocalizedString(@"Your updates were saved.", @"Your updates were saved")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+             */
+		}
+		else if ( response == BAD_CONTENT ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+		else if ( response == CONNECTION_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+		else if ( response == AUTH_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+		
+		
+
+        
+	}
+    
+    
+}
+
+
+
+
+- (CollectionItemData*) handleFetchOfCollectionDataOfGameId: (NSInteger) gameId {
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	
+    CollectionItemData * itemData;
+    
+	@autoreleasepool {
+		
+		self.username = [appDelegate.appSettings.dict objectForKey:@"username"];
+		self.password = [appDelegate.appSettings.dict objectForKey:@"password"];
+		
+		//BGGConnectResponse response = [bggConnect saveCollectionForGameId: gameId withParams: paramsToSave ];
+		
+		BGGConnectResponse response = SUCCESS;
+		
+		itemData = [self fetchGameCollectionItemData:gameId];
+		
+		if ( itemData != nil ) {
+			response = itemData.response;
+		}
+        
+		
+		if ( response == BAD_CONTENT || itemData == nil) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+		else if ( response == CONNECTION_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+		else if ( response == AUTH_ERROR ) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error Logging Play title")
+															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+			[alert show];
+		}
+    
+        
+	}
+
+    return itemData;
+
+}
+
+
+- (NSInteger) findRatingInData:(NSString*)data {
+    
+    NSRange startRange = [data rangeOfString:@"ratingtext'>"];
+    if ( startRange.location == NSNotFound ) {
+        return 0;
+    }
+    
+	NSInteger bufferIndex = 0;
+	unichar searchBuffer[50];
+	NSInteger searchIndex =  NSMaxRange( startRange);
+	
+	while( bufferIndex < 50 ) {
+        
+		unichar letter = [data characterAtIndex:searchIndex];
+		searchIndex++;
+        
+		if ( letter == '<' ) {
+			break;
+		}
+		
+		searchBuffer[bufferIndex] = letter;
+		bufferIndex++;
+		
+	}
+	
+	NSString * buffString = [[NSString alloc] initWithCharacters:searchBuffer length:bufferIndex];
+    
+    return [buffString integerValue];
+                                                                             
+    
+}
+
 
 - (BOOL) scanForCheckedForm: (NSString*) name fromData: (NSString*) data {
 	
@@ -614,7 +753,17 @@
 	if ( [paramsToSave objectForKey:@"wishlistpriority"] != nil ) {
 		[params setObject:[paramsToSave objectForKey:@"wishlistpriority"] forKey:@"wishlistpriority"];
 	}		                                           
-			
+		
+	if ( [paramsToSave objectForKey:@"rating"] != nil ) {
+		[params setObject:[paramsToSave objectForKey:@"rating"] forKey:@"rating"];
+        [params setObject:@"rating" forKey:@"fieldname"];
+        
+        [params setObject:@"thing" forKey:@"objecttype"];
+        [params setObject:[NSString stringWithFormat: @"%d",   gameId] forKey:@"objectid"];
+
+        
+	}
+    
 	
 	NSLog(@"going to log with params: %@", [params description] );
 	

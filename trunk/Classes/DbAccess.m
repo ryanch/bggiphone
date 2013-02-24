@@ -591,30 +591,35 @@
 
 
 - (FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId {
-	FullGameInfo * fullGameInfo = nil;
-	FMResultSet * rs = [database executeQuery:@"select * from GameInfo where gameId=?",  [NSNumber numberWithInt:gameId] ];
-	
-	if ([database hadError]) {
-        NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
-		return nil;
+    
+    @synchronized(self) {
+    
+        FullGameInfo * fullGameInfo = nil;
+        FMResultSet * rs = [database executeQuery:@"select * from GameInfo where gameId=?",  [NSNumber numberWithInt:gameId] ];
+        
+        if ([database hadError]) {
+            NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+            return nil;
+        }
+        
+        if ( [rs next] ) {
+            
+            fullGameInfo = [self buildFullGameInfoFromResultRow:rs];
+            
+            
+        }
+        else {
+    #ifdef __DEBUGGING__  
+            NSLog(@"did not find game with id %d", gameId	);
+    #endif
+        }
+        
+        [rs close];
+        
+        
+        return fullGameInfo;
+        
     }
-	
-	if ( [rs next] ) {
-		
-		fullGameInfo = [self buildFullGameInfoFromResultRow:rs];
-		
-		
-	}
-	else {
-#ifdef __DEBUGGING__  
-		NSLog(@"did not find game with id %d", gameId	);
-#endif
-	}
-	
-	[rs close];
-	
-	
-	return fullGameInfo;
 	
 	
 }

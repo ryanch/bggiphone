@@ -23,12 +23,16 @@
 
 
 @class FullGameInfo;
+@class CollectionItemData;
 
 @interface GameActionsViewController : UIViewController {
 	FullGameInfo * fullGameInfo;
 	IBOutlet UIButton * logPlayButton;
 	IBOutlet UIButton * safariButton;
 	IBOutlet UIButton * modifyButton;
+    IBOutlet UISegmentedControl * rateControl;
+    CollectionItemData * itemData;
+    IBOutlet UIActivityIndicatorView * ratingActivityView;
 }
 
 
@@ -36,11 +40,20 @@
 
 @property (nonatomic, strong ) UIButton * logPlayButton;
 @property (nonatomic, strong ) UIButton * safariButton;
+@property (nonatomic, strong ) UISegmentedControl * rateControl;
 
 
 - (IBAction) openRecordAPlay;
 - (IBAction) openGameInSafari;
 - (IBAction) manageGameInCollection;
 - (BOOL) confirmUserNameAndPassAvailable;
+- (IBAction) segControlChanged: (UISegmentedControl *) control;
+
+
+- (void) loadRating;
+- (void) ratingLoaded;
+- (void) saveRating;
+- (void) ratingSaved;
+
 
 @end

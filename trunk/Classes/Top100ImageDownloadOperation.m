@@ -24,9 +24,12 @@
         
         if ( searchResult.imageURL == nil ) {
             
+            NSLog(@"fetch full data since no image for that list type for: %@", searchResult.primaryTitle);
+            
             FullGameInfo * fullGame = [appDelegate getFullGameInfoByGameIdFromBGG: searchResult.gameId];
             
             if ( fullGame == nil) {
+                NSLog(@"did not find data for game: %@", searchResult.primaryTitle);
                 return;
             }
             
