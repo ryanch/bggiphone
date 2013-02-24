@@ -121,8 +121,9 @@
 	
 	
 	
-	[window addSubview:[navigationController view]];
-	[window makeKeyAndVisible];
+	//[window addSubview:[navigationController view]];
+	[window setRootViewController:navigationController];
+    [window makeKeyAndVisible];
 	
 	
 	// create html dir
