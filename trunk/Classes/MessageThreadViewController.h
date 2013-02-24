@@ -31,6 +31,7 @@
 	IBOutlet UIActivityIndicatorView * loadingView;
 	
 	BGGThread	*thread;
+    
 
 }
 

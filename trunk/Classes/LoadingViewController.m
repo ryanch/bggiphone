@@ -27,11 +27,44 @@
 @implementation LoadingViewController
 
 @synthesize loading;
+@synthesize pageNumber;
 
 #pragma mark Private
 
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ( buttonIndex == 0) {
+        [self userRequestedReload];
+    }
+    else {
+        [self userWantsNextPage];
+    }
+    
+}
+
+- (void) userWantsNextPage {
+    
+}
+
+
+- (void) userWantsMoreOrReload {
+    
+    UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:
+                             NSLocalizedString(@"Refresh", @"refresh"),
+                             NSLocalizedString(@"More", @"more"),
+                             nil ];
+    
+    [sheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+    
+    
+}
+
 -(void) showRefreshButton
 {
+    
+    refreshEnabled = YES;
+    
+    /*
 	// add a reload button to right nav bar
 	// see if we have reload button
 	if ( self.navigationItem.rightBarButtonItem == nil && ([self hasCachedData] || items == nil) )
@@ -44,10 +77,24 @@
 	}	
 	
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+
+     */
+    
+	if ( self.navigationItem.rightBarButtonItem == nil && ([self hasCachedData] || items == nil) )
+	{
+		UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc]
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(userWantsMoreOrReload)];
+		
+		[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+		
+	}
+    
+
 }
 
 -(void) disableRefreshButton
 {
+    refreshEnabled = NO;
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
@@ -91,7 +138,7 @@
 	loading = NO;
 	
 	items = results;
-	
+
 	[self updateViews];
 }
 

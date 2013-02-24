@@ -25,12 +25,16 @@
 @class BGGHTMLScraper;
 
 
-@interface LoadingViewController : UIViewController
+@interface LoadingViewController : UIViewController <UIActionSheetDelegate>
 {
 	NSArray			*items;
 	BOOL			loading;
 	BOOL			cancelLoading;
+    NSInteger pageNumber;
+    BOOL refreshEnabled;
 }
+
+@property NSInteger pageNumber;
 
 -(void) startLoading;
 
@@ -49,5 +53,9 @@
 -(NSData *) loadDataFromCache;
 - (BOOL) hasCachedData;
 -(void) clearCachedData;
+
+- (void) userWantsMoreOrReload;
+
+- (void) userWantsNextPage;
 
 @end

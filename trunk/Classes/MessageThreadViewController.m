@@ -123,9 +123,22 @@
 	}
 }
 
+
+- (void) userWantsNextPage {
+    
+    MessageThreadViewController * more = [[MessageThreadViewController alloc] init];
+    more.thread = self.thread;
+    more.pageNumber = self.pageNumber + 1;
+    
+    [self.navigationController pushViewController:more animated:YES];
+    
+    
+}
+
 -(NSString *) urlStringForLoading
 {
-	return [@"http://www.boardgamegeek.com" stringByAppendingString:self.thread.threadURL];
+	NSString * url =  [@"http://www.boardgamegeek.com" stringByAppendingString:self.thread.threadURL];
+    return [url stringByAppendingFormat:@"/page/%d", pageNumber ];
 }
 
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
@@ -138,7 +151,7 @@
 	if(self.thread == nil)
 		return nil;
 	
-	return [NSString stringWithFormat:@"thread-%@-page-1.cache.html", self.thread.threadId];
+	return [NSString stringWithFormat:@"thread-%@-page-%d.cache.html", self.thread.threadId, self.pageNumber];
 }
 
 #pragma mark Public
@@ -147,7 +160,7 @@
 {
 	if((self = [super initWithNibName:@"GameInfo" bundle:nil]) != nil)
 	{
-		
+		pageNumber = 1;
 	}
 	return self;
 }
