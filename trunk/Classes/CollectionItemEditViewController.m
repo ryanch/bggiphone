@@ -68,11 +68,16 @@
 	disclLabel.hidden = NO;
 	savingIndicator.hidden = YES;
 	loadingLabel.hidden = YES;
-	itemData.gameId = gameId;
 	
+	
+    BGGConnect * connect = [[BGGConnect alloc]init];
+    [connect showErrorForBadCollectionDataRead:itemData];
+    
 	if ( itemData == nil ) {
 		return;
 	}
+    
+    itemData.gameId = gameId;
 	
 	UISegmentedControl * segControl;
 	BOOL chooseOne = NO;
@@ -212,7 +217,7 @@
     BGGConnect * connect = [[BGGConnect alloc ] init];
     
 
-    [connect handleSaveCollectionForGameId:gameId withParams:paramsToSave withData:itemData];
+    saveResponse = [connect handleSaveCollectionForGameId:gameId withParams:paramsToSave withData:itemData];
     
     [self performSelectorOnMainThread:@selector(doModifyCollectionComplete) withObject:self waitUntilDone:YES];
 	
@@ -223,6 +228,11 @@
 
 - (void) doModifyCollectionComplete {
 	
+    
+    BGGConnect * connect = [[BGGConnect alloc] init];
+    [connect showErrorForBadCollectionDataWrite:saveResponse];
+    
+    
 	// update lists
 	//- (void) saveGameForListGameId: (NSInteger) gameId title: (NSString*) title list: (NSInteger) listType {
 	

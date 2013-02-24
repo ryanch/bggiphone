@@ -55,18 +55,21 @@
 */
 
 
-
-
-- (void) viewWillAppear:(BOOL)animated  {
-    [super viewWillAppear:animated];
-    
+- (void) viewDidAppear:(BOOL)animated  {
     ratingActivityView.hidden = NO;
     self.rateControl.hidden = YES;
     
     if ( [self confirmUserNameAndPassAvailable] ) {
-    
+        
         [self performSelectorInBackground:@selector(loadRating) withObject:nil];
     }
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated  {
+    [super viewWillAppear:animated];
+    
+
     
 }
 
@@ -212,7 +215,11 @@
     ratingActivityView.hidden = YES;
     self.rateControl.hidden = NO;
     
-    if ( itemData.rating != 0 ) {
+    BGGConnect * connect = [[BGGConnect alloc]init];
+    [connect showErrorForBadCollectionDataRead:itemData];
+    
+    
+    if ( itemData != nil && itemData.rating != 0 ) {
         [self.rateControl setSelectedSegmentIndex:itemData.rating -1];
     }
 
@@ -250,7 +257,7 @@
     NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:10];
     [params setObject:[NSString stringWithFormat:@"%d",rating ] forKey:@"rating"];
     
-    [connect handleSaveCollectionForGameId:[fullGameInfo.gameId integerValue] withParams:params withData:itemData];
+    saveResponse = [connect handleSaveCollectionForGameId:[fullGameInfo.gameId integerValue] withParams:params withData:itemData];
     
     [self performSelectorOnMainThread:@selector(ratingSaved) withObject:self waitUntilDone:YES];
     
@@ -259,6 +266,9 @@
 
 
 - (void) ratingSaved {
+    
+    BGGConnect * connect = [[BGGConnect alloc] init];
+    [connect showErrorForBadCollectionDataWrite:saveResponse];
     
     [rateControl setEnabled:YES];
     ratingActivityView.hidden = YES;

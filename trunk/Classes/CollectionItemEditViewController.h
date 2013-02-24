@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGGConnect.h"
 
 @class WishListPicker;
 @class CollectionItemData;
@@ -28,6 +29,7 @@
 	CollectionItemData* itemData;
 	NSArray * wishTexts;
 	NSString * gameTitle;
+    BGGConnectResponse saveResponse;
 }
 
 @property( nonatomic,strong) NSString * gameTitle;

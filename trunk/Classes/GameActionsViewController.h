@@ -24,6 +24,7 @@
 
 @class FullGameInfo;
 @class CollectionItemData;
+#import "BGGConnect.h"
 
 @interface GameActionsViewController : UIViewController {
 	FullGameInfo * fullGameInfo;
@@ -33,6 +34,7 @@
     IBOutlet UISegmentedControl * rateControl;
     CollectionItemData * itemData;
     IBOutlet UIActivityIndicatorView * ratingActivityView;
+    BGGConnectResponse saveResponse;
 }
 
 

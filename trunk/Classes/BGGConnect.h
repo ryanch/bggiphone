@@ -65,6 +65,10 @@ typedef NSInteger BGGConnectWishListState;
 
 - (CollectionItemData*) handleFetchOfCollectionDataOfGameId: (NSInteger) gameId;
 
-- (void) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData;
+- (BGGConnectResponse) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData;
+
+- (void) showErrorForBadCollectionDataRead:(CollectionItemData*) data;
+
+- (void) showErrorForBadCollectionDataWrite:(BGGConnectResponse) response;
 
 @end

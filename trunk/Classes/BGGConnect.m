@@ -477,58 +477,92 @@
 
 
 
-- (void) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData  {
+- (BGGConnectResponse) handleSaveCollectionForGameId: (NSInteger) gameId withParams: (NSDictionary*) paramsToSave withData: (CollectionItemData *) itemData  {
     
     BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
+    BGGConnectResponse response = SUCCESS;
+    
 	@autoreleasepool {
         
 
 		self.username = [appDelegate.appSettings.dict objectForKey:@"username"];
 		self.password = [appDelegate.appSettings.dict objectForKey:@"password"];
 		
-		BGGConnectResponse response = [self saveCollectionForGameId: gameId withParams: paramsToSave withData: itemData ];
+		 response = [self saveCollectionForGameId: gameId withParams: paramsToSave withData: itemData ];
 		
 		
 		if ( response == SUCCESS ) {
 			/// TODO UPDATE THE LOCAL DB
 		}
-		
-		if ( response == SUCCESS ) {
-            /*
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success modification")
-															message:NSLocalizedString(@"Your updates were saved.", @"Your updates were saved")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-             */
-		}
-		else if ( response == BAD_CONTENT ) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
-		else if ( response == CONNECTION_ERROR ) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
-		else if ( response == AUTH_ERROR ) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error Logging Play title")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
-		
-		
 
         
 	}
     
+    return response;
+    
     
 }
 
+
+- (void) showErrorForBadCollectionDataWrite:(BGGConnectResponse) response {
+    
+    if ( response == SUCCESS ) {
+        /*
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success modification")
+         message:NSLocalizedString(@"Your updates were saved.", @"Your updates were saved")
+         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+         [alert show];
+         */
+    }
+    else if ( response == BAD_CONTENT ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if ( response == CONNECTION_ERROR ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error moding")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if ( response == AUTH_ERROR ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Saving", @"Error Logging Play title")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    
+}
+
+
+
+- (void) showErrorForBadCollectionDataRead:(CollectionItemData*) data {
+    
+    BGGConnectResponse response  =  (data == nil) ? BAD_CONTENT : data.response;
+    
+    
+    if ( response == BAD_CONTENT ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if ( response == CONNECTION_ERROR ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if ( response == AUTH_ERROR ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error Logging Play title")
+                                                        message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+}
 
 
 
@@ -554,24 +588,7 @@
 		}
         
 		
-		if ( response == BAD_CONTENT || itemData == nil) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is that BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
-		else if ( response == CONNECTION_ERROR ) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error moding")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your network- or it is possible BGG has been updated.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
-		else if ( response == AUTH_ERROR ) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Loading Saved Data", @"Error Logging Play title")
-															message:NSLocalizedString(@"Check your password, and network connection. I think the error is your password.", @"No data was returned when logged. Check your password, and network connection.")
-														   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-			[alert show];
-		}
+
     
         
 	}
