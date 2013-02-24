@@ -205,6 +205,21 @@
 -(void) didFinishLoadingWithResults:(id)results
 {
 	[self takeResults:results];
+    
+    
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil )
+	{
+		UIBarButtonItem * nextButton = [[UIBarButtonItem alloc]
+                                        initWithTitle:NSLocalizedString(@"More", @"more games toolbar button") style: UIBarButtonItemStyleBordered  target:self action:@selector(userWantsMore)];
+		
+		[self.navigationItem setRightBarButtonItem:nextButton animated:YES];
+		
+	}
+	
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+    
 	
 	[self showRefreshButton];
 }

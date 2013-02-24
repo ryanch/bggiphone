@@ -48,7 +48,7 @@
 {
 	[super viewDidLoad];
     
-    
+    /*
  	if ( self.navigationItem.rightBarButtonItem == nil )
 	{
 		UIBarButtonItem * nextButton = [[UIBarButtonItem alloc]
@@ -57,6 +57,7 @@
 		[self.navigationItem setRightBarButtonItem:nextButton animated:YES];
 		
 	}
+     */
     
 	
 	self.tableView.rowHeight = 64;

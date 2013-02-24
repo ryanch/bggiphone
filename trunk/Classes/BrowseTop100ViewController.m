@@ -129,7 +129,7 @@
 	[super viewWillAppear:animated];
 	
     
-    
+    /*
 	// add a reload button to right nav bar
 	// see if we have reload button
 	if ( self.navigationItem.rightBarButtonItem == nil )
@@ -143,7 +143,7 @@
 	
 	self.navigationItem.rightBarButtonItem.enabled = YES;
     
-    
+    */
     
     
 	imagesLoading = [[NSMutableSet alloc] init];	
