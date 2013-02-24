@@ -109,6 +109,8 @@
 		BAEC7D050EC7ADD100151693 /* bgg11.db in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D040EC7ADD100151693 /* bgg11.db */; };
 		BAEC7D9B0EC7F02200151693 /* CollectionDownloadUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */; };
 		BAEC7D9D0EC7F04600151693 /* CollectionDownload.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */; };
+		E5381E3D16DAA4FC00B7208B /* GMSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5381E3B16DAA4FC00B7208B /* GMSDetailViewController.m */; };
+		E5381E3E16DAA4FC00B7208B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5381E3C16DAA4FC00B7208B /* MainStoryboard_iPad.storyboard */; };
 		E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */; };
 		E5AC4FCC16D8902200CF5ABE /* ForumReply.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */; };
 		E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */; };
@@ -264,6 +266,9 @@
 		BAEC7D990EC7F02200151693 /* CollectionDownloadUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionDownloadUIView.h; sourceTree = "<group>"; };
 		BAEC7D9A0EC7F02200151693 /* CollectionDownloadUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionDownloadUIView.m; sourceTree = "<group>"; };
 		BAEC7D9C0EC7F04600151693 /* CollectionDownload.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDownload.xib; sourceTree = "<group>"; };
+		E5381E3A16DAA4FC00B7208B /* GMSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSDetailViewController.h; path = iPad/GMSDetailViewController.h; sourceTree = "<group>"; };
+		E5381E3B16DAA4FC00B7208B /* GMSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSDetailViewController.m; path = iPad/GMSDetailViewController.m; sourceTree = "<group>"; };
+		E5381E3C16DAA4FC00B7208B /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = iPad/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5AC4FC916D8827B00CF5ABE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForumReply.xib; path = ../ForumReply.xib; sourceTree = "<group>"; };
 		E5AC4FCE16D8910E00CF5ABE /* ForumReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumReplyViewController.h; sourceTree = "<group>"; };
@@ -386,6 +391,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				E5381DEA16DAA2E600B7208B /* iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				BA48C76F0EB51D03005B4297 /* libsqlite3.0.dylib */,
@@ -543,6 +549,16 @@
 			name = gamepicker;
 			sourceTree = "<group>";
 		};
+		E5381DEA16DAA2E600B7208B /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				E5381E3A16DAA4FC00B7208B /* GMSDetailViewController.h */,
+				E5381E3B16DAA4FC00B7208B /* GMSDetailViewController.m */,
+				E5381E3C16DAA4FC00B7208B /* MainStoryboard_iPad.storyboard */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		E5AC4FCD16D890E600CF5ABE /* ForumReply */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +675,7 @@
 				2BF3FA241176020B00F07377 /* forums.png in Resources */,
 				E5AC4FCA16D8827B00CF5ABE /* Default-568h@2x.png in Resources */,
 				E5AC4FCC16D8902200CF5ABE /* ForumReply.xib in Resources */,
+				E5381E3E16DAA4FC00B7208B /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +731,7 @@
 				2B22EC1610F4C00300FCE834 /* LoadingTableViewController.m in Sources */,
 				94CD5631110259120081FEDF /* Top100ImageDownloadOperation.m in Sources */,
 				E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */,
+				E5381E3D16DAA4FC00B7208B /* GMSDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,12 +749,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BGG_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -749,12 +769,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BGG_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -768,6 +790,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "570F9FA3-F0D1-4B99-9F88-FE0FB1420665";
 				SDKROOT = iphoneos;
@@ -783,12 +806,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BGG_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Adhoc2;
 		};
@@ -801,7 +826,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -818,6 +843,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E37302CB-4DD1-4774-83F1-E2D98ABD6475";
 				SDKROOT = iphoneos;

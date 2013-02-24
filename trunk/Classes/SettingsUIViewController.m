@@ -49,6 +49,9 @@
 }
 */
 
+- (void) saveButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void) saveSettings {
 	

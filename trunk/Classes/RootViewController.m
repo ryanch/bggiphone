@@ -139,6 +139,11 @@
 
     
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    if ( appDelegate.navigationController == nil) {
+        appDelegate.navigationController = self.navigationController;
+    }
+    
 	[appDelegate loadMenuItem:menuItem];
 	
 }

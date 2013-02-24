@@ -135,6 +135,9 @@ typedef NSInteger BGGResumeState;
 	
 	// cached auth cookies
 	NSArray * authCookies;
+    
+    UISplitViewController * iPadSplitViewController;
+    
 }
 
 @property (nonatomic, strong) NSArray *authCookies;
@@ -143,6 +146,7 @@ typedef NSInteger BGGResumeState;
 @property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, strong) PlistSettings * appSettings;
 @property (nonatomic, strong) DownloadGameInfoOperation * downloadOperation;
+@property UISplitViewController * iPadSplitViewController;
 
 //! url encode a value
 + (NSString*) urlEncode: (NSString*) str;

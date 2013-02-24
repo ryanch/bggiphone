@@ -178,6 +178,8 @@
         BGGConnect * bggConnect = [[BGGConnect alloc] init];
         if ( ![bggConnect pullDefaultUsernameAndPassword]) {
             
+            
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"error dialog title")
                                                             message:NSLocalizedString(@"You must provide your username and password.", @"shown when username and password missing")
                                                            delegate:self cancelButtonTitle: NSLocalizedString( @"OK", @"okay button") otherButtonTitles: nil];
@@ -186,6 +188,12 @@
             SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
             
             [self.navigationController pushViewController:settings		animated:YES];
+            */
+            //[bggConnect confirmUserNameAndPassAvailable];
+            
+            BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate confirmUserNameAndPassAvailable];
+             
             
         }
         else {

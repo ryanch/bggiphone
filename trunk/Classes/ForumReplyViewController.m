@@ -56,6 +56,8 @@
     
     [self.subject setText:self.subjectTitle];
     
+    [self registerForKeyboardNotifications];
+    
     [super viewWillAppear:animated];
     
 }
@@ -72,6 +74,9 @@
     //[self.navigationController popViewControllerAnimated:YES];
     
     //UIAlertView * alert = – initWithTitle:message:delegate:cancelButtonTitle:otherButtonTitles:
+    
+    [self.subject   resignFirstResponder  ];
+    [self.body resignFirstResponder ];
     
     
     UIActionSheet * action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Discard" otherButtonTitles:@"Continue writing", @"Submit", nil ];
@@ -164,6 +169,52 @@
 	
 	
 }
+
+
+#pragma mark keyboard listeners
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect frame = self.view.frame;
+    
+    // this min thing is because if in portait the keybarod height is the width of the screen
+    frame.size.height = frame.size.height - ( MIN( kbSize.height, kbSize.width ) );     
+    
+    [self.view setFrame: frame];
+    
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect frame = self.view.frame;
+    
+    // this min thing is because if in portait the keybarod height is the width of the screen
+    frame.size.height = frame.size.height + ( MIN( kbSize.height, kbSize.width ) );
+    
+    [self.view setFrame: frame];
+}
+
 
 
 

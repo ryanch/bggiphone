@@ -137,8 +137,8 @@
 	web.title = @"Browser";
 	
 	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	[appDelegate.navigationController pushViewController: web animated: YES];
+	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[self.navigationController pushViewController: web animated: YES];
 	
 	
 	
@@ -152,13 +152,13 @@
 	}
 	
 	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
 	LogPlayUIViewController * logPlay = [[LogPlayUIViewController alloc] initWithNibName:@"RecordPlay" bundle:nil];
 	logPlay.gameId = fullGameInfo.gameId;
 	logPlay.title = NSLocalizedString( @"Log A Play", @"log a play button title" );
 	
-	[appDelegate.navigationController pushViewController: logPlay animated: YES];
+	[self.navigationController pushViewController: logPlay animated: YES];
 	
 }
 
@@ -173,8 +173,8 @@
 	col.gameId = [fullGameInfo.gameId intValue];
 	col.gameTitle = fullGameInfo.title;
 	
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	[appDelegate.navigationController pushViewController: col animated: YES];
+	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+	[self.navigationController pushViewController: col animated: YES];
 	
 	
 	

@@ -42,4 +42,6 @@
 
 - (IBAction) runTests;
 
+- (void) saveButtonPressed;
+
 @end

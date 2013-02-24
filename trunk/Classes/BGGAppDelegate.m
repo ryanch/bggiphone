@@ -49,6 +49,7 @@
 @synthesize downloadOperation;
 @synthesize dbAccess;
 @synthesize authCookies;
+@synthesize  iPadSplitViewController;
 
 
 
@@ -108,24 +109,32 @@
 	appSettings = [[PlistSettings alloc] initWithSettingsNamed:@"settings"];
 	
 	
-	// Configure and show the window
+    // Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        UINavigationController *foundNavigationController = [splitViewController.viewControllers lastObject];
+        splitViewController.delegate = (id)foundNavigationController.topViewController;
+        iPadSplitViewController = splitViewController;
+        
+        
+        ((UINavigationController*)[splitViewController.viewControllers objectAtIndex:0]).navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        
+        foundNavigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        
+    }
+    else {
+    
+        // Configure and show the window	
+        RootViewController * rootView = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
+        navigationController = [[UINavigationController alloc] initWithRootViewController: rootView];
+        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        
+        [window setRootViewController:navigationController];
+        [window makeKeyAndVisible];
+    }
 	
 	
-	
-	RootViewController * rootView = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
-	
-	navigationController = [[UINavigationController alloc] initWithRootViewController: rootView];
-	navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
-	
-	
-	
-	
-	
-	//[window addSubview:[navigationController view]];
-	[window setRootViewController:navigationController];
-    [window makeKeyAndVisible];
-	
-	
+    
 	// create html dir
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -140,9 +149,7 @@
 	tempFilePath = [documentsDirectory stringByAppendingPathComponent:  @"/imgs/" ];
 	//[fileManager createDirectoryAtPath:tempFilePath		attributes:nil];
     [fileManager createDirectoryAtPath:tempFilePath withIntermediateDirectories:YES attributes:nil error:nil];
-    
-    
-    
+
 	// try to resume
 	[self resumeFromSavedPoint];
 }
@@ -248,8 +255,15 @@
 	
 	
 	tabBarController.title = searchResult.primaryTitle;
-	[self.navigationController pushViewController:tabBarController		animated:YES];
-	
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UINavigationController * right = [iPadSplitViewController.viewControllers lastObject];
+        [right pushViewController:tabBarController animated:NO];
+    }
+    else {
+        [self.navigationController pushViewController:tabBarController		animated:YES];
+    }
 	
 	
 	DownloadGameInfoOperation *dl = [self cancelExistingCreateNewDownloadGameInfoOperation];
@@ -309,8 +323,20 @@
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
 		
-		[self.navigationController pushViewController:settings		animated:YES];
-		
+		//[self.navigationController pushViewController:settings		animated:YES];
+  
+        
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:settings];
+        settings.title = NSLocalizedString(@"Settings", @"settings");
+        
+        settings.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:settings action:@selector(saveButtonPressed)];
+        
+        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+        
+        
 		return NO;
 	}
 	
@@ -331,7 +357,19 @@
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
 		
-		[navigationController pushViewController:settings		animated:YES];
+		//[self.navigationController pushViewController:settings		animated:YES];
+        
+        
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:settings];
+        settings.title = NSLocalizedString(@"Settings", @"settings");
+        
+        settings.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:settings action:@selector(saveButtonPressed)];
+        
+        
+        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
 		
 		return nil;
 	}
@@ -676,7 +714,7 @@
 #endif
 		
 		SettingsUIViewController * settings = [SettingsUIViewController buildSettingsUIViewController];
-		
+        
 		[navigationController pushViewController:settings		animated:YES];
 	}
 	else if ( menuItem == ABOUT_MENU_CHOICE ) {
