@@ -28,12 +28,15 @@
 	NSMutableSet	*imagesLoading;
 	NSOperationQueue * imageDownloadQueue;
     NSInteger pageNumber;
+    NSInteger baseNumber;
 }
 
-- (void) setPageNumber:(NSInteger) page;
+- (void) setPageNumber:(NSInteger) page baseNumber:(NSInteger)base;
 
 -(void) nsOperationDidFinishLoadingResult:(BBGSearchResult *)result;
 
 - (void) updateCellImage: (UITableViewCell*) cell withSearchResult: (BBGSearchResult*) result;
+
+- (void) userWantsMore;
 
 @end

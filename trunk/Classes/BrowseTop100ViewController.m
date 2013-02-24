@@ -109,13 +109,43 @@
 	//[NSThread detachNewThreadSelector:@selector(backgroundImageLoad:) toTarget:self withObject:result];
 }
 
- 
+
+
+- (void) userWantsMore {
+    
+    BrowseTop100ViewController  * more = [[BrowseTop100ViewController alloc ] init];
+    [more setPageNumber: pageNumber+1 baseNumber: baseNumber+[items count]   ];
+    [self.navigationController pushViewController:more animated:YES];
+    
+    
+    
+}
+
+
 #pragma mark UIViewController overrides
 
 -(void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
+    
+    
+	// add a reload button to right nav bar
+	// see if we have reload button
+	if ( self.navigationItem.rightBarButtonItem == nil )
+	{
+		UIBarButtonItem * nextButton = [[UIBarButtonItem alloc]
+										   initWithTitle:NSLocalizedString(@"More", @"more games toolbar button") style: UIBarButtonItemStyleBordered  target:self action:@selector(userWantsMore)];
+		
+		[self.navigationItem setRightBarButtonItem:nextButton animated:YES];
+		
+	}
+	
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+    
+    
+    
+    
 	imagesLoading = [[NSMutableSet alloc] init];	
 	
 	imageDownloadQueue = [[NSOperationQueue alloc] init];
@@ -131,30 +161,20 @@
 -(NSString *) cacheFileName
 {
     
-    if (pageNumber == 0 ) {
-        return @"top100.cache.html";
-
-        
-    }
-    else {
+ 
         return [NSString stringWithFormat: @"top100p%d.cache.html", pageNumber];
         
-    }
+    
     
 	
 }
 
 -(NSString *) urlStringForLoading
 {
-    if (pageNumber == 0 ) {
-        return @"http://www.boardgamegeek.com/browse/boardgame";
-        
-        
-    }
-    else {
+
         return [NSString stringWithFormat: @"http://www.boardgamegeek.com/browse/boardgame/page/%d", pageNumber];
         
-    }
+    
     
     
 	
@@ -182,7 +202,7 @@
 {
 	BBGSearchResult * result = (BBGSearchResult*) [items objectAtIndex:indexPath.row];
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"%d. %@", indexPath.row + 1, result.primaryTitle];
+	cell.textLabel.text = [NSString stringWithFormat:@"%d. %@", indexPath.row + 1 + baseNumber, result.primaryTitle];
 	cell.textLabel.adjustsFontSizeToFitWidth = NO;
 	
 	[self updateCellImage:cell withSearchResult:result];
@@ -204,9 +224,10 @@
 	}
 }
 
-- (void) setPageNumber:(NSInteger) page {
-    self.title  = NSLocalizedString( @"Top 100", @"browse top 100 title" );
+- (void) setPageNumber:(NSInteger) page baseNumber:(NSInteger)base {
+    self.title  = NSLocalizedString( @"Top Titles", @"browse top titles" );
     pageNumber = page;
+    baseNumber = base;
 }
 
 
@@ -217,7 +238,8 @@
 	if((self = [super init]) != nil)
 	{
 		self.title = NSLocalizedString( @"Top 100", @"browse top 100 title" );
-        pageNumber = 0;
+        pageNumber = 1;
+        baseNumber = 0;
 	}
 	return self;
 }
