@@ -624,60 +624,64 @@
 
 - (void) saveFullGameInfo: (FullGameInfo * ) fullgameInfo {
 
-	/*
-	NSInteger ownerFlag = (fullgameInfo.ownedByUser) ? 1 : 0;
-	
-	if ( ownerFlag == 0 ) {
-		if ( [self checkIfUserOwnsGame: [fullgameInfo.gameId intValue]] ) {
-			ownerFlag = 1;
-		}
-	}
-	 */
-	
-	
-	
-	
-	// delete old if there is one
-	NSString * query = [NSString stringWithFormat: @"delete from GameInfo WHERE gameId=%@", fullgameInfo.gameId ];
-	[database executeUpdate:query];
-	
-	if ([database hadError]) {
-        NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
-    }
-	
-	// insert into db
-	query = @"insert into GameInfo ( gameId,title,imageURL ,desc ,usersrated ,average ,bayesaverage ,rank ,numweights ,averageweight ,owned ,minPlayers ,maxPlayers ,playingTime, isCached,trading,wanting,wishing  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	
-#ifdef __DEBUGGING__
-	NSLog( @"inserting full game info id: %d", [fullgameInfo.gameId intValue]	);
-#endif
-	
-	[database executeUpdate:query ,	
-	 
-	 fullgameInfo.gameId ,
-	 fullgameInfo.title,
-	 fullgameInfo.imageURL,
-	 fullgameInfo.desc,
-	 [NSNumber numberWithInt:fullgameInfo.usersrated],
-	 [NSNumber numberWithDouble: [fullgameInfo.average doubleValue]], 
-	 [NSNumber numberWithDouble: [fullgameInfo.bayesaverage doubleValue]], 
-	 [NSNumber numberWithInt: fullgameInfo.rank], 
-	 [NSNumber numberWithInt: fullgameInfo.numweights], 
-	 [NSNumber numberWithDouble: [fullgameInfo.averageweight doubleValue]], 
-	 [NSNumber numberWithInt:fullgameInfo.owned], 
-	 [NSNumber numberWithInt: fullgameInfo.minPlayers], 
-	 [NSNumber numberWithInt: fullgameInfo.maxPlayers],
-	 [NSNumber numberWithInt: fullgameInfo.playingTime], 
-	 [NSNumber numberWithInt: fullgameInfo.isCached ? 1: 0 ],	
-	 [NSNumber numberWithInt:fullgameInfo.trading],	
-	 [NSNumber numberWithInt:fullgameInfo.wanting],	
-	 [NSNumber numberWithInt:fullgameInfo.wishing]	
-	 
-	 ];
-	
-	
-	if ([database hadError]) {
-        NSLog(@"Err inserting game into db %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+    @synchronized(self) {
+        
+        /*
+        NSInteger ownerFlag = (fullgameInfo.ownedByUser) ? 1 : 0;
+        
+        if ( ownerFlag == 0 ) {
+            if ( [self checkIfUserOwnsGame: [fullgameInfo.gameId intValue]] ) {
+                ownerFlag = 1;
+            }
+        }
+         */
+        
+        
+        
+        
+        // delete old if there is one
+        NSString * query = [NSString stringWithFormat: @"delete from GameInfo WHERE gameId=%@", fullgameInfo.gameId ];
+        [database executeUpdate:query];
+        
+        if ([database hadError]) {
+            NSLog(@"Err %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+        }
+        
+        // insert into db
+        query = @"insert into GameInfo ( gameId,title,imageURL ,desc ,usersrated ,average ,bayesaverage ,rank ,numweights ,averageweight ,owned ,minPlayers ,maxPlayers ,playingTime, isCached,trading,wanting,wishing  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        
+    #ifdef __DEBUGGING__
+        NSLog( @"inserting full game info id: %d", [fullgameInfo.gameId intValue]	);
+    #endif
+        
+        [database executeUpdate:query ,	
+         
+         fullgameInfo.gameId ,
+         fullgameInfo.title,
+         fullgameInfo.imageURL,
+         fullgameInfo.desc,
+         [NSNumber numberWithInt:fullgameInfo.usersrated],
+         [NSNumber numberWithDouble: [fullgameInfo.average doubleValue]], 
+         [NSNumber numberWithDouble: [fullgameInfo.bayesaverage doubleValue]], 
+         [NSNumber numberWithInt: fullgameInfo.rank], 
+         [NSNumber numberWithInt: fullgameInfo.numweights], 
+         [NSNumber numberWithDouble: [fullgameInfo.averageweight doubleValue]], 
+         [NSNumber numberWithInt:fullgameInfo.owned], 
+         [NSNumber numberWithInt: fullgameInfo.minPlayers], 
+         [NSNumber numberWithInt: fullgameInfo.maxPlayers],
+         [NSNumber numberWithInt: fullgameInfo.playingTime], 
+         [NSNumber numberWithInt: fullgameInfo.isCached ? 1: 0 ],	
+         [NSNumber numberWithInt:fullgameInfo.trading],	
+         [NSNumber numberWithInt:fullgameInfo.wanting],	
+         [NSNumber numberWithInt:fullgameInfo.wishing]	
+         
+         ];
+        
+        
+        if ([database hadError]) {
+            NSLog(@"Err inserting game into db %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+        }
+        
     }
 	
 }
