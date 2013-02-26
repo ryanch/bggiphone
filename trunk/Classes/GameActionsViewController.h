@@ -35,6 +35,7 @@
     CollectionItemData * itemData;
     IBOutlet UIActivityIndicatorView * ratingActivityView;
     BGGConnectResponse saveResponse;
+    IBOutlet UIButton * loginForRatings;
 }
 
 
@@ -44,7 +45,8 @@
 @property (nonatomic, strong ) UIButton * safariButton;
 @property (nonatomic, strong ) UISegmentedControl * rateControl;
 
-
+- (void) updateRatingsAndLoginButtonStatus;
+- (IBAction) loginForRatingsButtonPress;
 - (IBAction) openRecordAPlay;
 - (IBAction) openGameInSafari;
 - (IBAction) manageGameInCollection;

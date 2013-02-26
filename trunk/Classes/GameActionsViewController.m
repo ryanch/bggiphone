@@ -59,10 +59,7 @@
     ratingActivityView.hidden = NO;
     self.rateControl.hidden = YES;
     
-    if ( [self confirmUserNameAndPassAvailable] ) {
-        
-        [self performSelectorInBackground:@selector(loadRating) withObject:nil];
-    }
+    [self updateRatingsAndLoginButtonStatus];
     
 }
 
@@ -100,6 +97,13 @@
 	[modifyButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 	
 	modifyButton.backgroundColor = [UIColor clearColor];
+    
+    // set the bg on the button
+	[loginForRatings setBackgroundImage:newImage forState:UIControlStateNormal];
+	
+	[loginForRatings setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
+	
+	loginForRatings.backgroundColor = [UIColor clearColor];
     
 
 }
@@ -178,6 +182,40 @@
 	
 	
 	
+}
+
+- (void) updateRatingsAndLoginButtonStatus {
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSString * username = [appDelegate.appSettings.dict objectForKey:@"username"];
+	NSString * password = [appDelegate.appSettings.dict objectForKey:@"password"];
+    BOOL needLogin = username == nil || password == nil;
+    
+    
+    if ( needLogin ) {
+        loginForRatings.hidden = NO;
+        rateControl.hidden = YES;
+        ratingActivityView.hidden = YES;
+        
+    }
+    else {
+        loginForRatings.hidden = YES;
+        rateControl.hidden  = NO;
+        
+        if ( [self confirmUserNameAndPassAvailable] ) {
+            ratingActivityView.hidden = NO;
+            [self performSelectorInBackground:@selector(loadRating) withObject:nil];
+        }
+    }
+    
+    
+    
+}
+
+- (IBAction) loginForRatingsButtonPress {
+    
+    [self confirmUserNameAndPassAvailable];
+    
 }
 
 
