@@ -332,8 +332,8 @@
         settings.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:settings action:@selector(saveButtonPressed)];
         
-        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
-        //navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:nil  ];
         
         
@@ -367,8 +367,8 @@
                                                       initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:settings action:@selector(saveButtonPressed)];
         
         
-        navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
-        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:nil  ];
 		
 		return nil;
