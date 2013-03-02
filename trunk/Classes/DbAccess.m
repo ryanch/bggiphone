@@ -594,6 +594,16 @@
     
     @synchronized(self) {
     
+        
+        // see if the info data is there
+        BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
+        NSString * infoPath = [appDelegate buildFilePathForGameItemsForGameId:gameId];
+        if ( ![[NSFileManager defaultManager] fileExistsAtPath:infoPath]) {
+            return nil;
+        }
+                            
+        
+        
         FullGameInfo * fullGameInfo = nil;
         FMResultSet * rs = [database executeQuery:@"select * from GameInfo where gameId=?",  [NSNumber numberWithInt:gameId] ];
         
@@ -617,6 +627,9 @@
         [rs close];
         
         
+        fullGameInfo.infoItems = [NSArray arrayWithContentsOfFile:infoPath];
+        
+        
         return fullGameInfo;
         
     }
@@ -630,6 +643,11 @@
 - (void) saveFullGameInfo: (FullGameInfo * ) fullgameInfo {
 
     @synchronized(self) {
+        
+        BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
+        NSString * infoPath = [appDelegate buildFilePathForGameItemsForGameId:fullgameInfo.gameId];
+        [fullgameInfo.infoItems writeToFile:infoPath atomically:YES];
+        
         
         /*
         NSInteger ownerFlag = (fullgameInfo.ownedByUser) ? 1 : 0;

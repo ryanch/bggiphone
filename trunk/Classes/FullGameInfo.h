@@ -43,8 +43,11 @@
 	NSInteger trading;
 	NSInteger wanting;
 	NSInteger wishing;
+    
+    NSArray * infoItems;
 }
 
+@property NSArray * infoItems;
 
 @property NSInteger trading;
 @property NSInteger wanting;

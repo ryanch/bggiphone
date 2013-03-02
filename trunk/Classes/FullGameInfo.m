@@ -37,6 +37,7 @@
 @synthesize maxPlayers;
 @synthesize playingTime;
 
+@synthesize infoItems;
 
 
 @synthesize isCached;

@@ -21,6 +21,7 @@
 
 #import "XmlGameInfoReader.h"
 #import "FullGameInfo.h"
+#import "GameInfoItem.h"
 
 
 @implementation XmlGameInfoReader
@@ -29,6 +30,8 @@
 
 - (BOOL)parseXMLAtURL:(NSURL *)URL parseError:(NSError **)error {
 
+    tempItems = [[NSMutableArray alloc]initWithCapacity:100];
+    
 	gameInfo = [[FullGameInfo alloc] init];
 	captureChars = NO;
 	
@@ -46,7 +49,22 @@
         *error =  [parser parserError];
     }
     
-	
+    // sort the items
+    [tempItems sortUsingComparator:^ NSComparisonResult(GameInfoItem *d1, GameInfoItem *d2) {
+        
+            NSComparisonResult result = [d1.name compare: d2.name];
+            if ( result != NSOrderedSame ) {
+                return result;
+            }
+            
+            return [d1.value compare:d2.value];
+            
+        }
+     ];
+     
+    
+	gameInfo.infoItems = tempItems;
+    
 	
 	return success;
 	
@@ -86,11 +104,28 @@
 			 [elementName isEqualToString:@"owned" ] || 
 			 [elementName isEqualToString:@"trading" ] ||
 			 [elementName isEqualToString:@"wanting" ] ||
+             
+             
+             // info items
+             [elementName isEqualToString:@"boardgamehonor" ] ||
+             [elementName isEqualToString:@"boardgamemechanic" ] ||
+             [elementName isEqualToString:@"boardgamecategory" ] ||
+             [elementName isEqualToString:@"boardgamedesigner" ] ||
+             [elementName isEqualToString:@"boardgameartist" ] ||
+             [elementName isEqualToString:@"boardgamepublisher" ] ||
+             [elementName isEqualToString:@"boardgameversion" ] ||
+             [elementName isEqualToString:@"boardgameexpansion" ] ||
+             [elementName isEqualToString:@"boardgamefamily" ] ||
+             
 			 [elementName isEqualToString:@"wishing" ]
 		
 			 ) {
 		[stringBuffer setString:@""];
 		captureChars = YES;
+        
+        
+        tempObjectId = [ attributeDict objectForKey:@"objectid"];
+        
 	}
 	
 	
@@ -194,6 +229,30 @@
 	}
 	
 	
+    else if (
+             [elementName isEqualToString:@"boardgamehonor" ] ||
+             [elementName isEqualToString:@"boardgamemechanic" ] ||
+             [elementName isEqualToString:@"boardgamecategory" ] ||
+             [elementName isEqualToString:@"boardgamedesigner" ] ||
+             [elementName isEqualToString:@"boardgameartist" ] ||
+             [elementName isEqualToString:@"boardgamepublisher" ] ||
+             [elementName isEqualToString:@"boardgameversion" ] ||
+             [elementName isEqualToString:@"boardgameexpansion" ] ||
+             [elementName isEqualToString:@"boardgamefamily" ] 
+        
+             ) {
+        
+        GameInfoItem * info = [[GameInfoItem alloc] init];
+        
+        info.value = [ [NSString alloc] initWithString: stringBuffer];
+        info.name = elementName;
+        info.idValue = tempObjectId;
+        
+        
+        [tempItems addObject: info ];
+    }
+    
+    
 	
 	captureChars = NO;
 

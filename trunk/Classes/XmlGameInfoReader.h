@@ -29,6 +29,8 @@
 	FullGameInfo * gameInfo;
 	BOOL captureChars;
 	BOOL captureGameTitle;
+    NSMutableArray * tempItems;
+    NSString * tempObjectId;
 }
 
 

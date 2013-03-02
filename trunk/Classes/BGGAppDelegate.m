@@ -430,6 +430,18 @@
 }
 
 
+
+- (NSString*) buildFilePathForGameItemsForGameId: (NSInteger) gameId {
+	// create a new html file for the game
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *fullPath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"info/%d.list", gameId] ];
+	return fullPath;
+	
+}
+
+
+
 //! build a local path to an game image file, check if it exists
 - (NSString*) buildImageFilePathForGameId: (NSString*) gameId checkIfExists: (BOOL) exists {
 	// create a new html file for the game

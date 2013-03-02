@@ -24,6 +24,7 @@
 #import "BBGSearchResult.h"
 #import "BGGAppDelegate.h"
 #import "HtmlTemplate.h"
+#import "GameInfoItem.h"
 
 
 @implementation GameInfoViewController
@@ -202,6 +203,58 @@
 	[params setObject: starBuffer	forKey: @"#!stars#" ];
 	
 	
+    // #!infoItems#
+    // build the text for the #!infoItems# area
+    if ( gameInfo.infoItems != nil ) {
+        
+        NSMutableString * infoItemText = [[NSMutableString alloc ] initWithCapacity:200 * [gameInfo.infoItems count] ];
+        
+        //[infoItemText appendString: @"<table>" ];
+        
+        
+        NSString * openItemType = nil;
+    
+        
+        for ( NSInteger i = 0; i < [gameInfo.infoItems count]; i++ ) {
+        
+            GameInfoItem * item = [gameInfo.infoItems objectAtIndex:i];
+            
+            
+            // see if we need to start a new row or not
+            if ( openItemType == nil || [openItemType compare:item.name] != NSOrderedSame ) {
+                if ( i != 0 ) {
+                    //[infoItemText appendString:@"</td></tr>"];
+                }
+                
+                //[infoItemText appendString:@"<tr><td>"];
+                [infoItemText appendString:@"<div class=\"itemname\" >"];
+                [infoItemText appendString: [GameInfoItem displayNameForType:   item.name]    ];
+                [infoItemText appendString:@"</div>"];
+                openItemType = item.name;
+                //[infoItemText appendString:@"</td><td>"];
+                
+            }
+            
+            
+            // add this row
+            [infoItemText appendString:@"<li>"];
+            [infoItemText appendString:item.value];
+            [infoItemText appendString:@"</li>"];
+            
+        }
+        
+        
+        // close the last row
+        //[infoItemText appendString:@"</td></tr>"];
+        
+        // close the table
+        //[infoItemText appendString: @"</table>" ];
+        
+        // add to params
+        [params setObject: infoItemText	forKey: @"#!infoItems#" ];
+    }
+    
+    
 	// stringByReplacingOccurrencesOfString:withString:
 	
 	NSString * desc = [ gameInfo.desc stringByReplacingOccurrencesOfString: @"\n" withString: @"<p/>" ];
