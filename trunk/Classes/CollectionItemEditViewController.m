@@ -376,4 +376,8 @@
 }
 
 
+- (void) doneButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

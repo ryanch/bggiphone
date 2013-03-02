@@ -40,6 +40,7 @@
 #import "FullGameInfo.h"
 #import "XmlGameInfoReader.h"
 #import "CollectionDownloadUIView.h"
+#import "FullInfoViewController.h"
 
 @implementation BGGAppDelegate
 
@@ -221,10 +222,19 @@
 	
 	UITabBarController * tabBarController = [[UITabBarController alloc] init];
 	
+    
 	GameInfoViewController *gameInfo = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameInfo.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
 	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Info", @"title for the info screen for a board game" )	image:[UIImage imageNamed:@"info.png"] tag:0];
 	gameInfo.tabBarItem = infoItem;
+    
+    
+    /*
+    FullInfoViewController * gameInfo = [[FullInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
+    gameInfo.gameId = [searchResult.gameId integerValue];
+	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Info", @"title for the info screen for a board game" )	image:[UIImage imageNamed:@"info.png"] tag:0];
+	gameInfo.tabBarItem = infoItem;
+     */
 	
 	GameInfoViewController *gameStats = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameStats.title = NSLocalizedString( @"Stats", @"title for the stats screen for a board game" );

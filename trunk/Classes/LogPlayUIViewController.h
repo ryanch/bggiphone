@@ -39,6 +39,7 @@
 - (void) doLogPlay;
 - (void) logPlayComplete;
 - (BOOL) confirmUserNameAndPassAvailable;
+- (void) doneButtonPressed;
 
 
 @property (nonatomic,strong) UISegmentedControl * playCountController;

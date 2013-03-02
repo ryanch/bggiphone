@@ -33,5 +33,8 @@
 -(NSArray *) scrapeForumsFromList:(NSString *)document;
 -(NSArray *) scrapeThreadsFromForum:(NSString *)document;
 -(NSArray *) scrapeMessagesFromThread:(NSString *)document;
+-(NSArray *) scrapeFullInfoFromDocument:(NSString *)document;
+
+
 
 @end

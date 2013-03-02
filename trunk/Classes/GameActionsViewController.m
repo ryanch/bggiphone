@@ -158,11 +158,30 @@
 	
 	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	LogPlayUIViewController * logPlay = [[LogPlayUIViewController alloc] initWithNibName:@"RecordPlay" bundle:nil];
-	logPlay.gameId = fullGameInfo.gameId;
-	logPlay.title = NSLocalizedString( @"Log A Play", @"log a play button title" );
-	
-	[self.navigationController pushViewController: logPlay animated: YES];
+    LogPlayUIViewController * logPlay = [[LogPlayUIViewController alloc] initWithNibName:@"RecordPlay" bundle:nil];
+    logPlay.gameId = fullGameInfo.gameId;
+    logPlay.title = NSLocalizedString( @"Log A Play", @"log a play button title" );
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:logPlay];
+        logPlay.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:logPlay action:@selector(doneButtonPressed)];
+        
+        nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+        
+        
+    }
+    else {
+        
+
+        [self.navigationController pushViewController: logPlay animated: YES];
+            
+    }
 	
 }
 
@@ -173,13 +192,33 @@
 		return;
 	}
 	
-	CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
-	col.gameId = [fullGameInfo.gameId intValue];
-	col.gameTitle = fullGameInfo.title;
-	
-	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-	[self.navigationController pushViewController: col animated: YES];
-	
+    CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
+    col.gameId = [fullGameInfo.gameId intValue];
+    col.gameTitle = fullGameInfo.title;
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:col];
+        col.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:col action:@selector(doneButtonPressed)];
+        
+        nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+        
+        
+    }
+    else {
+    
+        
+
+        
+        //BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+        [self.navigationController pushViewController: col animated: YES];
+        
+    }
 	
 	
 }

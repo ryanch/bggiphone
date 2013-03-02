@@ -55,5 +55,6 @@
 - (void) loadCurrentData;
 - (void) threadLoadCurrentData;
 - (void) loadCurrentDataComplete;
+- (void) doneButtonPressed;
 
 @end

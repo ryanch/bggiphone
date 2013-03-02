@@ -30,6 +30,10 @@
 
 #pragma mark Private
 
+
+
+
+
 - (NSString *) contentsOfTagWithStart:(NSString *)tagStart startTagEnd:(NSString *)startTagEnd endTag:(NSString *)endTag inRange:(NSRange)searchRange foundRange:(NSRange *)foundRange inSource:(NSString *)source
 {
 	// Find start tag
@@ -67,6 +71,52 @@
 }
 
 #pragma mark Public
+
+
+
+-(NSArray *) scrapeFullInfoFromDocument:(NSString *)document {
+    
+    NSRange startInfoAnchor = [document rangeOfString:@"<a name=\"information\"></a>"];
+    
+    if(startInfoAnchor.location == NSNotFound) {
+        NSLog( @"information tag  not found in html");
+        return nil;
+    }
+    
+    
+    
+    NSInteger endOfStartInfo = NSMaxRange(startInfoAnchor);
+    
+    NSRange startOfTable = [document rangeOfString:@"<table width=\'100%\' class=\'moduletable\'>" options:0
+                                             range: NSMakeRange( endOfStartInfo , [document length] - endOfStartInfo) ];
+    
+    if(startOfTable.location == NSNotFound) {
+        NSLog( @"information table tag  not found in html");
+        return nil;
+    }
+    
+    
+    NSRange endOfTable = [document rangeOfString:@"</div>" options:0
+                                             range: NSMakeRange( endOfStartInfo , [document length] - endOfStartInfo) ];
+    
+    
+    if(endOfTable.location == NSNotFound) {
+        NSLog( @"information table end tag  not found in html");
+        return nil;
+    }
+    
+
+    
+    NSRange tableRange = NSMakeRange(startOfTable.location, endOfTable.location-startOfTable.location  );
+    
+    
+    NSString * table = [document substringWithRange: tableRange];
+    
+    return [NSArray arrayWithObject:table];
+    
+    
+}
+
 
 -(NSArray *) scrapeMessagesFromThread:(NSString *)document
 {
