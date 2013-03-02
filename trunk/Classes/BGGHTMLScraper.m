@@ -440,6 +440,13 @@
 		
 		result.gameId = gameId;
 		result.primaryTitle = name;
+        
+        NSRange suffix = [imageURL rangeOfString:@"mt.jpg"];
+        if ( suffix.location != NSNotFound ) {
+            imageURL = [NSString stringWithFormat: @"%@t.jpg",  [imageURL substringToIndex:suffix.location] ];
+            //NSLog( imageURL);
+        }
+        
 		result.imageURL = imageURL;
 		
 		[results addObject:result];
