@@ -11,7 +11,8 @@
 #import "LogPlayUIViewController.h"
 
 #import "FullGameInfo.h"
-
+#import "BGGAppDelegate.h"
+#import "CollectionItemEditViewController.h"
 
 @interface GameViewUITabBarViewController  ()
 
@@ -46,6 +47,7 @@
     
     UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"cancel") destructiveButtonTitle:nil otherButtonTitles:
                              NSLocalizedString(@"Record A Play", @"record a play"),
+                             NSLocalizedString(@"Manage Collection", @"manage collection"),
                              NSLocalizedString(@"View in Safari", @"View in Safari"),
                              nil ];
     
@@ -58,9 +60,42 @@
         [self openRecordAPlay];
     }
     else if ( buttonIndex == 1 ) {
+        [self openCollectionManager];
+    }
+    else if ( buttonIndex == 2 ) {
         [self openGameInSafari];
     }
 
+}
+
+- (void) openCollectionManager {
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    if ( ![appDelegate confirmUserNameAndPassAvailable]  ) {
+        return;
+    }
+    
+    
+    CollectionItemEditViewController * col = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
+    col.gameId = [self.fullGameInfo.gameId intValue];
+    col.gameTitle = self.fullGameInfo.title;
+    
+
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:col];
+    col.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:col action:@selector(doneButtonPressed)];
+    
+    nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+    //nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+    
+
+
+    
+    
+    
 }
 
 - (void) openGameInSafari {
@@ -107,7 +142,13 @@
 		return;
 	}
 	
-	
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    if ( ![appDelegate confirmUserNameAndPassAvailable]  ) {
+        return;
+    }
+    
+    
 	//BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
     LogPlayUIViewController * logPlay = [[LogPlayUIViewController alloc] initWithNibName:@"RecordPlay" bundle:nil];

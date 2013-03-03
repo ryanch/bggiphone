@@ -17,6 +17,7 @@
 
 - (void) openGameInSafari;
 - (void) openRecordAPlay;
+- (void) openCollectionManager;
 
 
 @property FullGameInfo * fullGameInfo;

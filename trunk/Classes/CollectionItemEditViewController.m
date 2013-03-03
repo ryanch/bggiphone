@@ -65,7 +65,6 @@
 		
 		[self performSelectorOnMainThread:@selector(loadCurrentDataComplete) withObject:self waitUntilDone:YES];
 	
-	
 }
 
 - (void) loadCurrentDataComplete {
@@ -154,12 +153,6 @@
 }
 
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -176,15 +169,6 @@
 	
 	[self loadCurrentData];
 }
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
@@ -232,9 +216,6 @@
     saveResponse = [connect handleSaveCollectionForGameId:gameId withParams:paramsToSave withData:itemData];
     
     [self performSelectorOnMainThread:@selector(doModifyCollectionComplete) withObject:self waitUntilDone:YES];
-	
-
-	
 	
 }
 

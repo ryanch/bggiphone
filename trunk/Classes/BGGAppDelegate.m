@@ -261,13 +261,15 @@
 	gameActions.tabBarItem = actionsItem;
      */
     
+    
+    /*
     CollectionItemEditViewController * collectionManager = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
     //col.gameId = [fullGameInfo.gameId intValue];
     //col.gameTitle = fullGameInfo.title;
     
  	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Collection", @"title for the screen to manage e")	image:[UIImage imageNamed:@"actions.png"] tag:0];
 	collectionManager.tabBarItem = actionsItem;
-    
+    */
      
 	
 	GameForumsViewController *gameForums  = [[GameForumsViewController alloc] init];	
@@ -276,7 +278,7 @@
 	gameForums.tabBarItem = forumsItem;
 	
 
-	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments, collectionManager, gameForums, nil];
+	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments , gameForums, nil];
 	//[tabBarController setViewControllers: [NSArray arrayWithObjects:gameActions, gameInfo, nil] animated:NO];
 	
 	
@@ -301,7 +303,7 @@
 	dl.forumsController = gameForums;
 	dl.tabBarController = tabBarController;
 	dl.searchResult = searchResult;
-    dl.collectionManager = collectionManager;
+    //dl.collectionManager = collectionManager;
 	
 	[dl start];
 	
