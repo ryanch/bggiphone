@@ -18,4 +18,6 @@
 
 - (void) setURL: (NSString*) urlString;
 
+- (void) doneButtonPressed;
+
 @end

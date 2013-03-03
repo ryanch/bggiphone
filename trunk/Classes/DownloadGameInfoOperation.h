@@ -26,19 +26,23 @@
 @class GameForumsViewController;
 @class BBGSearchResult;
 @class FullGameInfo;
+@class GameViewUITabBarViewController;
+@class CollectionItemEditViewController;
 
 @interface DownloadGameInfoOperation : NSOperation {
 	GameInfoViewController * statsController;
 	GameInfoViewController * infoController;
 	GameActionsViewController * actionsController;
 	GameForumsViewController * forumsController;
-	UITabBarController * tabBarController;
+	GameViewUITabBarViewController * tabBarController;
 	
 	BBGSearchResult * searchResult;
 	BOOL isExe;
 	BOOL isDone;
 	FullGameInfo * fullGameInfo;
 }
+
+@property CollectionItemEditViewController * collectionManager;
 
 @property (nonatomic, strong) UITabBarController * tabBarController;
 @property (nonatomic, strong) GameInfoViewController * statsController;

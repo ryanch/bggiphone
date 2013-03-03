@@ -38,6 +38,10 @@
 	if ( ![self confirmUserNameAndPassAvailable] ) {
 		return;
 	}
+    
+    if ( self.gameId == 0 ) {
+        return;
+    }
 	
 	if ( disclLabel.hidden == YES ) {
 		return;
@@ -143,6 +147,8 @@
 		[paramsToSave setObject:@"1" forKey:@"wishlistpriority"];
 		
 		self.title = @"Modify Collection";
+        self.gameTitle = nil;
+        self.gameId  = 0;
 	}
     return self;
 }
@@ -190,6 +196,12 @@
 
 
 - (IBAction) saveButtonPressed {
+    
+    if ( self.gameId == 0 ) {
+        return;
+    }
+    
+    
 	if ( ![self confirmUserNameAndPassAvailable] ) {
 		return;
 	}
@@ -258,7 +270,7 @@
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
-	return [appDelegate confirmUserNameAndPassAvailable];
+	return [appDelegate confirmUserNameAndPassAvailableWithCompletion:nil];
 	
 	
 	

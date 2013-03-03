@@ -115,6 +115,7 @@
 		E5AC4FCC16D8902200CF5ABE /* ForumReply.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5AC4FCB16D8902200CF5ABE /* ForumReply.xib */; };
 		E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */; };
 		E5D700B216E2ADDE0044F649 /* GameInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D700B116E2ADDE0044F649 /* GameInfoItem.m */; };
+		E5D700BB16E3CAAA0044F649 /* GameViewUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D700BA16E3CAAA0044F649 /* GameViewUITabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -276,6 +277,8 @@
 		E5AC4FCF16D8910E00CF5ABE /* ForumReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumReplyViewController.m; sourceTree = "<group>"; };
 		E5D700B016E2ADDE0044F649 /* GameInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoItem.h; sourceTree = "<group>"; };
 		E5D700B116E2ADDE0044F649 /* GameInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoItem.m; sourceTree = "<group>"; };
+		E5D700B916E3CAAA0044F649 /* GameViewUITabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewUITabBarViewController.h; sourceTree = "<group>"; };
+		E5D700BA16E3CAAA0044F649 /* GameViewUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewUITabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,9 +523,10 @@
 		E5D700B416E3B05E0044F649 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
+				E5D700B916E3CAAA0044F649 /* GameViewUITabBarViewController.h */,
+				E5D700BA16E3CAAA0044F649 /* GameViewUITabBarViewController.m */,
 				BADB59FB0EB8259800742CA6 /* DownloadGameInfoOperation.h */,
 				BADB59FC0EB8259800742CA6 /* DownloadGameInfoOperation.m */,
-				BADB5AB50EBABD8E00742CA6 /* LogPlayUIViewController.h */,
 				BADB5AB60EBABD8E00742CA6 /* LogPlayUIViewController.m */,
 				943543EC10F1BC9E00E545D3 /* GameViewTabController.h */,
 				943543ED10F1BC9E00E545D3 /* GameViewTabController.m */,
@@ -549,6 +553,7 @@
 				BA03E7E10EA85AC60069F8D6 /* SettingsUIViewController.m */,
 				BA48C7340EB51BAF005B4297 /* AboutViewController.h */,
 				BA48C7350EB51BAF005B4297 /* AboutViewController.m */,
+				BADB5AB50EBABD8E00742CA6 /* LogPlayUIViewController.h */,
 				BA48C4AA0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.h */,
 				BA48C4AB0EB3CC99005B4297 /* BoardGameSearchResultsTableViewController.m */,
 				BAA7D0B90FDB1CAB002D5FCD /* WebViewController.h */,
@@ -786,6 +791,7 @@
 				E5AC4FD016D8910E00CF5ABE /* ForumReplyViewController.m in Sources */,
 				E5381E3D16DAA4FC00B7208B /* GMSDetailViewController.m in Sources */,
 				E5D700B216E2ADDE0044F649 /* GameInfoItem.m in Sources */,
+				E5D700BB16E3CAAA0044F649 /* GameViewUITabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

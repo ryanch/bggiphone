@@ -28,6 +28,8 @@
 #import "FullGameInfo.h"
 #import "XmlGameInfoReader.h"
 #import "BGGAppDelegate.h"
+#import "GameViewUITabBarViewController.h"
+#import "CollectionItemEditViewController.h"
 
 @implementation DownloadGameInfoOperation
 
@@ -109,6 +111,7 @@
 		tabBarController.title = fullGameInfo.title;
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 		[appDelegate.navigationController setTitle:fullGameInfo.title];
+        tabBarController.fullGameInfo = fullGameInfo;
 	}
 	
 	
@@ -118,7 +121,10 @@
 		actionsController.fullGameInfo = fullGameInfo;
 		forumsController.fullGameInfo = fullGameInfo;
 		[forumsController startLoading];
-	}	
+        _collectionManager.gameId = [fullGameInfo.gameId integerValue];
+        _collectionManager.gameTitle = fullGameInfo.title;
+        
+	}
 }
 
 - (void)start {

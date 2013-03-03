@@ -18,6 +18,8 @@
 //  Copyright __MyCompanyName__ 2008. All rights reserved.
 //
 
+#import "CollectionItemEditViewController.h"
+#import "GameViewUITabBarViewController.h"
 #import "BGGAppDelegate.h"
 #import "RootViewController.h"
 #import "PlistSettings.h"
@@ -220,8 +222,12 @@
 	
 	[self saveResumePoint:BGG_RESUME_GAME withString:searchResult.gameId];
 	
-	UITabBarController * tabBarController = [[UITabBarController alloc] init];
-	
+	GameViewUITabBarViewController * tabBarController = [[GameViewUITabBarViewController alloc] init];
+    
+    // we want an action button on the right
+    tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                          initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:tabBarController action:@selector(gameActionButtonPressed)];
+    
     
 	GameInfoViewController *gameInfo = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameInfo.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
@@ -248,11 +254,21 @@
 	gameComments.tabBarItem = commentsItem;
 	gameComments.gameId = searchResult.gameId;
 	
-	
+	/*
 	GameActionsViewController *gameActions  = [[GameActionsViewController alloc] initWithNibName:@"GameActions" bundle:nil];	
 	gameActions.title = NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game");
 	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Actions", @"title for the screen on a board game to do actions with that game")	image:[UIImage imageNamed:@"actions.png"] tag:0];
 	gameActions.tabBarItem = actionsItem;
+     */
+    
+    CollectionItemEditViewController * collectionManager = [[CollectionItemEditViewController alloc] initWithNibName:@"CollectionItemEdit" bundle:nil];
+    //col.gameId = [fullGameInfo.gameId intValue];
+    //col.gameTitle = fullGameInfo.title;
+    
+ 	UITabBarItem * actionsItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Collection", @"title for the screen to manage e")	image:[UIImage imageNamed:@"actions.png"] tag:0];
+	collectionManager.tabBarItem = actionsItem;
+    
+     
 	
 	GameForumsViewController *gameForums  = [[GameForumsViewController alloc] init];	
 	gameForums.title = NSLocalizedString( @"Forums", @"title for the screen on a board game to do forums with that game");
@@ -260,7 +276,7 @@
 	gameForums.tabBarItem = forumsItem;
 	
 
-	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments, gameActions, gameForums, nil];
+	tabBarController.viewControllers = [NSArray arrayWithObjects:gameInfo, gameStats, gameComments, collectionManager, gameForums, nil];
 	//[tabBarController setViewControllers: [NSArray arrayWithObjects:gameActions, gameInfo, nil] animated:NO];
 	
 	
@@ -270,6 +286,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UINavigationController * right = [iPadSplitViewController.viewControllers lastObject];
         [right pushViewController:tabBarController animated:NO];
+        
+  
     }
     else {
         [self.navigationController pushViewController:tabBarController		animated:YES];
@@ -279,14 +297,17 @@
 	DownloadGameInfoOperation *dl = [self cancelExistingCreateNewDownloadGameInfoOperation];
 	dl.infoController = gameInfo;
 	dl.statsController = gameStats;
-	dl.actionsController = gameActions;
+	//dl.actionsController = gameActions;
 	dl.forumsController = gameForums;
 	dl.tabBarController = tabBarController;
 	dl.searchResult = searchResult;
+    dl.collectionManager = collectionManager;
 	
 	[dl start];
 	
 }
+
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	
@@ -319,6 +340,11 @@
 }
 
 - (BOOL) confirmUserNameAndPassAvailable {
+    return [self confirmUserNameAndPassAvailableWithCompletion: nil];
+}
+
+
+- (BOOL) confirmUserNameAndPassAvailableWithCompletion:(void (^)(void))completion {
 
 	
 	NSString * username = [self.appSettings.dict objectForKey:@"username"];
@@ -344,7 +370,7 @@
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
-        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+        [self.navigationController presentViewController:nav animated:YES completion:completion  ];
         
         
 		return NO;

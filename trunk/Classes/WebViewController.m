@@ -70,7 +70,9 @@
     // Release anything that's not essential, such as cached data
 }
 
-
+- (void) doneButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end

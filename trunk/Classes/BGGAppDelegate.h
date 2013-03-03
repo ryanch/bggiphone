@@ -199,8 +199,11 @@ typedef NSInteger BGGResumeState;
 - (NSString*) getCurrentUserName;
 
 - (BOOL) confirmUserNameAndPassAvailable;
+- (BOOL) confirmUserNameAndPassAvailableWithCompletion:(void (^)(void))completion;
 
 - (NSString*) buildFilePathForGameItemsForGameId: (NSInteger) gameId;
+
+
 
 
 @end
