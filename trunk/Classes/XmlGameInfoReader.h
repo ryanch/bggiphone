@@ -31,6 +31,7 @@
 	BOOL captureGameTitle;
     NSMutableArray * tempItems;
     NSString * tempObjectId;
+    NSString * rankValue;
 }
 
 

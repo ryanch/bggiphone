@@ -129,6 +129,15 @@
 	}
 	
 	
+    if ( [elementName isEqualToString:@"rank" ] ) {
+        NSString * name = [ attributeDict objectForKey:@"name"];
+        NSString * value = [ attributeDict objectForKey:@"value"];
+        if ( [name isEqualToString: @"boardgame" ] ) {
+            rankValue = value;
+        }
+    }
+    
+    
 	NSString * primary = (NSString*) [ attributeDict objectForKey:@"primary"];
 	
 	if (  primary != nil && [primary isEqualToString:@"true"] && [elementName isEqualToString:@"name" ]) {
@@ -189,7 +198,15 @@
 	else if ( [elementName isEqualToString:@"rank" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.rank = [value intValue];
+        
+        
+        if ( gameInfo.rank == 0 ) {
+            gameInfo.rank    = [rankValue integerValue];
+        }
+        
 	}
+    
+    
 	
 	else if ( [elementName isEqualToString:@"numweights" ] ) {
 		NSString *value = [ [NSString alloc] initWithString: stringBuffer]; 
