@@ -229,10 +229,19 @@
                                                           initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:tabBarController action:@selector(gameActionButtonPressed)];
     
     
+	GameInfoViewController *gameSummary = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
+	gameSummary.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
+	UITabBarItem * summaryItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Summary", @"summary" )	image:[UIImage imageNamed:@"info.png"] tag:0];
+	gameSummary.tabBarItem = summaryItem;
+    gameSummary.showInfoView = NO;
+    
+    
 	GameInfoViewController *gameInfo = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameInfo.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
 	UITabBarItem * infoItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString( @"Info", @"title for the info screen for a board game" )	image:[UIImage imageNamed:@"info.png"] tag:0];
 	gameInfo.tabBarItem = infoItem;
+    gameInfo.showInfoView = YES;
+    
     
     
     /*
@@ -298,6 +307,7 @@
 	
 	DownloadGameInfoOperation *dl = [self cancelExistingCreateNewDownloadGameInfoOperation];
 	dl.infoController = gameInfo;
+    dl.summaryController = gameSummary;
 	dl.statsController = gameStats;
 	//dl.actionsController = gameActions;
 	dl.forumsController = gameForums;

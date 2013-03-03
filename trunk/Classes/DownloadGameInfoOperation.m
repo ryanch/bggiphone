@@ -118,6 +118,7 @@
 	if ( [self isCancelled] == NO ) {
 		[infoController updateForGameInfo: fullGameInfo];
 		[statsController updateForGameStats:fullGameInfo];
+        [_summaryController updateForGameInfo:fullGameInfo];
 		actionsController.fullGameInfo = fullGameInfo;
 		forumsController.fullGameInfo = fullGameInfo;
 		[forumsController startLoading];

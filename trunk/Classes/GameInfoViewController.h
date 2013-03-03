@@ -42,4 +42,8 @@
 @property (nonatomic, strong)  UIActivityIndicatorView * loadingView;
 @property (nonatomic, strong)  FullGameInfo * gameInfo;
 
+@property BOOL showInfoView;
+
+- (NSString*) buildStatsTable;
+
 @end
