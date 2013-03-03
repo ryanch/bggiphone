@@ -13,6 +13,8 @@
 #import "FullGameInfo.h"
 #import "BGGAppDelegate.h"
 #import "CollectionItemEditViewController.h"
+#import "GameActionsViewController.h"
+
 
 @interface GameViewUITabBarViewController  ()
 
@@ -48,6 +50,7 @@
     UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"cancel") destructiveButtonTitle:nil otherButtonTitles:
                              NSLocalizedString(@"Record A Play", @"record a play"),
                              NSLocalizedString(@"Manage Collection", @"manage collection"),
+                             NSLocalizedString(@"Rate This Game", @"rate this game"),
                              NSLocalizedString(@"View in Safari", @"View in Safari"),
                              nil ];
     
@@ -63,9 +66,42 @@
         [self openCollectionManager];
     }
     else if ( buttonIndex == 2 ) {
+        [self openRatings];
+    }
+    else if ( buttonIndex == 3 ) {
         [self openGameInSafari];
     }
 
+}
+
+- (void) openRatings {
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    if ( ![appDelegate confirmUserNameAndPassAvailable]  ) {
+        return;
+    }
+    
+    if ( self.fullGameInfo == nil ){
+        return;
+    }
+    
+    GameActionsViewController * ratingsView = [[GameActionsViewController alloc] initWithNibName:@"GameActions" bundle:nil];
+    
+    ratingsView.fullGameInfo = self.fullGameInfo;
+    ratingsView.title =self.fullGameInfo.title;
+    
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:ratingsView];
+    ratingsView.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:ratingsView action:@selector(doneButtonPressed)];
+    
+    nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+    
+    
+    
+    
 }
 
 - (void) openCollectionManager {

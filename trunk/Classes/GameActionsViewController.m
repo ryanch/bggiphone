@@ -105,6 +105,13 @@
 	
 	loginForRatings.backgroundColor = [UIColor clearColor];
     
+    
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSString * path = [appDelegate buildImageFilePathForGameId: fullGameInfo.gameId checkIfExists:YES ];
+    
+    
+    [gameImageView setImage: [UIImage imageWithContentsOfFile:path]  ];
 
 }
 
@@ -353,6 +360,8 @@
 }
 
 
-
+- (void) doneButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

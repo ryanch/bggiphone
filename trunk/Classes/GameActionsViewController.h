@@ -36,11 +36,12 @@
     IBOutlet UIActivityIndicatorView * ratingActivityView;
     BGGConnectResponse saveResponse;
     IBOutlet UIButton * loginForRatings;
+    
+    IBOutlet UIImageView * gameImageView;
 }
 
 
 @property (nonatomic, strong ) FullGameInfo * fullGameInfo;
-
 @property (nonatomic, strong ) UIButton * logPlayButton;
 @property (nonatomic, strong ) UIButton * safariButton;
 @property (nonatomic, strong ) UISegmentedControl * rateControl;
@@ -58,6 +59,6 @@
 - (void) ratingLoaded;
 - (void) saveRating;
 - (void) ratingSaved;
-
+- (void) doneButtonPressed;
 
 @end
