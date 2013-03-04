@@ -855,6 +855,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BGG_Prefix.pch;
@@ -865,6 +866,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA6BC319-25F4-43E8-8B94-2933FC0513B6";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
