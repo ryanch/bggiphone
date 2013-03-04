@@ -11,7 +11,7 @@
 #import "BGGConnect.h"
 #import "SettingsUIViewController.h"
 #import "PlistSettings.h"
-#import "Beacon.h"
+//#import "Beacon.h"
 #import "CollectionItemData.h"
 #import "DbAccess.h"
 

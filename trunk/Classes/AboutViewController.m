@@ -20,7 +20,7 @@
 //
 
 #import "AboutViewController.h"
-#import "Beacon.h"
+//#import "Beacon.h"
 
 @implementation AboutViewController
 

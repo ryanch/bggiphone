@@ -24,7 +24,7 @@
 #import "BGGAppDelegate.h"
 #import "PlistSettings.h"
 #import "SettingsUIViewController.h"
-#import "Beacon.h"
+//#import "Beacon.h"
 #import "BGGConnect.h"
 #import "PostWorker.h"
 

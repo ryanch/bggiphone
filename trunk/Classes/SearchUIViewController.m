@@ -24,7 +24,7 @@
 #import "BGGAppDelegate.h"
 #import "XmlSearchReader.h"
 #import "DbAccess.h"
-#import "Beacon.h"
+//#import "Beacon.h"
 #import "BBGSearchResult.h"
 
 @implementation SearchUIViewController

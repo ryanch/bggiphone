@@ -23,7 +23,7 @@
 #import "BGGAppDelegate.h"
 #import "RootViewController.h"
 #import "PlistSettings.h"
-#import "Beacon.h" 
+//#import "Beacon.h"
 #import "DownloadGameInfoOperation.h"
 #import "DbAccess.h"
 #import "GameViewTabController.h"

@@ -27,7 +27,7 @@
 #import "XmlSearchReader.h"
 #import "BoardGameSearchResultsTableViewController.h"
 #import "AboutViewController.h"
-#import "Beacon.h"
+//#import "Beacon.h"
 
 
 
