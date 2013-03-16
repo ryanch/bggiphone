@@ -36,8 +36,9 @@
 {
     
     refreshEnabled = YES;
-    
-    [self.refreshControl endRefreshing];
+    if ([self respondsToSelector:@selector(setRefreshControl:)]) {
+        [self.refreshControl endRefreshing];
+    }
     
 }
 
@@ -401,10 +402,16 @@
     
     refreshEnabled = NO;
     
-    UIRefreshControl * refreshControler = [[UIRefreshControl alloc] init];
-    [refreshControler addTarget:self action:@selector(refreshRequestedByPullDown)
-               forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControler;
+    if ([self respondsToSelector:@selector(setRefreshControl:)]) {
+    
+        UIRefreshControl * refreshControler = [[UIRefreshControl alloc] init];
+        [refreshControler addTarget:self action:@selector(refreshRequestedByPullDown)
+                   forControlEvents:UIControlEventValueChanged];
+        
+        NSLog(@"setting controller on %@", self);
+        self.refreshControl = refreshControler;
+        
+    }
 	
 	[self startLoading];
 }

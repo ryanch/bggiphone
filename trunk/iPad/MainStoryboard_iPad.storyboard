@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -27,25 +27,17 @@
                         <rect key="frame" x="0.0" y="64" width="703" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Get started by browsing the menu." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXO-Iq-fnp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Get started by browsing the menu." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eXO-Iq-fnp">
+                                <rect key="frame" x="13" y="12" width="624" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="MYu-J4-Nsd">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="383" id="4Db-b9-G9m"/>
-                                    <constraint firstAttribute="height" constant="381" id="a68-d6-8ya"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Default.png" id="MYu-J4-Nsd">
+                                <rect key="frame" x="160" y="161" width="383" height="381"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="eXO-Iq-fnp" firstAttribute="leading" secondItem="26" secondAttribute="leading" constant="13" id="IXh-Oj-tOZ"/>
-                            <constraint firstItem="MYu-J4-Nsd" firstAttribute="centerX" secondItem="26" secondAttribute="centerX" type="default" id="NxN-pb-II3"/>
-                            <constraint firstItem="MYu-J4-Nsd" firstAttribute="top" secondItem="26" secondAttribute="top" constant="161" id="pZb-U9-aUp"/>
-                            <constraint firstItem="eXO-Iq-fnp" firstAttribute="top" secondItem="26" secondAttribute="top" constant="12" id="yYg-oG-JKa"/>
-                        </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
@@ -58,7 +50,7 @@
         <!--Split View Controller-->
         <scene sceneID="18">
             <objects>
-                <splitViewController id="5" sceneMemberID="viewController">
+                <splitViewController id="5" customClass="BGGUISplitViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -132,6 +124,20 @@
     <resources>
         <image name="Default.png" width="320" height="480"/>
     </resources>
+    <classes>
+        <class className="BGGUISplitViewController" superclassName="UISplitViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BGGUISplitViewController.h"/>
+        </class>
+        <class className="GMSDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GMSDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RootViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
