@@ -50,6 +50,7 @@
 */
 
 - (void) saveButtonPressed {
+    [self saveSettings];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -86,6 +87,7 @@
 		[dict setObject:passwordTextField.text	forKey:@"password"];
 	}
 	
+    [appDelegate.appSettings saveSettings];
 	
 	
 }
