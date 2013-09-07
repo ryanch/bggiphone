@@ -133,7 +133,8 @@
 		
 		// Find end of username
 		NSRange nameEndSearchRange = NSMakeRange(nameEnd.location, [document length] - nameEnd.location);
-		NSString *nameEndSearchString = @"</div>\n\t<div style='white-space:nowrap;'>(<a href=\"/user/";
+		//NSString *nameEndSearchString = @"</div>\n\t<div style='white-space:nowrap;'>(<a href=\"/user/";
+        NSString *nameEndSearchString = @"</div>\n\t<div class='username'>(<a href=\"/user/";
 		nameEnd = [document rangeOfString:nameEndSearchString options:0 range:nameEndSearchRange];
 		
 		if(nameEnd.location == NSNotFound)
