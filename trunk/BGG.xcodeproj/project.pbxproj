@@ -881,7 +881,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON (2VR925JVKE)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BGG_Prefix.pch;
@@ -892,7 +892,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = BGG;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA6BC319-25F4-43E8-8B94-2933FC0513B6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3AAEF378-746D-4098-880D-0F336790B04B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -956,14 +956,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan CHRISTIANSON";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E37302CB-4DD1-4774-83F1-E2D98ABD6475";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
