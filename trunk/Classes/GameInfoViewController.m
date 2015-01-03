@@ -64,7 +64,7 @@
 	
 	[params setObject: gameInfo.title forKey:@"#!gameTitle#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.rank] forKey:@"#!rank#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.rank] forKey:@"#!rank#"];
 	
 
 	float avgRatingFloatValue = [gameInfo.average floatValue];
@@ -75,19 +75,19 @@
 	
 	[params setObject:  [self trimToDecimal:gameInfo.bayesaverage ]  forKey:@"#!bayAvg#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.usersrated] forKey:@"#!usersRated#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.usersrated] forKey:@"#!usersRated#"];
 	
 	[params setObject: [self trimToDecimal:gameInfo.averageweight] forKey:@"#!avgWeight#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.numweights] forKey:@"#!numWeights#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.numweights] forKey:@"#!numWeights#"];
 
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.owned] forKey:@"#!copiesOwned#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.owned] forKey:@"#!copiesOwned#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.trading] forKey:@"#!copiesForTrade#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.trading] forKey:@"#!copiesForTrade#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.wanting] forKey:@"#!copiesWanted#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.wanting] forKey:@"#!copiesWanted#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.wishing] forKey:@"#!copiesWishedFor#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.wishing] forKey:@"#!copiesWishedFor#"];
 	
 	
 	
@@ -222,12 +222,12 @@
 	
 	[params setObject: gameInfo.title forKey:@"#!title#"];
 	
-	[params setObject: [NSString stringWithFormat:@"%d", gameInfo.rank] forKey:@"#!rank#"];
+	[params setObject: [NSString stringWithFormat:@"%ld", (long)gameInfo.rank] forKey:@"#!rank#"];
 	
-	NSString * players = [NSString stringWithFormat:@"%d-%d",gameInfo.minPlayers,gameInfo.maxPlayers];
+	NSString * players = [NSString stringWithFormat:@"%ld-%ld",(long)gameInfo.minPlayers,(long)gameInfo.maxPlayers];
 	[params setObject:players forKey:@"#!players#"];
 	
-	NSString * gameTime = [NSString stringWithFormat:@"%d min",gameInfo.playingTime];
+	NSString * gameTime = [NSString stringWithFormat:@"%ld min",(long)gameInfo.playingTime];
 	[params setObject: gameTime	forKey: @"#!time#" ];
 	
 

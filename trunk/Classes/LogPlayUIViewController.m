@@ -28,6 +28,10 @@
 #import "BGGConnect.h"
 #import "PostWorker.h"
 
+@interface LogPlayUIViewController () <UITextFieldDelegate>
+
+@end
+
 @implementation LogPlayUIViewController
 
 
@@ -36,7 +40,6 @@
 @synthesize datePicker;
 @synthesize gameId;
 @synthesize loadingView;
-
 
 /*
 // Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
@@ -47,6 +50,11 @@
     return self;
 }
 */
+- (IBAction)backgroundTapped:(id)sender {
+    //[self.commentText endEditing:YES];
+    //[self.location endEditing:YES];
+    [self.view endEditing:YES];
+}
 
 
 // Implement loadView to create a view hierarchy programmatically.
@@ -81,9 +89,31 @@
 	
 	
 	playCount = 1;
+    
+    self.commentText.layer.borderWidth = 1.0;
+    self.commentText.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.commentText.layer.cornerRadius = 5;
+    
+    self.location.delegate = self;
+    
+    [self registerForKeyboardNotifications];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    // For some reason, the inset is needed for smaller screens so the date picker is not
+    // under the navigation bar.
+    CGSize frameSize = self.scrollView.frame.size;
+    if (frameSize.height < 500)
+    {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(80.0, 0.0, 0.0, 0.0);
+        self.scrollView.contentInset = contentInsets;
+    }
+    
+    CGSize contSize = self.myControl.frame.size;
+    contSize.height -= self.scrollView.contentInset.top;
+    [self.scrollView setContentSize:contSize];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
@@ -114,7 +144,11 @@
 		bggConnect.username = [appDelegate.appSettings.dict objectForKey:@"username"];
 		bggConnect.password = [appDelegate.appSettings.dict objectForKey:@"password"];
 		
-		BGGConnectResponse response = [bggConnect simpleLogPlayForGameId: [gameId intValue] forDate: datePicker.date numPlays: playCount ];
+        BGGConnectResponse response = [bggConnect simpleLogPlayForGameId:[gameId intValue]
+                                                                 forDate:datePicker.date
+                                                                numPlays:playCount
+                                                                location:self.location.text
+                                                                comments:self.commentText.text];
 		
 		if ( response == SUCCESS ) {
 			/*
@@ -125,7 +159,7 @@
 			[alert release];		
 			 */
 			
-			playLogLabel.hidden = NO;
+			self.playLogLabel.hidden = NO;
 			
 		}
 		else if ( response == CONNECTION_ERROR ) {
@@ -318,7 +352,7 @@
 		playCount = 1;
 	}
 	
-	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %d",playCount] forSegmentAtIndex: 1];
+	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %ld",(long)playCount] forSegmentAtIndex: 1];
 	
 }
 
@@ -326,5 +360,61 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWasShown:)
+                                                     name:UIKeyboardDidShowNotification object:nil];
+    
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillBeHidden:)
+                                                     name:UIKeyboardWillHideNotification object:nil];
+    }
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect aRect = self.myControl.frame;
+    aRect.size.height -= kbSize.height;
+   
+    UIEdgeInsets contentInsets = self.scrollView.contentInset;
+    contentInsets.bottom += kbSize.height;
+    self.scrollView.contentInset = contentInsets;
+    
+    UIEdgeInsets indInsets = self.scrollView.scrollIndicatorInsets;
+    indInsets.bottom += kbSize.height;
+    self.scrollView.scrollIndicatorInsets = indInsets;
+
+    if (!CGRectContainsPoint(aRect, self.commentText.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:self.commentText.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    UIEdgeInsets contentInsets = self.scrollView.contentInset;
+    contentInsets.bottom -= kbSize.height;
+    self.scrollView.contentInset = contentInsets;
+
+    UIEdgeInsets indInsets = self.scrollView.scrollIndicatorInsets;
+    indInsets.bottom -= kbSize.height;
+    self.scrollView.scrollIndicatorInsets = indInsets;
+}
 
 @end

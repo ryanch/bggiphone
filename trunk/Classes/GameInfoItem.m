@@ -63,4 +63,20 @@
      return NSLocalizedString(@"Info", @"info");
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.value forKey:@"value"];
+    [encoder encodeObject:self.idValue forKey:@"idValue"];
+}
+
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.value = [decoder decodeObjectForKey:@"value"];
+        self.idValue = [decoder decodeObjectForKey:@"idValue"];
+    }
+    return self;
+}
+
 @end

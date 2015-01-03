@@ -117,7 +117,7 @@
 ///
 /// given a game id, fetch the game from the db
 ///
--(FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId;
+-(FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId itemsRequired: (BOOL) itemsRequired;
 
 
 ///

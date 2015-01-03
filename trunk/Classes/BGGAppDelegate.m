@@ -99,6 +99,8 @@
 	
 	RANDOM_SEED();
 	
+    application.statusBarOrientation = UIInterfaceOrientationPortrait;
+    
 	dbAccess = [[DbAccess alloc] init];
 	
 	downloadOperation = nil;
@@ -121,8 +123,10 @@
         
         
         ((UINavigationController*)[splitViewController.viewControllers objectAtIndex:0]).navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        ((UINavigationController*)[splitViewController.viewControllers objectAtIndex:0]).navigationBar.translucent = NO;
         
         foundNavigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        foundNavigationController.navigationBar.translucent = NO;
         
     }
     else {
@@ -131,6 +135,7 @@
         RootViewController * rootView = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
         navigationController = [[UINavigationController alloc] initWithRootViewController: rootView];
         navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        navigationController.navigationBar.translucent = NO;
         
         [window setRootViewController:navigationController];
         [window makeKeyAndVisible];
@@ -160,6 +165,8 @@
 
 - (void) resumeFromSavedPoint {
 	
+    return; // Since top level menu is not saved, don't bother
+    
 	if ( self.appSettings == nil ) {
 		return;
 	}
@@ -227,7 +234,6 @@
     // we want an action button on the right
     tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                           initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:tabBarController action:@selector(gameActionButtonPressed)];
-    
     
 	GameInfoViewController *gameSummary = [[GameInfoViewController alloc] initWithNibName:@"GameInfo" bundle:nil];
 	gameSummary.title  = NSLocalizedString( @"Info", @"title for the info screen for a board game" );
@@ -301,6 +307,7 @@
   
     }
     else {
+        self.navigationController.navigationBar.translucent = NO;
         [self.navigationController pushViewController:tabBarController		animated:YES];
     }
 	
@@ -320,9 +327,8 @@
 }
 
 
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-	
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
 #ifdef PINCH_ENABLED	
 	[[Beacon shared] endBeacon];
 #endif 	
@@ -381,6 +387,7 @@
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:settings action:@selector(saveButtonPressed)];
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.navigationBar.translucent = NO;
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:completion  ];
         
@@ -416,6 +423,7 @@
         
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.navigationBar.translucent = NO;
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:nil  ];
 		
@@ -428,7 +436,7 @@
 - (FullGameInfo*) getFullGameInfoByGameIdFromBGG: (NSString*) gameId {
 	
 	
-	FullGameInfo* fullGameInfo = [self.dbAccess fetchFullGameInfoByGameId: [gameId intValue] ];
+	FullGameInfo* fullGameInfo = [self.dbAccess fetchFullGameInfoByGameId: [gameId intValue] itemsRequired:YES];
 	if ( fullGameInfo != nil && fullGameInfo.isCached == YES  ) {
 		//[fullGameInfo retain];
 		return fullGameInfo;
@@ -473,7 +481,14 @@
 	// create a new html file for the game
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *fullPath = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"info/%d.list", gameId] ];
+    NSString *fullDir = [documentsDirectory stringByAppendingPathComponent: @"info"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:fullDir])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:fullDir withIntermediateDirectories:YES attributes:nil error:nil];
+        
+    }
+    NSString *fullPath = [fullDir stringByAppendingPathComponent: [NSString stringWithFormat: @"/%ld.list", (long)gameId] ];
 	return fullPath;
 	
 }

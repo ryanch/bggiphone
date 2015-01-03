@@ -47,7 +47,11 @@ typedef NSInteger BGGConnectWishListState;
 - (BOOL) scanForCheckedForm: (NSString*) name fromData: (NSString*) data;
 
 //! Log a play, with simple params
-- (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId forDate: (NSDate *) date numPlays: (NSInteger) plays;
+- (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId
+                                      forDate: (NSDate *) date
+                                     numPlays: (NSInteger) plays
+                                     location: (NSString*) locationValue
+                                     comments: (NSString*) commentValue;
 
 - (BGGConnectResponse) createDbGameEntryForGameId:(NSInteger) gameId;
 

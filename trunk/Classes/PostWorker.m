@@ -32,11 +32,13 @@
 		for ( int i = 0; i < count; i++ ) {
 			NSString * key = [allKeys objectAtIndex:i];
 			NSString * value = [params objectForKey:key];
-			
-			[postString appendString: @"&"];
+            value = [BGGAppDelegate urlEncode:value];
+            value = [value stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+
+            [postString appendString: @"&"];
 			[postString appendString: [BGGAppDelegate urlEncode:key]];
 			[postString appendString: @"="];
-			[postString appendString: [BGGAppDelegate urlEncode:value]];
+			[postString appendString: value];
 		}
 		
 		
@@ -62,7 +64,7 @@
 		[request setHTTPMethod:@"POST"];
 		
 		if ( postData != nil ) {
-			NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+			NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
 			[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 			[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 			[request setHTTPBody:postData];

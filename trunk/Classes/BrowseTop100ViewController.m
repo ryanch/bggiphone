@@ -162,7 +162,7 @@
 {
     
  
-        return [NSString stringWithFormat: @"top100p%d.cache.html", pageNumber];
+        return [NSString stringWithFormat: @"top100p%ld.cache.html", (long)pageNumber];
         
     
     
@@ -172,7 +172,7 @@
 -(NSString *) urlStringForLoading
 {
 
-        return [NSString stringWithFormat: @"http://www.boardgamegeek.com/browse/boardgame/page/%d", pageNumber];
+        return [NSString stringWithFormat: @"http://www.boardgamegeek.com/browse/boardgame/page/%ld", (long)pageNumber];
         
     
     
@@ -202,7 +202,7 @@
 {
 	BBGSearchResult * result = (BBGSearchResult*) [items objectAtIndex:indexPath.row];
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"%d. %@", indexPath.row + 1 + baseNumber, result.primaryTitle];
+	cell.textLabel.text = [NSString stringWithFormat:@"%ld. %@", indexPath.row + 1 + baseNumber, result.primaryTitle];
 	cell.textLabel.adjustsFontSizeToFitWidth = NO;
 	
 	[self updateCellImage:cell withSearchResult:result];

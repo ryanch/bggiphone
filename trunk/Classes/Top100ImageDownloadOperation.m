@@ -15,7 +15,7 @@
 - (void) main {
 
 	
-	NSLog( @"starting operation to get image for: %@", searchResult.primaryTitle );
+	//NSLog( @"starting operation to get image for: %@", searchResult.primaryTitle );
 	
 	@autoreleasepool {
 	
@@ -24,7 +24,7 @@
         
         if ( searchResult.imageURL == nil ) {
             
-            NSLog(@"fetch full data since no image for that list type for: %@", searchResult.primaryTitle);
+            //NSLog(@"fetch full data since no image for that list type for: %@", searchResult.primaryTitle);
             
             FullGameInfo * fullGame = [appDelegate getFullGameInfoByGameIdFromBGG: searchResult.gameId];
             

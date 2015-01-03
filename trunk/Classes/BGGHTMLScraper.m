@@ -24,7 +24,7 @@
 #import "BGGForum.h"
 #import "BGGThread.h"
 #import "BGGMessage.h"
-
+#import "GTMNSString+HTML.h"
 
 @implementation BGGHTMLScraper
 
@@ -228,16 +228,17 @@
 		
 		// Get thread title
 		NSString *threadTitle = [document substringWithRange:NSMakeRange(NSMaxRange(urlEnd), titleEnd.location - NSMaxRange(urlEnd))];
+        threadTitle = [threadTitle gtm_stringByUnescapingFromHTML];
 		
 		// Get last post date
 		NSRange lastPostDateRange;
-		NSString *lastPostDate = [self contentsOfTagWithStart:@"<div class='sf' style='line-height:16px; white-space:nowrap;'>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<a href=\"/article/" startTagEnd:@">" endTag:@"\n" inRange:NSMakeRange(NSMaxRange(titleEnd), [document length] - NSMaxRange(titleEnd)) foundRange:&lastPostDateRange inSource:document];
-		lastPostDate = [lastPostDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+		NSString *lastPostDate = [self contentsOfTagWithStart:@"href=\"/article/" startTagEnd:@">" endTag:@"\n" inRange:NSMakeRange(NSMaxRange(titleEnd), [document length] - NSMaxRange(titleEnd)) foundRange:&lastPostDateRange inSource:document];
+		lastPostDate = [lastPostDate gtm_stringByUnescapingFromHTML];
 		
 		// Get last poster
 		NSRange lastPosterRange;
-		NSString *lastPoster = [self contentsOfTagWithStart:@"<div>\n\t\t\t\t\t\tby <a href=\"/user/" startTagEnd:@">" endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(lastPostDateRange), [document length] - NSMaxRange(lastPostDateRange)) foundRange:&lastPosterRange inSource:document];
-		lastPostDate = [lastPostDate stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+		NSString *lastPoster = [self contentsOfTagWithStart:@"href=\'/user/" startTagEnd:@">" endTag:@"</a>" inRange:NSMakeRange(NSMaxRange(lastPostDateRange), [document length] - NSMaxRange(lastPostDateRange)) foundRange:&lastPosterRange inSource:document];
+		lastPostDate = [lastPostDate gtm_stringByUnescapingFromHTML];
 		
 		// Advance
 		urlStart.location = NSMaxRange(lastPosterRange);

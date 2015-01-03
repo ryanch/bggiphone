@@ -14,7 +14,7 @@
 #import "BGGAppDelegate.h"
 #import "CollectionItemEditViewController.h"
 #import "GameActionsViewController.h"
-
+#import "RecordedPlaysViewController.h"
 
 @interface GameViewUITabBarViewController  ()
 
@@ -49,6 +49,7 @@
     
     UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"cancel") destructiveButtonTitle:nil otherButtonTitles:
                              NSLocalizedString(@"Record A Play", @"record a play"),
+                             NSLocalizedString(@"View Recorded Plays", @"view recorded plays"),
                              NSLocalizedString(@"Manage Collection", @"manage collection"),
                              NSLocalizedString(@"Rate This Game", @"rate this game"),
                              NSLocalizedString(@"View in Safari", @"View in Safari"),
@@ -62,13 +63,16 @@
     if ( buttonIndex == 0 ) {
         [self openRecordAPlay];
     }
-    else if ( buttonIndex == 1 ) {
-        [self openCollectionManager];
+    else if (buttonIndex == 1) {
+        [self openRecordedPlays];
     }
     else if ( buttonIndex == 2 ) {
-        [self openRatings];
+        [self openCollectionManager];
     }
     else if ( buttonIndex == 3 ) {
+        [self openRatings];
+    }
+    else if ( buttonIndex == 4 ) {
         [self openGameInSafari];
     }
 
@@ -96,7 +100,13 @@
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:ratingsView action:@selector(doneButtonPressed)];
     
     nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+    nav.navigationBar.translucent = NO;
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    if (self.presentedViewController)
+    {
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
     [self.navigationController presentViewController:nav animated:YES completion:nil  ];
     
     
@@ -124,7 +134,14 @@
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:col action:@selector(doneButtonPressed)];
     
     nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+    nav.navigationBar.translucent = NO;
     //nav.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    if (self.presentedViewController)
+    {
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+
     [self.navigationController presentViewController:nav animated:YES completion:nil  ];
     
 
@@ -199,13 +216,52 @@
                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:logPlay action:@selector(doneButtonPressed)];
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.navigationBar.translucent = NO;
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
-        [self.navigationController presentViewController:nav animated:YES completion:nil  ];
+    
+        if (self.presentedViewController)
+        {
+            [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        [self presentViewController:nav animated:YES completion:nil  ];
         
 
 	
 }
 
+- (void) openRecordedPlays {
+    if (self.fullGameInfo == nil) {
+        return;
+    }
+    
+    BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    if ( ![appDelegate confirmUserNameAndPassAvailable]  ) {
+        return;
+    }
+
+    RecordedPlaysViewController *vc = [[RecordedPlaysViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    vc.gameId = self.fullGameInfo.gameId;
+    vc.title = NSLocalizedString(@"Recorded Plays", @"recorded plays title");
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+
+    vc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:vc action:@selector(doneButtonPressed)];
+    
+    nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+    nav.navigationBar.translucent = NO;
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    if (self.presentedViewController)
+    {
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    [self presentViewController:nav animated:YES completion:nil  ];
+    
+    
+}
 
 
 @end

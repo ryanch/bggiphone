@@ -52,7 +52,7 @@
 		playersQuery = @" GameInfo.maxPlayers >= 10";
 	}
 	else {
-		playersQuery = [NSString stringWithFormat:	@" GameInfo.maxPlayers >= %d AND %d >= GameInfo.minPlayers ", player, player ];
+		playersQuery = [NSString stringWithFormat:	@" GameInfo.maxPlayers >= %ld AND %ld >= GameInfo.minPlayers ", (long)player, (long)player ];
 	}
 	
 	NSString * weightQuery;
@@ -69,7 +69,7 @@
 		// avg weight 4 
 		
 		
-		weightQuery = [NSString stringWithFormat:	@" GameInfo.averageweight BETWEEN %d and %f  ", weight, (weight+0.75) ];
+		weightQuery = [NSString stringWithFormat:	@" GameInfo.averageweight BETWEEN %ld and %f  ", (long)weight, (weight+0.75) ];
 	}
 	
 	NSString * timeQuery;
@@ -77,7 +77,7 @@
 		timeQuery = @" 1=1 ";
 	}
 	else {
-		timeQuery = [NSString stringWithFormat:	@" GameInfo.playingTime <= %d ", time ];
+		timeQuery = [NSString stringWithFormat:	@" GameInfo.playingTime <= %ld ", (long)time ];
 	}
 	
 	
@@ -375,7 +375,7 @@
 	NSString* tableName = [self _getTableNameForList: listType];
 	
 	
-	NSString * query = [NSString stringWithFormat:@"select * from %@ where gameId=%d and username=?", tableName, gameId];
+	NSString * query = [NSString stringWithFormat:@"select * from %@ where gameId=%ld and username=?", tableName, (long)gameId];
 	
 	FMResultSet * rs = [database executeQuery:query,username];
 	
@@ -459,7 +459,7 @@
 	for (int i = 0; i < count; i++ ){
 		NSNumber * gameIdNum = [gameIds objectAtIndex:i];
 		NSInteger gameId = [gameIdNum intValue];
-		FullGameInfo * gameInfo = [self fetchFullGameInfoByGameId:gameId];
+		FullGameInfo * gameInfo = [self fetchFullGameInfoByGameId:gameId itemsRequired:NO];
 		if ( gameInfo != nil ) {
 			[results addObject:gameInfo];
 		}
@@ -515,7 +515,7 @@
 	
 	
 	// delete from the db first
-	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where gameId=%d and username=?", tableName, gameId];
+	NSString * 	deleteQuery = [NSString stringWithFormat:@"delete from %@ where gameId=%ld and username=?", tableName, (long)gameId];
 	
 	//NSLog(@"remove game from list: %@", deleteQuery);
 	
@@ -559,7 +559,7 @@
 		
 		
 		FullGameInfo *fullGame = [[FullGameInfo alloc] init];
-		fullGame.gameId = [NSString stringWithFormat:@"%d", gameId];
+		fullGame.gameId = [NSString stringWithFormat:@"%ld", gameId];
 		fullGame.title = title;
 		
 		[self saveFullGameInfo:fullGame];
@@ -590,7 +590,7 @@
 }
 
 
-- (FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId {
+- (FullGameInfo*) fetchFullGameInfoByGameId: (NSInteger) gameId itemsRequired: (BOOL) itemsRequired {
     
     @synchronized(self) {
     
@@ -598,7 +598,7 @@
         // see if the info data is there
         BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
         NSString * infoPath = [appDelegate buildFilePathForGameItemsForGameId:gameId];
-        if ( ![[NSFileManager defaultManager] fileExistsAtPath:infoPath]) {
+        if ( itemsRequired && ![[NSFileManager defaultManager] fileExistsAtPath:infoPath]) {
             return nil;
         }
                             
@@ -627,9 +627,11 @@
         [rs close];
         
         
-        fullGameInfo.infoItems = [NSArray arrayWithContentsOfFile:infoPath];
-        
-        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:infoPath]) {
+            NSData * data = [NSData dataWithContentsOfFile:infoPath];
+            
+            fullGameInfo.infoItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }        
         return fullGameInfo;
         
     }
@@ -645,8 +647,13 @@
     @synchronized(self) {
         
         BGGAppDelegate * appDelegate = (BGGAppDelegate*) [[UIApplication sharedApplication] delegate];
-        NSString * infoPath = [appDelegate buildFilePathForGameItemsForGameId:fullgameInfo.gameId];
-        [fullgameInfo.infoItems writeToFile:infoPath atomically:YES];
+        NSString * infoPath = [appDelegate buildFilePathForGameItemsForGameId:[fullgameInfo.gameId integerValue]];
+        
+        NSData * infoData = [NSKeyedArchiver archivedDataWithRootObject:fullgameInfo.infoItems];
+        if (![infoData writeToFile:infoPath atomically:YES])
+        {
+            NSLog(@"Couldn't write to %@", infoPath);
+        }
         
         
         /*

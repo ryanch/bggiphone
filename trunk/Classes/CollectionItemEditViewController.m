@@ -336,7 +336,7 @@
 		name = @"dont know";
 	}
 	
-	NSLog(@"control changed: %d, name: %@ tag: %d", control.selectedSegmentIndex, name, control.tag );
+	NSLog(@"control changed: %ld, name: %@ tag: %ld", (long)control.selectedSegmentIndex, name, (long)control.tag );
 	
 	
 	
@@ -358,7 +358,7 @@
 		name = @"dont know";
 	
 	
-	NSLog(@"control changed: %d, name: %@ tag: %d", control.on, name, control.tag );
+	NSLog(@"control changed: %d, name: %@ tag: %ld", control.on, name, (long)control.tag );
 	
 	if ( control.on ) {
 		[paramsToSave setObject:@"1" forKey:name];

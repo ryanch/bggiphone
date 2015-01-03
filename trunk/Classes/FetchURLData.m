@@ -51,7 +51,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+	//NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
 	
 	if ( mode == FETCH_URL_MODE_SEARCH_RESULTS ) {
 		[self handleSearchResults];

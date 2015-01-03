@@ -38,7 +38,7 @@
     ForumThreadsViewController * more = [[ForumThreadsViewController alloc] init];
     more.pageNumber = self.pageNumber + 1;
 	more.forum = self.forum;
-    more.title = [NSString stringWithFormat:@"Page %d", more.pageNumber];
+    more.title = [NSString stringWithFormat:@"Page %ld", (long)more.pageNumber];
     
     [self.navigationController pushViewController:more animated:YES];
     
@@ -70,7 +70,7 @@
 	if(self.forum == nil)
 		return nil;
 	
-	return [NSString stringWithFormat:@"forum-threads-%@-page-%d.cache.html", self.forum.forumId,pageNumber];
+	return [NSString stringWithFormat:@"forum-threads-%@-page-%ld.cache.html", self.forum.forumId,(long)pageNumber];
 }
 
 -(NSString *) urlStringForLoading
@@ -79,7 +79,7 @@
 		return nil;
 	
 	NSString * url =  [@"http://boardgamegeek.com/" stringByAppendingString:self.forum.forumURL];
-    url = [url stringByAppendingFormat:@"/page/%d",pageNumber];
+    url = [url stringByAppendingFormat:@"/page/%ld",(long)pageNumber];
     
     NSLog(@"load: %@", url);
     

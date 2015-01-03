@@ -138,7 +138,7 @@
 -(NSString *) urlStringForLoading
 {
 	NSString * url =  [@"http://www.boardgamegeek.com" stringByAppendingString:self.thread.threadURL];
-    return [url stringByAppendingFormat:@"/page/%d", pageNumber ];
+    return [url stringByAppendingFormat:@"/page/%ld", (long)pageNumber ];
 }
 
 -(id) resultsFromDocument:(NSString *)document withHTMLScraper:(BGGHTMLScraper *)htmlScraper
@@ -151,7 +151,7 @@
 	if(self.thread == nil)
 		return nil;
 	
-	return [NSString stringWithFormat:@"thread-%@-page-%d.cache.html", self.thread.threadId, self.pageNumber];
+	return [NSString stringWithFormat:@"thread-%@-page-%ld.cache.html", self.thread.threadId, (long)self.pageNumber];
 }
 
 #pragma mark Public

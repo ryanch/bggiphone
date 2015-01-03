@@ -183,6 +183,8 @@
                                                       initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:logPlay action:@selector(doneButtonPressed)];
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.navigationBar.translucent = NO;
+
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:nil  ];
         
@@ -217,6 +219,8 @@
                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:col action:@selector(doneButtonPressed)];
         
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
+        nav.navigationBar.translucent = NO;
+
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self.navigationController presentViewController:nav animated:YES completion:nil  ];
         
@@ -344,7 +348,7 @@
     
     
     NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithCapacity:10];
-    [params setObject:[NSString stringWithFormat:@"%d",rating ] forKey:@"rating"];
+    [params setObject:[NSString stringWithFormat:@"%ld",(long)rating ] forKey:@"rating"];
     
     saveResponse = [connect handleSaveCollectionForGameId:[fullGameInfo.gameId integerValue] withParams:params withData:itemData];
     

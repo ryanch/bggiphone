@@ -144,7 +144,11 @@
 }
 
 //! Log a play, with simple params
-- (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId forDate: (NSDate *) date numPlays: (NSInteger) plays {
+- (BGGConnectResponse) simpleLogPlayForGameId: (NSInteger) gameId
+                                      forDate: (NSDate *) date
+                                     numPlays: (NSInteger) plays
+                                     location: (NSString *) locationValue
+                                     comments: (NSString *) commentValue {
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
 	
@@ -185,10 +189,13 @@
 	[params setObject:@"0" forKey:@"nowinstats"];
 	
 	// set the game id
-	[params setObject:[NSString stringWithFormat:@"%d", gameId] forKey:@"objectid"];
+	[params setObject:[NSString stringWithFormat:@"%ld", (long)gameId] forKey:@"objectid"];
 	
+    // add location
+    [params setObject:locationValue forKey:@"location"];
+    
 	// set the quantity
-	[params setObject:[NSString stringWithFormat:@"%d", plays] forKey:@"quantity"];
+	[params setObject:[NSString stringWithFormat:@"%ld", (long)plays] forKey:@"quantity"];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat: @"yyyy-MM-dd"];
@@ -198,6 +205,9 @@
 	[params setObject:datePlayedStr forKey:@"playdate"];
 	[params setObject:datePlayedStr forKey:@"dateinput"];
 	
+    // add comments
+    [params setObject:commentValue forKey:@"comments"];
+    
 	// set the params on request
 	worker.params = params;
 
@@ -274,7 +284,7 @@
 	// request an item to be added for this user
 	[params setObject:@"1" forKey:@"ajax"];
 	[params setObject:@"additem" forKey:@"action"];
-	[params setObject:[NSString stringWithFormat: @"%d", gameId] forKey:@"objectid"];
+	[params setObject:[NSString stringWithFormat: @"%ld", (long)gameId] forKey:@"objectid"];
 	[params setObject:@"thing" forKey:@"objecttype"];
 	
 	
@@ -361,7 +371,7 @@
 	// request an item to be added for this user
 	[params setObject:@"1" forKey:@"ajax"];
 	[params setObject:@"module" forKey:@"action"];
-	[params setObject:[NSString stringWithFormat: @"%d", gameId] forKey:@"objectid"];
+	[params setObject:[NSString stringWithFormat: @"%ld", (long)gameId] forKey:@"objectid"];
 	[params setObject:@"thing" forKey:@"objecttype"];
 	[params setObject:@"24" forKey:@"instanceid"];
 	
@@ -719,7 +729,7 @@
 	// request an item to be added for this user
 	[params setObject:@"1" forKey:@"ajax"];
 	[params setObject:@"savedata" forKey:@"action"];
-	[params setObject:[NSString stringWithFormat: @"%d",   itemData.collId] forKey:@"collid"];
+	[params setObject:[NSString stringWithFormat: @"%ld",   (long)itemData.collId] forKey:@"collid"];
 	[params setObject:@"status" forKey:@"fieldname"];
 	
 	// add params based on the contents of the dictionary
@@ -776,7 +786,7 @@
         [params setObject:@"rating" forKey:@"fieldname"];
         
         [params setObject:@"thing" forKey:@"objecttype"];
-        [params setObject:[NSString stringWithFormat: @"%d",   gameId] forKey:@"objectid"];
+        [params setObject:[NSString stringWithFormat: @"%ld",   (long)gameId] forKey:@"objectid"];
 
         
 	}

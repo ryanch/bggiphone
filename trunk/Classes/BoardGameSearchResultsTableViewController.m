@@ -65,6 +65,12 @@
 	else if ( searchGameType == BGG_SEARCH_WISH ) {
 		listId = LIST_TYPE_WISH;
 	}
+    else if ( searchGameType == BGG_GAMES_TO_PLAY_LIST) {
+        listId = LIST_TYPE_TOPLAY;
+    }
+    else if ( searchGameType == BGG_GAMES_PLAYED_LIST ) {
+        listId = LIST_TYPE_PLAYED;
+    }
 	
 	if ( listId != 0 ) {
 		[appDelegate.dbAccess removeAllGamesInList: listId forUser: username];
@@ -227,7 +233,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Fetching Data", @"error fetching data title error message")
 															message:[NSString stringWithFormat: NSLocalizedString(@"Error parsing XML data. Check your username is correct. BGG could be down. Error message: %@", @"error message for bad xml parsing. The error will be placed where you put the %@"), parseErrorMessage ]
-														   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
+														   delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",@"okay button") otherButtonTitles: nil];
 			[alert show];	
 			
 		
@@ -239,8 +245,8 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
 	else if ( resultsToDisplay == nil || [resultsToDisplay count] == 0 ) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Results", @"no results title message")
 														message:NSLocalizedString(@"There are no results for that list.",@"message shown when there are no games in a list that the user was looking up") 
-													   delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"okay button")  otherButtonTitles: nil];
-		[alert show];	
+													   delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",@"okay button")  otherButtonTitles: nil];
+		[alert show];
 		
 		
 		BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -362,7 +368,7 @@ NSInteger gameSort(id obj1, id obj2, void *context) {
     
 	cell.textLabel.text = result.primaryTitle;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
-	cell.textLabel.minimumFontSize = 12.0;
+	//cell.textLabel.minimumFontSize = 12.0;
 	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	
 	if ( result.yearPublished == 0 ) {

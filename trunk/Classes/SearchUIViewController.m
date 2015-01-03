@@ -136,7 +136,7 @@
 	
 	cell.textLabel.text = result.primaryTitle;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
-	cell.textLabel.minimumFontSize = 12.0;
+	//cell.textLabel.minimumFontSize = 12.0;
 	cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	
 	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];

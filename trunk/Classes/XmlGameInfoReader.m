@@ -45,9 +45,13 @@
     
     BOOL success = [parser parse];
     
-    if (!success && error != nil ) {
-        *error =  [parser parserError];
+    if (!success  ) {
+        if ( error != nil ) {
+            *error =  [parser parserError];
+        }
+        NSLog(@"Xml parse error: %@", [parser parserError]);
     }
+    
     
     // sort the items
     [tempItems sortUsingComparator:^ NSComparisonResult(GameInfoItem *d1, GameInfoItem *d2) {
@@ -160,6 +164,12 @@
 	}
 	
 	else if ( [elementName isEqualToString:@"thumbnail" ]  ) {
+        
+        // for some reason the xml api removed http: from the image urls
+        if ( [stringBuffer hasPrefix:@"//"] ) {
+            [stringBuffer insertString:@"http:" atIndex:0];
+        }
+        
 		NSString *thumb = [ [NSString alloc] initWithString: stringBuffer]; 
 		gameInfo.imageURL = thumb;
 	}
