@@ -244,7 +244,7 @@
 		playCount = 1;
 	}
 	
-	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %d",playCount] forSegmentAtIndex: 1];
+	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %ld",(long)playCount] forSegmentAtIndex: 1];
 	
 }
 
