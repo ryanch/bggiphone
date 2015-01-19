@@ -25,7 +25,6 @@
 
 @interface LogPlayUIViewController : UIViewController {
 	IBOutlet UISegmentedControl * playCountController;
-	IBOutlet UIButton * logPlayButton;
 	IBOutlet UIDatePicker * datePicker;
 	IBOutlet UIActivityIndicatorView * loadingView;
 	IBOutlet UILabel * playLogLabel;
@@ -43,15 +42,15 @@
 
 
 @property (nonatomic,strong) UISegmentedControl * playCountController;
-@property (nonatomic,strong)  UIButton * logPlayButton;
 @property (nonatomic,strong)  UIDatePicker * datePicker;
 @property (nonatomic,strong) NSString * gameId;
 @property (nonatomic,strong) UIActivityIndicatorView * loadingView;
 @property (weak, nonatomic) IBOutlet UITextView *commentText;
-@property (weak, nonatomic) IBOutlet UITextField *location;
 @property (weak, nonatomic) IBOutlet UILabel *commentsLabel;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *playLogLabel;
 @property (weak, nonatomic) IBOutlet UIControl *myControl;
+@property (nonatomic) NSInteger kbScrolled;
+@property (weak, nonatomic) IBOutlet UITextView *locationText;
 
 @end

@@ -21,6 +21,13 @@
 
 #pragma mark LoadingViewController overrides
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.origTitle = self.title;
+}
+
 -(NSString *) cacheFileName
 {
     return nil;
@@ -57,7 +64,8 @@
             playCount += play.numPlays;
         }
     
-        [self setTitle:[self.title stringByAppendingFormat:@" (%ld)", (long)playCount]];
+        
+        [self setTitle:[self.origTitle stringByAppendingFormat:@" (%ld)", (long)playCount]];
     }
     
     return results;

@@ -212,9 +212,11 @@
         
         
         UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:logPlay];
-        logPlay.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+        logPlay.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:logPlay action:@selector(doneButtonPressed)];
-        
+    
+        logPlay.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                initWithTitle:NSLocalizedString(@"Log Play", @"log play toolbar button") style: UIBarButtonItemStyleBordered  target:logPlay action:@selector(logPlayClicked)];
         nav.navigationBar.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:1.0];
         nav.navigationBar.translucent = NO;
         nav.modalPresentationStyle = UIModalPresentationFormSheet;

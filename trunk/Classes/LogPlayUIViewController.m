@@ -36,7 +36,6 @@
 
 
 @synthesize playCountController;
-@synthesize logPlayButton;
 @synthesize datePicker;
 @synthesize gameId;
 @synthesize loadingView;
@@ -51,8 +50,6 @@
 }
 */
 - (IBAction)backgroundTapped:(id)sender {
-    //[self.commentText endEditing:YES];
-    //[self.location endEditing:YES];
     [self.view endEditing:YES];
 }
 
@@ -72,16 +69,7 @@
 // Implement viewDidLoad to do additional setup after loading the view.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	// set the bg on the button
-	UIImage *newImage = [[UIImage imageNamed:@"whiteButton.png"] stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
-	[logPlayButton setBackgroundImage:newImage forState:UIControlStateNormal];
-	
-	UIImage *newPressedImage = [[UIImage imageNamed:@"blueButton.png"] stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
-	[logPlayButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
-	
-	logPlayButton.backgroundColor = [UIColor clearColor];
-	
+		
 	// update the date on the date control
 	//[datePicker setDate:[NSDate date] animated: YES];
 
@@ -94,17 +82,30 @@
     self.commentText.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.commentText.layer.cornerRadius = 5;
     
-    self.location.delegate = self;
+    self.locationText.layer.borderWidth = 1.0;
+    self.locationText.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.locationText.layer.cornerRadius = 5;
+    
+    //self.location.delegate = self;
     
     [self registerForKeyboardNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
+    CGSize frameSize = self.scrollView.frame.size;
+    
+    // On an IPad, there is a large margin at the top.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(-80.0, 0.0, 0.0, 0.0);
+        self.scrollView.contentInset = contentInsets;
+    }
+
     // For some reason, the inset is needed for smaller screens so the date picker is not
     // under the navigation bar.
-    CGSize frameSize = self.scrollView.frame.size;
-    if (frameSize.height < 500)
+    else if (frameSize.height < 450)
     {
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(80.0, 0.0, 0.0, 0.0);
         self.scrollView.contentInset = contentInsets;
@@ -147,7 +148,7 @@
         BGGConnectResponse response = [bggConnect simpleLogPlayForGameId:[gameId intValue]
                                                                  forDate:datePicker.date
                                                                 numPlays:playCount
-                                                                location:self.location.text
+                                                                location:self.locationText.text
                                                                 comments:self.commentText.text];
 		
 		if ( response == SUCCESS ) {
@@ -160,7 +161,6 @@
 			 */
 			
 			self.playLogLabel.hidden = NO;
-			
 		}
 		else if ( response == CONNECTION_ERROR ) {
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
@@ -175,124 +175,15 @@
 			[alert show];	
 		}
 
-			
-		
-		
-		
 		[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
 	
 	}
-	
-	
-	/*
-	 
-	 NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
-	 
-	BGGAppDelegate *appDelegate = (BGGAppDelegate *) [[UIApplication sharedApplication] delegate];
-
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat: @"yyyy-MM-dd"];
-	NSString * datePlayedStr = [dateFormatter stringFromDate:datePicker.date];
-	[dateFormatter release];
-	 
-	NSString * username = [appDelegate.appSettings.dict objectForKey:@"username"];
-	NSString * password = [appDelegate.appSettings.dict objectForKey:@"password"];
-	
-	
-	NSString * gotoURL = [NSString 
-						 stringWithFormat:	@"http://www.boardgamegeek.com/geekplay.php?ajax=1&action=save&version=2&objecttype=boardgame&objectid=%@&playid=&action=save&playdate=%@&dateinput=%@&YUIButton=&location=&quantity=%d&length=&incomplete=0&nowinstats=0&comments=",
-						 gameId, //game id
-						 datePlayedStr, //date played
-						 datePlayedStr, //date played
-						 playCount // num of plays
-						 ];
-	
-
-	
-	NSString * logURL = [NSString stringWithFormat:@"http://www.boardgamegeek.com/login?&username=%@&password=%@&lasturl=%@", 
-						 [BGGAppDelegate urlEncode:  username],
-						 [BGGAppDelegate urlEncode:  password],
-						 [BGGAppDelegate urlEncode:  gotoURL]];
-
-	
-	
-#ifdef __DEBUGGING__
-	NSLog( @"sending to: %@", logURL );
-#endif
-	
-	
-	NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:logURL]];
-	
-
-	NSError *error = nil;
-	NSHTTPURLResponse *response = nil;
-	BOOL looksGood = YES;
-	
-	NSData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
-
-	if ( result != nil ) {
-		
-		NSString * responseBody = [[NSString alloc] initWithData:result encoding:  NSASCIIStringEncoding];
-		
-#ifdef __DEBUGGING__		
-		NSLog( responseBody );
-#endif		
-		
-		if ( [responseBody length] > 300 ) {
-			looksGood = NO;
-		}
-		
-		
-		[responseBody release];
-
-	}
-	 
-	 
-	 
-	 if ( looksGood == NO ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
-														message:NSLocalizedString(@"Check your password, and network connection.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else if ( result== nil || [response statusCode] != 200 ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
-														message:NSLocalizedString(@"No data was returned when logged. Check your password, and network connection.", @"No data was returned when logged. Check your password, and network connection.")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else if ( error != nil ) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging Play", @"Error Logging Play title")
-														message:[error localizedDescription]
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	else {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success Play logged title")
-														message:NSLocalizedString(@"Your play was logged.", @"Your play was logged")
-													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		[alert show];	
-		[alert release];	
-	}
-	 
-	 
-	 
-	
-	//[self logPlayComplete];
-	[self performSelectorOnMainThread:@selector(logPlayComplete) withObject:self waitUntilDone:YES];
-	
-	[autoreleasepool release];
-	 
-	 */
 }
 
 - (void) logPlayComplete {
-	logPlayButton.hidden = NO;
 	loadingView.hidden = YES;
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    
 }
 
 
@@ -322,9 +213,10 @@
 		return;
 	}
 	
-	logPlayButton.hidden = YES;
 	loadingView.hidden = NO;
-	
+	self.playLogLabel.hidden = YES;
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    
 #ifdef PINCH_ENABLED
 	 [[Beacon shared] startSubBeaconWithName:@"log play click" timeSession:NO];
 #endif
@@ -352,7 +244,7 @@
 		playCount = 1;
 	}
 	
-	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %ld",(long)playCount] forSegmentAtIndex: 1];
+	[playCountController setTitle:[NSString stringWithFormat:@"Plays: %d",playCount] forSegmentAtIndex: 1];
 	
 }
 
@@ -385,19 +277,34 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize kbEndSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    
+    if (kbSize.height == 0)
+    {
+        return;
+    }
+    
+    if (self.kbScrolled != 0)
+    {
+        [self keyboardWillBeHidden:aNotification];
+    }
+    
+    self.kbScrolled = kbEndSize.height;
     
     CGRect aRect = self.myControl.frame;
-    aRect.size.height -= kbSize.height;
+    aRect.size.height -= self.kbScrolled;
    
     UIEdgeInsets contentInsets = self.scrollView.contentInset;
-    contentInsets.bottom += kbSize.height;
+    contentInsets.bottom += self.kbScrolled;
     self.scrollView.contentInset = contentInsets;
     
     UIEdgeInsets indInsets = self.scrollView.scrollIndicatorInsets;
-    indInsets.bottom += kbSize.height;
+    indInsets.bottom += self.kbScrolled;
     self.scrollView.scrollIndicatorInsets = indInsets;
 
-    if (!CGRectContainsPoint(aRect, self.commentText.frame.origin) ) {
+    if (!CGRectContainsPoint(aRect, self.commentText.frame.origin) )
+    {
         [self.scrollView scrollRectToVisible:self.commentText.frame animated:YES];
     }
 }
@@ -405,16 +312,15 @@
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
     UIEdgeInsets contentInsets = self.scrollView.contentInset;
-    contentInsets.bottom -= kbSize.height;
+    contentInsets.bottom -= self.kbScrolled;
     self.scrollView.contentInset = contentInsets;
 
     UIEdgeInsets indInsets = self.scrollView.scrollIndicatorInsets;
-    indInsets.bottom -= kbSize.height;
+    indInsets.bottom -= self.kbScrolled;
     self.scrollView.scrollIndicatorInsets = indInsets;
+    
+    self.kbScrolled = 0;
 }
 
 @end

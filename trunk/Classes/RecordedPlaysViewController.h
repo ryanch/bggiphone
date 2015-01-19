@@ -12,5 +12,6 @@
 @interface RecordedPlaysViewController : LoadingTableViewController
 
 @property (nonatomic,strong) NSString * gameId;
+@property (nonatomic,strong) NSString * origTitle;
 
 @end
