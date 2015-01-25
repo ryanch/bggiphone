@@ -99,7 +99,10 @@
 	
 	RANDOM_SEED();
 	
-    application.statusBarOrientation = UIInterfaceOrientationPortrait;
+    // force portiat if not a ipad
+    if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
+        application.statusBarOrientation = UIInterfaceOrientationPortrait;
+    }
     
 	dbAccess = [[DbAccess alloc] init];
 	
